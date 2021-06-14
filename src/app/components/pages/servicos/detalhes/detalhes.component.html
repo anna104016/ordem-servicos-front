@@ -1,0 +1,74 @@
+<app-header></app-header>
+<div class="novo-cliente-content">
+  <h1>Dados do  serviço {{servico.id}} </h1>
+  <div class="novo-cliente-container">
+    <form class="novo-form">
+      <mat-form-field class="novo-content">
+        <mat-label>Descrição</mat-label>
+        <input 
+          matInput 
+          name="descricao"
+          disabled
+          [(ngModel)]="servico.descricao">
+      </mat-form-field>
+    
+      <mat-form-field class="novo-content">
+        <mat-label>Nome do Cliente</mat-label>
+        <input 
+          matInput 
+          name="clienteId"
+          disabled
+          [(ngModel)]="servico.clienteId" >
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Status</mat-label>
+        <input 
+          matInput 
+          name="status"
+          disabled
+          [(ngModel)]="servico.status" >
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Data de abertura</mat-label>
+        <input 
+          matInput 
+          name="dataAbertura"
+          disabled
+          [(ngModel)]="servico.dataAbertura" >
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Data de Fechamento</mat-label>
+        <input 
+          matInput 
+          name="dataFechamento"
+          disabled
+          [(ngModel)]="servico.dataFechamento" >
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Valor total</mat-label>
+        <input 
+          matInput 
+          name="valor"
+          disabled
+          [(ngModel)]="servico.valor" >
+      </mat-form-field>
+
+
+      <div class="botoes">
+        <button mat-flat-button class="btn-deletar" (click)="deletarServico()">Deletar</button>
+        <button mat-flat-button class="btn-editar">
+          <a routerLink="/servicos/atualizar-servico/{{servico.id}}">
+            Editar
+          </a>
+        </button>
+        <button mat-flat-button class="btn-cancelar" (click)="voltar()">Voltar</button>
+      </div>
+  </form>
+  </div>
+</div>
+<app-footer></app-footer>
+

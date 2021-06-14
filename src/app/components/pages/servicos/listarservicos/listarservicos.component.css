@@ -1,0 +1,44 @@
+  
+.lista-content {
+    width: 95%;
+    margin: 1rem auto;
+}
+
+.table-content{
+    width: 100%;
+}
+.lista-content button{ 
+    background-color: #3a86ff;
+
+    margin: 0 0 10px 0;
+    transition: 400ms ease-in-out;
+    color: #FFF;
+}
+
+.table{
+    width: 100%;
+    text-align: center;
+}
+
+.table th{
+    font-weight: 500;
+    font-size: 16px;
+    background-color: rgb(100, 88, 88);
+    text-align: center;
+    color: white;
+}
+
+.table td{
+    text-align: center;
+    background-color: #eee;
+    color: black;
+}
+
+.acoes a{
+    cursor: pointer;
+    color: black;
+}
+.btn-new a{
+    text-decoration: none;
+    color: #fff;
+}

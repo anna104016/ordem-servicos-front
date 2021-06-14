@@ -1,0 +1,55 @@
+<app-header></app-header>
+<div class="novo-cliente-content">
+  <h1>Dados do  Cliente {{cliente.id}} </h1>
+  <div class="novo-cliente-container">
+    <form class="novo-form">
+      <mat-form-field class="novo-content">
+        <mat-label>Nome do Cliente</mat-label>
+        <input 
+          matInput 
+          name="nome"
+          disabled
+          [(ngModel)]="cliente.nome">
+      </mat-form-field>
+    
+      <mat-form-field class="novo-content">
+        <mat-label>CPF</mat-label>
+        <input 
+          matInput 
+          name="cpf"
+          disabled
+          [(ngModel)]="cliente.cpf" >
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Telefone</mat-label>
+        <input 
+          matInput 
+          name="telefone"
+          disabled
+          [(ngModel)]="cliente.telefone" >
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Data de cadastro</mat-label>
+        <input 
+          matInput 
+          name="dataCadastro"
+          disabled
+          [(ngModel)]="cliente.dataCadastro" >
+      </mat-form-field>
+
+      <div class="botoes">
+        <button mat-flat-button class="btn-deletar" (click)="deletarCliente()">Deletar</button>
+        <button mat-flat-button class="btn-editar">
+          <a routerLink="/atualizar-cliente/{{cliente.id}}">
+            Editar
+          </a>
+        </button>
+        <button mat-flat-button class="btn-cancelar" (click)="cancelar()">Voltar</button>
+      </div>
+  </form>
+  </div>
+</div>
+<app-footer></app-footer>
+

@@ -1,0 +1,17 @@
+.footer-container{
+    
+    background-color: #673ab7;
+
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    bottom: 0 ;
+
+    height:50px;
+    
+    
+}
+.footer-container span{
+    text-align: center;
+}

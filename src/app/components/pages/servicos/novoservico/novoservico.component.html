@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div class="novo-cliente-content">
+  <div class="novo-cliente-container">
+    <p>Novo Serviço</p>
+    <form class="novo-form">
+      <mat-form-field class="novo-content">
+        <mat-label>Descrição</mat-label>
+        <input 
+          matInput 
+          required
+          placeholder="Formatar notebook"
+          name="descricao"
+          [(ngModel)]="novoservico.descricao"
+          >
+      </mat-form-field>
+    
+      <mat-form-field class="novo-content">
+        <mat-label>Valor</mat-label>
+        <input 
+          matInput 
+          required
+          placeholder="20.00"
+          name="valor"
+          [(ngModel)]="novoservico.valor"
+          >
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Cliente</mat-label>
+        <mat-select [(value)]="novoservico.clienteId" required>
+          <mat-option *ngFor="let cli of listCliente" value="{{cli.id}}">{{cli.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="botoes">
+        <button mat-flat-button class="btn-salvar" (click)="salvar()">Salvar</button>
+        <button mat-flat-button class="btn-cancelar" (click)="voltar()" >Voltar</button>
+      </div>
+  </form>
+  </div>
+</div>
+<app-footer></app-footer>
+

@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="novo-cliente-content">
+  <h1>Dados do  serviço  </h1>
+  <div class="novo-cliente-container">
+    <form class="novo-form">
+      <mat-form-field class="novo-content">
+        <mat-label>Descrição</mat-label>
+        <input 
+          matInput 
+          name="descricao"
+          [(ngModel)]="editservico.descricao">
+      </mat-form-field>
+    
+      <mat-form-field class="novo-content">
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="editservico.status">
+          <mat-option value="0">ABERTO</mat-option>
+          <mat-option value="1">FECHADO</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Valor</mat-label>
+        <input 
+          matInput 
+          name="valor"
+          [(ngModel)]="editservico.valor">
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Data de abertura</mat-label>
+        <input 
+          matInput 
+          disabled
+          name="dataAbertura"
+          [(ngModel)]="editservico.dataAbertura">
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Data de Fechamento</mat-label>
+        <input 
+          matInput 
+          disabled
+          name="dataFechamento"
+          [(ngModel)]="editservico.dataFechamento">
+      </mat-form-field>
+
+      <mat-form-field class="novo-content">
+        <mat-label>Cliente</mat-label>
+        <mat-select [(value)]="editservico.clienteId">
+          <mat-option *ngFor="let cli of listCliente" value="{{cli.id}}" >{{cli.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <div class="botoes">
+        <button mat-flat-button class="btn-editar" (click)="editar()">
+            Editar
+        </button>
+        <button mat-flat-button class="btn-cancelar" (click)="voltar()">Voltar</button>
+      </div>
+  </form>
+  </div>
+</div>
+<app-footer></app-footer>
+
