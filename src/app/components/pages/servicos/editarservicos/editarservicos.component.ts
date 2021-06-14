@@ -17,7 +17,7 @@ export class EditarservicosComponent implements OnInit {
   
   editservico: ServicoModel = {
     descricao: '',
-    clienteId: '',
+    cliente: '',
     valor: '',
     status: '',
   }

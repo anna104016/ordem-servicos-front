@@ -15,11 +15,9 @@ export class DetalhesComponent implements OnInit {
   servico: ServicoModel ={
     id: '',
     descricao: '',
-    clienteId: '',
+    cliente: '',
     status: '',
   }
-
-  cliente: Cliente;
 
   constructor(
       private service: ServicosService, 
@@ -44,7 +42,6 @@ export class DetalhesComponent implements OnInit {
         this.service.mensagem(err.error.message);
       })
   }
-
 
   finById(): void {
     this.service.finById(this.servico.id)

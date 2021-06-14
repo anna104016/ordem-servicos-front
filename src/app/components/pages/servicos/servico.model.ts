@@ -1,7 +1,7 @@
 export interface ServicoModel{
     id?: any;
     descricao: string;
-    clienteId: any;
+    cliente?: any;
     dataAbertura?: any;
     dataFechamento?: any;
     valor?: string;

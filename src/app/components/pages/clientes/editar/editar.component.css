@@ -28,10 +28,14 @@
     width:100%;
 }
 
+.novo-content input, mat-label{
+    color: black;
+    font-size: 18px;
+}
+
 .botoes{
     display: flex;
 }
-
 .botoes button{
     padding: 10px 20px;
     background-color: #3a86ff;
@@ -44,7 +48,20 @@
 }
 
 .botoes .btn-cancelar{
-    background-color: #740606;
+     background-color: #673ab7;
+}
+
+.botoes .btn-editar{
+    background-color: #3a86ff;
+}
+
+.botoes .btn-editar a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.botoes .btn-deletar{
+    background-color: #880a0a;
 }
 
 @media  screen and (max-width: 1000px) {

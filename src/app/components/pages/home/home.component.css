@@ -44,7 +44,7 @@
 .text span{
     font-size:17px;
 }
-.text button{
+.text .botao-comecar{
     padding: 0px 10px;
 
     border-radius: 20px;

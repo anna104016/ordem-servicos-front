@@ -47,7 +47,7 @@
 
       <mat-form-field class="novo-content">
         <mat-label>Cliente</mat-label>
-        <mat-select [(value)]="editservico.clienteId">
+        <mat-select [(value)]="editservico.cliente">
           <mat-option *ngFor="let cli of listCliente" value="{{cli.id}}" >{{cli.nome}}</mat-option>
         </mat-select>
       </mat-form-field>

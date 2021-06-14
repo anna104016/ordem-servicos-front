@@ -17,7 +17,7 @@ export class NovoservicoComponent implements OnInit {
 
   novoservico: ServicoModel = {
     descricao: '',
-    clienteId: '',
+    cliente: '',
     valor: '',
   }
 
