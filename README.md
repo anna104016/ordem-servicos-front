@@ -20,7 +20,7 @@
 - encontrar pelo ID
 - atualizar
 
-####: api utilizada:
+##### :small_blue_diamond: API utilizada:
 - https://github.com/anna104016/ordem-servicos
 
 #### :small_blue_diamond: Sistema em execução
