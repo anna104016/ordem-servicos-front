@@ -21,7 +21,7 @@
 - atualizar
 
 ##### :small_blue_diamond: API utilizada:
-- https://github.com/anna104016/ordem-servicos
+- https://github.com/santoskarolina/ordem-servicos
 
 #### :small_blue_diamond: Sistema em execução
 ![DOMAIN MODEL](https://github.com/anna104016/html/blob/main/html/servicos.gif)
