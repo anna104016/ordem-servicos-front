@@ -1,9 +1,11 @@
+import { Cliente } from "../cliente/cliente.model";
+
 export class ServicoModel{
     id?: any;
     descricao: string;
-    cliente?: any;
+    cliente: Cliente;
     dataAbertura?: any;
     dataFechamento?: any;
-    valor?: string;
-    status?: string;
+    valor: string;
+    status: string;
 }

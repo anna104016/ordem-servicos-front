@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/cliente/cliente.model';
 import { ClientesService } from 'src/app/cliente/clientes.service';
+import Swal from 'sweetalert2';
 import { ServicoModel } from '../servico.model';
 import { ServicosService } from '../servicos.service';
 
@@ -12,22 +14,18 @@ import { ServicosService } from '../servicos.service';
 })
 export class NovoservicoComponent implements OnInit {
 
-  selected ='';
   listCliente: Cliente[] =[];
-
-  novoservico: ServicoModel = {
-    descricao: '',
-    cliente: '',
-    valor: '',
-  }
+  form: FormGroup
 
   constructor(
       private clienteService: ClientesService, 
       private router: Router, 
+      private formBiulder: FormBuilder,
       private service: ServicosService) { }
 
   ngOnInit(): void {
     this.listarClientes();
+    this.createForm(new ServicoModel())
   }
 
   listarClientes(): void {
@@ -39,19 +37,55 @@ export class NovoservicoComponent implements OnInit {
   }
 
   salvar(): void {
-    this.service.novo(this.novoservico).subscribe(
+    this.service.novo(this.form.value).subscribe(
       response => {
-        console.log(response);
-        this.service.mensagem("Serviço adicionado com sucesso!");
-        this.router.navigate(['/servicos']);
+        this.sucesso()
       },err => {
-        for(let i = 0; i < err.error.erros.length; i++) {
-          this.service.mensagem(err.error.erros[i].mensagem)
-        }
+        this.error()
       })
+  }
+
+  sucesso(){
+    Swal.fire({
+      icon: 'success',
+      title: 'Sucesso!',
+      text: 'Servico adicionado com sucesso',
+      showConfirmButton: true,
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.router.navigate(['/servicos'])
+      }
+    }) 
+  }
+
+  error(){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oppss.!',
+      text: 'Erro ao adicionar serviço',
+      showConfirmButton: true,
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.router.navigate(['/servicos'])
+      }
+    }) 
   }
 
   voltar(){
     this.router.navigate(['/servicos']);
+  }
+
+  createForm(servico: ServicoModel){
+    this.form = this.formBiulder.group({
+      descricao: new FormControl(servico.descricao, [
+        Validators.required
+      ]),
+      valor: new FormControl(servico.valor, [
+        Validators.required
+      ]),
+      cliente: new FormControl(servico.cliente, [
+        Validators.required
+      ])
+    })
   }
 }

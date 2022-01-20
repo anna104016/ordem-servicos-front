@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSnackBarModule,
     MatCardModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    SharedModule
   ],
   providers: [
     ServicosService

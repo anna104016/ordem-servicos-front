@@ -14,7 +14,7 @@ export class ListarservicosComponent implements AfterViewInit  {
 
   listaServicos: ServicoModel[] = [];
 
-  displayedColumns: string[] = ['id', 'descricao', 'cliente', 'status', 'dados'];
+  displayedColumns: string[] = ['id', 'descricao','status', 'dados'];
   dataSource = new MatTableDataSource<ServicoModel>(this.listaServicos);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,15 +32,6 @@ export class ListarservicosComponent implements AfterViewInit  {
           this.listaServicos = response;
           this.dataSource = new MatTableDataSource<ServicoModel>(this.listaServicos);
           this.dataSource.paginator = this.paginator;
-          this.findAllClientes();
-        })
-      }
-
-      findAllClientes(): void {
-        this.listaServicos.forEach(x => {
-          this.clienteService.findById(x.cliente).subscribe(response => {
-            x.cliente = response.nome;
-          })
         })
       }
   }

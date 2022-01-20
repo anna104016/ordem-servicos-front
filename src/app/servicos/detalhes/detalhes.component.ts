@@ -15,8 +15,13 @@ export class DetalhesServicosComponent implements OnInit {
   servico: ServicoModel ={
     id: '',
     descricao: '',
-    cliente: '',
+    cliente: {
+      nome: '',
+      cpf: '',
+      telefone: ''
+    },
     status: '',
+    valor: ''
   }
 
   constructor(

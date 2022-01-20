@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { ClienteRoutingModule } from './cliente.routing.module';
 import { ClienteIdComponent } from './cliente-id/cliente-id.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ClienteIdComponent } from './cliente-id/cliente-id.component';
     MatSnackBarModule,
     MatCardModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    SharedModule
   ],
   providers: [
     ClientesService

@@ -15,12 +15,7 @@ export class EditarservicosComponent implements OnInit {
 
   listCliente: Cliente[] =[];
   
-  editservico: ServicoModel = {
-    descricao: '',
-    cliente: '',
-    valor: '',
-    status: '',
-  }
+  editservico: ServicoModel = new ServicoModel()
 
   constructor(
       private route: ActivatedRoute, 
