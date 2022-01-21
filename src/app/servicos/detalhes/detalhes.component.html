@@ -1,8 +1,20 @@
-<div class="novo-cliente-content">
-  <h1>Dados do  serviço {{servico.id}} </h1>
-  <div class="novo-cliente-container">
-    <form class="novo-form">
-      <mat-form-field class="novo-content">
+<app-header></app-header>
+
+<div class="container">
+
+  <div class="content">
+
+    <form class="card-info">
+
+      <div class="action-back">
+        <i class="material-icons"
+        (click)="back()"
+        >arrow_back</i>
+      </div>
+
+      <p>Detalhes</p>
+
+      <mat-form-field class="form-field" appearance="fill">
         <mat-label>Descrição</mat-label>
         <input 
           matInput 
@@ -11,7 +23,7 @@
           [(ngModel)]="servico.descricao">
       </mat-form-field>
     
-      <mat-form-field class="novo-content">
+      <mat-form-field class="form-field" appearance="fill" *ngIf="servico.cliente">
         <mat-label>Nome do Cliente</mat-label>
         <input 
           matInput 
@@ -20,7 +32,7 @@
           [(ngModel)]="servico.cliente.nome">
       </mat-form-field>
 
-      <mat-form-field class="novo-content">
+      <mat-form-field class="form-field" appearance="fill">
         <mat-label>Status</mat-label>
         <input 
           matInput 
@@ -29,16 +41,16 @@
           [(ngModel)]="servico.status" >
       </mat-form-field>
 
-      <mat-form-field class="novo-content">
+      <mat-form-field class="form-field" appearance="fill">
         <mat-label>Data de abertura</mat-label>
         <input 
           matInput 
           name="dataAbertura"
           disabled
-          [(ngModel)]="servico.dataAbertura" >
+          [(ngModel)]="servico.dataAbertura">
       </mat-form-field>
 
-      <mat-form-field class="novo-content">
+      <mat-form-field class="form-field" appearance="fill" *ngIf="servico.dataFechamento">
         <mat-label>Data de Fechamento</mat-label>
         <input 
           matInput 
@@ -47,7 +59,7 @@
           [(ngModel)]="servico.dataFechamento" >
       </mat-form-field>
 
-      <mat-form-field class="novo-content">
+      <mat-form-field class="form-field" appearance="fill">
         <mat-label>Valor total</mat-label>
         <input 
           matInput 
@@ -57,16 +69,15 @@
       </mat-form-field>
 
 
-      <div class="botoes">
-        <button mat-flat-button class="btn-deletar" (click)="deletarServico()">Deletar</button>
-        <button mat-flat-button class="btn-editar">
-          <a routerLink="/servicos/atualizar/{{servico.id}}">
+      <div class="actions">
+        <button mat-button class="delete" (click)="delete()">Deletar</button>
+        <button mat-button class="update" (click)="update()">
             Editar
-          </a>
         </button>
-        <button mat-flat-button class="btn-cancelar" (click)="voltar()">Voltar</button>
       </div>
   </form>
   </div>
 </div>
+
+<app-footer></app-footer>
 

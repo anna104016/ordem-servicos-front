@@ -1,1 +1,69 @@
-<p>cliente-id works!</p>
+<app-header></app-header>
+
+<div class="container">
+    <div class="content">
+      <mat-card class="card-info">
+  
+        <div class="action-back">
+          <i class="material-icons"
+          (click)="back()"
+          >arrow_back</i>
+        </div>
+  
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input
+            matInput
+            disabled
+            type="text"
+            #nome
+            [(ngModel)]="cliente.nome"
+            name="nome"
+          />
+        </mat-form-field>
+  
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>CPF</mat-label>
+          <input
+            matInput
+            disabled
+            type="text"
+            name="nome"
+            [(ngModel)]="cliente.cpf"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input
+              matInput
+              disabled
+              type="text"
+              name="nome"
+              [(ngModel)]="cliente.telefone"
+            />
+          </mat-form-field>
+  
+        <mat-card-actions class="acoes">
+          <button
+            mat-button
+            (click)="update()"
+            class="save"
+          >
+            Editar
+          </button>
+  
+          <button
+            mat-button
+            class="delete"
+            (click)="delete()"
+          >
+            Excluir
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+<app-footer></app-footer>
+  

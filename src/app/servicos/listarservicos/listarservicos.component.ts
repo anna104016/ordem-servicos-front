@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ClientesService } from 'src/app/cliente/clientes.service';
 import { ServicoModel } from '../servico.model';
 import { ServicosService } from '../servicos.service';
@@ -21,6 +22,7 @@ export class ListarservicosComponent implements AfterViewInit  {
 
   constructor( 
       private service: ServicosService, 
+      private router: Router,
       private clienteService: ClientesService) { }
 
       ngAfterViewInit() {
@@ -33,5 +35,9 @@ export class ListarservicosComponent implements AfterViewInit  {
           this.dataSource = new MatTableDataSource<ServicoModel>(this.listaServicos);
           this.dataSource.paginator = this.paginator;
         })
+      }
+
+      newService(){
+        this.router.navigate(['/servicos/novo'])
       }
   }

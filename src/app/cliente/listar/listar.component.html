@@ -7,28 +7,27 @@
   <div class="title">
     <h1>Clientes</h1>
   </div>
-  <button mat-button (click)="novoCliente()">Novo Cliente</button>
+  <button mat-button (click)="novoCliente()" class="btn-new">Novo Cliente</button>
+
   <div class="table">
-    <table mat-table class="table" [dataSource]="dataSource">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
+    <table mat-table class="table-content" [dataSource]="dataSource">
+      <ng-container matColumnDef="id" class="table-tr">
+        <th mat-header-cell *matHeaderCellDef class="table-th"> ID </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
     
-      <!-- Name Column -->
-      <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <ng-container matColumnDef="nome" class="table-tr">
+        <th mat-header-cell *matHeaderCellDef class="table-th"> NOME </th>
         <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
       </ng-container>
     
-      <!-- Weight Column -->
-      <ng-container matColumnDef="cpf">
-        <th mat-header-cell *matHeaderCellDef> Telefone </th>
+      <ng-container matColumnDef="cpf" class="table-tr">
+        <th mat-header-cell *matHeaderCellDef class="table-th"> TELEFONE </th>
         <td mat-cell *matCellDef="let element"> {{element.telefone}} </td>
       </ng-container>
 
       <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef> DADOS </th>
+        <th mat-header-cell *matHeaderCellDef class="table-th"> DADOS </th>
         <td mat-cell *matCellDef="let element">
           <a class="delete" routerLink="/clientes/dados/{{element.id}}">
             <span class="material-icons">info</span>

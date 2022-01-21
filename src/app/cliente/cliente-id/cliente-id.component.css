@@ -1,0 +1,87 @@
+.container{
+    margin: 20px 20px 0 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: top;
+}
+
+.content{
+   width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: 10px 0 20px 0;
+    padding: 20px 10px;
+}
+
+.card-info p{
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+}
+.card-info p{
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+}
+
+.action-back{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.action-back i {
+    cursor: pointer;
+    color: #e5383b;
+}
+
+.field{
+    width: 90%;
+}
+
+.field input{
+    margin-top: 10px;
+    width: 100%;
+    padding: 2px 6px;
+    font-size: 16px;
+    outline: none;
+    color: #000;
+}
+
+.acoes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    padding: 2px 0;
+}
+
+.acoes button{
+    width: 120px;
+    margin: 0 2px 0 2px;
+}
+
+.save{
+    background-color: #058c42;
+    color: #ffff;
+}
+
+.delete{
+    background-color: #e5383b;
+    color: #ffff;
+}

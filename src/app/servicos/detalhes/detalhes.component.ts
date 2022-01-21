@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientesService } from 'src/app/cliente/clientes.service';
-import { Cliente } from '../../cliente/cliente.model';
 import { ServicoModel } from '../servico.model';
 import { ServicosService } from '../servicos.service';
+import { map, switchMap } from 'rxjs/operators'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalhes',
@@ -12,47 +13,81 @@ import { ServicosService } from '../servicos.service';
 })
 export class DetalhesServicosComponent implements OnInit {
 
-  servico: ServicoModel ={
-    id: '',
-    descricao: '',
-    cliente: {
-      nome: '',
-      cpf: '',
-      telefone: ''
-    },
-    status: '',
-    valor: ''
-  }
+  servico= new ServicoModel()
 
   constructor(
-      private service: ServicosService, 
-      private router: ActivatedRoute, 
-      private route: Router,
+      private servicosService: ServicosService, 
+      private activatedRoute: ActivatedRoute, 
+      private router: Router,
       private serviceClient: ClientesService) { }
 
   ngOnInit(): void {
-    this.servico.id = this.router.snapshot.paramMap.get('id');
-    this.finById();
+    this.findOne();
   }
 
-  voltar(){
-    this.route.navigate(['/servicos'])
-  }
-  deletarServico(): void{
-    this.service.deletar(this.servico.id)
-      .subscribe(response => {
-        this.service.mensagem(`Serviço ${this.servico.id} exluido com sucesso!`);
-        this.route.navigate(['/'])
-      }, err => {
-        this.service.mensagem(err.error.message);
-      })
+  back(){
+    this.router.navigate(['/servicos'])
   }
 
-  finById(): void {
-    this.service.finById(this.servico.id)
-      .subscribe(response => {
-        this.servico = response;
-      })
+  findOne(): void {
+    this.activatedRoute.params
+    .pipe(
+      map((params:any) => params['id']),
+      switchMap(id => this.servicosService.finById(id))
+    ).subscribe(servico => {
+      this.servico = servico
+    })
+  }
+
+  update(){
+    this.router.navigate([`/servicos/atualizar/${this.servico.id}`])
+  }
+
+  delete(){
+    Swal.fire({
+      title: 'Deletar serviço',
+      icon:'question',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'SIM',
+      cancelButtonText: 'NÃO'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.servicosService.deletar(this.servico.id).subscribe(
+          result => {
+            this.sucesso()
+          }, error => {
+            this.error()
+          }
+        )
+      }
+    })
+  }
+
+  sucesso(){
+    Swal.fire({
+      icon: 'success',
+      title: 'Sucesso!',
+      text: 'Serviço deletado com sucesso',
+      showConfirmButton: true,
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.router.navigate([`/servicos`])
+      }
+    }) 
+  }
+
+  error(){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oppess...!',
+      text: 'Serviço não pode ser deletado',
+      showConfirmButton: true,
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.router.navigate([`/servicos/dados/${this.servico.id}`])
+      }
+    }) 
   }
 }
 

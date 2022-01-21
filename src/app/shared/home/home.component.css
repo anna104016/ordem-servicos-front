@@ -98,6 +98,7 @@
 
     font-weight: 500;
     overflow: hidden;
+    transition:all 0.3s ease;
 }
 .info-card .title{
     font-size:20px;
@@ -109,6 +110,12 @@
 .info-card span{
     color:#5d00ff;
     font-size: 30px;
+}
+
+.info-card:hover{
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
 }
 
 @media  screen and (max-width: 700px) {

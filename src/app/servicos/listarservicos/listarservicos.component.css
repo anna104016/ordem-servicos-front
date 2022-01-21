@@ -2,9 +2,10 @@
     margin: 20px 20px 0 0px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: top;
 }
 
 
@@ -23,20 +24,59 @@
     color: #FFF;
 }
 
-.table{
+.table, .table-content{
     width: 100%;
 }
 
-.table th{
+.table-content{
+    /* background-color: #34495E;
+    color: #fff;
+    border-radius: .4em;
+    overflow: hidden; */
+    border-collapse: collapse;
+    margin: 25px 0 0 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    text-align: center;
+}
+
+.table-tr{
+    text-align: center;
+}
+
+.table-th{
     font-weight: 500;
     font-size: 16px;
-    background-color: rgb(126, 123, 123);
+    background-color: #34495E;
     text-align: center;
     color: white;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #34495E;
+    border-color: lighten(#34495E, 10%);
+    margin: 0;
+    /* background-color: #ffff;
+    border-bottom: 1px solid #009879;
+    color: #009879;
+    text-align: center;
+    padding: 12px 15px;
+    font-weight: 600; */
+}
+
+.table-content td{
+    /* text-align: center;
+    background-color: #34495E;
+    color: #ffff; */
+    padding: 12px 15px;
+    color: #000;
+}
+
+.table-tr {
+    border-bottom: 1px solid #dddddd;
 }
 
 mat-paginator{
-    background-color: #eee;
+    background-color: #ffff;
     margin-bottom: 20px;
 }
 
@@ -48,15 +88,12 @@ mat-paginator{
     color: #fff;
 }
 
-.table td{
-    text-align: center;
-    background-color: #eee;
-    color: black;
-}
-
 .acoes a{
     cursor: pointer;
-    color: black;
+    color: #fff;
+}
+.material-icons{
+    color: #009879;
 }
 .btn-new a{
     text-decoration: none;
