@@ -12,7 +12,7 @@
     align-items: center;
     margin: 20px 0px;
     padding: 0px 20px;
-    height: 450px;
+    height: 100vh;
 }
 
 .text{
@@ -46,11 +46,9 @@
 }
 .text .botao-comecar{
     padding: 0px 10px;
-
     border-radius: 20px;
     width: 150px;
-    background-color:#673ab7;
-
+    background-color:#013A63;
     color: #fff;
     margin-top: 8px;
 }
@@ -60,7 +58,7 @@
 }
 
 .infomativos{
-    background-color:#caacff;
+    background-color:#ccdbfd;
     width: 100%;
     height:280px;
 
@@ -103,12 +101,12 @@
 .info-card .title{
     font-size:20px;
     font-weight:500;
-    color:#230d49;
+    color:#012A4A;
     margin: 1rem 0rem;
 }
 
 .info-card span{
-    color:#5d00ff;
+    color:#012A4A;
     font-size: 30px;
 }
 
@@ -122,6 +120,7 @@
     .content{
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 
     .cards{
@@ -130,7 +129,6 @@
     }
 
     .infomativos{
-        background-color:#caacff;
         width: 100%;
         height: 380px;
         padding: 20px 20px;

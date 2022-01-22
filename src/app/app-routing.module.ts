@@ -4,7 +4,9 @@ import { HomeComponent } from './shared/home/home.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', 
+    loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule),
+  },
   { path: 'clientes', 
     loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule),
   },

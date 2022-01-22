@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 import { Cliente } from 'src/app/cliente/cliente.model';
 import { ClientesService } from 'src/app/cliente/clientes.service';
+import Swal from 'sweetalert2';
 import { ServicoModel } from '../servico.model';
 import { ServicosService } from '../servicos.service';
 
@@ -12,22 +15,22 @@ import { ServicosService } from '../servicos.service';
 })
 export class EditarservicosComponent implements OnInit {
   
-
-  listCliente: Cliente[] =[];
-  
-  editservico: ServicoModel = new ServicoModel()
+  listCliente: Cliente[] = [];
+  form: FormGroup
+  servico: ServicoModel = new ServicoModel()
 
   constructor(
-      private route: ActivatedRoute, 
+      private formBuilder: FormBuilder,
+      private activatedRoute: ActivatedRoute, 
       private cliService: ClientesService, 
       private service: ServicosService,
       private router: Router
       ) { }
 
   ngOnInit(): void {
-    this.editservico.id = this.route.snapshot.paramMap.get('id');
     this.getAllClientes();
-    this.getServicoId();
+    this.getServicoById();
+    this.createForm(this.servico)
   }
 
   voltar(){
@@ -42,22 +45,86 @@ export class EditarservicosComponent implements OnInit {
     );
   }
 
-  getServicoId(): void{
-    this.service.finById(this.editservico.id).subscribe(
+  getServicoById(): void{
+   this.activatedRoute.params
+   .pipe(
+     map((params:any) => params['id']),
+     switchMap(id => this.service.finById(id))
+   ).subscribe(servicos => {
+     this.servico = servicos
+     this.updateForm(servicos)
+   })
+  }
+
+  editar(): void {
+    this.service.atualizar(this.form.value).subscribe(
       response => {
-        this.editservico = response;
+        this.sucesso()
+      },err => {
+        this.error()
       }
     )
   }
 
-  editar(): void {
-    this.service.atualizar(this.editservico).subscribe(
-      response => {
-        this.service.mensagem(`Serviço ${this.editservico.id} atualizado com sucesso!`);
-        this.router.navigate(['/servicos']);
-      },err => {
-        this.service.mensagem(err.error.message);
+  updateForm(servico: ServicoModel) {
+    this.form.patchValue({
+      id: servico.id,
+      descricao: servico.descricao,
+      cliente: servico.cliente,
+      dataAbertura: servico.dataAbertura,
+      dataFechamento: servico.dataFechamento,
+      valor: servico.valor,
+      status: servico.status
+    })
+  }
+
+  createForm(servico: ServicoModel){
+    this.form = this.formBuilder.group({
+      id: this.servico.id,
+      descricao: new FormControl(servico.descricao, [
+        Validators.required,
+        Validators.minLength(10)
+      ]),
+      valor: new FormControl(servico.valor, [
+        Validators.required
+      ]),
+      cliente: new FormControl(servico.cliente, [
+        Validators.required
+      ]),
+      dataFechamento: ({value: servico.dataFechamento, disabled:true}),
+      dataAbertura: ({value: servico.dataAbertura, disabled:true}),
+      status: new FormControl(servico.status, [
+        Validators.required
+      ])
+    })
+  }
+
+  sucesso(){
+    Swal.fire({
+      title: 'Sucesso!',
+      text: 'Serviço atualizado.',
+      icon: 'success',
+      showConfirmButton: true,
+      confirmButtonText: 'Fechar'
+    }).then((result => {
+      if(result.isConfirmed){
+        this.router.navigate([`/servicos/dados/${this.servico.id}`])
       }
-    )
+    }))
+  }
+
+  error(){
+    Swal.fire({
+      title: 'oppss..!',
+      text: 'Falha ao atualizar serviço.',
+      footer: 'Tesnte novamento mais tarde',
+      icon: 'error',
+      showConfirmButton: true,
+      confirmButtonText: 'Fechar'
+    }).then((result => {
+      if(result.isConfirmed){
+        this.router.navigate([`/servicos/dados/${this.servico.id}`])
+      }
+    }))
   }
 }

@@ -46,27 +46,16 @@
 }
 
 .table-th{
-    font-weight: 500;
-    font-size: 16px;
-    background-color: #34495E;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #d9dcd6;
     text-align: center;
-    color: white;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #34495E;
+    color: #000;
     border-color: lighten(#34495E, 10%);
     margin: 0;
-    /* background-color: #ffff;
-    border-bottom: 1px solid #009879;
-    color: #009879;
-    text-align: center;
-    padding: 12px 15px;
-    font-weight: 600; */
 }
 
 .table-content td{
-    /* text-align: center;
-    background-color: #34495E;
-    color: #ffff; */
     padding: 12px 15px;
     color: #000;
 }
@@ -84,7 +73,7 @@ mat-paginator{
     align-self: flex-start;
     width: 120px;
     margin-bottom: 20px;
-    background-color: #058c42;
+    background-color:#008bc2 !important;
     color: #fff;
 }
 

@@ -78,7 +78,8 @@ export class NovoservicoComponent implements OnInit {
   createForm(servico: ServicoModel){
     this.form = this.formBiulder.group({
       descricao: new FormControl(servico.descricao, [
-        Validators.required
+        Validators.required,
+        Validators.minLength(10)
       ]),
       valor: new FormControl(servico.valor, [
         Validators.required

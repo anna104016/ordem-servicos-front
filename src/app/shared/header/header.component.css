@@ -1,15 +1,14 @@
 .header-container{
-    background-color: #673ab7;
-
+    background-color: #012A4A;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content:space-between;
-
     padding: 0 2rem;
-    height:10%;
+    height: 70px;
     width: 100%;
 }
+
 .header-container span{
     text-align: center;
     cursor: pointer;
@@ -29,7 +28,6 @@
 }
 
 @media  screen and (max-width: 1000px) {
-
     .left, .direita{
         font-size:16px;
     }

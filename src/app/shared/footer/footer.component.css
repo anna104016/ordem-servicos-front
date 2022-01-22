@@ -1,17 +1,14 @@
 .footer-container{
-    
-    background-color: #673ab7;
-
+    background-color: #012A4A;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content:center;
     bottom: 0 ;
-
     height:50px;
-    
-    
+    margin: 0;
 }
+
 .footer-container span{
     text-align: center;
 }

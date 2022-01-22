@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   }
 
   clientes(){
-    this.router.navigate(['/clientes'])
+    this.router.navigate(['/login'])
   }
 
 

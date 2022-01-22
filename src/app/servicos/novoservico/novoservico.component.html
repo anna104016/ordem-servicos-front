@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="container">
   <div class="content">
     <form class="form mat-card"  [formGroup]="form">
@@ -8,11 +10,17 @@
         <mat-label>Descrição</mat-label>
         <textarea
           matInput 
+          #descricao
+          minlength="10"
+          maxlength="255"
           autocomplete="off"
           placeholder="Formatar notebook"
           formControlName="descricao"
           >
         </textarea>
+        <mat-hint align="start">{{descricao.value?.length || 0}}/255</mat-hint>
+        <mat-error *ngIf="form.get('descricao').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+        <mat-error *ngIf="form.get('descricao').hasError('minlength')" class="field-error">Descreva mais sobre o serviço</mat-error>
       </mat-form-field>
     
       <mat-form-field class="form-field">
@@ -23,6 +31,7 @@
           autocomplete="off"
           formControlName="valor"
           >
+          <mat-error *ngIf="form.get('valor').hasError('required')" class="field-error">Campo obrigatório</mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-field">
@@ -30,13 +39,16 @@
         <mat-select formControlName="cliente">
           <mat-option *ngFor="let cli of listCliente" value="{{cli.id}}">{{cli.nome}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="form.get('cliente').hasError('required')" class="field-error">Campo obrigatório</mat-error>
       </mat-form-field>
 
       <div class="actions">
-        <button mat-button class="save" (click)="salvar()">Salvar</button>
+        <button mat-button class="save" (click)="salvar()" [disabled]="!form.valid">Salvar</button>
         <button mat-button class="cancel" (click)="voltar()" >Voltar</button>
       </div>
   </form>
   </div>
 </div>
+
+<app-footer></app-footer>
 

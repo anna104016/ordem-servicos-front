@@ -4,10 +4,7 @@
 
   <div class="content">
 
-  <div class="title">
-    <h1>Clientes</h1>
-  </div>
-  <button mat-button (click)="newService()" class="btn-new">Novo Cliente</button>
+  <button mat-button (click)="newService()" class="btn-new">Novo Serviço</button>
 
   <div class="table">
     <table mat-table class="table-content" [dataSource]="dataSource">
@@ -17,17 +14,17 @@
       </ng-container>
     
       <ng-container matColumnDef="status" class="table-tr">
-        <th mat-header-cell *matHeaderCellDef class="table-th"> NOME </th>
+        <th mat-header-cell *matHeaderCellDef class="table-th"> STATUS </th>
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
       </ng-container>
     
       <ng-container matColumnDef="descricao" class="table-tr">
-        <th mat-header-cell *matHeaderCellDef class="table-th"> TELEFONE </th>
+        <th mat-header-cell *matHeaderCellDef class="table-th"> DESCRIÇÃO </th>
         <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
       </ng-container>
 
       <ng-container matColumnDef="dados">
-        <th mat-header-cell *matHeaderCellDef class="table-th"> DADOS </th>
+        <th mat-header-cell *matHeaderCellDef class="table-th"> DETALHES </th>
         <td mat-cell *matCellDef="let element">
           <a class="delete" routerLink="/servicos/dados/{{element.id}}">
             <span class="material-icons">info</span>

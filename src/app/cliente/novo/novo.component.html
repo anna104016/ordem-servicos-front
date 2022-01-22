@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="container">
   <div class="content">
     <form class="form mat-card" [formGroup]="form">
@@ -10,45 +12,43 @@
           autocomplete="off"
           placeholder="Nome do cliente"
           formControlName="nome"
-          />
-          <!-- <mat-error class="field-error" *ngIf="form.controls.nome.errors?.['required']">Campo obrigatório</mat-error>
-          <mat-error class="field-error" *ngIf="form.controls.nome.errors?.['minlength']">Informe um nome valido</mat-error> -->
+          >
+          <mat-error *ngIf="form.get('nome').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+          <mat-error *ngIf="form.get('nome').hasError('minlength')" class="field-error">Nome deve ter mais e 5 caracteres</mat-error>
         </mat-form-field>
 
     
       <mat-form-field class="form-field"  appearance="fill">
         <mat-label>CPF</mat-label>
-        <input 
-          matInput 
-          type="number"
-          autocomplete="off"
-          placeholder="34587410235"
-          formControlName="cpf"
-          />
-          <!-- <mat-error class="field-error" *ngIf="form.controls.cpf.errors?.['required']">Campo obrigatório</mat-error>
-          <mat-error class="field-error" *ngIf="form.controls.cpf.errors?.['minlength']">Informe um cpf valido</mat-error> -->
+        <input  matInput type="text" autocomplete="off" placeholder="34587410235" formControlName="cpf" maxlength="11">
+        <mat-error *ngIf="form.get('cpf').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+        <mat-error *ngIf="form.get('cpf').hasError('minlength')" class="field-error">Informe um cpf válido</mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-field"  appearance="fill">
         <mat-label>Telefone</mat-label>
-        <input 
-          matInput 
-          autocomplete="off"
-          placeholder="(12) 93456-7890"
-          formControlName="telefone"/>
+        <input matInput  autocomplete="off"  placeholder="(12) 93456-7890" formControlName="telefone">
+          <mat-error *ngIf="form.get('telefone').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+          <mat-error *ngIf="form.get('telefone').hasError('minlength')" class="field-error">Informe um telefone válido</mat-error>
       </mat-form-field>
+
       <div class="actions">
         <button 
           mat-button 
+          [disabled]="!form.valid"
           class="save" 
           (click)="create()">Salvar
         </button>
+
         <button 
           mat-button 
           class="cancel" 
           (click)="cancelar()">Cancelar</button>
       </div>
+
   </form>
   </div>
 </div>
+
+<app-footer></app-footer>
 
