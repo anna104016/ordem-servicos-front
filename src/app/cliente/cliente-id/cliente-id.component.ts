@@ -35,11 +35,11 @@ export class ClienteIdComponent implements OnInit {
   }
 
   update(){
-    this.router.navigate([`/clientes/atualizar/${this.cliente.id}`])
+    this.router.navigate([`/main/clientes/atualizar/${this.cliente.cliente_id}`])
   }
 
   back(){
-    this.router.navigate([`/clientes`])
+    this.router.navigate([`/main/clientes`])
   }
 
   delete(){
@@ -53,7 +53,7 @@ export class ClienteIdComponent implements OnInit {
       confirmButtonText: 'SIM'
     }).then((result) => {
       if(result.isConfirmed){
-       this.clienteService.deletarCliente(this.cliente.id).subscribe(
+       this.clienteService.deletarCliente(this.cliente.cliente_id).subscribe(
          result => {
            this.sucesso()
          }, error => {
@@ -72,7 +72,7 @@ export class ClienteIdComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/clientes'])
+        this.router.navigate(['/main/clientes'])
       }
     }) 
   }
@@ -85,7 +85,7 @@ export class ClienteIdComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/clientes'])
+        this.router.navigate(['/main/clientes'])
       }
     }) 
   }

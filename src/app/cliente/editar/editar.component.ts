@@ -20,7 +20,6 @@ export class EditarClienteComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private formBuilder: FormBuilder,
     private service: ClientesService,
-    private route: ActivatedRoute,
      private router: Router) { }
 
   ngOnInit(): void {
@@ -34,14 +33,14 @@ export class EditarClienteComponent implements OnInit {
       map((params:any) => params['id']),
       switchMap(id => this.service.findById(id))
     ).subscribe(cliente => {
-      this.id = cliente.id
+      this.id = cliente.cliente_id
       this.updateForm(cliente)
     })
   } 
 
   updateForm(cliente: Cliente) {
     this.form.patchValue({
-      id: cliente.id,
+      cliente_id: cliente.cliente_id,
       nome:cliente.nome,
       telefone:cliente.telefone,
       cpf: cliente.cpf
@@ -50,7 +49,7 @@ export class EditarClienteComponent implements OnInit {
 
   createFornm(){
     this.form = this.formBuilder.group({
-      id:null,
+      cliente_id:null,
       nome: new FormControl(null, [
         Validators.required
       ]),
@@ -67,7 +66,7 @@ export class EditarClienteComponent implements OnInit {
   }
 
   cancelar(){
-    this.router.navigate([`/clientes/dados/${this.id}`])
+    this.router.navigate([`/main/clientes/dados/${this.id}`])
   }
 
   editar(): void {
@@ -88,7 +87,7 @@ export class EditarClienteComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate([`/clientes/dados/${this.id}`])
+        this.router.navigate([`/main/clientes/dados/${this.id}`])
       }
     }) 
   }
@@ -101,7 +100,7 @@ export class EditarClienteComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate([`/clientes/dados/${this.id}`])
+        this.router.navigate([`/main/clientes/dados/${this.id}`])
       }
     }) 
   }

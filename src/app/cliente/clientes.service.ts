@@ -30,7 +30,7 @@ export class ClientesService {
   }
 
   editar(cliente: Cliente): Observable<void>{
-    const url = `${this.baseUrl}/clientes/${cliente.id}`;
+    const url = `${this.baseUrl}/clientes/${cliente.cliente_id}`;
     return this.http.put<void>(url,cliente)
   }
 

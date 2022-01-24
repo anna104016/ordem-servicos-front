@@ -31,7 +31,7 @@ export class ServicosService {
   }
 
   atualizar(servicosnew: ServicoModel): Observable<ServicoModel>{
-    const url = `${this.baseUrl}/servicos/${servicosnew.id}`;
+    const url = `${this.baseUrl}/servicos/${servicosnew.servico_id}`;
     return this.http.put<ServicoModel>(url, servicosnew);
   }
 

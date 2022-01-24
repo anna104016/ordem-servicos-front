@@ -34,7 +34,7 @@ export class EditarservicosComponent implements OnInit {
   }
 
   voltar(){
-    this.router.navigate(['/servicos'])
+    this.router.navigate(['/main/servicos'])
   }
 
   getAllClientes(): void {
@@ -68,11 +68,11 @@ export class EditarservicosComponent implements OnInit {
 
   updateForm(servico: ServicoModel) {
     this.form.patchValue({
-      id: servico.id,
+      id: servico.servico_id,
       descricao: servico.descricao,
       cliente: servico.cliente,
-      dataAbertura: servico.dataAbertura,
-      dataFechamento: servico.dataFechamento,
+      data_abertura: servico.data_abertura,
+      data_fechamento: servico.data_fechamento,
       valor: servico.valor,
       status: servico.status
     })
@@ -80,7 +80,7 @@ export class EditarservicosComponent implements OnInit {
 
   createForm(servico: ServicoModel){
     this.form = this.formBuilder.group({
-      id: this.servico.id,
+      id: this.servico.servico_id,
       descricao: new FormControl(servico.descricao, [
         Validators.required,
         Validators.minLength(10)
@@ -91,8 +91,8 @@ export class EditarservicosComponent implements OnInit {
       cliente: new FormControl(servico.cliente, [
         Validators.required
       ]),
-      dataFechamento: ({value: servico.dataFechamento, disabled:true}),
-      dataAbertura: ({value: servico.dataAbertura, disabled:true}),
+      data_fechamento: new FormControl(servico.cliente),
+      data_abertura: ({value: servico.data_abertura, disabled:true}),
       status: new FormControl(servico.status, [
         Validators.required
       ])
@@ -108,7 +108,7 @@ export class EditarservicosComponent implements OnInit {
       confirmButtonText: 'Fechar'
     }).then((result => {
       if(result.isConfirmed){
-        this.router.navigate([`/servicos/dados/${this.servico.id}`])
+        this.router.navigate([`/main/servicos/dados/${this.servico.servico_id}`])
       }
     }))
   }
@@ -123,7 +123,7 @@ export class EditarservicosComponent implements OnInit {
       confirmButtonText: 'Fechar'
     }).then((result => {
       if(result.isConfirmed){
-        this.router.navigate([`/servicos/dados/${this.servico.id}`])
+        this.router.navigate([`/main/servicos/dados/${this.servico.servico_id}`])
       }
     }))
   }

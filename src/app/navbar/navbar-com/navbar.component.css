@@ -1,0 +1,29 @@
+.container{
+    background-color: #eeee;
+    min-height: 100vh;
+}
+
+i{
+    padding-right: 1.0rem;
+}
+
+.mat-sidenav-content{
+    margin: 0 0 20px 0;
+    min-height: 100vh;
+}
+
+.mat-sidenav{
+    background-color: #012A4A;
+    width: 240px;
+}
+
+.list-item a{
+    color: #fff
+}
+
+.logo{
+    width: 100%;
+    color:#fff;
+    font-size: 20px;
+    padding: 20px;
+}

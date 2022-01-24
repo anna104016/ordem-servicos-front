@@ -8,6 +8,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { ClienteModule } from './cliente/cliente.module';
 import { ServicosModule } from './servicos/servicos.module';
 import { SharedModule } from './shared/shared.module';
+import { NavbarModule } from './navbar/navbar.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     ClienteModule,
     ServicosModule,
-    SharedModule
+    SharedModule,
+    NavbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,3 @@
-<app-header></app-header>
-
 <div class="container">
 
   <div class="content">
@@ -45,24 +43,24 @@
         <mat-label>Data de abertura</mat-label>
         <input 
           matInput 
-          name="dataAbertura"
-          formControlName="dataAbertura"
+          name="data_abertura"
+          formControlName="data_abertura"
         >
       </mat-form-field>
 
-      <mat-form-field class="form-field" *ngIf="form.controls.dataFechamento.value" appearance="fill">
+      <mat-form-field class="form-field" appearance="fill">
         <mat-label>Data de Fechamento</mat-label>
         <input 
           matInput 
-          name="dataFechamento"
-          formControlName="dataFechamento"
+          name="data_fechamento"
+          formControlName="data_fechamento"
           >
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Cliente</mat-label>
         <mat-select formControlName="cliente">
-          <mat-option *ngFor="let cli of listCliente" value="{{cli.id}}">{{cli.nome}}</mat-option>
+          <mat-option *ngFor="let cliente of listCliente" [value]="cliente">{{cliente.nome}}</mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('cliente').hasError('required')" class="field-error">Campo obrigatório</mat-error>
       </mat-form-field>
@@ -76,6 +74,3 @@
   </form>
   </div>
 </div>
-
-<app-footer></app-footer>
-

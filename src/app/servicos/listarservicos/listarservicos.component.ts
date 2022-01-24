@@ -38,6 +38,6 @@ export class ListarservicosComponent implements AfterViewInit  {
       }
 
       newService(){
-        this.router.navigate(['/servicos/novo-servico'])
+        this.router.navigate(['/main/servicos/novo-servico'])
       }
   }

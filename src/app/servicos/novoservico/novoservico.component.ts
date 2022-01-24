@@ -53,7 +53,7 @@ export class NovoservicoComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/servicos'])
+        this.router.navigate(['/main/servicos'])
       }
     }) 
   }
@@ -66,13 +66,13 @@ export class NovoservicoComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/servicos'])
+        this.router.navigate(['/main/servicos'])
       }
     }) 
   }
 
   voltar(){
-    this.router.navigate(['/servicos']);
+    this.router.navigate(['/main/servicos']);
   }
 
   createForm(servico: ServicoModel){

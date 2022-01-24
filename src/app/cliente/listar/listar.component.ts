@@ -26,7 +26,7 @@ export class ListarClienteComponent implements AfterViewInit {
   }
 
   novoCliente(){
-    this.router.navigate(['/clientes/novo-cliente'])
+    this.router.navigate(['/main/clientes/novo-cliente'])
   }
 
   findAllCliente(){

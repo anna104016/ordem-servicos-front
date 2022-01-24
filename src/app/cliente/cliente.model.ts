@@ -1,7 +1,9 @@
+import { ServicoModel } from "../servicos/servico.model";
+
 export class Cliente{
-    id?: string;
+    cliente_id?: string;
     nome: string;
-    cpf: string;
-    dataCadastro?: string;
+    cpf: number;
     telefone: string;
+    servicos: ServicoModel
 }

@@ -40,7 +40,7 @@ export class NovoClienteComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/clientes'])
+        this.router.navigate(['/main/clientes'])
       }
     }) 
   }
@@ -53,13 +53,13 @@ export class NovoClienteComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/clientes'])
+        this.router.navigate(['/main/clientes'])
       }
     }) 
   }
 
   cancelar(){
-    this.router.navigate(['/clientes'])
+    this.router.navigate(['/main/clientes'])
   }
 
   createForm(cliente: Cliente){

@@ -26,7 +26,7 @@ export class DetalhesServicosComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(['/servicos'])
+    this.router.navigate(['/main/servicos'])
   }
 
   findOne(): void {
@@ -40,7 +40,7 @@ export class DetalhesServicosComponent implements OnInit {
   }
 
   update(){
-    this.router.navigate([`/servicos/atualizar/${this.servico.id}`])
+    this.router.navigate([`/main/servicos/atualizar/${this.servico.servico_id}`])
   }
 
   delete(){
@@ -53,7 +53,7 @@ export class DetalhesServicosComponent implements OnInit {
       cancelButtonText: 'NÃO'
     }).then((result) => {
       if(result.isConfirmed){
-        this.servicosService.deletar(this.servico.id).subscribe(
+        this.servicosService.deletar(this.servico.servico_id).subscribe(
           result => {
             this.sucesso()
           }, error => {
@@ -72,7 +72,7 @@ export class DetalhesServicosComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate([`/servicos`])
+        this.router.navigate([`/main/servicos`])
       }
     }) 
   }
@@ -85,7 +85,7 @@ export class DetalhesServicosComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate([`/servicos/dados/${this.servico.id}`])
+        this.router.navigate([`/main/servicos/dados/${this.servico.servico_id}`])
       }
     }) 
   }
