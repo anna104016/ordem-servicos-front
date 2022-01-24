@@ -8,20 +8,20 @@
 
 ##### :small_blue_diamond: Métodos para entidade Clientes:
 - inserir
-- deletar (se não houver serviços associados)
+- deletar
 - encontrar todos
 - encontrar pelo ID
 - atualizar
 
 ##### :small_blue_diamond: Métodos para entidade Serviços:
 - inserir
-- deletar (se não houver cliente associado)
+- deletar
 - encontrar todos
 - encontrar pelo ID
 - atualizar
 
 ##### :small_blue_diamond: API utilizada:
-- https://github.com/santoskarolina/ordem-servicos
+- https://github.com/santoskarolina/ordem-servicos-nestjs
 
 #### :small_blue_diamond: Sistema em execução
 ![DOMAIN MODEL](https://github.com/anna104016/html/blob/main/html/servicos.gif)
