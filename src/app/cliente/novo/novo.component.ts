@@ -27,7 +27,7 @@ export class NovoClienteComponent implements OnInit {
     this.service.novoCliente(this.form.value)
       .subscribe(response =>{
           this.sucesso()
-      },err => {
+      },error  => {
         this.error()
       })
   }

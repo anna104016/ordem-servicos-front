@@ -7,3 +7,9 @@ export class Cliente{
     telefone: string;
     servicos: ServicoModel
 }
+
+export class RelatoriosClientes {
+    clientes: number
+    clientes_com_servico: number
+    clientes_sem_servicos: number
+}

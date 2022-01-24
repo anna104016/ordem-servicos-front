@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class DetalhesServicosComponent implements OnInit {
 
-  servico= new ServicoModel()
+  servico: ServicoModel = new ServicoModel()
 
   constructor(
       private servicosService: ServicosService, 

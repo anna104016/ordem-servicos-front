@@ -3,14 +3,10 @@
     <div class="content">
 
         <mat-toolbar class="dashboard">
-            <p>Dashboard</p>
+            <p>Dashboard serviços</p>
         </mat-toolbar>
 
         <div class="main">
-            <mat-card class="card">
-                <mat-card-title class="title">Clientes</mat-card-title>
-                <mat-card-subtitle class="subtitle">{{totalClientes}}</mat-card-subtitle>
-            </mat-card>
             <mat-card class="card">
                 <mat-card-title class="title">Serviços</mat-card-title>
                 <mat-card-subtitle class="subtitle">{{totalServicos}}</mat-card-subtitle>
@@ -22,6 +18,25 @@
             <mat-card class="card">
                 <mat-card-title class="title">Serviços finalizados</mat-card-title>
                 <mat-card-subtitle class="subtitle">{{totalServicosClose}}</mat-card-subtitle>
+            </mat-card>
+        </div>
+
+        <mat-toolbar class="dashboard">
+            <p>Dashboard clientes</p>
+        </mat-toolbar>
+        
+        <div class="main">
+            <mat-card class="card">
+                <mat-card-title class="title">Clientes</mat-card-title>
+                <mat-card-subtitle class="subtitle">{{totalClientes}}</mat-card-subtitle>
+            </mat-card>
+            <mat-card class="card">
+                <mat-card-title class="title">Clientes com serviços</mat-card-title>
+                <mat-card-subtitle class="subtitle">{{clientsWithService}}</mat-card-subtitle>
+            </mat-card>
+            <mat-card class="card">
+                <mat-card-title class="title">Clientes sem serviços</mat-card-title>
+                <mat-card-subtitle class="subtitle">{{clientsWithoutService}}</mat-card-subtitle>
             </mat-card>
         </div>
     </div>

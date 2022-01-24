@@ -23,8 +23,7 @@
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Status</mat-label>
         <mat-select formControlName="status">
-          <mat-option value="0">ABERTO</mat-option>
-          <mat-option value="1">FECHADO</mat-option>
+          <mat-option *ngFor="let status of statusList" [value]="status">{{status.nome}}</mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('status').hasError('required')" class="field-error">Campo obrigatório</mat-error>
       </mat-form-field>

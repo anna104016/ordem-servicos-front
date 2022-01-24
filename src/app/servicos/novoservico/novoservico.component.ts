@@ -3,8 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Cliente } from 'src/app/cliente/cliente.model';
 import { ClientesService } from 'src/app/cliente/clientes.service';
+import { StatusService } from 'src/app/status/status.service';
 import Swal from 'sweetalert2';
-import { ServicoModel } from '../servico.model';
+import { ServicoModel, Status } from '../servico.model';
 import { ServicosService } from '../servicos.service';
 
 @Component({
@@ -14,21 +15,21 @@ import { ServicosService } from '../servicos.service';
 })
 export class NovoservicoComponent implements OnInit {
 
-  listCliente: Cliente[] =[];
+  listCliente: Cliente[] = [];
   form: FormGroup
 
   constructor(
-      private clienteService: ClientesService, 
       private router: Router, 
+      private clienteService: ClientesService, 
       private formBiulder: FormBuilder,
       private service: ServicosService) { }
 
   ngOnInit(): void {
-    this.listarClientes();
+    this.getClients();
     this.createForm(new ServicoModel())
   }
 
-  listarClientes(): void {
+  getClients(): void {
     this.clienteService.findAllClientes().subscribe(
       response => {
         this.listCliente = response;

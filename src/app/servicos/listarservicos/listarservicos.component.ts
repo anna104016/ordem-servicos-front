@@ -3,7 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ClientesService } from 'src/app/cliente/clientes.service';
-import { ServicoModel } from '../servico.model';
+import { StatusService } from 'src/app/status/status.service';
+import { ServicoModel, Status } from '../servico.model';
 import { ServicosService } from '../servicos.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ListarservicosComponent implements AfterViewInit  {
 
   listaServicos: ServicoModel[] = [];
 
-  displayedColumns: string[] = ['id', 'descricao','status', 'dados'];
+  displayedColumns: string[] = ['servico_id', 'descricao','status', 'dados'];
   dataSource = new MatTableDataSource<ServicoModel>(this.listaServicos);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,10 +27,10 @@ export class ListarservicosComponent implements AfterViewInit  {
       private clienteService: ClientesService) { }
 
       ngAfterViewInit() {
-        this.findAllServicos();
+        this.getServicos();
       }
 
-      findAllServicos(): void {
+      getServicos(): void {
         this.service.findAllServicos().subscribe(response => {
           this.listaServicos = response;
           this.dataSource = new MatTableDataSource<ServicoModel>(this.listaServicos);
@@ -39,5 +40,9 @@ export class ListarservicosComponent implements AfterViewInit  {
 
       newService(){
         this.router.navigate(['/main/servicos/novo-servico'])
+      }
+
+      findOne(id:string){
+        this.router.navigate([`/main/servicos/dados/${id}`])
       }
   }

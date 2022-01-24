@@ -10,7 +10,7 @@
         >arrow_back</i>
       </div>
 
-      <p>Detalhes</p>
+      <p>Informações do serviço</p>
 
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Descrição</mat-label>
@@ -30,7 +30,7 @@
           [(ngModel)]="servico.cliente.nome">
       </mat-form-field>
 
-      <mat-form-field class="form-field" appearance="fill">
+      <mat-form-field class="form-field" appearance="fill" *ngIf="servico.status">
         <mat-label>Status</mat-label>
         <input 
           matInput 
@@ -45,7 +45,7 @@
           matInput 
           disabled
           name="data_abertura"
-          [(ngModel)]="servico.data_abertura">
+          [ngModel]="servico.data_abertura | date: 'dd-MM-yyyy' ">
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill" *ngIf="servico.data_fechamento">
@@ -54,7 +54,7 @@
           matInput 
           name="data_fechamento"
           disabled
-          [(ngModel)]="servico.data_fechamento" >
+          [ngModel]="servico.data_fechamento | date: 'dd-MM-yyyy'" >
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill">

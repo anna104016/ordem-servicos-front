@@ -4,8 +4,8 @@ export class ServicoModel{
     servico_id?: any;
     descricao: string;
     cliente: Cliente;
-    data_abertura?: Date;
-    data_fechamento?: Date;
+    data_abertura: Date;
+    data_fechamento: Date;
     valor: number;
     status: Status
 }

@@ -1,5 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +18,7 @@ export class NavbarComponent implements OnDestroy {
   private _mobileQueryListener: () => void
 
   constructor(
+    private router: Router,
     changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 800px)');
@@ -25,5 +28,21 @@ export class NavbarComponent implements OnDestroy {
   
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener)
+  }
+
+  logOut(){
+    Swal.fire({
+      icon:'question',
+      title: 'Encerrar sessão',
+      text: 'Você deseja encerrar a sessão?',
+      showCancelButton: true,
+      showConfirmButton: true,
+      cancelButtonText: 'NÃO',
+      confirmButtonText: 'SIM'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.router.navigate([''])
+      }
+    })
   }
 }

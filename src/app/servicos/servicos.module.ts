@@ -17,6 +17,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
+import {LOCALE_ID} from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -45,10 +49,14 @@ import { SharedModule } from '../shared/shared.module';
     MatCardModule,
     MatSelectModule,
     MatPaginatorModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
-    ServicosService
+    ServicosService,
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    }
   ]
 })
 export class ServicosModule { }

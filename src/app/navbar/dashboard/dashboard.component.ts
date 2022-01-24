@@ -14,10 +14,12 @@ export class DashboardComponent implements OnInit {
   cliente: Cliente[] = []
   servicos: ServicoModel[] = []
 
-  totalClientes:number = 0
   totalServicos:number = 0
   totalServicosOpen:number = 0
   totalServicosClose:number = 0
+  totalClientes:number = 0
+  clientsWithService: number = 0
+  clientsWithoutService: number = 0
 
   constructor(
     private clienteService: ClientesService,
@@ -25,15 +27,8 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getClientes()
     this.getServicos()
-  }
-
-  getClientes(){
-    this.clienteService.findAllClientes().subscribe(response => {
-      this.cliente = response
-        this.totalClientes += this.cliente.length
-    })
+    this.getClientesService()
   }
 
   getServicos(){
@@ -48,7 +43,7 @@ export class DashboardComponent implements OnInit {
 
   getServicosOpen(response: any[]){
     var status: string = 'ABERTO'
-    const total = response.filter((s) => s.status == status)
+    const total = response.filter((s) => s.status.nome == status)
     if(total.length >= 0){
       this.totalServicosOpen += total.length
     }
@@ -56,9 +51,19 @@ export class DashboardComponent implements OnInit {
 
   getServicosClose(response: any[]){
     var status: string = 'FINALIZADO'
-    const total = response.filter((s) => s.status == status)
+    const total = response.filter((s) => s.status.nome == status)
     if(total.length >= 0){
       this.totalServicosClose += total.length
     }
+  }
+
+  getClientesService(){
+    this.clienteService.relatorios().subscribe(
+      response => {
+        this.clientsWithService = response.clientes_com_servico
+        this.clientsWithoutService = response.clientes_sem_servicos
+        this.totalClientes = response.clientes
+      }
+    )
   }
 }

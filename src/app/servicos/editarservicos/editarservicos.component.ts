@@ -4,8 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
 import { Cliente } from 'src/app/cliente/cliente.model';
 import { ClientesService } from 'src/app/cliente/clientes.service';
+import { StatusService } from 'src/app/status/status.service';
 import Swal from 'sweetalert2';
-import { ServicoModel } from '../servico.model';
+import { ServicoModel, Status } from '../servico.model';
 import { ServicosService } from '../servicos.service';
 
 @Component({
@@ -16,11 +17,13 @@ import { ServicosService } from '../servicos.service';
 export class EditarservicosComponent implements OnInit {
   
   listCliente: Cliente[] = [];
+  statusList: Status[] = []
   form: FormGroup
   servico: ServicoModel = new ServicoModel()
 
   constructor(
       private formBuilder: FormBuilder,
+      private statusService: StatusService,
       private activatedRoute: ActivatedRoute, 
       private cliService: ClientesService, 
       private service: ServicosService,
@@ -28,7 +31,8 @@ export class EditarservicosComponent implements OnInit {
       ) { }
 
   ngOnInit(): void {
-    this.getAllClientes();
+    this.getStatus()
+    this.getClients();
     this.getServicoById();
     this.createForm(this.servico)
   }
@@ -37,7 +41,15 @@ export class EditarservicosComponent implements OnInit {
     this.router.navigate(['/main/servicos'])
   }
 
-  getAllClientes(): void {
+  getStatus(){
+    this.statusService.findAll().subscribe(
+      response => {
+        this.statusList = response
+      }
+    )
+  }
+  
+  getClients(): void {
     this.cliService.findAllClientes().subscribe(
       response => {
         this.listCliente = response;
@@ -68,7 +80,7 @@ export class EditarservicosComponent implements OnInit {
 
   updateForm(servico: ServicoModel) {
     this.form.patchValue({
-      id: servico.servico_id,
+      servico_id: servico.servico_id,
       descricao: servico.descricao,
       cliente: servico.cliente,
       data_abertura: servico.data_abertura,
@@ -80,7 +92,7 @@ export class EditarservicosComponent implements OnInit {
 
   createForm(servico: ServicoModel){
     this.form = this.formBuilder.group({
-      id: this.servico.servico_id,
+      servico_id: this.servico.servico_id,
       descricao: new FormControl(servico.descricao, [
         Validators.required,
         Validators.minLength(10)

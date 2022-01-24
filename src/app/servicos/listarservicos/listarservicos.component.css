@@ -93,3 +93,6 @@ mat-paginator{
     background-color: #673ab7;
     margin: 10px 0;
 }
+.delete{
+    cursor: pointer;
+}
