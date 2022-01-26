@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="content">
+      <mat-card class="card-info">
+  
+        <div class="action-back">
+          <i class="material-icons"
+          (click)="back()"
+          >arrow_back</i>
+        </div>
+
+        <p>Informações do cliente</p>
+  
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input
+            matInput
+            disabled
+            type="text"
+            #nome
+            [(ngModel)]="clientModel.name"
+            name="name"
+          />
+        </mat-form-field>
+  
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>CPF</mat-label>
+          <input
+            matInput
+            disabled
+            type="text"
+            name="nome"
+            [(ngModel)]="clientModel.cpf"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input
+              matInput
+              disabled
+              type="text"
+              name="cell_phone"
+              [(ngModel)]="clientModel.cell_phone"
+            />
+          </mat-form-field>
+  
+        <mat-card-actions class="acoes">
+          <button
+            mat-button
+            (click)="update()"
+            class="save"
+          >
+            Editar
+          </button>
+  
+          <button
+            mat-button
+            class="delete"
+            (click)="delete()"
+          >
+            Excluir
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  

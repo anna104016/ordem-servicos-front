@@ -11,10 +11,10 @@ const routes: Routes = [
   { path: 'main', component: NavbarComponent, children: [
     {path: 'dashboard', component: DashboardComponent},
     { path: 'clientes', 
-      loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule),
+      loadChildren: () => import('./client/client.module').then(m => m.ClientModule),
     },
     { path: 'servicos', 
-    loadChildren: () => import('./servicos/servicos.module').then(m => m.ServicosModule),
+    loadChildren: () => import('./services/services.module').then(m => m.ServicesModule),
     }
   ]},
   { path: '**', component: NotfoundComponent}

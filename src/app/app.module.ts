@@ -5,10 +5,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { ClienteModule } from './cliente/cliente.module';
-import { ServicosModule } from './servicos/servicos.module';
+import { ClientModule } from './client/client.module';
 import { SharedModule } from './shared/shared.module';
 import { NavbarModule } from './navbar/navbar.module';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,8 @@ import { NavbarModule } from './navbar/navbar.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ClienteModule,
-    ServicosModule,
+    ClientModule,
+    ServicesModule,
     SharedModule,
     NavbarModule
   ],

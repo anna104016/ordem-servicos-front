@@ -1,0 +1,74 @@
+<div class="container">
+
+  <div class="content">
+
+    <form class="form" [formGroup]="form">
+      <h1>Atualizar serviço</h1>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Descrição</mat-label>
+        <textarea 
+          matInput 
+          #descricao
+          minlength="10"
+          maxlength="255"
+          autocomplete="off"
+          formControlName="description"
+          ></textarea>
+        <mat-hint align="start">{{descricao.value?.length || 0}}/255</mat-hint>
+        <mat-error *ngIf="form.get('description').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+        <mat-error *ngIf="form.get('description').hasError('minlength')" class="field-error">Descreva mais sobre o serviço</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of statusList" [value]="status">{{status.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('status').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Valor</mat-label>
+        <input 
+          matInput 
+          name="price"
+          formControlName="price"
+          >
+          <mat-error *ngIf="form.get('price').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Data de abertura</mat-label>
+        <input 
+          matInput 
+          name="opening_date"
+          formControlName="opening_date"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Date de fechamento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="closing_date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill" *ngIf="form.controls.client.value">
+        <mat-label>Cliente</mat-label>
+        <input 
+          matInput 
+          name="client"
+          formControlName="client"
+          >
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-button class="save" (click)="update()" [disabled]="!form.valid">
+            Editar
+        </button>
+        <button mat-button class="cancel" (click)="cancel()">Cancelar</button>
+      </div>
+  </form>
+  </div>
+</div>

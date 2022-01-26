@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from 'src/app/cliente/cliente.model';
-import { ClientesService } from 'src/app/cliente/clientes.service';
-import { ServicoModel } from 'src/app/servicos/servico.model';
-import { ServicosService } from 'src/app/servicos/servicos.service';
+import { Client } from 'src/app/client/client.model';
+import { ClientsService } from 'src/app/client/clients.service';
+import { ServiceModel } from 'src/app/services/service.model';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +11,8 @@ import { ServicosService } from 'src/app/servicos/servicos.service';
 })
 export class DashboardComponent implements OnInit {
 
-  cliente: Cliente[] = []
-  servicos: ServicoModel[] = []
+  cliente: Client[] = []
+  servicos: ServiceModel[] = []
 
   totalServicos:number = 0
   totalServicosOpen:number = 0
@@ -22,43 +22,25 @@ export class DashboardComponent implements OnInit {
   clientsWithoutService: number = 0
 
   constructor(
-    private clienteService: ClientesService,
-    private servicosService: ServicosService,
+    private clientService: ClientsService,
+    private servicesService: ServicesService,
   ) { }
 
   ngOnInit(): void {
-    this.getServicos()
-    this.getClientesService()
+    this.getReportServices()
+    this.getReportClients()
   }
 
-  getServicos(){
-    this.servicosService.findAllServicos().subscribe(
-      response => {
-        this.servicos = response
-        this.totalServicos += this.servicos.length
-        this.getServicosOpen(response)
-        this.getServicosClose(response)
+  getReportServices(){
+    this.servicesService.reportService().subscribe(response => {
+      this.totalServicos= response.servicos
+      this.totalServicosClose = response.servicos_fechados
+      this.totalServicosOpen = response.servicos_abertos
     })
   }
 
-  getServicosOpen(response: any[]){
-    var status: string = 'ABERTO'
-    const total = response.filter((s) => s.status.nome == status)
-    if(total.length >= 0){
-      this.totalServicosOpen += total.length
-    }
-  }
-
-  getServicosClose(response: any[]){
-    var status: string = 'FINALIZADO'
-    const total = response.filter((s) => s.status.nome == status)
-    if(total.length >= 0){
-      this.totalServicosClose += total.length
-    }
-  }
-
-  getClientesService(){
-    this.clienteService.relatorios().subscribe(
+  getReportClients(){
+    this.clientService.reportClients().subscribe(
       response => {
         this.clientsWithService = response.clientes_com_servico
         this.clientsWithoutService = response.clientes_sem_servicos

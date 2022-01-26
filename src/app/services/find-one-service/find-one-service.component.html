@@ -1,0 +1,78 @@
+<div class="container">
+
+  <div class="content">
+
+    <form class="card-info">
+
+      <div class="action-back">
+        <i class="material-icons"
+        (click)="wayBack()"
+        >arrow_back</i>
+      </div>
+
+      <p>Informações do serviço</p>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Descrição</mat-label>
+        <input 
+          matInput 
+          name="descricao"
+          disabled
+          [(ngModel)]="serviceModel.description">
+      </mat-form-field>
+    
+      <mat-form-field class="form-field" appearance="fill" *ngIf="serviceModel.client">
+        <mat-label>Nome do Cliente</mat-label>
+        <input 
+          matInput 
+          name="cliente"
+          disabled
+          [(ngModel)]="serviceModel.client.name">
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill" *ngIf="serviceModel.status">
+        <mat-label>Status</mat-label>
+        <input 
+          matInput 
+          name="status"
+          disabled
+          [(ngModel)]="serviceModel.status.name" >
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Data de abertura</mat-label>
+        <input 
+          matInput 
+          disabled
+          name="data_abertura"
+          [ngModel]="serviceModel.opening_date | date: 'dd-MM-yyyy' ">
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill" *ngIf="serviceModel.closing_date">
+        <mat-label>Data de Fechamento</mat-label>
+        <input 
+          matInput 
+          name="data_fechamento"
+          disabled
+          [ngModel]="serviceModel.closing_date | date: 'dd-MM-yyyy'" >
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Valor total</mat-label>
+        <input 
+          matInput 
+          name="valor"
+          disabled
+          [(ngModel)]="serviceModel.price" >
+      </mat-form-field>
+
+
+      <div class="actions">
+        <button mat-button class="delete" (click)="delete()">Deletar</button>
+        <button mat-button class="update" (click)="update()">
+            Editar
+        </button>
+      </div>
+  </form>
+  </div>
+</div>
