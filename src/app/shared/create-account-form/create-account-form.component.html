@@ -1,0 +1,64 @@
+<div class="container">
+
+    <form class="form" [formGroup]="form">
+  
+      <div class="back">
+        <span class="material-icons" (click)="home()">close</span>
+      </div>
+          
+          <div class="texts">
+              <p>Criar conta</p>
+              <h1>Rápido e fácil.</h1>
+          </div>
+
+          <mat-form-field class="form-field">
+            <mat-label>Nome de usuário</mat-label>
+            <input
+              matInput 
+              minlength="10"
+              maxlength="255"
+              autocomplete="off"
+              formControlName="user_name"
+              >
+              <mat-error *ngIf="form.get('user_name').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+              <mat-error *ngIf="form.get('user_name').hasError('minlength')" class="field-error">Informe um nome válido</mat-error>
+              <mat-error *ngIf="form.get('user_name').hasError('maxlength')" class="field-error">Limite máximo de caracteres</mat-error>
+        </mat-form-field>
+          
+          <mat-form-field class="form-field">
+              <mat-label>Email</mat-label>
+              <input
+                matInput 
+                minlength="10"
+                maxlength="255"
+                autocomplete="off"
+                formControlName="email"
+                >
+              <mat-error *ngIf="form.get('email').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+              <mat-error *ngIf="form.get('email').hasError('email')" class="field-error">Informe um email válido</mat-error>
+          </mat-form-field>
+          
+            <mat-form-field class="form-field">
+              <mat-label>Senha</mat-label>
+              <input 
+                matInput 
+                type="password"
+                autocomplete="off"
+                formControlName="password"
+                >
+                <mat-error *ngIf="form.get('password').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+                <mat-error *ngIf="form.get('password').hasError('minlength')" class="field-error">Senha deve ter mais de 8 caracteres</mat-error>
+                <mat-error *ngIf="form.get('password').hasError('maxlength')" class="field-error">Limite máximo de caracteres</mat-error>
+            </mat-form-field>
+  
+            <button 
+            [disabled]="!form.valid"
+            (click)="registerNewUser()"
+              mat-button>Criar conta</button>
+  
+            <div class="new-account" (click)="login()">
+              <h1>Já tem uma conta? <strong>faça o login</strong></h1>
+            </div>
+      </form>
+  </div>
+  

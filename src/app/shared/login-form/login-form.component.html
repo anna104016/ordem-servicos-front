@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form class="form">
+  <form class="form" [formGroup]="form">
 
     <div class="back">
       <span class="material-icons" (click)="home()">close</span>
@@ -10,15 +10,17 @@
             <p>Login</p>
             <h1>Faço o login para acessar o sistema.</h1>
         </div>
+
+        <p>{{emailOrPassWrong}}</p>
         
         <mat-form-field class="form-field">
             <mat-label>Email</mat-label>
             <input
               matInput 
-              minlength="10"
-              maxlength="255"
               autocomplete="off"
+              formControlName="email"
               >
+              <mat-error *ngIf="form.get('email').hasError('required')" class="field-error">Campo obrigatório</mat-error>
           </mat-form-field>
         
           <mat-form-field class="form-field">
@@ -27,13 +29,17 @@
               matInput 
               type="password"
               autocomplete="off"
+              formControlName="password"
               >
+              <mat-error *ngIf="form.get('password').hasError('required')" class="field-error">Campo obrigatório</mat-error>
           </mat-form-field>
 
-          <button mat-button (click)="login()">Login</button>
+          <button 
+          [disabled]="!form.valid"
+          mat-button (click)="login()" class="btn-login">Login</button>
 
           <div class="new-account">
-            <h1>Novo usuário? <strong>Criar conta</strong></h1>
+            <h1 (click)="createAccount()">Novo usuário? <strong>Criar conta</strong></h1>
           </div>
     </form>
 </div>

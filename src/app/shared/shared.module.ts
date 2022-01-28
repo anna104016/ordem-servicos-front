@@ -16,6 +16,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginTextComponent } from './login-text/login-text.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
+import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { LoginTextComponent } from './login-text/login-text.component';
     HeaderComponent,
     LoginComponent,
     LoginFormComponent,
-    LoginTextComponent
+    LoginTextComponent,
+    CreateAccountComponent,
+    CreateAccountFormComponent
   ],
   exports: [
     HomeComponent,
@@ -32,7 +36,9 @@ import { LoginTextComponent } from './login-text/login-text.component';
     HeaderComponent,
     LoginComponent,
     LoginFormComponent,
-    LoginTextComponent
+    LoginTextComponent,
+    CreateAccountComponent,
+    CreateAccountFormComponent
   ],
   imports: [
     CommonModule,
