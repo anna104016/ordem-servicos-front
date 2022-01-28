@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ServicesService } from 'src/app/services/services.service';
 import { UserModel } from 'src/app/user/model/user.model';
 import { UserService } from 'src/app/user/user.service';
 import Swal from 'sweetalert2';
@@ -17,7 +18,8 @@ export class CreateAccountFormComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private servicesService: ServicesService
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +38,11 @@ export class CreateAccountFormComponent implements OnInit {
     this.userService.create(this.form.value).subscribe(response => {
       this.successModel()
     }, error => {
-      this.errorModel()
+      if(error.error.error == 'email'){
+        this.servicesService.message('Email já cadastrado.')
+      }else{
+        this.errorModel()
+      }
     })
   }
 
@@ -48,6 +54,7 @@ export class CreateAccountFormComponent implements OnInit {
       confirmButtonText: 'Fazer login'
     }).then((result) => {
       if(result.isConfirmed){
+        this.form.reset()
         this.router.navigate(['/login'])
       }
     })
@@ -56,8 +63,8 @@ export class CreateAccountFormComponent implements OnInit {
   errorModel(){
     Swal.fire({
       icon: 'info',
-      title: 'Oppss...',
-      text: 'Erro ao criar conta, teste novamente.',
+      title: 'Que pena!',
+      text: 'Não foi possível criar conta, teste novamente mais tarde.',
       showConfirmButton: true,
       confirmButtonText: 'OK'
     }).then((result) => {

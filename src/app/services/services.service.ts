@@ -49,7 +49,7 @@ export class ServicesService {
     this.snack.open(`${string}`, 'OK', 
     {
       horizontalPosition: 'end',
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       duration: 3000
     });
   }
