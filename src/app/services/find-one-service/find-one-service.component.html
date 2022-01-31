@@ -45,7 +45,7 @@
           matInput 
           disabled
           name="data_abertura"
-          [ngModel]="serviceModel.opening_date | date: 'dd-MM-yyyy' ">
+          [ngModel]="serviceModel.opening_date | date: 'dd/MM/yyyy' ">
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="fill" *ngIf="serviceModel.closing_date">

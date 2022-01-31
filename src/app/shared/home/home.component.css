@@ -6,11 +6,12 @@
     align-items: center;
     justify-content: center;
 }
+
 .content{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 20px 0px;
+    margin: 0 0 20px 0;
     padding: 0px 20px;
     height: 100vh;
 }
@@ -25,6 +26,7 @@
     font-size: 40px;
     font-weight:500;
     line-height: 1;
+    font-size: 40px;
 }
 
 .text a{
@@ -33,28 +35,24 @@
 }
 .text p{
     width: 300px;
-
-    font-size: 18px;
+    font-size: 20px;
 }
 
-.text .img{
-    width: 400px;
+.img img{
+    width: 500px;
 }
 
 .text span{
     font-size:17px;
 }
+
 .text .botao-comecar{
     padding: 0px 10px;
     border-radius: 20px;
     width: 150px;
-    background-color:#013A63;
+    background-color:#2A44AB;
     color: #fff;
     margin-top: 8px;
-}
-
-.img img{
-    width: 450px;
 }
 
 .infomativos{

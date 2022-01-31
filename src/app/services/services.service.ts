@@ -14,7 +14,6 @@ export class ServicesService {
 
   constructor(private http: HttpClient, private snack: MatSnackBar) { }
 
-
   findAll(): Observable<ServiceModel[]>{
     const url = `${this.baseUrl}/servicos`;
     return this.http.get<ServiceModel[]>(url);

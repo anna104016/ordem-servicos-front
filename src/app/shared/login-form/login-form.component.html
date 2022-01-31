@@ -1,14 +1,10 @@
 <div class="container">
 
   <form class="form" [formGroup]="form">
-
-    <div class="back">
-      <span class="material-icons" (click)="home()">close</span>
-    </div>
-        
+   
         <div class="texts">
             <p>Login</p>
-            <h1>Faço o login para acessar o sistema.</h1>
+            <h1>Faça o login para acessar o sistema.</h1>
         </div>
 
         <p>{{emailOrPassWrong}}</p>
@@ -17,20 +13,25 @@
             <mat-label>Email</mat-label>
             <input
               matInput 
-              autocomplete="off"
               formControlName="email"
+              autocomplete="off" 
+              list="autocompleteOff" 
               >
               <mat-error *ngIf="form.get('email').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+              <mat-error *ngIf="form.get('email').hasError('email')" class="field-error">Email inválido</mat-error>
           </mat-form-field>
         
           <mat-form-field class="form-field">
             <mat-label>Senha</mat-label>
             <input 
-              matInput 
+              matInput [type]="hide ? 'password' : 'text'"
               type="password"
               autocomplete="off"
               formControlName="password"
               >
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
               <mat-error *ngIf="form.get('password').hasError('required')" class="field-error">Campo obrigatório</mat-error>
           </mat-form-field>
 
@@ -41,5 +42,11 @@
           <div class="new-account">
             <h1 (click)="createAccount()">Novo usuário? <strong>Criar conta</strong></h1>
           </div>
+
+          <div class="back">
+            <p (click)="home()">Voltar</p>
+          </div>
     </form>
+
+  
 </div>

@@ -41,7 +41,7 @@
 
 .form button{
     width: 90%;
-    background-color: #012A4A;
+    background-color: #2A44AB;
     color: #fff
 }
 
@@ -50,6 +50,20 @@
     margin: 10px 0;
     border-radius: 20px;
     padding: 2px 10px;
+}
+
+.form-field input{
+    width: 100%;
+}
+
+
+.form-field button{
+    background-color: transparent;
+}
+
+.form-field button mat-icon{
+    color:#012A4A;
+    font-size: 20px;
 }
 
 .new-account{
@@ -72,14 +86,40 @@
     align-items:center;
 }
 
-.back span{
-    cursor: pointer;
+.back{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: flex-start;
+    justify-content: center;
 }
 
-.back span:hover{
-    -webkit-transform: rotateZ(-30deg);
-    -ms-transform: rotateZ(-30deg);
-     transform: rotateZ(-30deg);
+.back p{
+    margin: 8px 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.texts{
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    margin: 0 0 50px 0;
+}
+
+.texts  p{
+    font-size: 22px;
+    text-align: flex-start;
+    font-weight: 500;
+    margin:0
+}
+
+.texts h1{
+    font-size: 16px;
+    text-align: flex-start;
+    font-weight: 500;
+    margin:0
 }
 
 @media  screen and (max-width: 700px) {

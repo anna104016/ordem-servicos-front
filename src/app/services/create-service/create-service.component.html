@@ -22,9 +22,11 @@
       </mat-form-field>
     
       <mat-form-field class="form-field">
-        <mat-label>Valor</mat-label>
+        <mat-label>Valor R$</mat-label>
         <input 
+          type="number"
           matInput 
+          step="0.01"
           placeholder="20.00"
           autocomplete="off"
           formControlName="price"
@@ -42,7 +44,7 @@
 
       <div class="actions">
         <button mat-button class="save" (click)="save()" [disabled]="!form.valid">Salvar</button>
-        <button mat-button class="cancel" (click)="wayBack()" >Voltar</button>
+        <button mat-button class="cancel" (click)="wayBack()">Cancelar</button>
       </div>
   </form>
   </div>

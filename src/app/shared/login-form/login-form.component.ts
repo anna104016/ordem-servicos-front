@@ -13,6 +13,7 @@ export class LoginFormComponent implements OnInit {
 
   form: FormGroup
   emailOrPassWrong:string
+  hide = true;
 
   constructor(
     private router: Router,
@@ -56,7 +57,8 @@ export class LoginFormComponent implements OnInit {
   createForm(user: UserModel){
     this.form = this.formBuilder.group({
       email: new FormControl(user.email, [
-        Validators.required
+        Validators.required,
+        Validators.email
       ]),
       password: new FormControl(user.password, [
         Validators.required

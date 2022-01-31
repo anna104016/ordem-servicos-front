@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { Client } from 'src/app/client/client.model';
 import { StatusService } from 'src/app/status/status.service';
 import Swal from 'sweetalert2';
 import { ServiceModel, Status } from '../service.model';

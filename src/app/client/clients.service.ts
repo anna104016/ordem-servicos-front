@@ -24,6 +24,16 @@ export class ClientsService {
     return this.http.get<Client[]>(url);
   }
 
+  // OBTENDO TOKEN NO LOCAL STORAGE E LANÇANDO NA REQUISIÇÃO
+  // find(): Observable<Client[]> {
+  //   const token = localStorage.getItem('access_token')
+  //   const headers = {
+  //     'Authorization': 'Bearer ' + token
+  //   }
+  //   const url = `${this.baseUrl}/clientes`;
+  //   return this.http.get<Client[]>(url, {headers});
+  // }
+
   create(cliente: Client): Observable<Client>{
     const url = `${this.baseUrl}/clientes`;
     return this.http.post<Client>(url,cliente);

@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="content">
+      <mat-card class="card-info">
+
+        <p>Minha conta</p>
+  
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input
+            matInput
+            disabled
+            type="text"
+            #nome
+            [(ngModel)]="user.user_name"
+            name="name"
+          />
+        </mat-form-field>
+  
+        <mat-form-field class="field" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            disabled
+            type="text"
+            name="nome"
+            [(ngModel)]="user.email"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Data de criação da conta</mat-label>
+            <input
+              matInput
+              disabled
+              type="text"
+              name="cell_phone"
+              [ngModel]="user.creation_date | date: 'dd/MM/yyyy'"
+            />
+          </mat-form-field>
+      </mat-card>
+    </div>
+  </div>
+  

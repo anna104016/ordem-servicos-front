@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/user/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnDestroy {
   private _mobileQueryListener: () => void
 
   constructor(
-    private router: Router,
+    private userService: UserService,
     changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 800px)');
@@ -41,7 +42,7 @@ export class NavbarComponent implements OnDestroy {
       confirmButtonText: 'SIM'
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate([''])
+        this.userService.logOut()
       }
     })
   }

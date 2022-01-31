@@ -41,7 +41,7 @@
 
 .form button{
     width: 90%;
-    background-color: #012A4A;
+    background-color: #2A44AB;
     color: #fff
 }
 
@@ -50,6 +50,15 @@
     margin: 10px 0;
     border-radius: 20px;
     padding: 2px 10px;
+}
+
+.form-field button{
+    background-color: transparent;
+}
+
+.form-field button mat-icon{
+    color:#012A4A;
+    font-size: 20px;
 }
 
 .new-account{
@@ -69,22 +78,28 @@
 }
 
 .back{
-    align-items:center;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: flex-start;
+    justify-content: center;
 }
 
-.back span{
+.back p{
+    margin: 8px 0;
     cursor: pointer;
-}
-
-.back span:hover{
-    -webkit-transform: rotateZ(-30deg);
-    -ms-transform: rotateZ(-30deg);
-     transform: rotateZ(-30deg);
+    font-size: 18px;
+    font-weight: 500;
 }
 
 @media  screen and (max-width: 700px) {
+
+    .new-account, .back{
+        padding: 0 15px;
+    }
+
     .new-account h1{
-        width: 55%;
+        width: 100%;
     }
 
     .texts{

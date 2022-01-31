@@ -82,7 +82,7 @@ export class CreateServiceComponent implements OnInit {
         Validators.minLength(10)
       ]),
       price: new FormControl(service.price, [
-        Validators.required
+        Validators.required,
       ]),
       client: new FormControl(service.client, [
         Validators.required

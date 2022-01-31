@@ -25,20 +25,16 @@ export class CreateClientComponent implements OnInit {
   }
 
   create() {
-    this.service.findByCpf(this.form.controls.cpf.value).subscribe(
-      response => {
-      this.client = response
-       if(this.client == true){
-        this.service.message('CPF já cadastrado')
-       }else{
-        this.service.create(this.form.value)
-          .subscribe(response =>{
-              this.successModel()
-          },error  => {
-            this.errorModel()
-          })
-       }
-    })
+    this.service.create(this.form.value)
+      .subscribe(response => {
+        this.successModel()
+      }, error => {
+        if(error.error.error == 'cpf'){
+          this.service.message('CPF já cadastrado.')
+        }else{
+          this.errorModel()
+        }
+      })
   }
   
   successModel(){
@@ -75,14 +71,17 @@ export class CreateClientComponent implements OnInit {
     this.form = this.formBiulder.group({
       name: new FormControl(client.name, [
         Validators.required,
-        Validators.minLength(5)
+        Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
+        Validators.minLength(5),
       ]),
       cell_phone: new FormControl(client.cell_phone, [
         Validators.required,
+        Validators.pattern('[0-9]+$'),
         Validators.minLength(9)
       ]),
       cpf: new FormControl(client.cpf, [
         Validators.required,
+        Validators.pattern('[0-9]+$'),
         Validators.minLength(11),
         Validators.maxLength(11)
       ])

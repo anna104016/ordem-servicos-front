@@ -1,10 +1,6 @@
 <div class="container">
 
     <form class="form" [formGroup]="form">
-  
-      <div class="back">
-        <span class="material-icons" (click)="home()">close</span>
-      </div>
           
           <div class="texts">
               <p>Criar conta</p>
@@ -41,11 +37,14 @@
             <mat-form-field class="form-field">
               <mat-label>Senha</mat-label>
               <input 
-                matInput 
+                matInput [type]="hide ? 'password' : 'text'"
                 type="password"
                 autocomplete="off"
                 formControlName="password"
                 >
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
                 <mat-error *ngIf="form.get('password').hasError('required')" class="field-error">Campo obrigatório</mat-error>
                 <mat-error *ngIf="form.get('password').hasError('minlength')" class="field-error">Senha deve ter mais de 8 caracteres</mat-error>
                 <mat-error *ngIf="form.get('password').hasError('maxlength')" class="field-error">Limite máximo de caracteres</mat-error>
@@ -58,6 +57,10 @@
   
             <div class="new-account" (click)="login()">
               <h1>Já tem uma conta? <strong>faça o login</strong></h1>
+            </div>
+
+            <div class="back">
+              <p (click)="home()">Voltar</p>
             </div>
       </form>
   </div>

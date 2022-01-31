@@ -7,11 +7,13 @@
         <mat-label>Nome do Cliente</mat-label>
         <input 
           matInput 
+          type="text"
           autocomplete="off"
           placeholder="Nome do cliente"
           formControlName="name"
           >
           <mat-error *ngIf="form.get('name').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+          <mat-error *ngIf="form.get('name').hasError('pattern')" class="field-error">Informe um nome válido.</mat-error>
           <mat-error *ngIf="form.get('name').hasError('minlength')" class="field-error">Nome deve ter mais e 5 caracteres</mat-error>
         </mat-form-field>
 
@@ -21,6 +23,7 @@
         <input  matInput type="text" autocomplete="off" placeholder="34587410235" formControlName="cpf" maxlength="11">
         <mat-error *ngIf="form.get('cpf').hasError('required')" class="field-error">Campo obrigatório</mat-error>
         <mat-error *ngIf="form.get('cpf').hasError('minlength')" class="field-error">Informe um cpf válido</mat-error>
+        <mat-error *ngIf="form.get('name').hasError('pattern')" class="field-error">Informe um cpf válido.</mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-field"  appearance="fill">

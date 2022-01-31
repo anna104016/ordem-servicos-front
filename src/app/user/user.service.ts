@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserModel } from './model/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +12,11 @@ import { UserModel } from './model/user.model';
 export class UserService {
 
   baseUrl: String = environment.baseUrl;
+  jwtHelperService: JwtHelperService = new JwtHelperService()
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   create(user: UserModel): Observable<UserModel> {
@@ -21,11 +25,11 @@ export class UserService {
   }
 
   generateToken(email:string, password:string){
-    const parametros = new HttpParams()
+    const params = new HttpParams()
     .set('email', email)
     .set('password', password)
     const url = `${this.baseUrl}/auth/login`
-    return this.http.post<any>(url, parametros)
+    return this.http.post<any>(url, params)
   }
 
   getToken(){
@@ -35,5 +39,24 @@ export class UserService {
       return tokenJSON
     }
     return null //token não existe
+  }
+
+  checkIfTheUserIsAuthenticated(): boolean {
+    const token = this.getToken() //obter o token
+    if(token){
+      const expiredToken = this.jwtHelperService.isTokenExpired(token) //verificar se o token está expirado
+      return !expiredToken
+    }
+    return false //return false se não tiver o token no local storage
+  }
+
+  logOut(){
+    localStorage.removeItem('access_token')
+    this.router.navigate([''])
+  }
+
+  finduser(): Observable<UserModel>{
+    const url = `${this.baseUrl}/user/infos`;
+    return this.http.get<UserModel>(url);
   }
 }

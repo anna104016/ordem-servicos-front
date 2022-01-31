@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class CreateAccountFormComponent implements OnInit {
 
   form: FormGroup
+  hide = true;
 
   constructor(
     private router: Router,
