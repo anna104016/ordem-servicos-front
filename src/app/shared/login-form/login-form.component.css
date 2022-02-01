@@ -97,7 +97,7 @@
 .back p{
     margin: 8px 0;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -124,7 +124,11 @@
 
 @media  screen and (max-width: 700px) {
     .new-account h1{
-        width: 55%;
+        width: 100%;
+    }
+
+    .texts{
+        text-align: center;
     }
 }
 

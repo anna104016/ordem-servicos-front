@@ -88,15 +88,11 @@
 .back p{
     margin: 8px 0;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 }
 
 @media  screen and (max-width: 700px) {
-
-    .new-account, .back{
-        padding: 0 15px;
-    }
 
     .new-account h1{
         width: 100%;
