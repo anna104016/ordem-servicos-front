@@ -1,5 +1,4 @@
 .container{
-    margin: 20px 20px 0 0px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -29,10 +28,8 @@
 
 .table-content{
     border-collapse: collapse;
-    margin: 25px 0 0 0;
     font-size: 0.9em;
     font-family: sans-serif;
-    min-width: 400px;
     text-align: center;
 }
 
@@ -62,6 +59,7 @@
 mat-paginator{
     background-color: #ffff;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .btn-new{
