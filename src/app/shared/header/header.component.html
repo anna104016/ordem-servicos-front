@@ -3,11 +3,29 @@
     <div class="left">
         <span (click)="home()">Services On</span>
     </div>
-    
+
     <div class="rigth">
         <p>Funcionalidades</p>
         <p>Sobre</p>
         <p>Contatos</p>
     </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="menu">
+        <button mat-menu-item>
+            <!-- <mat-icon>dialpad</mat-icon> -->
+            <span>Funcionalidades</span>
+        </button>
+        <button mat-menu-item>
+            <!-- <mat-icon>voicemail</mat-icon> -->
+            <span>Contato</span>
+        </button>
+        <button mat-menu-item>
+            <!-- <mat-icon>notifications_off</mat-icon> -->
+            <span>Sobre</span>
+        </button>
+    </mat-menu>
 
 </mat-toolbar>

@@ -17,6 +17,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     MatTableModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

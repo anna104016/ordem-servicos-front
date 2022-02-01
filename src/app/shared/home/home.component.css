@@ -33,6 +33,7 @@
     text-decoration: none;
     color: #fff;
 }
+
 .text p{
     width: 300px;
     font-size: 20px;
@@ -58,7 +59,7 @@
 .infomativos{
     background-color:#ccdbfd;
     width: 100%;
-    height:280px;
+    height: fit-content;
 
     display: flex;
     flex-direction: column;
@@ -72,6 +73,7 @@
     font-weight:500;
     color:#230d49;
 }
+
 .cards{
     display: flex;
     flex-direction: row;
@@ -79,6 +81,7 @@
     justify-content: center;
     align-self: center;
 }
+
 .info-card{
     padding: 30px;
     width: 200px;
@@ -96,6 +99,7 @@
     overflow: hidden;
     transition:all 0.3s ease;
 }
+
 .info-card .title{
     font-size:20px;
     font-weight:500;
@@ -126,16 +130,10 @@
         flex-direction: column;
     }
 
-    .infomativos{
-        width: 100%;
-        height: 380px;
-        padding: 20px 20px;
-    }
-
     .info-card{
         padding: 30px 30px;
         width: 200px;
-        height: 150px;
+        height: 190px;
         margin: 6px 6rem;
     }
 
