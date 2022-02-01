@@ -39,8 +39,8 @@ export class ClientsService {
     return this.http.post<Client>(url,cliente);
   }
 
-  update(client: Client): Observable<void>{
-    const url = `${this.baseUrl}/clientes/${client.client_id}`;
+  update(id:string, client: Client): Observable<void>{
+    const url = `${this.baseUrl}/clientes/${id}`;
     return this.http.put<void>(url,client)
   }
 
@@ -63,7 +63,7 @@ export class ClientsService {
     this.snack.open(`${string}`, 'OK', 
     {
       horizontalPosition: 'end',
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       duration: 3000
     });
   }

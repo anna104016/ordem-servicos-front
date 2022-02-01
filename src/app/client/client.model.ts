@@ -3,7 +3,7 @@ import { ServiceModel } from "../services/service.model";
 export class Client{
     client_id?: string;
     name: string;
-    cpf: number;
+    cpf: string;
     cell_phone: string;
     services: ServiceModel[]
 }

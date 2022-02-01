@@ -49,7 +49,7 @@ export class CreateServiceComponent implements OnInit {
     Swal.fire({
       icon: 'success',
       title: 'Sucesso!',
-      text: 'Servico adicionado com sucesso',
+      text: 'Serviço adicionado com sucesso.',
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){

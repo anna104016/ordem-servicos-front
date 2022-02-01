@@ -41,7 +41,7 @@ export class CreateClientComponent implements OnInit {
     Swal.fire({
       icon: 'success',
       title: 'Sucesso!',
-      text: 'Cliente adicionado com sucesso',
+      text: 'Cliente adicionado com sucesso.',
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
@@ -77,7 +77,8 @@ export class CreateClientComponent implements OnInit {
       cell_phone: new FormControl(client.cell_phone, [
         Validators.required,
         Validators.pattern('[0-9]+$'),
-        Validators.minLength(9)
+        Validators.minLength(9),
+        Validators.maxLength(20)
       ]),
       cpf: new FormControl(client.cpf, [
         Validators.required,

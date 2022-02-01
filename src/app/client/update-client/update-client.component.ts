@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 export class UpdateClientComponent implements OnInit {
 
   form: FormGroup
-  id:string
   client: Client = new Client()
 
   constructor(
@@ -28,7 +27,7 @@ export class UpdateClientComponent implements OnInit {
     this.createFornm(this.client)
   }
 
-  findOne(): void {
+  findOne() {
     this.activatedRouter.params
     .pipe(
       map((params:any) => params['id']),
@@ -41,7 +40,6 @@ export class UpdateClientComponent implements OnInit {
 
   updateForm(client: Client) {
     this.form.patchValue({
-      cliente_id: client.client_id,
       name:client.name,
       cell_phone:client.cell_phone,
       cpf: client.cpf
@@ -50,16 +48,20 @@ export class UpdateClientComponent implements OnInit {
 
   createFornm(client: Client){
     this.form = this.formBuilder.group({
-      client_id: client.client_id,
       name: new FormControl(client.name, [
-        Validators.required
+        Validators.required,
+        Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
+        Validators.minLength(5),
       ]),
       cell_phone: new FormControl(client.cell_phone, [
         Validators.required,
-        Validators.minLength(9)
+        Validators.pattern('[0-9]+$'),
+        Validators.minLength(9),
+        Validators.maxLength(20)
       ]),
       cpf: new FormControl(client.cpf, [
         Validators.required,
+        Validators.pattern('[0-9]+$'),
         Validators.minLength(11),
         Validators.maxLength(11)
       ])
@@ -71,11 +73,15 @@ export class UpdateClientComponent implements OnInit {
   }
 
   update(): void {
-    this.service.update(this.form.value)
-      .subscribe(response =>{
+    this.service.update(this.client.client_id, this.form.value)
+      .subscribe(response => {
         this.successModel()
-      }, err => {
-        this.errorModel()
+      }, error => {
+        if (error.error.error == 'cpf') {
+          this.service.message('CPF pertence a outro cliente.')
+        } else {
+          this.errorModel()
+        }
       })
   }
 
@@ -83,7 +89,7 @@ export class UpdateClientComponent implements OnInit {
     Swal.fire({
       icon: 'success',
       title: 'Sucesso!',
-      text: 'Cliente atualizado com sucesso',
+      text: 'Cliente atualizado com sucesso.',
       position: 'center',
       showConfirmButton: true,
     }).then((result) => {
