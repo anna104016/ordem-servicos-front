@@ -1,6 +1,6 @@
 # :computer: :pushpin:Sistema Ordem de Serviços - Frontend 
 
-#### Um usuário pode adiconar seus serviços com seus respectivos clientes.
+#### Um usuário pode adicionar seus serviços com seus respectivos clientes.
 
 #### :small_blue_diamond: Tecnologias usadas no desenvolvimento:
 - Angular
@@ -24,4 +24,4 @@
 - https://github.com/santoskarolina/ordem-servicos-nestjs
 
 #### :small_blue_diamond: Sistema em execução
-![DOMAIN MODEL](https://github.com/anna104016/html/blob/main/html/servicos.gif)
+![DOMAIN MODEL](https://github.com/santoskarolina/html/blob/main/html/services-on.gif)
