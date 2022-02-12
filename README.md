@@ -23,7 +23,7 @@
 ##### :small_blue_diamond: API utilizada:
 - https://github.com/santoskarolina/ordem-servicos-nestjs
 
-####: small_blue_diamond: Sistema em produção
+##### :small_blue_diamond: Sistema em produção
 - https://services-on.netlify.app/
 
 #### :small_blue_diamond: Sistema em execução
