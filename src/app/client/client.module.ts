@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FindClientsComponent } from './find-clients/find-clients.component';
 import { CreateClientComponent } from './create-client/create-client.component';
-import { UpdateClientComponent } from './update-client/update-client.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ClientsService } from './clients.service';
@@ -19,18 +18,17 @@ import { FineOneClientComponent } from './find-one-client/find-one-client.compon
 import { SharedModule } from '../shared/shared.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { TokenInterceptor } from '../auth/token.interceptor';
+import { ClientesGuard } from '../resolver/clientes.guard';
 
 @NgModule({
   declarations: [
     FindClientsComponent,
     CreateClientComponent,
-    UpdateClientComponent,
     FineOneClientComponent
   ],
   exports: [
     FindClientsComponent,
     CreateClientComponent,
-    UpdateClientComponent,
     FineOneClientComponent
   ],
   imports: [
@@ -52,6 +50,7 @@ import { TokenInterceptor } from '../auth/token.interceptor';
   ],
   providers: [
     ClientsService,
+    ClientesGuard,
     {
       provide: HTTP_INTERCEPTORS, //interceptor
       useClass: TokenInterceptor, //classe TokenInterceptor vai ser utilizada com interceptor da aplicação

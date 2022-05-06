@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserModel } from './model/user.model';
+import { UserModel } from '../models/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { Router } from '@angular/router';
 

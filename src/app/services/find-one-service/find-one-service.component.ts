@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceModel } from '../service.model';
+import { ServiceModel } from '../../models/service.model';
 import { ServicesService } from '../services.service';
 import { map, switchMap } from 'rxjs/operators'
 import Swal from 'sweetalert2';
@@ -15,15 +15,15 @@ export class FindOneServiceComponent implements OnInit {
   serviceModel: ServiceModel = new ServiceModel()
 
   constructor(
-      private servicesService: ServicesService, 
-      private activatedRoute: ActivatedRoute, 
-      private router: Router) { }
+      private readonly servicesService: ServicesService, 
+      private readonly activatedRoute: ActivatedRoute, 
+      private readonly router: Router) { }
 
   ngOnInit(): void {
     this.findOne();
   }
 
-  wayBack(){
+  wayBack(): void{
     this.router.navigate(['/main/servicos'])
   }
 
@@ -38,7 +38,7 @@ export class FindOneServiceComponent implements OnInit {
   }
 
   update(){
-    this.router.navigate([`/main/servicos/atualizar/${this.serviceModel.service_id}`])
+    this.router.navigate([`/main/servicos/update/${this.serviceModel.service_id}`])
   }
 
   delete(){
@@ -47,8 +47,8 @@ export class FindOneServiceComponent implements OnInit {
       icon:'question',
       showCancelButton: true,
       showConfirmButton: true,
-      confirmButtonText: 'SIM',
-      cancelButtonText: 'NÃO'
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
     }).then((result) => {
       if(result.isConfirmed){
         this.servicesService.delete(this.serviceModel.service_id).subscribe(
@@ -78,7 +78,7 @@ export class FindOneServiceComponent implements OnInit {
   errorModel(){
     Swal.fire({
       icon: 'error',
-      title: 'Oppess...!',
+      title: 'Opss...!',
       text: 'Serviço não pode ser deletado',
       showConfirmButton: true,
     }).then((result) => {

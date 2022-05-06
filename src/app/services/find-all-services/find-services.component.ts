@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { ServiceModel, Status } from '../service.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { ServiceModel, Status } from '../../models/service.model';
 import { ServicesService } from '../services.service';
 
 @Component({
@@ -12,7 +14,7 @@ import { ServicesService } from '../services.service';
 })
 export class FindServicesComponent implements AfterViewInit  {
 
-  services: ServiceModel[] = [];
+  services: ServiceModel[] = this.activaredRoute.snapshot.data.servicos;
 
   displayedColumns: string[] = ['service_id', 'description','status', 'data'];
   dataSource = new MatTableDataSource<ServiceModel>(this.services);
@@ -21,6 +23,7 @@ export class FindServicesComponent implements AfterViewInit  {
 
   constructor( 
       private service: ServicesService, 
+      private readonly activaredRoute: ActivatedRoute,
       private router: Router) { }
 
       ngAfterViewInit() {
@@ -28,18 +31,42 @@ export class FindServicesComponent implements AfterViewInit  {
       }
 
       findAll(): void {
-        this.service.findAll().subscribe(response => {
-          this.services = response;
           this.dataSource = new MatTableDataSource<ServiceModel>(this.services);
           this.dataSource.paginator = this.paginator;
-        })
       }
 
       newService(){
-        this.router.navigate(['/main/servicos/novo-servico'])
+        this.router.navigate(['/main/servicos/create'])
       }
 
-      findOne(id:string){
+      update(id: number){
+        this.router.navigate([`/main/servicos/update/${id}`])
+      }
+
+      findOne(id:number){
         this.router.navigate([`/main/servicos/dados/${id}`])
+      }
+
+      deleteOne(id:number): void{
+        Swal.fire({
+          icon: 'question',
+          text: 'Você deseja deleatar este serviço?',
+          title: 'Deletar serviço',
+          showCancelButton: true,
+          showConfirmButton: true,
+        }).then((res) => {
+          if(res.isConfirmed){
+            this.service.delete(id).pipe(take(1)).subscribe(res => {
+              Swal.fire('Serviço deletado com sucesso!', '', 'success')
+              Swal.close()
+              this.findAll()
+            }, error => {
+              Swal.fire('Não foi possível deletar este serviço', '', 'error')
+              Swal.close()
+            })
+          }else{
+            Swal.close()
+          }
+        })
       }
   }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Client } from 'src/app/client/client.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/client/clients.service';
 import Swal from 'sweetalert2';
-import { ServiceModel, Status } from '../service.model';
+import { ServiceModel, Status } from '../../models/service.model';
 import { ServicesService } from '../services.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-service',
@@ -16,16 +17,34 @@ export class CreateServiceComponent implements OnInit {
 
   clients: Client[] = [];
   form: FormGroup
+  service_id: string
 
   constructor(
-      private router: Router, 
-      private clientService: ClientsService, 
-      private formBiulder: FormBuilder,
-      private service: ServicesService) { }
+      private readonly router: Router, 
+      private readonly clientService: ClientsService, 
+      private readonly formBiulder: FormBuilder,
+      private readonly activatedRouter: ActivatedRoute,
+      private readonly service: ServicesService) { 
+        this.service_id =  this.activatedRouter?.snapshot?.params['id'];
+      }
 
   ngOnInit(): void {
     this.getClients();
     this.createForm(new ServiceModel())
+    if(this.service_id) this.getService()
+  }
+
+  getService(){
+    this.service.findOne(parseInt(this.service_id)).pipe(take(1)).subscribe((res: ServiceModel) => {
+      this.form.patchValue({
+        description: res.description,
+        client: res.client,
+        opening_date: res.opening_date,
+        closing_date: res.closing_date,
+        price: res.price,
+        status: res.status
+      })
+    })
   }
 
   getClients(): void {
@@ -36,20 +55,31 @@ export class CreateServiceComponent implements OnInit {
     )
   }
 
+  update(): void {
+    const form = this.form.getRawValue()
+    form.service_id = parseInt(this.service_id)
+    this.service.update(form).pipe(take(1)).subscribe(res => {
+      this.successModel('Serviço atualizado com sucesso!')
+    }, error => {
+      this.errorModel('Não foi possível atualizar este serviço')
+    })
+  }
+
   save(): void {
-    this.service.create(this.form.value).subscribe(
+    const form = this.form.getRawValue()
+    this.service.create(form).subscribe(
       response => {
-        this.successModel()
+        this.successModel('Serviço criado com sucesso!')
       },err => {
-        this.errorModel()
+        this.errorModel('Não foi pissível criar este serviço')
       })
   }
 
-  successModel(){
+  successModel(text:string): void{
     Swal.fire({
       icon: 'success',
       title: 'Sucesso!',
-      text: 'Serviço adicionado com sucesso.',
+      text: `${text}`,
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
@@ -58,11 +88,11 @@ export class CreateServiceComponent implements OnInit {
     }) 
   }
 
-  errorModel(){
+  errorModel(text:string): void{
     Swal.fire({
       icon: 'error',
       title: 'Oppss.!',
-      text: 'Erro ao adicionar serviço',
+      text: `${text}`,
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
@@ -71,11 +101,11 @@ export class CreateServiceComponent implements OnInit {
     }) 
   }
 
-  wayBack(){
+  wayBack(): void{
     this.router.navigate(['/main/servicos']);
   }
 
-  createForm(service: ServiceModel){
+  createForm(service: ServiceModel): void{
     this.form = this.formBiulder.group({
       description: new FormControl(service.description, [
         Validators.required,

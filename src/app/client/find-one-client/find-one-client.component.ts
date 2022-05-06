@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Client } from '../client.model';
+import { Client } from '../../models/client.model';
 import { ClientsService } from '../clients.service';
 import { map, switchMap } from 'rxjs/operators'
 import Swal from 'sweetalert2';
@@ -35,7 +35,7 @@ export class FineOneClientComponent implements OnInit {
   }
 
   update(){
-    this.router.navigate([`/main/clientes/atualizar/${this.clientModel.client_id}`])
+    this.router.navigate([`/main/clientes/update/${this.clientModel.client_id}`])
   }
 
   back(){

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CreateServiceComponent } from './create-service/create-service.component';
 import { FindOneServiceComponent } from './find-one-service/find-one-service.component';
-import { UpdateServiceComponent } from './update-service/update-service.component';
 import { FindServicesComponent } from './find-all-services/find-services.component';
 import { ServicesService } from './services.service';
 import { ServiceRoutingModule } from './services.routing.module';
@@ -22,19 +21,18 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { TokenInterceptor } from '../auth/token.interceptor';
+import { ServicesGuard } from '../resolver/services.guard';
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     CreateServiceComponent,
     FindOneServiceComponent,
-    UpdateServiceComponent,
     FindServicesComponent
   ],
   exports: [
     CreateServiceComponent,
     FindOneServiceComponent,
-    UpdateServiceComponent,
     FindServicesComponent
   ],
   imports: [
@@ -58,6 +56,7 @@ registerLocaleData(localePt);
   providers: [
     MatDatepickerModule,
     ServicesService,
+    ServicesGuard,
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'

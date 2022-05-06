@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ReportServices, ServiceModel } from './service.model';
+import { ReportServices, ServiceModel } from '../models/service.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class ServicesService {
     return this.http.get<ReportServices>(url);
   }
 
-  findOne(id: string): Observable<ServiceModel>{
+  findOne(id: number): Observable<ServiceModel>{
     const url = `${this.baseUrl}/servicos/${id}`;
     return this.http.get<ServiceModel>(url);
   }
@@ -39,7 +39,7 @@ export class ServicesService {
     return this.http.put<ServiceModel>(url, service);
   }
 
-  delete(id: string): Observable<void>{
+  delete(id: number): Observable<void>{
     const url = `${this.baseUrl}/servicos/${id}`;
     return this.http.delete<void>(url);
   }

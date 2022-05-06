@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Client, ReportClients } from './client.model';
+import { Client, ReportClients } from '../models/client.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ClientsService {
 
   constructor(private http: HttpClient, private snack: MatSnackBar) { }
 
-  findOne(id: string): Observable<Client>{
+  findOne(id: number): Observable<Client>{
     const url = `${this.baseUrl}/clientes/${id}`
     return this.http.get<Client>(url);
   }
@@ -39,12 +39,12 @@ export class ClientsService {
     return this.http.post<Client>(url,cliente);
   }
 
-  update(id:string, client: Client): Observable<void>{
+  update(id: number, client: Client): Observable<void>{
     const url = `${this.baseUrl}/clientes/${id}`;
     return this.http.put<void>(url,client)
   }
 
-  delete(id: string):Observable<void>{
+  delete(id: number):Observable<void>{
     const url = `${this.baseUrl}/clientes/${id}`;
     return this.http.delete<void>(url);
   }

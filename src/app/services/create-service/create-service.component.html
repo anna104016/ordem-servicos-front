@@ -2,7 +2,7 @@
   <div class="content">
     <form class="form mat-card" [formGroup]="form">
 
-    <p>Novo Serviço</p>
+    <p>{{ service_id ? 'Atualizar serviço' : 'Novo serviço' }}</p>
 
       <mat-form-field class="form-field">
         <mat-label>Descrição</mat-label>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { Client } from '../client.model';
+import { Client } from '../../models/client.model';
 import { ClientsService } from '../clients.service';
 
 @Component({
@@ -13,35 +14,64 @@ import { ClientsService } from '../clients.service';
 export class CreateClientComponent implements OnInit {
 
   form: FormGroup
-  client: boolean
+  clienteId: string
 
   constructor(
-    private router: Router, 
-    private service: ClientsService,
-    private formBiulder: FormBuilder) { }
+    private readonly router: Router, 
+    private readonly service: ClientsService,
+    private readonly activatedRouter: ActivatedRoute,
+    private readonly formBiulder: FormBuilder) {
+      this.clienteId = this.activatedRouter?.snapshot?.params['id'];
+     }
 
   ngOnInit(): void {
+    if(this.clienteId) this.getClient()
     this.createForm(new Client())
   }
 
+  getClient(): void {
+    const id = parseInt(this.clienteId)
+    this.service.findOne(id).pipe(take(1)).subscribe((res: Client) => {
+      this.getForm(res)
+    })
+  }
+
+  getForm(client: Client){
+    this.form.patchValue({
+      name: client.name,
+      cpf: client.cpf,
+      cell_phone: client.cell_phone,
+    })
+  }
+
   create() {
+    const form = this.form.getRawValue()
     this.service.create(this.form.value)
       .subscribe(response => {
-        this.successModel()
+        this.successModel('Cliente adicionado com sucesso!')
       }, error => {
         if(error.error.error == 'cpf'){
           this.service.message('CPF já cadastrado.')
         }else{
-          this.errorModel()
+          this.errorModel('Não foi possilve adicionar este cliente')
         }
       })
   }
-  
-  successModel(){
+
+  update(){
+    const form = this.form.getRawValue()
+    form._id = parseInt(this.clienteId)
+    this.service.update(parseInt(this.clienteId), form).pipe(take(1)).subscribe(res => {
+      this.successModel('Cliente atualizado com sucesso!')
+    }, erro => {
+      this.errorModel('Não foi possível atualizar os dados do cliente')
+    })
+  }
+  successModel(text:string){
     Swal.fire({
       icon: 'success',
       title: 'Sucesso!',
-      text: 'Cliente adicionado com sucesso.',
+      text: `${text}`,
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
@@ -50,11 +80,11 @@ export class CreateClientComponent implements OnInit {
     }) 
   }
 
-  errorModel(){
+  errorModel(text:string){
     Swal.fire({
       icon: 'error',
       title: 'Oppss.!',
-      text: 'Erro ao adicionar cliente',
+      text: `${text}`,
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){

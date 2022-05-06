@@ -1,7 +1,7 @@
 <div class="container">
   <div class="content">
     <form class="form mat-card" [formGroup]="form">
-      <p>Novo Cliente</p>
+      <p>{{clienteId ? 'Editar cliente' : 'Novo Cliente'}}</p>
       
       <mat-form-field class="form-field"  appearance="fill">
         <mat-label>Nome do Cliente</mat-label>
@@ -34,11 +34,21 @@
 
       <div class="actions">
         <button 
+          *ngIf="!clienteId"
           mat-button 
           [disabled]="!form.valid"
           class="save" 
           (click)="create()">Salvar
         </button>
+
+        <button 
+        *ngIf="clienteId"
+        mat-button 
+        [disabled]="!form.valid"
+        class="save" 
+        (click)="update()">Atualizar
+      </button>
+
 
         <button 
           mat-button 

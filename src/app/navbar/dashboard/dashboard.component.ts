@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/client/client.model';
+import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/client/clients.service';
-import { ServiceModel } from 'src/app/services/service.model';
+import { ServiceModel } from 'src/app/models/service.model';
 import { ServicesService } from 'src/app/services/services.service';
 
 @Component({

@@ -18,6 +18,4 @@ export class HomeComponent implements OnInit {
   clientes(){
     this.router.navigate(['/login'])
   }
-
-
 }
