@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceModel } from '../../models/service.model';
+import { ResServicoResolve, ServiceModel } from '../../models/service.model';
 import { ServicesService } from '../services.service';
 import { map, switchMap } from 'rxjs/operators'
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-find-one-service',
@@ -12,11 +13,12 @@ import Swal from 'sweetalert2';
 })
 export class FindOneServiceComponent implements OnInit {
 
-  serviceModel: ServiceModel = new ServiceModel()
+  serviceModel: ServiceModel;
+  inscricao: Subscription
 
   constructor(
       private readonly servicesService: ServicesService, 
-      private readonly activatedRoute: ActivatedRoute, 
+      private readonly activaredRoute: ActivatedRoute, 
       private readonly router: Router) { }
 
   ngOnInit(): void {
@@ -28,12 +30,8 @@ export class FindOneServiceComponent implements OnInit {
   }
 
   findOne(): void {
-    this.activatedRoute.params
-    .pipe(
-      map((params:any) => params['id']),
-      switchMap(id => this.servicesService.findOne(id))
-    ).subscribe(service => {
-      this.serviceModel = service
+    this.inscricao = this.activaredRoute.data.subscribe((data: ResServicoResolve) => {
+      this.serviceModel = data.servico
     })
   }
 

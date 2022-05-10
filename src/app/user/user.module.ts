@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { TokenInterceptor } from '../auth/token.interceptor';
+import { UserGuard } from '../resolver/user.guard';
 import { SharedModule } from '../shared/shared.module';
 import { UserIdComponent } from './user-id/user-id.component';
 import { UserRoutingModule } from './user.routing.module';
@@ -41,6 +42,7 @@ import { UserService } from './user.service';
   ],
   providers: [
     UserService,
+    UserGuard,
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'

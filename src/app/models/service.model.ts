@@ -1,5 +1,9 @@
 import { Client } from "./client.model";
 
+
+export class ResServicoResolve {
+    servico: ServiceModel
+}
 export class ServiceModel{
     service_id?: number;
     description: string;

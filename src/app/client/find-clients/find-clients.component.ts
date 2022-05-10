@@ -54,15 +54,42 @@ export class FindClientsComponent implements AfterViewInit {
       if (result.isConfirmed) {
         this.service.delete(id).subscribe(
           (resp) => {
-            Swal.fire("Cliente deleta com sucesso", "", "success");
-            this.find();
+            this.successModel('Cliente deletado com sucesso!')
           },
           () => {
-            Swal.fire("Não foi possível deletar este cliente", "", "error");
+            this.errorModel('Cliente não pode ser deletado!')
           }
         );
       }
     });
+  }
+
+  successModel(text:string){
+    Swal.fire({
+      icon: 'success',
+      title: 'Sucesso!',
+      text: `${text}`,
+      showConfirmButton: true,
+    }).then((result) => {
+      if(result.isConfirmed){
+        Swal.close()
+        this.find()
+      }
+    }) 
+  }
+
+  errorModel(text:string){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oppss.!',
+      text: `${text}`,
+      showConfirmButton: true,
+    }).then((result) => {
+      if(result.isConfirmed){
+        Swal.close()
+        this.find()
+      }
+    }) 
   }
 
   find() {

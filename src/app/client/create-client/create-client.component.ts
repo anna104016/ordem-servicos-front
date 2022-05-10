@@ -50,7 +50,7 @@ export class CreateClientComponent implements OnInit {
       .subscribe(response => {
         this.successModel('Cliente adicionado com sucesso!')
       }, error => {
-        if(error.error.error == 'cpf'){
+        if(error.error.error === 'cpf'){
           this.service.message('CPF já cadastrado.')
         }else{
           this.errorModel('Não foi possilve adicionar este cliente')
@@ -67,6 +67,7 @@ export class CreateClientComponent implements OnInit {
       this.errorModel('Não foi possível atualizar os dados do cliente')
     })
   }
+  
   successModel(text:string){
     Swal.fire({
       icon: 'success',

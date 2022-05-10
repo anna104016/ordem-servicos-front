@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from '../../models/user.model';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ResUserResolve, UserModel } from '../../models/user.model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -9,21 +11,20 @@ import { UserService } from '../user.service';
 })
 export class UserIdComponent implements OnInit {
 
-  user: UserModel = new UserModel()
+  user: UserModel;
+  subscription: Subscription
 
   constructor(
-    private userService: UserService
+    private readonly activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.findMyAccount()
+    this.userAccount()
   }
 
-  findMyAccount(){
-    this.userService.finduser().subscribe(
-      response => {
-        this.user = response
-      }
-    )
+  userAccount(): void{
+    this.subscription = this.activatedRoute.data.subscribe((data: ResUserResolve) => {
+      this.user = data.user
+    })
   }
 }

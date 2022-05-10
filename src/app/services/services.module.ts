@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { TokenInterceptor } from '../auth/token.interceptor';
 import { ServicesGuard } from '../resolver/services.guard';
+import { ServiceGuard } from '../resolver/service.guard';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -57,6 +58,7 @@ registerLocaleData(localePt);
     MatDatepickerModule,
     ServicesService,
     ServicesGuard,
+    ServiceGuard,
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
