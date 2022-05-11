@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResServicoResolve, ServiceModel } from '../../models/service.model';
 import { ServicesService } from '../services.service';
-import { map, switchMap } from 'rxjs/operators'
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 

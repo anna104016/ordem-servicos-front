@@ -19,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { TokenInterceptor } from '../auth/token.interceptor';
 import { ClientesGuard } from '../resolver/clientes.guard';
+import { OneClienteGuard } from '../resolver/client.guard';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ClientesGuard } from '../resolver/clientes.guard';
   providers: [
     ClientsService,
     ClientesGuard,
+    OneClienteGuard,
     {
       provide: HTTP_INTERCEPTORS, //interceptor
       useClass: TokenInterceptor, //classe TokenInterceptor vai ser utilizada com interceptor da aplicação

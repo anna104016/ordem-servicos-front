@@ -1,5 +1,8 @@
 import { ServiceModel } from "./service.model";
 
+export class ResClientResolve {
+    cliente: Client
+}
 export class Client{
     client_id?: number;
     name: string;

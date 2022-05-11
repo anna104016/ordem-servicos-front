@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { FineOneClientComponent } from "./find-one-client/find-one-client.component";
 import { FindClientsComponent } from "./find-clients/find-clients.component";
 import { CreateClientComponent } from "./create-client/create-client.component";
+import { OneClienteGuard } from "../resolver/client.guard";
 import { ClientesGuard } from "../resolver/clientes.guard";
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
     }},
     { path: 'create', component: CreateClientComponent },
     { path: 'update/:id', component: CreateClientComponent },
-    { path: 'dados/:id', component: FineOneClientComponent },
+    { path: 'dados/:id', component: FineOneClientComponent, resolve : {cliente: OneClienteGuard} },
   ];
   
   @NgModule({

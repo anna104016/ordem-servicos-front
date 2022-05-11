@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Client } from '../../models/client.model';
+import { Client, ResClientResolve } from '../../models/client.model';
 import { ClientsService } from '../clients.service';
-import { map, switchMap } from 'rxjs/operators'
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-find-one-client',
@@ -12,12 +12,13 @@ import Swal from 'sweetalert2';
 })
 export class FineOneClientComponent implements OnInit {
 
-  clientModel = new Client()
+  clientModel: Client
+  subscription: Subscription
 
   constructor(
     private clientService: ClientsService,
     private router: Router,
-    private activatedRouter: ActivatedRoute
+    private activaredRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -25,12 +26,8 @@ export class FineOneClientComponent implements OnInit {
   }
 
   findOne(){
-    this.activatedRouter.params
-    .pipe(
-      map((params:any) => params['id']),
-      switchMap(id => this.clientService.findOne(id))
-    ).subscribe(client => {
-      this.clientModel = client
+    this.subscription = this.activaredRoute.data.subscribe((data: ResClientResolve) => {
+      this.clientModel = data.cliente
     })
   }
 
