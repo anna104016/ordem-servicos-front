@@ -14,35 +14,34 @@
             <div id="menu-btn" (click)="navbarActive=!navbarActive" class="box-nav">
                 <i class="fas fa-bars"></i>
             </div>
-
-            <nav [ngClass]="navbarActive ? 'active' : 'navbar'">
-                <p>Sobre</p>
-                <p><a href="#func">Funcionalidades</a></p>
-                <p>Contatos</p>
-                <p routerLink="/create-account">Criar conta</p>
-            </nav>
-
-            <form class="login-form" [ngClass]="formLoginActive ? 'activeLogin' : 'login-form'" [formGroup]="form">
-                <div class="login-form-box">
-                    <span>usuário</span>
-                    <input type="text" name="" id="email" placeholder="Email" autocomplete="off" formControlName="email">
-                </div>
-
-                <div class="login-form-box">
-                    <span>senha</span>
-                    <input type="password" name="" id="senha" placeholder="Senha" autocomplete="off" formControlName="password">
-                </div>
-
-                <div class="invalid">
-                    <p>{{invalidCredentials}}</p>
-                </div>
-                <input type="button" class="btn" value="login" (click)="login()" *ngIf="!loading">
-                <div class="spinner" *ngIf="loading">
-                    <mat-spinner mode="indeterminate" [diameter]="30"></mat-spinner> 
-                 </div>
-            </form>
         </div>
+        <nav [ngClass]="navbarActive ? 'active' : 'navbar'" class="navbar">
+            <p>Sobre</p>
+            <p><a href="#func">Funcionalidades</a></p>
+            <p>Contatos</p>
+            <p routerLink="/create-account">Criar conta</p>
+        </nav>
+        <form class="login-form" [ngClass]="formLoginActive ? 'activeLogin' : 'login-form'" [formGroup]="form">
+            <div class="login-form-box">
+                <span>usuário</span>
+                <input type="text" name="" id="email" placeholder="Email" autocomplete="off" formControlName="email">
+            </div>
+    
+            <div class="login-form-box">
+                <span>senha</span>
+                <input type="password" name="" id="senha" placeholder="Senha" autocomplete="off" formControlName="password">
+            </div>
+    
+            <div class="invalid">
+                <p>{{invalidCredentials}}</p>
+            </div>
+            <input type="button" class="btn" value="login" (click)="login()" *ngIf="!loading">
+            <div class="spinner" *ngIf="loading">
+                <mat-spinner mode="indeterminate" [diameter]="30"></mat-spinner> 
+             </div>
+        </form>
     </header>
+
     
     <div class="content" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
         <div class="text">

@@ -25,7 +25,7 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createAccountField = false
-    this.createForm(new UserModel())
+    this.createForm()
   }
 
   login(){
@@ -77,18 +77,11 @@ export class LoginFormComponent implements OnInit {
   }
 
 
-  createForm(user: UserModel){
+  createForm(){
     this.form = this.formBuilder.group({
-      email: new FormControl(user.email, [
-        Validators.required,
-        Validators.email
-      ]),
-      password: new FormControl(user.password, [
-        Validators.required
-      ]),
-      user_name: new FormControl(user.user_name, [
-        Validators.required
-      ]),
+      email: ['', Validators.email],
+      password: ['', Validators.email],
+      user_name: ['', Validators.email],
     })
   }
 

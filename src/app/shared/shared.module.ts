@@ -8,11 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { SharedRoutingModule } from './shared.routing.module';
-import { LoginComponent } from './login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { LoginTextComponent } from './login-text/login-text.component';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
@@ -23,17 +21,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HomeComponent,
     FooterComponent,
     HeaderComponent,
-    LoginComponent,
     LoginFormComponent,
-    LoginTextComponent,
   ],
   exports: [
     HomeComponent,
     FooterComponent,
     HeaderComponent,
-    LoginComponent,
     LoginFormComponent,
-    LoginTextComponent,
   ],
   imports: [
     CommonModule,
