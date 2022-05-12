@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/user/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-form',
@@ -14,14 +15,16 @@ export class LoginFormComponent implements OnInit {
   form: FormGroup
   emailOrPassWrong:string
   hide = true;
+  createAccountField: boolean
 
   constructor(
-    private router: Router,
-    private userService: UserService,
-    private formBuilder: FormBuilder
+    private readonly router: Router,
+    private readonly userService: UserService,
+    private readonly formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.createAccountField = false
     this.createForm(new UserModel())
   }
 
@@ -50,7 +53,27 @@ export class LoginFormComponent implements OnInit {
   }
 
   createAccount(){
+    this.createAccountField = true
     this.router.navigate(['create-account'])
+  }
+
+  saveUser(){
+    this.userService.create(this.form.getRawValue()).subscribe(resp => {
+      this.sucesso()
+    })
+  }
+
+  sucesso(){
+    Swal.fire({
+      title: 'Sucesso!',
+      text: 'Conta criada com sucesso',
+      icon: 'success',
+      showConfirmButton: true,
+    }).then(res => {
+      if(res.isConfirmed){
+        this.router.navigate(['/login'])
+      }
+    })
   }
 
 
@@ -62,7 +85,10 @@ export class LoginFormComponent implements OnInit {
       ]),
       password: new FormControl(user.password, [
         Validators.required
-      ])
+      ]),
+      user_name: new FormControl(user.user_name, [
+        Validators.required
+      ]),
     })
   }
 

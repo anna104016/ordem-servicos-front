@@ -12,5 +12,4 @@ export class ServicesGuard implements Resolve<ServiceModel[]> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.servicosService.findAll();
     }
-
 }

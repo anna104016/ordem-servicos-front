@@ -428,3 +428,11 @@ mark{
      flex-direction: column;
      align-items: center;
  }
+
+ .spinner{
+     width: 90%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+ }

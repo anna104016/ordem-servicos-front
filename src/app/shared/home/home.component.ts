@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   invalidCredentials: string
   form: FormGroup
   darkTheme: boolean = false
+  loading: boolean = false
 
   constructor(
     private router: Router,
@@ -29,12 +30,15 @@ export class HomeComponent implements OnInit {
   }
 
   login(){
+    this.loading = true
     this.userService.generateToken(this.form.controls.email.value, this.form.controls.password.value)
       .subscribe(response => {
         const access_token = response.access_token
+        this.loading = true
         localStorage.setItem('access_token' , access_token )
         this.router.navigate(['/main/dashboard'])
       }, error => {
+        this.loading = false
         this.invalidCredentials = 'Email e/ou senha incorretos'
         setInterval(() => {
           this.invalidCredentials = ''

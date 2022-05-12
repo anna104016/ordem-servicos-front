@@ -13,11 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginTextComponent } from './login-text/login-text.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -27,8 +26,6 @@ import {MatMenuModule} from '@angular/material/menu';
     LoginComponent,
     LoginFormComponent,
     LoginTextComponent,
-    CreateAccountComponent,
-    CreateAccountFormComponent
   ],
   exports: [
     HomeComponent,
@@ -37,8 +34,6 @@ import {MatMenuModule} from '@angular/material/menu';
     LoginComponent,
     LoginFormComponent,
     LoginTextComponent,
-    CreateAccountComponent,
-    CreateAccountFormComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +48,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatTableModule,
     MatInputModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }

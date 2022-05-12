@@ -1,52 +1,37 @@
 <div class="container">
 
   <form class="form" [formGroup]="form">
-   
-        <div class="texts">
-            <p>Login</p>
-            <h1>Faça o login para acessar o sistema.</h1>
-        </div>
 
-        <p>{{emailOrPassWrong}}</p>
-        
-        <mat-form-field class="form-field">
-            <mat-label>Email</mat-label>
-            <input
-              matInput 
-              formControlName="email"
-              autocomplete="off" 
-              list="autocompleteOff" 
-              >
-              <mat-error *ngIf="form.get('email').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-              <mat-error *ngIf="form.get('email').hasError('email')" class="field-error">Email inválido</mat-error>
-          </mat-form-field>
-        
-          <mat-form-field class="form-field">
-            <mat-label>Senha</mat-label>
-            <input 
-              matInput [type]="hide ? 'password' : 'text'"
-              type="password"
-              autocomplete="off"
-              formControlName="password"
-              >
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="form.get('password').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-          </mat-form-field>
+    <div class="texts">
+      <p>{{createAccountField ? 'Criar conta' : 'Login'}}</p>
+      <h1>{{createAccountField ? 'Aproveite desse recurso gratuito' : 'Faça o login para acessar o sistema.'}}</h1>
+    </div>
 
-          <button 
-          [disabled]="!form.valid"
-          mat-button (click)="login()" class="btn-login">Login</button>
+    <p>{{emailOrPassWrong}}</p>
 
-          <div class="new-account">
-            <h1 (click)="createAccount()">Novo usuário? <strong>Criar conta</strong></h1>
-          </div>
+    <div class="form-field" *ngIf="createAccountField">
+      <label>Nome de usuário</label>
+      <input formControlName="user_name" autocomplete="off" list="autocompleteOff">
+    </div>
 
-          <div class="back">
-            <p (click)="home()">Voltar</p>
-          </div>
-    </form>
+    <div class="form-field">
+      <label>Email</label>
+      <input formControlName="email" autocomplete="off" list="autocompleteOff">
+    </div>
 
-  
+    <div class="form-field">
+      <label>Senha</label>
+      <input [type]="hide ? 'password' : 'text'" autocomplete="off" formControlName="password">
+      <!-- <label for="searchBox" (click)="hide = !hide">
+                <i [class]="hide ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+              </label> -->
+    </div>
+
+    <button mat-button (click)="login()" class="btn-login" *ngIf="!createAccountField">Login</button>
+    <button mat-button (click)="saveUser()" class="btn-login" *ngIf="createAccountField">Criar conta</button>
+
+    <div class="new-account">
+      <h1 (click)="createAccount()">Novo usuário? <strong>Criar conta</strong></h1>
+    </div>
+  </form>
 </div>

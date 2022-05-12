@@ -13,5 +13,4 @@ export class OneClienteGuard implements Resolve<Client> {
         let _id = route.params['id']
         return this.clientsService.findOne(_id)
     }
-
 }

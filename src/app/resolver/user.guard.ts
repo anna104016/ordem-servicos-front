@@ -15,5 +15,4 @@ export class UserGuard implements Resolve<UserModel> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         return this.userService.finduser()
     }
-
 }

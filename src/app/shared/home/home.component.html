@@ -36,7 +36,10 @@
                 <div class="invalid">
                     <p>{{invalidCredentials}}</p>
                 </div>
-                <input type="button" class="btn" value="login" (click)="login()">
+                <input type="button" class="btn" value="login" (click)="login()" *ngIf="!loading">
+                <div class="spinner" *ngIf="loading">
+                    <mat-spinner mode="indeterminate" [diameter]="30"></mat-spinner> 
+                 </div>
             </form>
         </div>
     </header>

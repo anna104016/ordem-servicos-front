@@ -13,5 +13,4 @@ export class ClientesGuard implements Resolve<Client[]> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.clienteService.find();
     }
-
 }
