@@ -9,7 +9,7 @@ import { ServiceGuard } from "../resolver/service.guard";
 const routes: Routes = [
     { path: '', component: FindServicesComponent, resolve: { servicos: ServicesGuard },},
     { path: 'create', component: CreateServiceComponent },
-    { path: 'update/:id', component: CreateServiceComponent },
+    { path: 'update/:id', component: CreateServiceComponent, resolve: { servico: ServiceGuard } },
     { path: 'dados/:id', component: FindOneServiceComponent, resolve: { servico: ServiceGuard } },
   ];
   

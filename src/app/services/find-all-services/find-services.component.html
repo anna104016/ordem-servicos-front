@@ -2,38 +2,52 @@
 
   <div class="content">
 
-  <button mat-button (click)="newService()" class="btn-new">Novo Serviço</button>
+    <div class="pesquisa">
 
-  <div class="table">
-    <table mat-table class="table-content" [dataSource]="dataSource">
-      <ng-container matColumnDef="service_id" class="table-tr">
-        <th mat-header-cell *matHeaderCellDef class="table-th"> ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.service_id}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="status" class="table-tr">
-        <th mat-header-cell *matHeaderCellDef class="table-th"> STATUS </th>
-        <td mat-cell *matCellDef="let element"> {{element.status.name}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="description" class="table-tr">
-        <th mat-header-cell *matHeaderCellDef class="table-th"> DESCRIÇÃO </th>
-        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-      </ng-container>
+      <div class="pesquisa-content">
 
-      <ng-container matColumnDef="data">
-        <th mat-header-cell *matHeaderCellDef class="table-th"> DETALHES </th>
-        <td mat-cell *matCellDef="let element">
-            <span class="material-icons" (click)="findOne(element.service_id)">info</span>
-            <span class="material-icons" (click)="update(element.service_id)">edit</span>
-            <span class="material-icons" (click)="deleteOne(element.service_id)">delete</span>
-        </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
-  </div>
+        <div class="pesquisa-header">
+          <h1>Serviços</h1>
+          <p>Todos os serviços</p>
+        </div>
+
+        <div class="pesquisa-search">
+          <button mat-fab (click)="newService()" class="btn-new mat-elevation-z2" matTooltip="Adicionar serviço">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <table mat-table class="table-content" [dataSource]="dataSource">
+        
+        <ng-container matColumnDef="service_id" class="content-table">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.service_id}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="status" class="content-table">
+          <th mat-header-cell *matHeaderCellDef class="table-th"> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status?.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="description" class="content-table">
+          <th mat-header-cell *matHeaderCellDef class="table-th"> Descrição </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="data" class="content-table">
+          <th mat-header-cell *matHeaderCellDef class="table-th"> Ações </th>
+          <td mat-cell *matCellDef="let element" class="table-td">
+            <i class="fas fa-info-circle" (click)="findOne(element.service_id)" style="color:rgb(7, 105, 7)"></i>
+            <i class="far fa-edit" (click)="update(element.service_id)" style="color:rgb(5, 30, 143)"></i>
+            <i class="fas fa-trash" (click)="deleteOne(element.service_id)" style="color:rgb(180, 11, 11)"></i>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
 </div>
 </div>

@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { ServiceModel, Status } from '../../models/service.model';
 import { ServicesService } from '../services.service';
 import { take } from 'rxjs/operators';
+import { StatusService } from 'src/app/status/status.service';
 
 @Component({
   selector: 'app-create-service',
@@ -16,6 +17,7 @@ import { take } from 'rxjs/operators';
 export class CreateServiceComponent implements OnInit {
 
   clients: Client[] = [];
+  status:any
   form: FormGroup
   service_id: string
 
@@ -23,15 +25,23 @@ export class CreateServiceComponent implements OnInit {
       private readonly router: Router, 
       private readonly clientService: ClientsService, 
       private readonly formBiulder: FormBuilder,
+      private readonly statusService: StatusService,
       private readonly activatedRouter: ActivatedRoute,
       private readonly service: ServicesService) { 
         this.service_id =  this.activatedRouter?.snapshot?.params['id'];
       }
 
   ngOnInit(): void {
+    this.getSttatus()
     this.getClients();
     this.createForm(new ServiceModel())
     if(this.service_id) this.getService()
+  }
+
+  getSttatus(){
+    this.statusService.findAll().subscribe(resp => {
+      this.status = resp
+    })
   }
 
   getService(){
@@ -106,17 +116,33 @@ export class CreateServiceComponent implements OnInit {
   }
 
   createForm(service: ServiceModel): void{
-    this.form = this.formBiulder.group({
-      description: new FormControl(service.description, [
-        Validators.required,
-        Validators.minLength(10)
-      ]),
-      price: new FormControl(service.price, [
-        Validators.required,
-      ]),
-      client: new FormControl(service.client, [
-        Validators.required
-      ])
-    })
+    if(this.service_id){
+      this.form = this.formBiulder.group({
+        service_id: service.service_id,
+        description: new FormControl(service.description, [
+          Validators.required,
+          Validators.minLength(10)
+        ]),
+        price: new FormControl(service.price, [
+          Validators.required
+        ]),
+        closing_date: ({value: service.closing_date}),
+        opening_date: ({value: service.opening_date, disabled:true}),
+        status: ({value: service.status}),
+      })
+    }else{
+      this.form = this.formBiulder.group({
+        description: new FormControl(service.description, [
+          Validators.required,
+          Validators.minLength(10)
+        ]),
+        price: new FormControl(service.price, [
+          Validators.required,
+        ]),
+        client: new FormControl(service.client, [
+          Validators.required
+        ])
+      })
+    }
   }
 }

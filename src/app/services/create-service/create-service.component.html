@@ -1,40 +1,28 @@
 <div class="container">
   <div class="content">
-    <form class="form mat-card" [formGroup]="form">
+    <form class="form" [formGroup]="form">
 
-    <p>{{ service_id ? 'Atualizar serviço' : 'Novo serviço' }}</p>
+      <p>{{ service_id ? 'Atualizar serviço' : 'Novo serviço' }}</p>
 
-      <mat-form-field class="form-field">
+      <mat-form-field class="form-field"  appearance="fill">
         <mat-label>Descrição</mat-label>
-        <textarea
-          matInput 
-          #descricao
-          minlength="10"
-          maxlength="255"
-          autocomplete="off"
-          placeholder="Formatar notebook"
-          formControlName="description"
-          >
+        <textarea matInput #descricao minlength="10" maxlength="255" autocomplete="off" placeholder="Formatar notebook"
+          formControlName="description">
         </textarea>
         <mat-hint align="start">{{descricao.value?.length || 0}}/255</mat-hint>
-        <mat-error *ngIf="form.get('description').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-        <mat-error *ngIf="form.get('description').hasError('minlength')" class="field-error">Descreva mais sobre o serviço</mat-error>
-      </mat-form-field>
-    
-      <mat-form-field class="form-field">
-        <mat-label>Valor R$</mat-label>
-        <input 
-          type="number"
-          matInput 
-          step="0.01"
-          placeholder="20.00"
-          autocomplete="off"
-          formControlName="price"
-          >
-          <mat-error *ngIf="form.get('price').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+        <mat-error *ngIf="form.get('description').hasError('required')" class="field-error">Campo obrigatório
+        </mat-error>
+        <mat-error *ngIf="form.get('description').hasError('minlength')" class="field-error">Descreva mais sobre o
+          serviço</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form-field">
+      <mat-form-field class="form-field"  appearance="fill">
+        <mat-label>Valor R$</mat-label>
+        <input type="number" matInput step="0.01" placeholder="20.00" autocomplete="off" formControlName="price">
+        <mat-error *ngIf="form.get('price').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field"  appearance="fill" *ngIf="!service_id">
         <mat-label>Cliente</mat-label>
         <mat-select formControlName="client">
           <mat-option *ngFor="let client of clients" [value]="client">{{client.name}}</mat-option>
@@ -42,10 +30,32 @@
         <mat-error *ngIf="form.get('client').hasError('required')" class="field-error">Campo obrigatório</mat-error>
       </mat-form-field>
 
+      <mat-form-field class="form-field" appearance="fill" *ngIf="service_id">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let item of status" [value]="item">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field" *ngIf="service_id">
+        <mat-label>Data de entrega</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="closing_date">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker  #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field" *ngIf="service_id">
+        <mat-label>Data de abertura</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="opening_date">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker  #picker2></mat-datepicker>
+      </mat-form-field>
+
       <div class="actions">
-        <button mat-button class="save" (click)="save()" [disabled]="!form.valid">Salvar</button>
+        <button mat-button class="save" (click)="save()"  *ngIf="!service_id">Salvar</button>
+        <button mat-button class="save" (click)="update()" *ngIf="service_id">Salvar</button>
         <button mat-button class="cancel" (click)="wayBack()">Cancelar</button>
       </div>
-  </form>
+    </form>
   </div>
 </div>
