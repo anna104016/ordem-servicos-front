@@ -22,13 +22,13 @@
     <div class="form-field">
       <label>Senha</label>
       <input [type]="hide ? 'password' : 'text'" autocomplete="off" formControlName="password" placeholder="Sua senha">
-      <!-- <label for="searchBox" (click)="hide = !hide">
-                <i [class]="hide ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
-              </label> -->
     </div>
 
-    <button mat-button (click)="login()" class="btn-login" *ngIf="!createAccountField">Login</button>
-    <button mat-button (click)="saveUser()" class="btn-login" *ngIf="createAccountField">Criar conta</button>
+    <button mat-button (click)="login()" class="btn-login" *ngIf="!createAccountField && !loading">Login</button>
+    <button mat-button (click)="saveUser()" class="btn-login" *ngIf="createAccountField && !loading">Criar conta</button>
+    <div class="spinner" *ngIf="loading">
+      <mat-spinner mode="indeterminate" [diameter]="30"></mat-spinner> 
+   </div>
 
     <div class="new-account" *ngIf="!createAccountField">
       <h1 (click)="createAccount()">Novo usuário? <strong>Criar conta</strong></h1>

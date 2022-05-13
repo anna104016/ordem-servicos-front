@@ -15,26 +15,31 @@ export class LoginFormComponent implements OnInit {
   form: FormGroup
   emailOrPassWrong:string
   hide = true;
-  createAccountField: boolean
-
+  createAccountField: boolean = false
+  loading: boolean
+  
   constructor(
     private readonly router: Router,
     private readonly userService: UserService,
     private readonly formBuilder: FormBuilder,
-  ) { }
+  ) { 
+    this.createAccountField = false
+  }
 
   ngOnInit(): void {
-    this.createAccountField = false
     this.createForm()
   }
 
   login(){
+    this.loading = true
     this.userService.generateToken(this.form.controls.email.value, this.form.controls.password.value)
       .subscribe(response => {
+        this.loading = false
         const access_token = response.access_token
         localStorage.setItem('access_token' , access_token )
         this.router.navigate(['/main/dashboard'])
       }, error => {
+        this.loading = false
         this.validateUser()
       })
   }
@@ -47,19 +52,24 @@ export class LoginFormComponent implements OnInit {
     },5000);
 
   }
-
-  home(){
-    this.router.navigate([''])
-  }
-
   createAccount(){
-    this.createAccountField = true
     this.router.navigate(['create-account'])
+    this.createAccountField = true
   }
 
   saveUser(){
+    this.loading = true
     this.userService.create(this.form.getRawValue()).subscribe(resp => {
+      this.loading = false
       this.sucesso()
+    }, error => {
+      this.loading = false
+      this.form.reset()
+        Swal.fire('Que pena!', 'Não foi possível criar sua conta', 'error').then(res => {
+          if(res.isConfirmed){
+            Swal.close()
+          }
+        })
     })
   }
 
@@ -76,7 +86,6 @@ export class LoginFormComponent implements OnInit {
     })
   }
 
-
   createForm(){
     this.form = this.formBuilder.group({
       email: ['', Validators.email],
@@ -84,5 +93,4 @@ export class LoginFormComponent implements OnInit {
       user_name: ['', Validators.email],
     })
   }
-
 }

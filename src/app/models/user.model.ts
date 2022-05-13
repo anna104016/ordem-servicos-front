@@ -5,7 +5,6 @@ export class UserModel {
     password: string
     creation_date: Date
 }
-
 export class ResUserResolve {
      user: UserModel
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
@@ -27,6 +27,11 @@ export class HomeComponent implements OnInit {
       email: '',
       password: ''
     })
+  }
+
+  scrollToElement($element): void {
+    this.navbarActive = false
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
   login(){
