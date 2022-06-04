@@ -13,7 +13,6 @@ export class UserIdComponent implements OnInit {
 
   user: UserModel;
   subscription: Subscription
-  userPhoto: string = 'https://licitacao.fundacaouniselva.org.br/Perfil/Foto'
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
