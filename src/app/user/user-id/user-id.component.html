@@ -1,32 +1,31 @@
 <div class="container">
-    <div class="content">
-      <mat-card class="card-info">
+  <div class="content">
+    <mat-card class="card-info">
 
-        <div class="card-wrap">
-          <div class="photo">
-            <img src="{{user?.photo}}" alt="{{user?.user_name}}" srcset="">
+      <div class="card-wrap">
+        <div class="photo">
+          <img src="{{user?.photo}}" alt="{{user?.user_name}}" srcset="">
+        </div>
+
+        <div>
+          <div class="info">
+            <h4>Nome</h4>
+            <p>{{user?.user_name}}</p>
           </div>
 
-          <div>
-            <div class="info">
-              <h4>Nome</h4>
-              <p>{{user?.user_name}}</p>
-          </div>
-  
           <div class="info">
             <h4>Email</h4>
             <p>{{user?.email}}</p>
           </div>
-  
+
           <div class="info">
             <h4>Data de criação da conta</h4>
             <p>{{user?.creation_date | date: 'dd/MM/yyyy'}}</p>
           </div>
-          </div>
-
         </div>
 
-      </mat-card>
-    </div>
+      </div>
+
+    </mat-card>
   </div>
-  
+</div>

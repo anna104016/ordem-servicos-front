@@ -4,7 +4,7 @@ import { UserGuard } from "../resolver/user.guard";
 import { UserIdComponent } from "./user-id/user-id.component";
 
 const routes: Routes = [
-    { path: '', component: UserIdComponent, resolve: { user: UserGuard }}
+    { path: '', component: UserIdComponent}
   ];
   
   @NgModule({

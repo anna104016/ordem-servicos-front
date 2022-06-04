@@ -6,7 +6,7 @@
 
     <div class="photos">
         <div *ngFor="let photo of photos">
-            <div class="photo" (click)="select(photo)">
+            <div class="photo" (click)="select(photo)" #photo>
                 <img src="{{photo.img}}" alt="">
             </div>
         </div>
@@ -14,7 +14,7 @@
 
     <!-- <mat-divider></mat-divider> -->
 
-    <button mat-button color="primary" (click)="close()">
+    <button mat-button (click)="close()">
         Escolher
     </button>
 

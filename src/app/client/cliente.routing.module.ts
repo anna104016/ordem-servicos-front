@@ -7,12 +7,10 @@ import { OneClienteGuard } from "../resolver/client.guard";
 import { ClientesGuard } from "../resolver/clientes.guard";
 
 const routes: Routes = [
-    { path: '', component: FindClientsComponent, resolve : {
-      clientes: ClientesGuard
-    }},
+    { path: '', component: FindClientsComponent},
     { path: 'create', component: CreateClientComponent },
     { path: 'update/:id', component: CreateClientComponent },
-    { path: 'dados/:id', component: FineOneClientComponent, resolve : {cliente: OneClienteGuard} },
+    { path: 'dados/:id', component: FineOneClientComponent },
   ];
   
   @NgModule({

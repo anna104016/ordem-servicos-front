@@ -2,7 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
-import { take } from "rxjs/operators";
+import { NgxSpinnerService } from "ngx-spinner";
+import { finalize, take } from "rxjs/operators";
 import Swal from "sweetalert2";
 import { ServiceModel, Status } from "../../models/service.model";
 import { ServicesService } from "../services.service";
@@ -21,9 +22,10 @@ export class FindServicesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private service: ServicesService,
+    private readonly service: ServicesService,
     private readonly activaredRoute: ActivatedRoute,
-    private router: Router
+    private readonly router: Router,
+    private readonly spinner: NgxSpinnerService
   ) {}
 
   ngAfterViewInit() {
@@ -31,8 +33,14 @@ export class FindServicesComponent implements AfterViewInit {
   }
 
   findAll(): void {
-    this.dataSource = new MatTableDataSource<ServiceModel>(this.services);
-    this.dataSource.paginator = this.paginator;
+    this.spinner.show()
+    this.service.findAll().pipe(
+      finalize(() => this.spinner.hide())
+    ).subscribe((resp : ServiceModel[]) => {
+      this.services = resp
+      this.dataSource = new MatTableDataSource<ServiceModel>(this.services);
+      this.dataSource.paginator = this.paginator;
+    })
   }
 
   newService() {

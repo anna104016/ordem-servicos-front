@@ -10,6 +10,7 @@ import { NavbarModule } from './navbar/navbar.module';
 import { ServicesModule } from './services/services.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
     ServicesModule,
     SharedModule,
     NavbarModule,
+    NgxSpinnerModule
   ],
   providers: [
     {

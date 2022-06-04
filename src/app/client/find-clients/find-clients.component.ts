@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Client } from '../../models/client.model';
 import { ClientsService } from '../clients.service';
@@ -12,7 +14,7 @@ import { ClientsService } from '../clients.service';
   styleUrls: ["./find-clients.component.css"],
 })
 export class FindClientsComponent implements AfterViewInit {
-  clientes: Client[] = this.activatedRoute.snapshot.data.clientes;
+  clientes: Client[] = []
 
   displayedColumns: string[] = ["client_id", "name", "cell_phone", "actions"];
   dataSource = new MatTableDataSource<Client>(this.clientes);
@@ -22,7 +24,8 @@ export class FindClientsComponent implements AfterViewInit {
   constructor(
     private readonly service: ClientsService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly spinner: NgxSpinnerService
   ) {}
 
   ngAfterViewInit() {
@@ -93,7 +96,13 @@ export class FindClientsComponent implements AfterViewInit {
   }
 
   find() {
-    this.dataSource = new MatTableDataSource<Client>(this.clientes);
-    this.dataSource.paginator = this.paginator;
+    this.spinner.show()
+    this.service.find().pipe(
+      finalize(() => this.spinner.hide())
+    ).subscribe(response => {
+      this.clientes = response
+      this.dataSource = new MatTableDataSource<Client>(this.clientes);
+      this.dataSource.paginator = this.paginator;
+    })
   }
 }

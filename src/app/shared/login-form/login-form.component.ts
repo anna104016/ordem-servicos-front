@@ -45,8 +45,10 @@ export class LoginFormComponent implements OnInit {
         width: '30rem',
         height: '34rem'
       }).afterClosed().subscribe(res => {
-        if(res.data){
+        if(res){
           this.form.get('photo').setValue(res.data)
+        }else{
+          this.form.get('photo').setValue('')
         }
       })
   }

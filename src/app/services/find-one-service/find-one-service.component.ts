@@ -4,6 +4,8 @@ import { ResServicoResolve, ServiceModel } from '../../models/service.model';
 import { ServicesService } from '../services.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-find-one-service',
@@ -13,12 +15,15 @@ import { Subscription } from 'rxjs';
 export class FindOneServiceComponent implements OnInit {
 
   serviceModel: ServiceModel;
-  inscricao: Subscription
-
+  id: any
   constructor(
       private readonly servicesService: ServicesService, 
-      private readonly activaredRoute: ActivatedRoute, 
-      private readonly router: Router) { }
+      private readonly activatedRoute: ActivatedRoute, 
+      private readonly router: Router,
+      private readonly spinner: NgxSpinnerService
+      ) {
+        this.id = this.activatedRoute?.snapshot?.params['id']
+       }
 
   ngOnInit(): void {
     this.findOne();
@@ -29,8 +34,12 @@ export class FindOneServiceComponent implements OnInit {
   }
 
   findOne(): void {
-    this.inscricao = this.activaredRoute.data.subscribe((data: ResServicoResolve) => {
-      this.serviceModel = data.servico
+    this.spinner.show()
+    this.servicesService.findOne(this.id).pipe(
+      finalize(() => this.spinner.hide()),
+      take(1)
+    ).subscribe((resp : ServiceModel) => {
+      this.serviceModel = resp
     })
   }
 

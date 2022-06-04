@@ -24,7 +24,6 @@
     width: 100%;
     background-color: #ffff;
     margin: 10px 0 20px 0;
-    padding: 40px 20px;
 }
 
 .card-info p{
@@ -32,6 +31,7 @@
     font-weight: 500;
     margin: 0 0 10px 0;
 }
+
 .card-info p{
     font-size: 20px;
     font-weight: 500;
@@ -43,7 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin: 10px 0;
+    /* margin: 10px 0; */
 }
 
 .action-back i {
@@ -88,20 +88,20 @@
     color: #ffff;
 }
 
-
 .card-wrap{
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin: 0;
 }
 
-.card-wrap div{
-    width: 40%;
-    margin: 1rem;
-}
 
 .card-wrap .photo img{
-    width: 20rem;
-    height: 20rem;
+    width: 10rem;
+    height: 10rem;
+}
+
+.info{
+    width: 100%;
 }

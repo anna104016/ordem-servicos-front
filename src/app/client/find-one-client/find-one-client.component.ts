@@ -4,6 +4,8 @@ import { Client, ResClientResolve } from '../../models/client.model';
 import { ClientsService } from '../clients.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-find-one-client',
@@ -13,21 +15,27 @@ import { Subscription } from 'rxjs';
 export class FineOneClientComponent implements OnInit {
 
   clientModel: Client
-  subscription: Subscription
+  id: any
 
   constructor(
     private clientService: ClientsService,
     private router: Router,
-    private activaredRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private readonly spinner: NgxSpinnerService
+  ) {
+    this.id = this.activatedRoute?.snapshot?.params['id']
+   }
 
   ngOnInit(): void {
     this.findOne()
   }
 
   findOne(){
-    this.subscription = this.activaredRoute.data.subscribe((data: ResClientResolve) => {
-      this.clientModel = data.cliente
+    this.spinner.show()
+    this.clientService.findOne(this.id).pipe(
+      finalize(() =>  this.spinner.hide())
+    ).subscribe(resp => {
+      this.clientModel = resp
     })
   }
 
@@ -46,8 +54,8 @@ export class FineOneClientComponent implements OnInit {
       text: 'Você deseja deletar este cliente?',
       showCancelButton: true,
       showConfirmButton: true,
-      cancelButtonText:'NÃO',
-      confirmButtonText: 'SIM'
+      cancelButtonText:'Não',
+      confirmButtonText: 'Sim'
     }).then((result) => {
       if(result.isConfirmed){
        this.clientService.delete(this.clientModel.client_id).subscribe(

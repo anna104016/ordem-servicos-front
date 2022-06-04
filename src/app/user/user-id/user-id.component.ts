@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { ResUserResolve, UserModel} from '../../models/user.model';
 import { UserService } from '../user.service';
 
@@ -12,11 +14,10 @@ import { UserService } from '../user.service';
 export class UserIdComponent implements OnInit {
 
   user: UserModel;
-  subscription: Subscription
 
   constructor(
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly userService:UserService
+    private readonly userService:UserService,
+    private readonly spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +25,10 @@ export class UserIdComponent implements OnInit {
   }
 
   userAccount(): void{
-    this.userService.finduser().subscribe(resp => {
+    this.spinner.show()
+    this.userService.finduser().pipe(
+      finalize(() =>  this.spinner.hide())
+    ).subscribe(resp => {
       this.user = resp
     })
   }

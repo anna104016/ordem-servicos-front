@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Photo } from 'src/app/models/user.model';
@@ -11,6 +11,8 @@ import { Photo } from 'src/app/models/user.model';
 export class SelectUserPhotoComponent implements OnInit {
 
   photoSelected: Photo = new Photo()
+
+  @ViewChild('photo') photo: HTMLElement
 
   photos: Photo[] = [
     {img: 'https://services-on.netlify.app/assets/avatar-01.png', value: 'https://services-on.netlify.app/assets/avatar-01.png'},
@@ -38,8 +40,7 @@ export class SelectUserPhotoComponent implements OnInit {
   }
 
   select(photo: Photo){
-    console.log(photo)
-      this.photoSelected.img = photo.img
+    this.photoSelected.img = photo.img
   }
 
 }
