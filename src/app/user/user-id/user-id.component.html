@@ -2,41 +2,30 @@
     <div class="content">
       <mat-card class="card-info">
 
-        <p>Minha conta</p>
-  
-        <mat-form-field class="field" appearance="fill">
-          <mat-label>Nome</mat-label>
-          <input
-            matInput
-            disabled
-            type="text"
-            #nome
-            [(ngModel)]="user.user_name"
-            name="name"
-          />
-        </mat-form-field>
-  
-        <mat-form-field class="field" appearance="fill">
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            disabled
-            type="text"
-            name="nome"
-            [(ngModel)]="user.email"
-          />
-        </mat-form-field>
+        <div class="card-wrap">
+          <div class="photo">
+            <img [src]="user?.photo ? user?.photo : userPhoto" alt="{{user.user_name}}">
+          </div>
 
-        <mat-form-field class="field" appearance="fill">
-            <mat-label>Data de criação da conta</mat-label>
-            <input
-              matInput
-              disabled
-              type="text"
-              name="cell_phone"
-              [ngModel]="user.creation_date | date: 'dd/MM/yyyy'"
-            />
-          </mat-form-field>
+          <div>
+            <div class="info">
+              <h4>Nome</h4>
+              <p>{{user.user_name}}</p>
+          </div>
+  
+          <div class="info">
+            <h4>Email</h4>
+            <p>{{user.email}}</p>
+          </div>
+  
+          <div class="info">
+            <h4>Data de criação da conta</h4>
+            <p>{{user.creation_date | date: 'dd/MM/yyyy'}}</p>
+          </div>
+          </div>
+
+        </div>
+
       </mat-card>
     </div>
   </div>

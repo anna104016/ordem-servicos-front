@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ResUserResolve, UserModel } from '../../models/user.model';
+import { ResUserResolve, UserModel} from '../../models/user.model';
 import { UserService } from '../user.service';
 
 @Component({
@@ -13,9 +13,11 @@ export class UserIdComponent implements OnInit {
 
   user: UserModel;
   subscription: Subscription
+  userPhoto: string = 'https://licitacao.fundacaouniselva.org.br/Perfil/Foto'
 
   constructor(
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly userService:UserService
   ) { }
 
   ngOnInit(): void {
@@ -23,8 +25,8 @@ export class UserIdComponent implements OnInit {
   }
 
   userAccount(): void{
-    this.subscription = this.activatedRoute.data.subscribe((data: ResUserResolve) => {
-      this.user = data.user
+    this.userService.finduser().subscribe(resp => {
+      this.user = resp
     })
   }
 }

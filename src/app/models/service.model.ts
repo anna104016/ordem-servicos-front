@@ -1,6 +1,4 @@
 import { Client } from "./client.model";
-
-
 export class ResServicoResolve {
     servico: ServiceModel
 }
@@ -19,7 +17,6 @@ export class Status{
     name: string;
     code: number
 }
-
 export class ReportServices {
     servicos_abertos:number
     servicos: number 

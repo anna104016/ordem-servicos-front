@@ -1,5 +1,4 @@
 import { ServiceModel } from "./service.model";
-
 export class ResClientResolve {
     cliente: Client
 }
@@ -10,7 +9,6 @@ export class Client{
     cell_phone: string;
     services: ServiceModel[]
 }
-
 export class ReportClients {
     clientes: number
     clientes_com_servico: number
