@@ -9,3 +9,8 @@ export class UserModel {
 export class ResUserResolve {
      user: UserModel
 }
+
+export class Photo {
+    img: string
+    value: string
+  }

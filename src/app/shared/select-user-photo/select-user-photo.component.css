@@ -1,0 +1,33 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container .title{
+    font-size: 1.3rem;
+    color: rgba(119, 115, 115, 0.933);
+}
+
+.photos{
+    width: 100%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8.9rem, 1fr));
+}
+
+.photo{
+    cursor: pointer;
+    width: 8rem;
+    height: 8rem;
+}
+
+.photo img{
+    width: 100%;
+
+}
+
+button{
+    background-color: rgb(161, 161, 207);
+}

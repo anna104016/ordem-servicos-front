@@ -19,7 +19,7 @@ import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
-    UserIdComponent
+    UserIdComponent,
   ],
   exports: [
     UserIdComponent

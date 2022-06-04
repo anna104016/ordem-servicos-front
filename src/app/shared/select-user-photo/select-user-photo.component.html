@@ -1,0 +1,21 @@
+<div class="container">
+
+    <p class="title">Selecione a foto do seu perfil</p>
+
+    <!-- <mat-divider></mat-divider> -->
+
+    <div class="photos">
+        <div *ngFor="let photo of photos">
+            <div class="photo" (click)="select(photo)">
+                <img src="{{photo.img}}" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- <mat-divider></mat-divider> -->
+
+    <button mat-button color="primary" (click)="close()">
+        Escolher
+    </button>
+
+</div>

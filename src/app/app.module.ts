@@ -10,7 +10,6 @@ import { NavbarModule } from './navbar/navbar.module';
 import { ServicesModule } from './services/services.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
-
 @NgModule({
   declarations: [
     AppComponent,
