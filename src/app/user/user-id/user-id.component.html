@@ -2,28 +2,40 @@
   <div class="content">
     <mat-card class="card-info">
 
+      <div class="header">
+        <div class="header-overlay"></div>
+
+        <div class="wellcome">
+          <div class="texts">
+            <h3>Olá {{user?.user_name}}!</h3>
+            <p>Este é o seu perfil, você pode ver seus dados e editar sua foto do perfil</p>
+              <button mat-button (click)="selectPhoto()">Editar foto</button>
+          </div>
+        </div>
+
+      </div>
+
       <div class="card-wrap">
-        <div class="photo">
-          <img src="{{user?.photo}}" alt="{{user?.user_name}}" srcset="">
-        </div>
-
-        <div>
-          <div class="info">
-            <h4>Nome</h4>
-            <p>{{user?.user_name}}</p>
+        <div class="my-account mat-card">
+          <div class="header-account">
+            <p>Minha conta</p>
           </div>
 
-          <div class="info">
-            <h4>Email</h4>
-            <p>{{user?.email}}</p>
+          <div class="data">
+            <p>Nome</p>
+            <h2>{{user?.user_name}}</h2>
           </div>
 
-          <div class="info">
-            <h4>Data de criação da conta</h4>
-            <p>{{user?.creation_date | date: 'dd/MM/yyyy'}}</p>
+          <div class="data">
+            <p>Email</p>
+            <h2>{{user?.email}}</h2>
           </div>
         </div>
 
+        <div class="photo mat-card">
+          <div class="photo-content" [style.background-image]="backgroundImg"></div>
+          <p>Se juntou a comunidade em {{user?.creation_date | date: 'dd/MM/yyyy'}}</p>
+        </div>
       </div>
 
     </mat-card>

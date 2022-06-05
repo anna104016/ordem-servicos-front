@@ -51,12 +51,17 @@ export class UserService {
   }
 
   logOut(){
-    localStorage.removeItem('access_token')
+    localStorage.clear()
     this.router.navigate([''])
   }
 
   finduser(): Observable<UserModel>{
     const url = `${this.baseUrl}/user/infos`;
     return this.http.get<UserModel>(url);
+  }
+
+  updatePhoto(userId: number, body: { photo: string}): Observable<object> {
+    const url = `${this.baseUrl}/user/update-photo/${userId}`;
+    return this.http.put(url, body);
   }
 }

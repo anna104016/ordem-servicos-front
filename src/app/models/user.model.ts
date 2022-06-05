@@ -13,4 +13,4 @@ export class ResUserResolve {
 export class Photo {
     img: string
     value: string
-  }
+}

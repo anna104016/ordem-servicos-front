@@ -19,89 +19,132 @@
 .card-info{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: start;
     width: 100%;
     background-color: #ffff;
     margin: 10px 0 20px 0;
+    padding: 0;
 }
 
-.card-info p{
-    font-size: 20px;
-    font-weight: 500;
-    margin: 0 0 10px 0;
-}
-
-.card-info p{
-    font-size: 20px;
-    font-weight: 500;
-    margin: 0 0 10px 0;
-}
-
-.action-back{
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    /* margin: 10px 0; */
-}
-
-.action-back i {
-    cursor: pointer;
-    color: #e5383b;
-}
-
-.field{
-    width: 90%;
-}
-
-.field input{
-    margin-top: 10px;
+.card-info .header{
     width: 100%;
-    padding: 2px 6px;
-    font-size: 16px;
-    outline: none;
-    color: #000;
-}
-
-.acoes{
+    height: 20rem;
+    /* background-color: red; */
+    background: url("/assets/cover.jpg");
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-position: center; */
+    background-size: cover;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    width: 90%;
-    padding: 2px 0;
+    justify-content: start;
 }
 
-.acoes button{
-    width: 120px;
-    margin: 0 2px 0 2px;
+.header-overlay{
+    width: 100%;
+    height: 20rem;
+    background-color: rgba(1, 3, 39, 0.623);
+    position: absolute;
 }
 
-.save{
-    background-color: #058c42;
+.wellcome{
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+}
+
+.wellcome .texts h3{
+    font-weight: 500;
     color: #ffff;
+    font-size: 2rem;
 }
 
-.delete{
-    background-color: #e5383b;
+.wellcome .texts p{
+    font-weight: 500;
     color: #ffff;
+    font-size: 1.4rem;
 }
+
+.wellcome .texts button{
+    font-weight: 500;
+    color: #ffff;
+    background-color: rgb(187, 62, 12);
+}
+
+.card-info p{
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+}
+
+.card-info p{
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+}
+
 
 .card-wrap{
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    place-items: center;
+    object-position: center;
+    place-content: center;
+    place-self: center;
+    /* justify-content: space-evenly; */
+    margin: 0;
+    background-color: #eee;
+}
+
+.my-account, .photo{
+    top: -3rem;
+    width: 70% !important;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.6rem;
+}
+
+.header-account{
+    width: 100%;
+    height: 1.8rem;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+}
+
+.data{
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.data p{
+    font-size: 0.8rem;
     margin: 0;
 }
 
-
-.card-wrap .photo img{
-    width: 10rem;
-    height: 10rem;
+.data h2{
+    margin: 0;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.1rem 0.6rem;
+    background-color: #eee;
+    border-radius: 1rem;
 }
 
-.info{
-    width: 100%;
+.photo-content{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.photo p{
+    font-size: 0.9rem;
+    margin-top: 0.9rem;
 }
