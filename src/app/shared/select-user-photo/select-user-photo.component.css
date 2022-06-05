@@ -15,6 +15,7 @@
     height: 90%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(8.9rem, 1fr));
+    place-items: center;
 }
 
 .photo{
