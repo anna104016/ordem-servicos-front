@@ -27,4 +27,4 @@
 - https://services-on.netlify.app/
 
 #### :small_blue_diamond: Sistema em execução
-![DOMAIN MODEL](https://github.com/santoskarolina/html/blob/main/assets/services-on.gif)
+![DOMAIN MODEL](https://github.com/santoskarolina/html/blob/main/assets/servicos2.gif)
