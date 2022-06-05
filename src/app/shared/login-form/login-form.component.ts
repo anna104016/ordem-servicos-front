@@ -43,7 +43,7 @@ export class LoginFormComponent implements OnInit {
   selectPhoto(){
     this.dialog.open(SelectUserPhotoComponent,  {
         width: '30rem',
-        height: '34rem'
+        height: '90vh'
       }).afterClosed().subscribe(res => {
         if(res){
           this.form.get('photo').setValue(res.data)
