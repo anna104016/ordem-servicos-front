@@ -18,13 +18,15 @@ import { SelectUserPhotoComponent } from './select-user-photo/select-user-photo.
 import { MatDivider, MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AppPageComponent } from './app-page/app-page.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     FooterComponent,
     LoginFormComponent,
-    SelectUserPhotoComponent
+    SelectUserPhotoComponent,
+    AppPageComponent
   ],
   imports: [
     CommonModule,

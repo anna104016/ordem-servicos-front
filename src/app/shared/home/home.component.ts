@@ -34,6 +34,10 @@ export class HomeComponent implements OnInit {
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
+  appPage(){
+    this.router.navigate(['/download-app'])
+  }
+
   login(){
     this.loading = true
     this.userService.generateToken(this.form.controls.email.value, this.form.controls.password.value)

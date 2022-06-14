@@ -66,14 +66,18 @@
                 <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Serviços</p>
                 <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Tenha o controle de seus serviços.</p>
             </div>
+       
+            <div class="info-card" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
+                <i class="far fa-address-book" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'"></i>
+                <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Aplicativo</p>
+                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Na Services ON você pode fazer o downloado dp aplivativo e ter tudo na
+                    palma de suas mãos.</p>
+                    <button mat-button (click)="appPage()" class="app">Baixar o aplicativo</button>
+            </div>
+
             <div class="info-card" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
                 <i class="fas fa-user-friends" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'"></i>
                 <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Clientes</p>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Na Services ON você pode adicionar seus clientes.</p>
-            </div>
-            <div class="info-card" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
-                <i class="far fa-address-book" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'"></i>
-                <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Agenda</p>
                 <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Na Services ON você pode adicionar seus clientes.</p>
             </div>
         </div>

@@ -195,6 +195,12 @@
     cursor: pointer;
 }
 
+.app{
+    background-color: #012a4a;
+    color: #fff;
+    border-radius: 1rem;
+}
+
 @media  screen and (max-width: 700px) {
     .content{
         display: flex;
