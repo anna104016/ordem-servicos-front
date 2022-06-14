@@ -36,6 +36,9 @@
     width: 50%;
     background-color: #2A44AB;
 }
+.cancel{
+    margin: 1rem 0;
+}
 
 a{
     text-decoration: none;

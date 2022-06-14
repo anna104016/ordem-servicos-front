@@ -9,6 +9,7 @@
                 <li (click)="scrollToElement(inicio)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'" >Inicio</p></li>
                 <li (click)="scrollToElement(func)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Funcionalidades</p></li>
                 <li (click)="scrollToElement(contatos)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Contatos</p></li>
+                <li (click)="appPage()"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Aplicativo</p></li>
                 <div id="theme-btn" class="box-nav" (click)="darkTheme=!darkTheme">
                     <i [class]="darkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
                 </div>
@@ -36,6 +37,7 @@
                     <li (click)="scrollToElement(inicio)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Inicio</p></li>
                     <li (click)="scrollToElement(func)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Funcionalidades</p></li>
                     <li (click)="scrollToElement(contatos)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Contatos</p></li>
+                    <li (click)="appPage()"><p [style.color]="darkTheme ? '#ffff' : '#ffff'" >Baixar aplicativo</p></li>
                     <li (click)="loginGo()"><p [style.color]="darkTheme ? '#ffff' : '#ffff'" >Login</p></li>
                 </ul>
             </div>
