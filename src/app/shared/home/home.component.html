@@ -9,7 +9,7 @@
                 <li (click)="scrollToElement(inicio)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'" >Inicio</p></li>
                 <li (click)="scrollToElement(func)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Funcionalidades</p></li>
                 <li (click)="scrollToElement(contatos)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Contatos</p></li>
-                <li (click)="appPage()"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Aplicativo</p></li>
+                <li (click)="scrollToElement(app)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Aplicativo</p></li>
                 <div id="theme-btn" class="box-nav" (click)="darkTheme=!darkTheme">
                     <i [class]="darkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
                 </div>
@@ -37,7 +37,7 @@
                     <li (click)="scrollToElement(inicio)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Inicio</p></li>
                     <li (click)="scrollToElement(func)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Funcionalidades</p></li>
                     <li (click)="scrollToElement(contatos)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Contatos</p></li>
-                    <li (click)="appPage()"><p [style.color]="darkTheme ? '#ffff' : '#ffff'" >Baixar aplicativo</p></li>
+                    <li (click)="scrollToElement(app)"><p [style.color]="darkTheme ? '#ffff' : '#ffff'" >Baixar aplicativo</p></li>
                     <li (click)="loginGo()"><p [style.color]="darkTheme ? '#ffff' : '#ffff'" >Login</p></li>
                 </ul>
             </div>
@@ -74,7 +74,6 @@
                 <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Aplicativo</p>
                 <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Na Services ON você pode fazer o downloado dp aplivativo e ter tudo na
                     palma de suas mãos.</p>
-                    <button mat-button (click)="appPage()" class="app">Baixar o aplicativo</button>
             </div>
 
             <div class="info-card" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
@@ -91,6 +90,31 @@
         <div class="texts-paralax">
             <h2>Tudo isso de uma forma muito <br><mark>visual e fácil</mark> de preencher!</h2>
         </div>
+    </div>
+
+    <div class="app" #app [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
+
+        <div class="app-content">
+
+                <div class="textos">
+                    <h3 [style.color]="darkTheme ?  '#ffff' : '#2d2c2e'">Baixar ServiceOn para Android grátis</h3>
+                    <p [style.color]="darkTheme ?  '#ffff' : '#2d2c2e'">Tenha todos os serviços na palma de suas mãos</p>
+                    <!-- <a href="https://www.mediafire.com/file/pwyin8jl0qzbvfl/base.apk/file" download="ServicseOn" class="mat-button">
+                        <button mat-button>Baixar aplicativo</button>
+                    </a> -->
+
+                    <a href="../../../assets/base.apk" download="ServicesOn" class="mat-button" class="app-button" [style.background-color]="darkTheme ?  '#ccc' : '#012a4a'">
+                        <button mat-button [style.color]="darkTheme ?  '#000' : '#fff'">Baixar aplicativo</button>
+                    </a>
+
+                </div>
+        
+                <div class="app-img">
+                    <img src="../../../assets/app.svg" alt="">
+                </div>
+
+    </div>
+
     </div>
 
     <footer [style.background-color]="darkTheme ?  '#1A1C1F' : '#ffff'" #contatos>

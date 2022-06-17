@@ -195,11 +195,6 @@
     cursor: pointer;
 }
 
-.app{
-    background-color: #012a4a;
-    color: #fff;
-    border-radius: 1rem;
-}
 
 @media  screen and (max-width: 700px) {
     .content{
@@ -247,6 +242,21 @@
         text-align: center;
     }   
 
+    .app-content{
+        width: 90%;
+        flex-direction: column !important;
+        align-items: center;
+        padding: 0;
+    }
+
+    .app-content .textos, .app-content .app-img{
+        width: 90% !important;
+        align-items: center !important;
+        text-align: center;
+        justify-content: center !important;
+    }
+
+    
     footer .main-footer{
         flex-direction: column !important;
     }
@@ -265,6 +275,60 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.app{
+    width: 100%;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    justify-content: center;
+    border-radius: 0;
+}
+
+.app-content{
+    width: 90%;
+    display: flex;
+    padding: 1rem;
+}
+
+.app-content .textos{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+}
+
+.app-content .textos h3{
+    font-size: 1.3rem;
+    margin: 0%;
+}
+
+.app-content .textos p{
+    font-size: 1.0rem;
+    margin-top: 0.4rem;
+}
+
+.app-content .app-img{
+    width: 50%;
+}
+
+.app-content .app-img img{
+    width: 80%;
+}
+
+.app-button{
+    background-color: #012a4a;
+    text-decoration: none !important;
+    color: white;
+    width: 15rem;
+    border-radius: 1rem;
+    text-align: center;
+    margin-top: 1rem;
 }
 
 .overlay{
@@ -417,6 +481,7 @@ a{
      align-items: center;
      justify-content: center;
      min-height: 10rem;height: fit-content;
+     box-shadow:  0 .0rem 1.5rem rgba(0, 0, 0, .1);
  }
 
  footer .main-footer{
