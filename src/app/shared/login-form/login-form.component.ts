@@ -159,6 +159,9 @@ export class LoginFormComponent implements OnInit {
       user_name: new FormControl('', [
         Validators.required, Validators.minLength(5), Validators.maxLength(255)
       ]),
+      occupation_area: new FormControl('', [
+        Validators.required, Validators.minLength(5), Validators.maxLength(255)
+      ]),
       photo: new FormControl('')
     })
   }

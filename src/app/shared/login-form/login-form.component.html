@@ -1,56 +1,67 @@
 <div class="container">
 
-  <form class="form" [formGroup]="form">
-
-    <div class="texts">
-      <p>{{createAccountField ? 'Criar conta' : 'Login'}}</p>
-      <h1>{{createAccountField ? 'Aproveite desse recurso gratuito' : 'Faça o login para acessar o sistema.'}}</h1>
-    </div>
-
-    <p>{{emailOrPassWrong}}</p>
-
-
-    <div class="photo" *ngIf="createAccountField">
-        <div class="pick-photo"*ngIf="form.get('photo').value"  [style.background-image]="'url(' + form.get('photo').value + ')'"></div>
-        <div class="pick-photo" *ngIf="!form.get('photo').value" [style.background-image]="'url(/assets/user-default.png)'"></div>
-          <button mat-fab color="warn" (click)="selectPhoto()">
-            <mat-icon>add</mat-icon>
-          </button>
+  <div class="content">
+    <form class="form" [formGroup]="form">
+  
+      <div class="texts">
+        <p>{{createAccountField ? 'Criar conta' : 'Login'}}</p>
+        <h1>{{createAccountField ? 'Aproveite desse recurso gratuito' : 'Faça o login para acessar o sistema.'}}</h1>
+      </div>
+  
+      <p>{{emailOrPassWrong}}</p>
+  
+  
+      <div class="photo" *ngIf="createAccountField">
+          <div class="pick-photo"*ngIf="form.get('photo').value"  [style.background-image]="'url(' + form.get('photo').value + ')'"></div>
+          <div class="pick-photo" *ngIf="!form.get('photo').value" [style.background-image]="'url(/assets/user-default.png)'"></div>
+            <button mat-fab color="warn" (click)="selectPhoto()">
+              <mat-icon>add</mat-icon>
+            </button>
+       </div>
+  
+      <mat-form-field appearance="fill" class="form-field" *ngIf="createAccountField">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="user_name" autocomplete="off" placeholder="Seu nome">
+        <mat-error *ngIf="form.get('user_name').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+        <mat-error *ngIf="form.get('user_name').hasError('minlength')" class="field-error">Informe um nome valido</mat-error>
+        <mat-error *ngIf="form.get('user_name').hasError('maxlength')" class="field-error">Informe um nome valido</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-field" *ngIf="createAccountField">
+        <mat-label>Area de atuação</mat-label>
+        <input matInput formControlName="occupation_area" autocomplete="off" placeholder="Ex.: Tecnico em informática">
+        <mat-error *ngIf="form.get('occupation_area').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+        <mat-error *ngIf="form.get('occupation_area').hasError('minlength')" class="field-error">Informe um nome valido</mat-error>
+        <mat-error *ngIf="form.get('occupation_area').hasError('maxlength')" class="field-error">Informe um nome valido</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" autocomplete="off" placeholder="Seu email">
+        <mat-error *ngIf="form.get('email').hasError('email')" class="field-error">Informe um email valido</mat-error>
+        <mat-error *ngIf="form.get('email').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" autocomplete="off" placeholder="********">
+        <mat-error *ngIf="form.get('password').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+        <mat-error *ngIf="form.get('password').hasError('minlength')" class="field-error">Senha deve ter entre 5 e 255 caracteres</mat-error>
+      </mat-form-field>
+  
+      <button mat-button (click)="login()" class="btn-login" *ngIf="!createAccountField && !loading">Login</button>
+      <button mat-button (click)="saveUser()" class="btn-login" *ngIf="createAccountField && !loading">Criar conta</button>
+      <div class="spinner" *ngIf="loading">
+        <mat-spinner mode="indeterminate" [diameter]="30"></mat-spinner> 
      </div>
+  
+      <div class="new-account" *ngIf="!createAccountField">
+        <h1 (click)="createAccount()">Novo usuário? <strong>Criar conta</strong></h1>
+      </div>
+      <div class="new-account" *ngIf="createAccountField">
+        <h1 routerLink="/login">Fazer login</h1>
+      </div>
+    </form>
+  </div>
 
-    <mat-form-field appearance="fill" class="form-field" *ngIf="createAccountField">
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="user_name" autocomplete="off" placeholder="Seu nome">
-      <mat-error *ngIf="form.get('user_name').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-      <mat-error *ngIf="form.get('user_name').hasError('minlength')" class="field-error">Informe um nome valido</mat-error>
-      <mat-error *ngIf="form.get('user_name').hasError('maxlength')" class="field-error">Informe um nome valido</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" autocomplete="off" placeholder="Seu email">
-      <mat-error *ngIf="form.get('email').hasError('email')" class="field-error">Informe um email valido</mat-error>
-      <mat-error *ngIf="form.get('email').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="form-field">
-      <mat-label>Senha</mat-label>
-      <input matInput formControlName="password" autocomplete="off" placeholder="********">
-      <mat-error *ngIf="form.get('password').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-      <mat-error *ngIf="form.get('password').hasError('minlength')" class="field-error">Senha deve ter entre 5 e 255 caracteres</mat-error>
-    </mat-form-field>
-
-    <button mat-button (click)="login()" class="btn-login" *ngIf="!createAccountField && !loading">Login</button>
-    <button mat-button (click)="saveUser()" class="btn-login" *ngIf="createAccountField && !loading">Criar conta</button>
-    <div class="spinner" *ngIf="loading">
-      <mat-spinner mode="indeterminate" [diameter]="30"></mat-spinner> 
-   </div>
-
-    <div class="new-account" *ngIf="!createAccountField">
-      <h1 (click)="createAccount()">Novo usuário? <strong>Criar conta</strong></h1>
-    </div>
-    <div class="new-account" *ngIf="createAccountField">
-      <h1 routerLink="/login">Fazer login</h1>
-    </div>
-  </form>
 </div>

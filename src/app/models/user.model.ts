@@ -5,6 +5,7 @@ export class UserModel {
     password: string
     creation_date: Date
     photo: string
+    occupation_area: string
 }
 export class ResUserResolve {
      user: UserModel

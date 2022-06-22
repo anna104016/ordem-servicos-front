@@ -101,7 +101,9 @@
 .my-account, .photo{
     top: -3rem;
     width: 70% !important;
-    height: 15rem;
+    min-height: 15rem;
+    height: fit-content;
+    padding: 0.9rem;
     display: flex;
     flex-direction: column;
     align-items: center;
