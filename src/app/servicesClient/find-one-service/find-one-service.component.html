@@ -1,0 +1,58 @@
+<div id="data">
+
+    <div class="loading" *ngIf="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="header" mat-dialog-title *ngIf="!loading">
+        <h2 class="headline m-0" style="display: flex; flex: auto">{{serviceModel?.description}}</h2>
+
+<!--            <button mat-icon-button type="button">-->
+<!--                <i class="fas fa-info-circle" style="font-size: 1rem"></i>-->
+<!--            </button>-->
+
+            <button mat-dialog-close mat-icon-button type="button">
+                <i class="fas fa-times" style="font-size: 1rem"></i>
+            </button>
+    </div>
+
+    <mat-dialog-content *ngIf="!loading">
+
+        <div class="status">
+            <p>{{serviceModel?.status?.name}}</p>
+        </div>
+
+        <div class="box">
+            <span>Cliente</span>
+            <p>{{serviceModel?.client?.name}}</p>
+        </div>
+
+        <div class="box">
+            <span>Valor</span>
+            <p>{{serviceModel?.price | currency: 'R$' }}</p>
+        </div>
+
+        <div class="box">
+            <span>Data de abertura</span>
+            <p>{{serviceModel?.opening_date | date}}</p>
+        </div>
+
+        <div class="box">
+            <span>Data de fechamento</span>
+            <p>{{serviceModel?.closing_date ? (serviceModel?.closing_date | date) : 'Sem data de fechamento'}}</p>
+        </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end">
+        <button mat-raised-button class="delete" (click)="delete()">Deletar</button>
+        <button mat-raised-button class="update" (click)="update()">Editar</button>
+    </mat-dialog-actions>
+
+</div>
+
+
+
+
+
+

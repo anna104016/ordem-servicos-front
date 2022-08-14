@@ -1,24 +1,30 @@
 import { Client } from "./client.model";
-export class ResServicoResolve {
-    servico: ServiceModel
-}
-export class ServiceModel{
+
+export interface ServiceModel{
     service_id?: number;
     description: string;
     client: Client;
-    opening_date: Date;
-    closing_date: Date;
+    opening_date?: Date;
+    closing_date?: Date;
     price: number;
-    status: Status
+    status?: Status
 }
 
-export class Status{
+export interface Status{
     status_id?: number;
     name: string;
     code: number
 }
-export class ReportServices {
+export interface ReportServices {
     servicos_abertos:number
-    servicos: number 
+    servicos: number
     servicos_fechados:  number
 }
+
+export interface IRespGetServices{
+    services: ServiceModel[],
+    page?: number,
+    totalSize: number,
+    count?: number,
+}
+

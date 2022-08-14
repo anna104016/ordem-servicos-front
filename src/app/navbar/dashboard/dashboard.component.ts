@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client, ReportClients } from 'src/app/models/client.model';
-import { ClientsService } from 'src/app/client/clients.service';
+import { ClientsService } from 'src/app/services/clients.service';
 import { ReportServices, ServiceModel } from 'src/app/models/service.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { NgxSpinnerService } from 'ngx-spinner';

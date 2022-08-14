@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ServiceModel } from '../models/service.model';
 import { UserModel } from '../models/user.model';
 import { ServicesService } from '../services/services.service';
-import { UserService } from '../user/user.service';
+import { UserService } from '../services/user.service';
 
 
 @Injectable()

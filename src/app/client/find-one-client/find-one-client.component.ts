@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Client, ResClientResolve } from '../../models/client.model';
-import { ClientsService } from '../clients.service';
+import { Client} from '../../models/client.model';
+import { ClientsService } from '../../services/clients.service';
 import Swal from 'sweetalert2';
-import { Subscription } from 'rxjs';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { finalize } from 'rxjs/operators';
+import {finalize, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-find-one-client',
@@ -14,6 +12,8 @@ import { finalize } from 'rxjs/operators';
 })
 export class FineOneClientComponent implements OnInit {
 
+  loading: boolean = false
+
   clientModel: Client
   id: any
 
@@ -21,7 +21,6 @@ export class FineOneClientComponent implements OnInit {
     private clientService: ClientsService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private readonly spinner: NgxSpinnerService
   ) {
     this.id = this.activatedRoute?.snapshot?.params['id']
    }
@@ -31,12 +30,13 @@ export class FineOneClientComponent implements OnInit {
   }
 
   findOne(){
-    this.spinner.show()
+    this.loading = true
     this.clientService.findOne(this.id).pipe(
-      finalize(() =>  this.spinner.hide())
-    ).subscribe(resp => {
-      this.clientModel = resp
-    })
+      finalize(() =>  this.loading = false),
+        take(1)
+    ).subscribe({
+      next: (resp) =>{ this.clientModel = resp}
+  })
   }
 
   update(){
@@ -66,7 +66,7 @@ export class FineOneClientComponent implements OnInit {
          }
        )
       }
-    }) 
+    })
   }
 
   successModel(){
@@ -79,7 +79,7 @@ export class FineOneClientComponent implements OnInit {
       if(result.isConfirmed){
         this.router.navigate(['/main/clientes'])
       }
-    }) 
+    })
   }
 
   errorModel(){
@@ -92,7 +92,7 @@ export class FineOneClientComponent implements OnInit {
       if(result.isConfirmed){
         this.router.navigate(['/main/clientes'])
       }
-    }) 
+    })
   }
 
 }

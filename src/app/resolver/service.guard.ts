@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { ServiceModel } from '../models/service.model';
 import { ServicesService } from '../services/services.service';
 
-
 @Injectable()
 export class ServiceGuard implements Resolve<ServiceModel> {
 

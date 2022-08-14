@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { StatusService } from './status.service'
+import { StatusService } from '../services/status.service'
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
@@ -11,6 +11,6 @@ import { NgModule } from '@angular/core';
   ],
   providers: [
     StatusService
-  ] 
+  ]
 })
 export class StatusModule { }

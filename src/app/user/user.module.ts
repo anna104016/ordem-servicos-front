@@ -1,22 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
 import { TokenInterceptor } from '../auth/token.interceptor';
 import { UserGuard } from '../resolver/user.guard';
 import { SharedModule } from '../shared/shared.module';
 import { UserIdComponent } from './user-id/user-id.component';
 import { UserRoutingModule } from './user.routing.module';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 
 @NgModule({
   declarations: [
@@ -28,19 +21,11 @@ import { UserService } from './user.service';
   imports: [
     CommonModule,
     UserRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
-    FormsModule,
     MatIconModule,
-    MatTableModule,
     MatButtonModule,
-    MatInputModule,
-    MatSnackBarModule,
     MatCardModule,
-    MatSelectModule,
-    MatPaginatorModule,
     SharedModule,
-    MatDividerModule
   ],
   providers: [
     UserService,

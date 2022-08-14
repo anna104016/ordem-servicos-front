@@ -6,18 +6,18 @@ import { DashboardComponent } from './navbar/dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar-com/navbar.component';
 
 const routes: Routes = [
-  { path: '', 
+  { path: '',
   loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule),
   },
   { path: 'main', component: NavbarComponent, canActivate: [AuthGuard] ,children: [
     {path: 'dashboard', component: DashboardComponent},
-    { path: 'clientes', 
+    { path: 'clientes',
       loadChildren: () => import('./client/client.module').then(m => m.ClientModule),
     },
-    { path: 'servicos', 
-    loadChildren: () => import('./services/services.module').then(m => m.ServicesModule),
+    { path: 'servicos',
+    loadChildren: () => import('./servicesClient/services.module').then(m => m.ServicesModule),
     },
-    { path: 'user', 
+    { path: 'user',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
     },
   ]},

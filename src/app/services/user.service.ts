@@ -20,14 +20,13 @@ export class UserService {
   ) { }
 
   create(user: UserModel): Observable<UserModel> {
-    const url = `${this.baseUrl}/user`
-    return this.http.post<UserModel>(url, user)
+    return this.http.post<UserModel>(`${this.baseUrl}/user`, user)
   }
 
-  generateToken(email:string, password:string){
+  generateToken(user:{email:string, password:string}){
     const params = new HttpParams()
-    .set('email', email)
-    .set('password', password)
+    .set('email', user.email)
+    .set('password', user.password)
     const url = `${this.baseUrl}/auth/login`
     return this.http.post<any>(url, params)
   }
@@ -56,12 +55,10 @@ export class UserService {
   }
 
   finduser(): Observable<UserModel>{
-    const url = `${this.baseUrl}/user/infos`;
-    return this.http.get<UserModel>(url);
+    return this.http.get<UserModel>(`${this.baseUrl}/user/infos`);
   }
 
   updatePhoto(userId: number, body: { photo: string}): Observable<object> {
-    const url = `${this.baseUrl}/user/update-photo/${userId}`;
-    return this.http.put(url, body);
+    return this.http.put(`${this.baseUrl}/user/update-photo/${userId}`, body);
   }
 }

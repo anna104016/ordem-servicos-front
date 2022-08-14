@@ -10,7 +10,7 @@ import { Photo } from 'src/app/models/user.model';
 })
 export class SelectUserPhotoComponent implements OnInit {
 
-  photoSelected: Photo = new Photo()
+  photoSelected: Photo = {img: '', value: ''}
 
   @ViewChild('photo') photo: HTMLElement
 
@@ -45,5 +45,4 @@ export class SelectUserPhotoComponent implements OnInit {
   select(photo: Photo){
     this.photoSelected.img = photo.img
   }
-
 }

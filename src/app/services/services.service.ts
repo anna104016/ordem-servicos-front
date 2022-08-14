@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ReportServices, ServiceModel } from '../models/service.model';
+import {IRespGetServices, ReportServices, ServiceModel} from '../models/service.model';
+import {IQuery} from "../models/query.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,44 +12,32 @@ export class ServicesService {
 
   baseUrl: String = environment.baseUrl;
 
-  constructor(private http: HttpClient, private snack: MatSnackBar) { }
+  constructor(private http: HttpClient) { }
 
-  findAll(): Observable<ServiceModel[]>{
-    const url = `${this.baseUrl}/servicos`;
-    return this.http.get<ServiceModel[]>(url);
+  findAll(query: IQuery): Observable<IRespGetServices>{
+    let params = new HttpParams()
+    if (query?.page) params = params.set('page', String(query.page))
+    if (query?.take) params = params.set('take', String(query.take))
+    return this.http.get<IRespGetServices>(`${this.baseUrl}/servicos`, {params});
   }
 
   reportService(): Observable<ReportServices> {
-    const url = `${this.baseUrl}/servicos/todos/report`;
-    return this.http.get<ReportServices>(url);
+    return this.http.get<ReportServices>(`${this.baseUrl}/servicos/todos/report`);
   }
 
   findOne(id: number): Observable<ServiceModel>{
-    const url = `${this.baseUrl}/servicos/${id}`;
-    return this.http.get<ServiceModel>(url);
+    return this.http.get<ServiceModel>(`${this.baseUrl}/servicos/${id}`);
   }
 
-  create(novoservico: ServiceModel): Observable<ServiceModel>{
-    const url = `${this.baseUrl}/servicos`;
-    return this.http.post<ServiceModel>(url, novoservico);
+  create(service: ServiceModel): Observable<ServiceModel>{
+    return this.http.post<ServiceModel>(`${this.baseUrl}/servicos`, service);
   }
 
-  update(service: ServiceModel): Observable<ServiceModel>{
-    const url = `${this.baseUrl}/servicos/${service.service_id}`;
-    return this.http.put<ServiceModel>(url, service);
+  update(id:number, service: ServiceModel): Observable<ServiceModel>{
+    return this.http.put<ServiceModel>(`${this.baseUrl}/servicos/${id}`, service);
   }
 
   delete(id: number): Observable<void>{
-    const url = `${this.baseUrl}/servicos/${id}`;
-    return this.http.delete<void>(url);
-  }
-
-  message(string: String): void{
-    this.snack.open(`${string}`, 'OK', 
-    {
-      horizontalPosition: 'end',
-      verticalPosition: 'bottom',
-      duration: 3000
-    });
+    return this.http.delete<void>(`${this.baseUrl}/servicos/${id}`);
   }
 }

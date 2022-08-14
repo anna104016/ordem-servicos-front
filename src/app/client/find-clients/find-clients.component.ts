@@ -1,35 +1,41 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { finalize } from 'rxjs/operators';
+import { take} from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Client } from '../../models/client.model';
-import { ClientsService } from '../clients.service';
+import { ClientsService } from '../../services/clients.service';
+import {IQuery} from "../../models/query.model";
 
 @Component({
   selector: "app-find-clients",
   templateUrl: "./find-clients.component.html",
   styleUrls: ["./find-clients.component.css"],
 })
-export class FindClientsComponent implements AfterViewInit {
-  clientes: Client[] = []
+export class FindClientsComponent implements OnInit {
+  clients: Client[] = []
+
+  paginationDefault = {
+    size: 12,
+    totalElements: 0,
+    page: 0
+  }
+
+  pageSizeOptions: number[] = [12, 24, 36, 48]
 
   displayedColumns: string[] = ["client_id", "name", "cell_phone", "actions"];
-  dataSource = new MatTableDataSource<Client>(this.clientes);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  loading: boolean = true;
 
   constructor(
     private readonly service: ClientsService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
-    private readonly spinner: NgxSpinnerService
   ) {}
 
-  ngAfterViewInit() {
-    this.find();
+  ngOnInit(): void {
+    this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
   }
 
   novoCliente() {
@@ -55,14 +61,10 @@ export class FindClientsComponent implements AfterViewInit {
       cancelButtonText: "Não",
     }).then((result) => {
       if (result.isConfirmed) {
-        this.service.delete(id).subscribe(
-          (resp) => {
-            this.successModel('Cliente deletado com sucesso!')
-          },
-          () => {
-            this.errorModel('Cliente não pode ser deletado!')
-          }
-        );
+       this.service.delete(id).subscribe({
+       next: () => { this.successModel('Cliente deletado com sucesso!')},
+       error: () => {this.errorModel('Cliente não pode ser deletado!')}
+      });
       }
     });
   }
@@ -76,9 +78,9 @@ export class FindClientsComponent implements AfterViewInit {
     }).then((result) => {
       if(result.isConfirmed){
         Swal.close()
-        this.find()
+        this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
       }
-    }) 
+    })
   }
 
   errorModel(text:string){
@@ -90,19 +92,34 @@ export class FindClientsComponent implements AfterViewInit {
     }).then((result) => {
       if(result.isConfirmed){
         Swal.close()
-        this.find()
+        this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
       }
-    }) 
-  }
-
-  find() {
-    this.spinner.show()
-    this.service.find().pipe(
-      finalize(() => this.spinner.hide())
-    ).subscribe(response => {
-      this.clientes = response
-      this.dataSource = new MatTableDataSource<Client>(this.clientes);
-      this.dataSource.paginator = this.paginator;
     })
   }
+
+  getNext (event: PageEvent): void {
+    this.paginationDefault.size = event.pageSize
+    this.paginationDefault.page = event.pageIndex
+    console.log(event.pageIndex + 1, event.pageSize)
+
+    this.find(event.pageIndex + 1, event.pageSize)
+  }
+
+  find(page: number, perPage: number) {
+    const query: IQuery = {
+      page: page,
+      take: perPage
+    }
+
+    this.service.find(query).pipe(
+      take(1)
+    ).subscribe({
+      next: (resp) => {
+      this.clients = resp.users
+      this.paginationDefault.totalElements = resp.totalSize
+        this.loading = false
+    }})
+  }
+
+
 }

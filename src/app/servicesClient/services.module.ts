@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { CreateServiceComponent } from './create-service/create-service.component';
 import { FindOneServiceComponent } from './find-one-service/find-one-service.component';
 import { FindServicesComponent } from './find-all-services/find-services.component';
-import { ServicesService } from './services.service';
+import { ServicesService } from '../services/services.service';
 import { ServiceRoutingModule } from './services.routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -21,8 +21,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { TokenInterceptor } from '../auth/token.interceptor';
-import { ServicesGuard } from '../resolver/services.guard';
 import { ServiceGuard } from '../resolver/service.guard';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 registerLocaleData(localePt);
 
 @NgModule({
@@ -52,12 +53,13 @@ registerLocaleData(localePt);
     MatSelectModule,
     MatPaginatorModule,
     SharedModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+   MatDialogModule,
+      MatProgressSpinnerModule
   ],
   providers: [
     MatDatepickerModule,
     ServicesService,
-    ServicesGuard,
     ServiceGuard,
     {
       provide: LOCALE_ID,

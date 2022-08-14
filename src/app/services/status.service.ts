@@ -16,7 +16,6 @@ export class StatusService {
   ) { }
 
   findAll(): Observable<Status[]> {
-    const url = `${this.baseURL}/status`
-    return this.http.get<Status[]>(url)
+    return this.http.get<Status[]>(`${this.baseURL}/status`)
   }
 }

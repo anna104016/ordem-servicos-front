@@ -1,4 +1,4 @@
-export class UserModel {
+export interface UserModel {
     user_id: number
     user_name:string
     email:string
@@ -7,11 +7,11 @@ export class UserModel {
     photo: string
     occupation_area: string
 }
-export class ResUserResolve {
+export interface ResUserResolve {
      user: UserModel
 }
 
-export class Photo {
+export interface Photo {
     img: string
     value: string
 }

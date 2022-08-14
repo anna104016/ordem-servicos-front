@@ -2,11 +2,10 @@
 
     <p class="title">Selecione a foto do seu perfil</p>
 
-    <!-- <mat-divider></mat-divider> -->
 
     <div class="photos">
         <div *ngFor="let photo of photos">
-            <div class="photo" (click)="select(photo)" #photo>
+            <div class="photo" (click)="select(photo)" #photo [ngClass]="{'photoSelected': photo.img === photoSelected.img}">
                 <img src="{{photo.img}}" alt="">
             </div>
         </div>

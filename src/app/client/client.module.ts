@@ -4,7 +4,7 @@ import { FindClientsComponent } from './find-clients/find-clients.component';
 import { CreateClientComponent } from './create-client/create-client.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ClientsService } from './clients.service';
+import { ClientsService } from '../services/clients.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +20,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { TokenInterceptor } from '../auth/token.interceptor';
 import { ClientesGuard } from '../resolver/clientes.guard';
 import { OneClienteGuard } from '../resolver/client.guard';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -32,23 +33,24 @@ import { OneClienteGuard } from '../resolver/client.guard';
     CreateClientComponent,
     FineOneClientComponent
   ],
-  imports: [
-    ClientRoutingModule,
-    CommonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    MatIconModule,
-    MatTableModule,
-    MatButtonModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatCardModule,
-    MatSelectModule,
-    MatPaginatorModule,
-    SharedModule,
-    MatDatepickerModule
-  ],
+    imports: [
+        ClientRoutingModule,
+        CommonModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        MatIconModule,
+        MatTableModule,
+        MatButtonModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatCardModule,
+        MatSelectModule,
+        MatPaginatorModule,
+        SharedModule,
+        MatDatepickerModule,
+        MatProgressSpinnerModule
+    ],
   providers: [
     ClientsService,
     ClientesGuard,
