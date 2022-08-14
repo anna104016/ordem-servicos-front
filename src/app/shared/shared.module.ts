@@ -15,8 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SelectUserPhotoComponent } from './select-user-photo/select-user-photo.component';
-import { MatDivider, MatDividerModule } from '@angular/material/divider';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
@@ -42,7 +41,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatMenuModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatSnackBarModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule

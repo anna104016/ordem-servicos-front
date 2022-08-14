@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Photo } from 'src/app/models/user.model';
 

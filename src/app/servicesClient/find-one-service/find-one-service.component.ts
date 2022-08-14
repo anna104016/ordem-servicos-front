@@ -15,8 +15,8 @@ import {DialogTypeEnum} from "../../models/dialogType.enum";
 })
 export class FindOneServiceComponent implements OnInit {
   loading: boolean = false
-
   serviceModel: ServiceModel;
+
   constructor(
       private readonly servicesService: ServicesService,
       private readonly activatedRoute: ActivatedRoute,
@@ -49,6 +49,7 @@ export class FindOneServiceComponent implements OnInit {
     this.dialogRef.close()
     this.dialog.open(CreateServiceComponent, {
       width: '40rem',
+      minHeight: '70vh',
       data: {
         service_id: this.data.service,
         type: DialogTypeEnum.UPDATE

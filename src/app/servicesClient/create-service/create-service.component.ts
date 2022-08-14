@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Client} from 'src/app/models/client.model';
 import {ClientsService} from 'src/app/services/clients.service';
 import Swal from 'sweetalert2';
-import {ServiceModel} from '../../models/service.model';
+import {ServiceModel, Status} from '../../models/service.model';
 import {ServicesService} from '../../services/services.service';
 import {take} from 'rxjs/operators';
 import {StatusService} from 'src/app/services/status.service';
@@ -18,16 +18,19 @@ import {DialogTypeEnum} from "../../models/dialogType.enum";
 })
 export class CreateServiceComponent implements OnInit {
 
+    clientControl = new FormControl('', Validators.required)
+    statusControl = new FormControl('', Validators.required)
+
     loading: boolean = false
 
     clients: Client[] = [];
-    status: any
+    status: Status[] = []
     form: FormGroup
 
     constructor(
         private readonly router: Router,
         private readonly clientService: ClientsService,
-        private readonly formBiulder: FormBuilder,
+        private readonly formBuilder: FormBuilder,
         private readonly statusService: StatusService,
         private readonly activatedRouter: ActivatedRoute,
         private readonly dialogRef: MatDialogRef<CreateServiceComponent>,
@@ -37,7 +40,7 @@ export class CreateServiceComponent implements OnInit {
 
     ngOnInit(): void {
         this.getStatus()
-        this.getClients();
+        if (this.data.type === DialogTypeEnum.CREATE) this.getClients();
         this.createForm()
         if (this.data.type === DialogTypeEnum.UPDATE) this.getService()
     }
@@ -56,13 +59,20 @@ export class CreateServiceComponent implements OnInit {
         this.loading = true
         this.service.findOne(this.data.service_id).pipe(take(1)).subscribe({
         next: (res: ServiceModel) => {
-            this.form.patchValue({
-                description: res.description,
-                client: res.client,
-                opening_date: res.opening_date,
-                closing_date: res.closing_date,
-                price: res.price,
-                status: res.status
+            this.statusControl.setValue(res.status.status_id)
+            this.clientControl.setValue(res.client.client_id)
+            this.form = this.formBuilder.group({
+                description: new FormControl(res.description, [
+                    Validators.required,
+                    Validators.minLength(10)
+                ]),
+                price: new FormControl(res.price, [
+                    Validators.required,
+                ]),
+                client: this.clientControl,
+                status: this.statusControl,
+                closing_date: new FormControl(res.closing_date),
+                opening_date: new FormControl(res.opening_date),
             })
             this.loading = false
         }})
@@ -79,14 +89,17 @@ export class CreateServiceComponent implements OnInit {
     }
 
     update(data: any): void {
-        this.service.update(this.data.service_id, data).pipe(take(1)).subscribe(res => {
+        this.service.update(this.data.service_id, data).pipe(take(1)).subscribe({
+          next: () => {
             this.successModel('Serviço atualizado com sucesso!')
-        }, error => {
+        }, error: () => {
             this.errorModel('Não foi possível atualizar este serviço')
-        })
+        }})
     }
 
     submitForm(){
+        if(this.form.invalid) return
+
         const data = this.form.getRawValue()
         if(this.data.type === DialogTypeEnum.UPDATE){
             this.update(data)
@@ -136,7 +149,7 @@ export class CreateServiceComponent implements OnInit {
     }
 
     createForm(): void {
-        this.form = this.formBiulder.group({
+        this.form = this.formBuilder.group({
             description: new FormControl('', [
                 Validators.required,
                 Validators.minLength(10)
@@ -144,10 +157,8 @@ export class CreateServiceComponent implements OnInit {
             price: new FormControl('', [
                 Validators.required,
             ]),
-            client: new FormControl('', [
-                Validators.required
-            ]),
-            status: new FormControl(''),
+            client: this.clientControl,
+            status: this.statusControl,
             closing_date: new FormControl(''),
             opening_date: new FormControl(''),
         })
