@@ -1,61 +1,41 @@
-<div class="container">
-  <div class="content">
-    <form class="form mat-card" [formGroup]="form">
-      <p>{{clienteId ? 'Editar cliente' : 'Novo Cliente'}}</p>
-      
-      <mat-form-field class="form-field"  appearance="fill">
-        <mat-label>Nome do Cliente</mat-label>
-        <input 
-          matInput 
-          type="text"
-          autocomplete="off"
-          placeholder="Nome do cliente"
-          formControlName="name"
-          >
-          <mat-error *ngIf="form.get('name').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-          <mat-error *ngIf="form.get('name').hasError('pattern')" class="field-error">Informe um nome válido.</mat-error>
-          <mat-error *ngIf="form.get('name').hasError('minlength')" class="field-error">Nome deve ter mais e 5 caracteres</mat-error>
-        </mat-form-field>
+<div id="data">
 
-    
-      <mat-form-field class="form-field"  appearance="fill">
-        <mat-label>CPF</mat-label>
-        <input  matInput type="text" autocomplete="off" formControlName="cpf" maxlength="11" minlength="11">
-        <mat-error *ngIf="form.get('cpf').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-        <mat-error *ngIf="form.get('cpf').hasError('pattern')" class="field-error">Informe um cpf válido.</mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="form-field"  appearance="fill">
-        <mat-label>Telefone</mat-label>
-        <input matInput  autocomplete="off"  placeholder="(12) 93456-7890" formControlName="cell_phone" maxlength="20">
-          <mat-error *ngIf="form.get('cell_phone').hasError('required')" class="field-error">Campo obrigatório</mat-error>
-          <mat-error *ngIf="form.get('cell_phone').hasError('minlength')" class="field-error">Informe um telefone válido</mat-error>
-      </mat-form-field>
-
-      <div class="actions">
-        <button 
-          *ngIf="!clienteId"
-          mat-button 
-          [disabled]="!form.valid"
-          class="save" 
-          (click)="create()">Salvar
-        </button>
-
-        <button 
-        *ngIf="clienteId"
-        mat-button 
-        [disabled]="!form.valid"
-        class="save" 
-        (click)="update()">Atualizar
-      </button>
-
-
-        <button 
-          mat-button 
-          class="cancel" 
-          (click)="cancel()">Cancelar</button>
-      </div>
-
-  </form>
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
   </div>
+
+  <div class="header" mat-dialog-title *ngIf="!loading">
+    <p style="display: flex; flex: auto">{{ data.type === 'UPDATE' ? 'Atualizar cliente' : 'Novo cliente' }}</p>
+    <button mat-dialog-close="true" mat-icon-button type="button">
+      <i class="fas fa-times" style="font-size: 1rem"></i>
+    </button>
+  </div>
+
+
+  <form class="form" [formGroup]="form" *ngIf="!loading">
+
+
+    <mat-form-field class="form-field"  appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input type="text" matInput autocomplete="off" formControlName="name">
+      <mat-error *ngIf="form.get('name').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field"  appearance="fill">
+      <mat-label>CPF</mat-label>
+      <input type="text" matInput autocomplete="off" formControlName="cpf">
+      <mat-error *ngIf="form.get('cpf').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field"  appearance="fill">
+      <mat-label>Telefone</mat-label>
+      <input type="text" matInput autocomplete="off" formControlName="cell_phone">
+      <mat-error *ngIf="form.get('cell_phone').hasError('required')" class="field-error">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </form>
+
+  <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end">
+    <button mat-raised-button class="update" (click)="submitForm()">Salvar</button>
+    <button mat-raised-button class="delete" mat-dialog-close>Cancelar</button>
+  </mat-dialog-actions>
 </div>

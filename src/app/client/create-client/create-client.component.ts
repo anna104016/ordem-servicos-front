@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
-import { ErrorsType } from 'src/app/models/error.enum';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRoute, Router} from '@angular/router';
+import {take} from 'rxjs/operators';
+import {ErrorsType} from 'src/app/models/error.enum';
 import Swal from 'sweetalert2';
-import { Client } from '../../models/client.model';
-import { ClientsService } from '../../services/clients.service';
+import {Client} from '../../models/client.model';
+import {ClientsService} from '../../services/clients.service';
 import {Notify} from "notiflix";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {DialogTypeEnum} from "../../models/dialogType.enum";
 
 @Component({
   selector: 'app-create-client',
@@ -15,6 +17,8 @@ import {Notify} from "notiflix";
   styleUrls: ['./create-client.component.css']
 })
 export class CreateClientComponent implements OnInit {
+
+  loading: boolean = false
 
   form: FormGroup
   clienteId: string
@@ -24,32 +28,40 @@ export class CreateClientComponent implements OnInit {
     private readonly _snackBar: MatSnackBar,
     private readonly service: ClientsService,
     private readonly activatedRouter: ActivatedRoute,
-    private readonly formBiulder: FormBuilder) {
-      this.clienteId = this.activatedRouter?.snapshot?.params['id'];
-     }
+    private readonly dialogRef: MatDialogRef<CreateClientComponent>,
+    private readonly formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public readonly data: {
+      client: number
+      type: DialogTypeEnum}
+    ) {}
 
   ngOnInit(): void {
-    if(this.clienteId) this.getClient()
     this.createForm()
+    if(this.data.type === DialogTypeEnum.UPDATE) this.getClient()
   }
 
   getClient(): void {
-    const id = parseInt(this.clienteId)
-    this.service.findOne(id).pipe(take(1)).subscribe({next: (res: Client) => {
-      this.getForm(res)
+    this.loading = true
+    this.service.findOne(this.data.client).pipe(take(1)).subscribe({next: (res: Client) => {
+        this.form.patchValue({
+          name: res.name,
+          cpf: res.cpf,
+          cell_phone: res.cell_phone,
+        })
+        this.loading = false
     }})
   }
 
-  getForm(client: Client){
-    this.form.patchValue({
-      name: client.name,
-      cpf: client.cpf,
-      cell_phone: client.cell_phone,
-    })
-  }
+  submitForm(){
+    if(this.form.invalid) return
 
+    if(this.data.type === DialogTypeEnum.CREATE){
+      this.create()
+    }else{
+      this.update()
+    }
+  }
   create() {
-    const form = this.form.getRawValue()
     this.service.create(this.form.value)
       .subscribe({
         next: () => { this.successModel('Cliente adicionado com sucesso!')} ,
@@ -65,9 +77,8 @@ export class CreateClientComponent implements OnInit {
 
 
   update(){
-    const form = this.form.getRawValue()
-    form._id = parseInt(this.clienteId)
-    this.service.update(parseInt(this.clienteId), form)
+    const body = this.form.getRawValue()
+    this.service.update(this.data.client, body)
         .pipe(take(1))
         .subscribe({next: () => {
           this.successModel('Cliente atualizado com sucesso!')
@@ -88,7 +99,7 @@ export class CreateClientComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/main/clientes'])
+        this.dialogRef.close({data: true})
       }
     })
   }
@@ -101,17 +112,13 @@ export class CreateClientComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/main/clientes'])
+        this.dialogRef.close()
       }
     })
   }
 
-  cancel(){
-    this.router.navigate(['/main/clientes'])
-  }
-
   createForm(){
-    this.form = this.formBiulder.group({
+    this.form = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
         Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),

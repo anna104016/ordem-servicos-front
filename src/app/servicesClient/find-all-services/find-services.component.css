@@ -1,4 +1,5 @@
 .container{
+    margin: 20px 20px 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,13 +50,19 @@
     justify-content: flex-end;
 }
 
+
 .pesquisa-search input{
     width: 50%;
+
     border: 1px solid #c4c4c4;
     height: 40px;
+
     border-radius: 16px;
+
     text-align: start;
+
     padding: 2px 10px;
+
     margin-right: 9px;
 }
 
@@ -97,6 +104,19 @@
     width: 90%;
 }
 
+.lista-container-th{
+    width: 100px;
+    text-align: center;
+    font-weight: 500;
+    color: #585b59;
+    font-size: 16px;
+}
+
+.lista-container-td{
+    text-align: center;
+    color: #000;
+}
+
 .icone-info {
     cursor: pointer;
     color: #3399CC;
@@ -107,8 +127,19 @@
     color: #2284b4;
 }
 
+.concluido{
+    color: #606c38;
+    width: 100px;
+    text-align: center;
+    font-weight: 400;
+}
+
 .mat-paginator{
     width: 90%;
+}
+
+.lista-container-td i{
+    margin: 0 2px;
 }
 
 .table-td i{

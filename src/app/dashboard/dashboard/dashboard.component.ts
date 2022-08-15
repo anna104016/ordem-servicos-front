@@ -4,6 +4,7 @@ import { ServicesService } from 'src/app/services/services.service';
 import {forkJoin} from "rxjs";
 import {take} from "rxjs/operators";
 import {ApexChart, ApexNonAxisChartSeries, ApexResponsive, ChartComponent} from "ng-apexcharts";
+import {Notify} from "notiflix";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -12,7 +13,6 @@ export type ChartOptions = {
   labels: any;
 };
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,10 +20,10 @@ export type ChartOptions = {
 })
 export class DashboardComponent implements OnInit {
 
-  totalServices:number = 0
-  totalServicesOpen:number = 0
-  totalServicesClose:number = 0
-  totalClients:number = 0
+  totalServices: number = 0
+  totalServicesOpen: number = 0
+  totalServicesClose: number = 0
+  totalClients: number = 0
   clientsWithService: number = 0
   clientsWithoutService: number = 0
 
@@ -41,7 +41,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.configChart()
+    this.configChartClients()
     this.getReport()
+
   }
 
   configChart(){
@@ -154,8 +157,13 @@ export class DashboardComponent implements OnInit {
         this.totalServicesClose = resp[1].servicos_fechados
         this.totalServicesOpen = resp[1].servicos_abertos
 
+
+       this.configChartClients()
         this.configChart()
-        this.configChartClients()
+
+      },
+      error: () => {
+        Notify.failure("Falha ao retornar os dados")
       }
     })
   }

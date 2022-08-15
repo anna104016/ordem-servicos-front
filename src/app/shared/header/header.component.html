@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+    <span class="title">Services ON</span>
+    <p routerLink="/portal/dashboard">Dashboard</p>
+    <p routerLink="/portal/clientes">Clientes</p>
+    <p routerLink="/portal/servicos">Serviços</p>
+    <span class="example-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>person</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/portal/user">
+        <mat-icon>person</mat-icon>
+        <span>Meu Perfil</span>
+    </button>
+    <button mat-menu-item (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+        <span>Sair</span>
+    </button>
+</mat-menu>
+

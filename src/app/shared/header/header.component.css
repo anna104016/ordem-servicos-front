@@ -1,0 +1,12 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.title{
+    margin-right: 1rem;
+}
+ p{
+     font-size: 1rem;
+     margin: 0 0.9rem;
+     cursor: pointer;
+ }

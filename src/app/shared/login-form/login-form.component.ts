@@ -67,7 +67,7 @@ export class LoginFormComponent implements OnInit {
                 this.form.reset()
                 const access_token = response.access_token
                 localStorage.setItem('access_token', access_token)
-                this.router.navigate(['/main/dashboard'])
+                this.router.navigate(['/portal/dashboard'])
             },
             error: () => {
                 this.form.reset()

@@ -1,67 +1,39 @@
-<div class="container">
-    <div class="content">
-      <mat-card class="card-info">
-  
-        <div class="action-back">
-          <i class="material-icons"
-          (click)="back()"
-          >arrow_back</i>
-        </div>
+<div id="data">
 
-        <p>Informações do cliente</p>
-  
-        <mat-form-field class="field" appearance="fill">
-          <mat-label>Nome</mat-label>
-          <input
-            matInput
-            disabled
-            type="text"
-            #nome
-            [(ngModel)]="clientModel.name"
-            name="name"
-          />
-        </mat-form-field>
-  
-        <mat-form-field class="field" appearance="fill">
-          <mat-label>CPF</mat-label>
-          <input
-            matInput
-            disabled
-            type="text"
-            name="nome"
-            [(ngModel)]="clientModel.cpf"
-          />
-        </mat-form-field>
-
-        <mat-form-field class="field" appearance="fill">
-            <mat-label>Telefone</mat-label>
-            <input
-              matInput
-              disabled
-              type="text"
-              name="cell_phone"
-              [(ngModel)]="clientModel.cell_phone"
-            />
-          </mat-form-field>
-  
-        <mat-card-actions class="acoes">
-          <button
-            mat-button
-            (click)="update()"
-            class="save"
-          >
-            Editar
-          </button>
-  
-          <button
-            mat-button
-            class="delete"
-            (click)="delete()"
-          >
-            Excluir
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
   </div>
-  
+
+  <div class="header" mat-dialog-title *ngIf="!loading">
+    <h2 style="display: flex; flex: auto">{{clientModel?.name}}</h2>
+
+    <button mat-dialog-close="true" mat-icon-button type="button">
+      <i class="fas fa-times" style="font-size: 1rem"></i>
+    </button>
+  </div>
+
+  <mat-dialog-content *ngIf="!loading" style="height: calc(100% - 96px);">
+    <div class="box">
+      <span>CPF</span>
+      <p>{{clientModel?.cpf}}</p>
+    </div>
+
+    <div class="box">
+      <span>CPF</span>
+      <p>{{clientModel?.cell_phone}}</p>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end; box-sizing: border-box">
+    <button mat-raised-button class="delete" (click)="delete()">Deletar</button>
+    <button mat-raised-button class="update" (click)="update()">Editar</button>
+  </mat-dialog-actions>
+
+</div>
+
+
+
+
+
+

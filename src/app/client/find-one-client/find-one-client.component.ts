@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client} from '../../models/client.model';
 import { ClientsService } from '../../services/clients.service';
 import Swal from 'sweetalert2';
 import {finalize, take} from 'rxjs/operators';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {CreateServiceComponent} from "../../servicesClient/create-service/create-service.component";
+import {DialogTypeEnum} from "../../models/dialogType.enum";
+import {CreateClientComponent} from "../create-client/create-client.component";
 
 @Component({
   selector: 'app-find-one-client',
@@ -18,12 +22,14 @@ export class FineOneClientComponent implements OnInit {
   id: any
 
   constructor(
-    private clientService: ClientsService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {
-    this.id = this.activatedRoute?.snapshot?.params['id']
-   }
+    private readonly clientService: ClientsService,
+    private readonly router: Router,
+    private readonly dialogRef: MatDialogRef<FineOneClientComponent>,
+    private readonly dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: {
+      id: number
+  }
+  ) { }
 
   ngOnInit(): void {
     this.findOne()
@@ -31,7 +37,7 @@ export class FineOneClientComponent implements OnInit {
 
   findOne(){
     this.loading = true
-    this.clientService.findOne(this.id).pipe(
+    this.clientService.findOne(this.data.id).pipe(
       finalize(() =>  this.loading = false),
         take(1)
     ).subscribe({
@@ -40,11 +46,15 @@ export class FineOneClientComponent implements OnInit {
   }
 
   update(){
-    this.router.navigate([`/main/clientes/update/${this.clientModel.client_id}`])
-  }
-
-  back(){
-    this.router.navigate([`/main/clientes`])
+    this.dialogRef.close()
+    this.dialog.open(CreateClientComponent, {
+      width: '40rem',
+      minHeight: '10rem',
+      data: {
+        client: this.data.id,
+        type: DialogTypeEnum.UPDATE
+      }
+    })
   }
 
   delete(){
@@ -58,13 +68,10 @@ export class FineOneClientComponent implements OnInit {
       confirmButtonText: 'Sim'
     }).then((result) => {
       if(result.isConfirmed){
-       this.clientService.delete(this.clientModel.client_id).subscribe(
-         result => {
-           this.successModel()
-         }, error => {
-           this.errorModel()
-         }
-       )
+       this.clientService.delete(this.clientModel.client_id).subscribe({
+         next : () => { this.successModel() },
+         error: () => { this.errorModel()}
+      })
       }
     })
   }

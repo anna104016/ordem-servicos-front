@@ -21,14 +21,11 @@ import { TokenInterceptor } from '../auth/token.interceptor';
 import { ClientesGuard } from '../resolver/clientes.guard';
 import { OneClienteGuard } from '../resolver/client.guard';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
-    FindClientsComponent,
-    CreateClientComponent,
-    FineOneClientComponent
-  ],
-  exports: [
     FindClientsComponent,
     CreateClientComponent,
     FineOneClientComponent
@@ -49,7 +46,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         MatPaginatorModule,
         SharedModule,
         MatDatepickerModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatTooltipModule
     ],
   providers: [
     ClientsService,

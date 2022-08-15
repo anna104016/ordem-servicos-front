@@ -17,6 +17,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SelectUserPhotoComponent } from './select-user-photo/select-user-photo.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {HeaderComponent} from "./header/header.component";
+import {PageHeaderComponent} from "./page-header/page-header.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FooterComponent,
     LoginFormComponent,
     SelectUserPhotoComponent,
+    HeaderComponent,
+      PageHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -43,10 +47,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDividerModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   exports: [
-    SelectUserPhotoComponent
+    SelectUserPhotoComponent,
+      HeaderComponent,PageHeaderComponent
   ]
 })
 export class SharedModule { }

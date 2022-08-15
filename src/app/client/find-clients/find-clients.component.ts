@@ -6,6 +6,12 @@ import Swal from 'sweetalert2';
 import { Client } from '../../models/client.model';
 import { ClientsService } from '../../services/clients.service';
 import {IQuery} from "../../models/query.model";
+import {MatDialog} from "@angular/material/dialog";
+import {CreateServiceComponent} from "../../servicesClient/create-service/create-service.component";
+import {DialogTypeEnum} from "../../models/dialogType.enum";
+import {CreateClientComponent} from "../create-client/create-client.component";
+import {FindOneServiceComponent} from "../../servicesClient/find-one-service/find-one-service.component";
+import {FineOneClientComponent} from "../find-one-client/find-one-client.component";
 
 @Component({
   selector: "app-find-clients",
@@ -32,22 +38,57 @@ export class FindClientsComponent implements OnInit {
     private readonly service: ClientsService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
+    private readonly  dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
   }
 
-  novoCliente() {
-    this.router.navigate(["/main/clientes/create"]);
+  newClient() {
+    this.dialog.open(CreateClientComponent, {
+      width: '40rem',
+      data: {
+        type: DialogTypeEnum.CREATE
+      }
+    }).afterClosed().pipe(take(1)).subscribe({
+      next: (resp: {data: boolean}) => {
+        if(resp){
+          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+        }
+      }})
   }
 
   getClient(_id: number) {
-    this.router.navigate([`/main/clientes/dados/${_id}`]);
+    this.dialog.open(FineOneClientComponent,{
+      width: '40rem',
+      height: '20rem',
+      data: {
+        id: _id
+      }
+    }).afterClosed().pipe(take(1)).subscribe({
+      next: (resp: {data: boolean}) => {
+        if(resp){
+          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+        }
+      }
+    })
   }
 
-  updateCliente(_id: number) {
-    this.router.navigate([`/main/clientes/update/${_id}`]);
+  update(id: number) {
+    this.dialog.open(CreateClientComponent, {
+      width: '40rem',
+      minHeight: '70vh',
+      data: {
+        client: id,
+        type: DialogTypeEnum.UPDATE
+      }
+    }).afterClosed().pipe(take(1)).subscribe({
+      next: (resp: {data: boolean}) => {
+        if(resp){
+          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+        }
+      }})
   }
 
   deleteClient(id: number): void {

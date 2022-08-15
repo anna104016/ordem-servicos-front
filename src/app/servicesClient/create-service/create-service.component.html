@@ -6,7 +6,7 @@
 
     <div class="header" mat-dialog-title *ngIf="!loading">
         <p style="display: flex; flex: auto">{{ data.type === 'UPDATE' ? 'Atualizar serviço' : 'Novo serviço' }}</p>
-        <button mat-dialog-close mat-icon-button type="button">
+        <button mat-dialog-close="true" mat-icon-button type="button">
             <i class="fas fa-times" style="font-size: 1rem"></i>
         </button>
     </div>
