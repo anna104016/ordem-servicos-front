@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NavbarRoutingModule } from './navbar.routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {NgApexchartsModule} from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    NgApexchartsModule
   ],
   exports: [NavbarComponent]
 })

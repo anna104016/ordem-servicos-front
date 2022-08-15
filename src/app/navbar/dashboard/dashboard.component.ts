@@ -1,9 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Client, ReportClients } from 'src/app/models/client.model';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { ClientsService } from 'src/app/services/clients.service';
-import { ReportServices, ServiceModel } from 'src/app/models/service.model';
 import { ServicesService } from 'src/app/services/services.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import {forkJoin} from "rxjs";
+import {take} from "rxjs/operators";
+import {ApexChart, ApexNonAxisChartSeries, ApexResponsive, ChartComponent} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+};
+
 
 @Component({
   selector: 'app-dashboard',
@@ -12,39 +20,151 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class DashboardComponent implements OnInit {
 
-  totalServicos:number = 0
-  totalServicosOpen:number = 0
-  totalServicosClose:number = 0
-  totalClientes:number = 0
+  totalServices:number = 0
+  totalServicesOpen:number = 0
+  totalServicesClose:number = 0
+  totalClients:number = 0
   clientsWithService: number = 0
   clientsWithoutService: number = 0
+
+  series: number[] = [ ]
+
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
+
+  @ViewChild("chart") chartClients: ChartComponent;
+  public chartOptionsClients: Partial<ChartOptions>;
 
   constructor(
     private readonly clientService: ClientsService,
     private readonly servicesService: ServicesService,
-    private readonly spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
-    this.getReportServices()
-    this.getReportClients()
+    this.getReport()
   }
 
-  getReportServices(){
-    this.servicesService.reportService().subscribe((response: ReportServices) => {
-      this.totalServicos= response.servicos
-      this.totalServicosClose = response.servicos_fechados
-      this.totalServicosOpen = response.servicos_abertos
+  configChart(){
+    this.chartOptions = {
+      series: [this.totalServices, this.totalServicesOpen, this.totalServicesClose],
+      chart: {
+        width: 380,
+        type: "pie",
+        toolbar: {
+          show: true,
+          offsetX: 0,
+          offsetY: 0,
+          tools: {
+            download: true,
+          },
+          export: {
+            csv: {
+              filename: undefined,
+              columnDelimiter: ',',
+              headerCategory: 'category',
+              headerValue: 'value',
+              dateFormatter(timestamp) {
+                return new Date(timestamp).toDateString()
+              }
+            },
+            svg: {
+              filename: undefined,
+            },
+            png: {
+              filename: undefined,
+            }
+          },
+          autoSelected: 'zoom'
+        },
+      },
+      labels: ["Serviços", "Serviços abertos", "Serviços finalizados"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  }
+
+  configChartClients (){
+    this.chartOptionsClients = {
+      series: [this.totalClients, this.clientsWithService, this.clientsWithoutService],
+      chart: {
+        width: 380,
+        type: "pie",
+        toolbar: {
+          show: true,
+          offsetX: 0,
+          offsetY: 0,
+          tools: {
+            download: true,
+          },
+          export: {
+            csv: {
+              filename: undefined,
+              columnDelimiter: ',',
+              headerCategory: 'category',
+              headerValue: 'value',
+              dateFormatter(timestamp) {
+                return new Date(timestamp).toDateString()
+              }
+            },
+            svg: {
+              filename: undefined,
+            },
+            png: {
+              filename: undefined,
+            }
+          },
+          autoSelected: 'zoom'
+        },
+      },
+      labels: ["Total de clientes", "Clientes com serviços", "Clientes sem serviços"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "center"
+            }
+          }
+        }
+      ]
+    };
+  }
+
+  getReport(){
+    forkJoin([this.getReportClients(), this.getReportServices()]).pipe(take(1)).subscribe({
+      next: (resp) => {
+        this.totalClients =  resp[0].clientes
+        this.clientsWithoutService = resp[0].clientes_sem_servicos
+        this.clientsWithService = resp[0].clientes_com_servico
+        this.totalServices = resp[1].servicos
+        this.totalServicesClose = resp[1].servicos_fechados
+        this.totalServicesOpen = resp[1].servicos_abertos
+
+        this.configChart()
+        this.configChartClients()
+      }
     })
   }
 
+  getReportServices(){
+    return this.servicesService.reportService()
+  }
+
   getReportClients(){
-    this.clientService.reportClients().subscribe(
-      (response : ReportClients) => {
-        this.clientsWithService = response.clientes_com_servico
-        this.clientsWithoutService = response.clientes_sem_servicos
-        this.totalClientes = response.clientes
-      }
-    )
+    return this.clientService.reportClients()
   }
 }

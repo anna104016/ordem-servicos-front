@@ -4,7 +4,7 @@
 
 
     <div class="photos">
-        <div *ngFor="let photo of photos">
+        <div *ngFor="let photo of photos; let index = i">
             <div class="photo" (click)="select(photo)" #photo [ngClass]="{'photoSelected': photo.img === photoSelected.img}">
                 <img src="{{photo.img}}" alt="">
             </div>

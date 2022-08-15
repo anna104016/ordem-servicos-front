@@ -85,7 +85,7 @@ export class FineOneClientComponent implements OnInit {
   errorModel(){
     Swal.fire({
       icon: 'error',
-      title: 'Oppess...!',
+      title: 'Opss...!',
       text: 'Cliente não pode ser deletado',
       showConfirmButton: true,
     }).then((result) => {
@@ -94,5 +94,4 @@ export class FineOneClientComponent implements OnInit {
       }
     })
   }
-
 }

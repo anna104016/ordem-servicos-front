@@ -11,21 +11,23 @@ import { ServicesModule } from './servicesClient/services.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {MatButtonModule} from "@angular/material/button";
 @NgModule({
   declarations: [
     AppComponent,
     NotfoundComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ClientModule,
-    ServicesModule,
-    SharedModule,
-    NavbarModule,
-    NgxSpinnerModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ClientModule,
+        ServicesModule,
+        SharedModule,
+        NavbarModule,
+        NgxSpinnerModule,
+        MatButtonModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS, //interceptor
