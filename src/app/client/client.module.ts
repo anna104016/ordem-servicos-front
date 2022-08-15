@@ -23,6 +23,7 @@ import { OneClienteGuard } from '../resolver/client.guard';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
         MatDatepickerModule,
         MatProgressSpinnerModule,
         MatDialogModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatMenuModule
     ],
   providers: [
     ClientsService,

@@ -78,7 +78,7 @@ export class FindClientsComponent implements OnInit {
   update(id: number) {
     this.dialog.open(CreateClientComponent, {
       width: '40rem',
-      minHeight: '70vh',
+      minHeight: '20rem',
       data: {
         client: id,
         type: DialogTypeEnum.UPDATE

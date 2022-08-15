@@ -26,6 +26,7 @@ export class MenuButtomComponent implements OnInit {
   }
 
   public logOut(){
+    this._bottomSheetRef.dismiss();
     Swal.fire({
       title: "Encerrar sessão",
       icon: "info",

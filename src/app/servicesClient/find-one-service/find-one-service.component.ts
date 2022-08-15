@@ -49,7 +49,7 @@ export class FindOneServiceComponent implements OnInit {
     this.dialogRef.close()
     this.dialog.open(CreateServiceComponent, {
       width: '40rem',
-      minHeight: '70vh',
+      minHeight: '20rem',
       data: {
         service_id: this.data.service,
         type: DialogTypeEnum.UPDATE

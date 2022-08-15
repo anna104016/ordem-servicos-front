@@ -88,7 +88,7 @@ export class FindServicesComponent implements OnInit {
   update(id: number) {
     this.dialog.open(CreateServiceComponent, {
       width: '40rem',
-      minHeight: '70vh',
+      minHeight: '20rem',
       data: {
         service_id: id,
         type: DialogTypeEnum.UPDATE
@@ -104,7 +104,7 @@ export class FindServicesComponent implements OnInit {
   findOne(id: number) {
     this.dialog.open(FindOneServiceComponent,{
       width: '40rem',
-      height: '72vh',
+      minHeight: '20rem',
         data: {
           service: id
         }

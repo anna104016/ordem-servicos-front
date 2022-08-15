@@ -104,19 +104,6 @@
     width: 90%;
 }
 
-.lista-container-th{
-    width: 100px;
-    text-align: center;
-    font-weight: 500;
-    color: #585b59;
-    font-size: 16px;
-}
-
-.lista-container-td{
-    text-align: center;
-    color: #000;
-}
-
 .icone-info {
     cursor: pointer;
     color: #3399CC;
@@ -127,23 +114,33 @@
     color: #2284b4;
 }
 
-.concluido{
-    color: #606c38;
-    width: 100px;
-    text-align: center;
-    font-weight: 400;
-}
 
 .mat-paginator{
     width: 90%;
 }
 
-.lista-container-td i{
-    margin: 0 2px;
+td, tr, th{
+    text-align: center !important;
 }
 
-.table-td i{
+.mobile{
+    display: none !important;
+}
+
+i{
     margin: 0 0.2rem;
     font-size: 1.3rem;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 600px)  {
+    .desktop{
+        display: none;
+    }
+
+    .mobile{
+        display: flex !important;
+    }
+}
+
+

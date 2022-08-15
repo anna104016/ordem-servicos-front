@@ -24,6 +24,8 @@ import { TokenInterceptor } from '../auth/token.interceptor';
 import { ServiceGuard } from '../resolver/service.guard';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatMenuModule} from "@angular/material/menu";
 registerLocaleData(localePt);
 
 @NgModule({
@@ -37,26 +39,28 @@ registerLocaleData(localePt);
     FindOneServiceComponent,
     FindServicesComponent
   ],
-  imports: [
-    MatNativeDateModule,
-    CommonModule,
-    ServiceRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    MatIconModule,
-    MatTableModule,
-    MatButtonModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatCardModule,
-    MatSelectModule,
-    MatPaginatorModule,
-    SharedModule,
-    MatDatepickerModule,
-   MatDialogModule,
-      MatProgressSpinnerModule
-  ],
+    imports: [
+        MatNativeDateModule,
+        CommonModule,
+        ServiceRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        MatIconModule,
+        MatTableModule,
+        MatButtonModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatCardModule,
+        MatSelectModule,
+        MatPaginatorModule,
+        SharedModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
+        MatMenuModule
+    ],
   providers: [
     MatDatepickerModule,
     ServicesService,

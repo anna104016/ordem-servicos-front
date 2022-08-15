@@ -49,7 +49,7 @@ export class FineOneClientComponent implements OnInit {
     this.dialogRef.close()
     this.dialog.open(CreateClientComponent, {
       width: '40rem',
-      minHeight: '10rem',
+      minHeight: '20rem',
       data: {
         client: this.data.id,
         type: DialogTypeEnum.UPDATE
