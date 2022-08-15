@@ -19,6 +19,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {HeaderComponent} from "./header/header.component";
 import {PageHeaderComponent} from "./page-header/page-header.component";
+import {MenuButtomComponent} from "./menu-buttom/menu-buttom.component";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {PageHeaderComponent} from "./page-header/page-header.component";
     LoginFormComponent,
     SelectUserPhotoComponent,
     HeaderComponent,
-      PageHeaderComponent
+      PageHeaderComponent,
+      MenuButtomComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ import {PageHeaderComponent} from "./page-header/page-header.component";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
   ],
   exports: [
     SelectUserPhotoComponent,

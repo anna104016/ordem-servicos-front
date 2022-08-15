@@ -1,10 +1,15 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
     <span class="title">Services ON</span>
-    <p routerLink="/portal/dashboard">Dashboard</p>
-    <p routerLink="/portal/clientes">Clientes</p>
-    <p routerLink="/portal/servicos">Serviços</p>
+    <p routerLink="/portal/dashboard" class="desktop">Dashboard</p>
+    <p routerLink="/portal/clientes" class="desktop">Clientes</p>
+    <p routerLink="/portal/servicos" class="desktop">Serviços</p>
     <span class="example-spacer"></span>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+
+    <button (click)="openBottomSheet()" class="mobile" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="desktop">
         <mat-icon>person</mat-icon>
     </button>
 </mat-toolbar>

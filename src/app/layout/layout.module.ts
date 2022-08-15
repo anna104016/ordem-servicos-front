@@ -4,16 +4,18 @@ import { LayoutComponentComponent } from './layout-component/layout-component.co
 import {SharedModule} from "../shared/shared.module";
 import {RouterModule} from "@angular/router";
 import {LayoutRoutingModule} from "./layout.routing.module";
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
-    LayoutComponentComponent
+    LayoutComponentComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+    MatBottomSheetModule
   ],
   exports: [
       LayoutComponentComponent
