@@ -78,9 +78,9 @@ export class FindServicesComponent implements OnInit {
         type: DialogTypeEnum.CREATE
       }
     }).afterClosed().pipe(take(1)).subscribe({
-      next: (resp: {data: boolean}) => {
+      next: (resp: boolean) => {
         if(resp){
-          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+          this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
         }
     }})
   }
@@ -96,7 +96,7 @@ export class FindServicesComponent implements OnInit {
     }).afterClosed().pipe(take(1)).subscribe({
       next: (resp: {data: boolean}) => {
         if(resp){
-          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+          this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
         }
       }})
   }

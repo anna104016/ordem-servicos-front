@@ -22,6 +22,7 @@ export class CreateServiceComponent implements OnInit {
     statusControl = new FormControl('', Validators.required)
 
     loading: boolean = false
+    loadingSumit: boolean = false
 
     clients: Client[] = [];
     status: Status[] = []
@@ -91,15 +92,16 @@ export class CreateServiceComponent implements OnInit {
     update(data: any): void {
         this.service.update(this.data.service_id, data).pipe(take(1)).subscribe({
           next: () => {
-            this.successModel('Serviço atualizado com sucesso!')
+            this.dialogRef.close(true)
+              this.successModel('Serviço atualizado com sucesso!')
+              this.loadingSumit = false
         }, error: () => {
             this.errorModel('Não foi possível atualizar este serviço')
         }})
     }
 
     submitForm(){
-        if(this.form.invalid) return
-
+        this.loadingSumit = true
         const data = this.form.getRawValue()
         if(this.data.type === DialogTypeEnum.UPDATE){
             this.update(data)
@@ -109,6 +111,7 @@ export class CreateServiceComponent implements OnInit {
     }
 
     save(): void {
+        console.log("chegou aqui")
         const data = {
             description: this.form.get('description').value,
             price: this.form.get('price').value,
@@ -116,8 +119,11 @@ export class CreateServiceComponent implements OnInit {
         }
         this.service.create(data).subscribe({
             next: () => {
+                this.dialogRef.close(true)
                 this.successModel('Serviço criado com sucesso!')
+                this.loadingSumit = false
             }, error: () => {
+                this.loading = false
                 this.errorModel('Não foi pissível criar este serviço')
             }})
     }

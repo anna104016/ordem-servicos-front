@@ -66,7 +66,7 @@ export class CreateClientComponent implements OnInit {
       .subscribe({
         next: () => { this.successModel('Cliente adicionado com sucesso!')} ,
         error: (error) => {
-          if (error.error.error === ErrorsType.CPF_ALREADY_REGISTERED) {
+          if (error.error.error === ErrorsType.CPF_ALREDY_REGISTERED) {
             Notify.info("CPF já cadastrado")
           } else {
             this.errorModel('Não foi possilve adicionar este cliente')
@@ -83,7 +83,7 @@ export class CreateClientComponent implements OnInit {
         .subscribe({next: () => {
           this.successModel('Cliente atualizado com sucesso!')
         }, error: (error) => {
-          if(error.error.error === ErrorsType.CPF_ALREADY_REGISTERED){
+          if(error.error.error === ErrorsType.CPF_ALREDY_REGISTERED){
             Notify.info("CPF já cadastrado")
           }else{
             this.errorModel('Não foi possível atualizar os dados do cliente')
