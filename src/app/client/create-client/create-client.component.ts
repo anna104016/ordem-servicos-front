@@ -19,7 +19,7 @@ import {DialogTypeEnum} from "../../models/dialogType.enum";
 export class CreateClientComponent implements OnInit {
 
   loading: boolean = false
-
+  loadingSumit: boolean = false
   form: FormGroup
   clienteId: string
 
@@ -55,6 +55,8 @@ export class CreateClientComponent implements OnInit {
   submitForm(){
     if(this.form.invalid) return
 
+    this.loadingSumit = true
+
     if(this.data.type === DialogTypeEnum.CREATE){
       this.create()
     }else{
@@ -64,8 +66,11 @@ export class CreateClientComponent implements OnInit {
   create() {
     this.service.create(this.form.value)
       .subscribe({
-        next: () => { this.successModel('Cliente adicionado com sucesso!')} ,
+        next: () => { 
+          this.loadingSumit = false
+          this.successModel('Cliente adicionado com sucesso!')} ,
         error: (error) => {
+          this.loadingSumit = false
           if (error.error.error === ErrorsType.CPF_ALREDY_REGISTERED) {
             Notify.info("CPF já cadastrado")
           } else {
@@ -81,8 +86,10 @@ export class CreateClientComponent implements OnInit {
     this.service.update(this.data.client, body)
         .pipe(take(1))
         .subscribe({next: () => {
+          this.loadingSumit = false
           this.successModel('Cliente atualizado com sucesso!')
         }, error: (error) => {
+          this.loadingSumit = false
           if(error.error.error === ErrorsType.CPF_ALREDY_REGISTERED){
             Notify.info("CPF já cadastrado")
           }else{
@@ -99,7 +106,7 @@ export class CreateClientComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.dialogRef.close({data: true})
+        this.dialogRef.close(true)
       }
     })
   }

@@ -64,7 +64,9 @@
     </form>
 
     <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end">
-        <button mat-raised-button class="update" (click)="submitForm()">Salvar</button>
-        <button mat-raised-button class="delete" mat-dialog-close>Cancelar</button>
+        <button mat-raised-button class="update" (click)="submitForm()"  [class.spinner]="loadingSumit" [disabled]="loadingSumit">
+         Salvar
+        </button>
+        <button mat-raised-button class="delete" mat-dialog-close [disabled]="loadingSumit">Cancelar</button>
     </mat-dialog-actions>
 </div>

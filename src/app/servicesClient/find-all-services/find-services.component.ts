@@ -45,9 +45,7 @@ export class FindServicesComponent implements OnInit {
   }
 
   find(page: number, perPage: number): void {
-
     this.loading = true
-
     const query: IQuery = {
       page: page,
       take: perPage
@@ -58,7 +56,7 @@ export class FindServicesComponent implements OnInit {
     ).subscribe({
     next:(resp : IRespGetServices) => {
       this.services = resp.services
-      this.paginationDefault.totalElements = resp.totalSize
+      this.paginationDefault.totalElements = resp.count
       this.loading = false
     }})
   }

@@ -54,7 +54,7 @@ export class FindClientsComponent implements OnInit {
     }).afterClosed().pipe(take(1)).subscribe({
       next: (resp: {data: boolean}) => {
         if(resp){
-          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+         this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
         }
       }})
   }
@@ -86,7 +86,7 @@ export class FindClientsComponent implements OnInit {
     }).afterClosed().pipe(take(1)).subscribe({
       next: (resp: {data: boolean}) => {
         if(resp){
-          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+          this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
         }
       }})
   }
@@ -157,7 +157,7 @@ export class FindClientsComponent implements OnInit {
     ).subscribe({
       next: (resp) => {
       this.clients = resp.users
-      this.paginationDefault.totalElements = resp.totalSize
+      this.paginationDefault.totalElements = resp.count
         this.loading = false
     }})
   }

@@ -92,7 +92,6 @@ export class CreateServiceComponent implements OnInit {
     update(data: any): void {
         this.service.update(this.data.service_id, data).pipe(take(1)).subscribe({
           next: () => {
-            this.dialogRef.close(true)
               this.successModel('Serviço atualizado com sucesso!')
               this.loadingSumit = false
         }, error: () => {
@@ -119,7 +118,6 @@ export class CreateServiceComponent implements OnInit {
         }
         this.service.create(data).subscribe({
             next: () => {
-                this.dialogRef.close(true)
                 this.successModel('Serviço criado com sucesso!')
                 this.loadingSumit = false
             }, error: () => {
@@ -136,7 +134,7 @@ export class CreateServiceComponent implements OnInit {
             showConfirmButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                this.dialogRef.close({data: true})
+                this.dialogRef.close(true)
             }
         })
     }

@@ -23,7 +23,7 @@
 
     <mat-form-field class="form-field"  appearance="fill">
       <mat-label>CPF</mat-label>
-      <input type="text" matInput autocomplete="off" formControlName="cpf">
+      <input type="text" matInput autocomplete="off" formControlName="cpf" maxlength="11">
       <mat-error *ngIf="form.get('cpf').hasError('required')" class="field-error">Campo obrigatório</mat-error>
     </mat-form-field>
 
@@ -35,7 +35,7 @@
   </form>
 
   <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end">
-    <button mat-raised-button class="update" (click)="submitForm()">Salvar</button>
+    <button mat-raised-button class="update" (click)="submitForm()" [class.spinner]="loadingSumit" [disabled]="loadingSumit">Salvar</button>
     <button mat-raised-button class="delete" mat-dialog-close>Cancelar</button>
   </mat-dialog-actions>
 </div>
