@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {SafeStyle, DomSanitizer} from '@angular/platform-browser';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {finalize, take} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 import {SelectUserPhotoComponent} from 'src/app/shared/select-user-photo/select-user-photo.component';
 import {UserModel} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
-import {Block, Notify} from "notiflix";
+import {Notify} from "notiflix";
 
 @Component({
     selector: 'app-user-id',
@@ -31,17 +31,15 @@ export class UserIdComponent implements OnInit {
     }
 
     userAccount(): void {
-        Block.pulse('#userInfo');
         this.userService.finduser()
-           .pipe(take(1))
+            .pipe(take(1))
             .subscribe(
-            {
-                next: (resp) => {
-                    this.user = resp
-                    this.backgroundImg = this.sanitizer.bypassSecurityTrustStyle('url(' + this.user.photo + ')');
-                },
-                complete: () => Block.remove('#userInfo')
-            })
+                {
+                    next: (resp) => {
+                        this.user = resp
+                        this.backgroundImg = this.sanitizer.bypassSecurityTrustStyle('url(' + this.user.photo + ')');
+                    },
+                })
     }
 
     selectPhoto() {

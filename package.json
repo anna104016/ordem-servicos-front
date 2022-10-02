@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build"
+    "build": "ng build",
+    "start:prod": "ng serve --configuration production"
   },
   "private": true,
   "dependencies": {

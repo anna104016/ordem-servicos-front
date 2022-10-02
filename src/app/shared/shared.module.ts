@@ -29,8 +29,8 @@ import {MatListModule} from "@angular/material/list";
     LoginFormComponent,
     SelectUserPhotoComponent,
     HeaderComponent,
-      PageHeaderComponent,
-      MenuButtomComponent
+    PageHeaderComponent,
+    MenuButtomComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +55,7 @@ import {MatListModule} from "@angular/material/list";
   ],
   exports: [
     SelectUserPhotoComponent,
-      HeaderComponent,PageHeaderComponent
+    HeaderComponent,PageHeaderComponent
   ]
 })
 export class SharedModule { }

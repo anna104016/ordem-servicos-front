@@ -15,11 +15,9 @@ import {CreateClientComponent} from "../create-client/create-client.component";
   styleUrls: ['./find-one-client.component.css']
 })
 export class FineOneClientComponent implements OnInit {
-
   loading: boolean = false
-
   clientModel: Client
-  id: any
+  id: number
 
   constructor(
     private readonly clientService: ClientsService,
@@ -69,35 +67,28 @@ export class FineOneClientComponent implements OnInit {
     }).then((result) => {
       if(result.isConfirmed){
        this.clientService.delete(this.clientModel.client_id).subscribe({
-         next : () => { this.successModel() },
-         error: () => { this.errorModel()}
+         next : () => { this.messageAlert('Sucesso!', 'Cliente deletado com sucesso',
+             true) },
+         error: () => { this.messageAlert('Opsss', 'Não foi possível deletar este cliente',
+             false)}
       })
       }
     })
   }
 
-  successModel(){
+  messageAlert(title: string, message: string, success: boolean){
     Swal.fire({
-      icon: 'success',
-      title: 'Sucesso!',
-      text: 'Cliente deletado com sucesso',
+      icon: success ? 'success' : 'error',
+      title: `${title}`,
+      text: `$message`,
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate(['/main/clientes'])
-      }
-    })
-  }
-
-  errorModel(){
-    Swal.fire({
-      icon: 'error',
-      title: 'Opss...!',
-      text: 'Cliente não pode ser deletado',
-      showConfirmButton: true,
-    }).then((result) => {
-      if(result.isConfirmed){
-        this.router.navigate(['/main/clientes'])
+        if(success){
+          this.router.navigate(['/main/clientes'])
+        }else{
+          Swal.close()
+        }
       }
     })
   }

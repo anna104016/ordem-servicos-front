@@ -7,9 +7,6 @@ export interface UserModel {
     photo: string
     occupation_area: string
 }
-export interface ResUserResolve {
-     user: UserModel
-}
 
 export interface Photo {
     img: string

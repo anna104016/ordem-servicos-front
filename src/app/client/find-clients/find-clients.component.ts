@@ -7,10 +7,8 @@ import { Client } from '../../models/client.model';
 import { ClientsService } from '../../services/clients.service';
 import {IQuery} from "../../models/query.model";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateServiceComponent} from "../../servicesClient/create-service/create-service.component";
 import {DialogTypeEnum} from "../../models/dialogType.enum";
 import {CreateClientComponent} from "../create-client/create-client.component";
-import {FindOneServiceComponent} from "../../servicesClient/find-one-service/find-one-service.component";
 import {FineOneClientComponent} from "../find-one-client/find-one-client.component";
 
 @Component({
@@ -28,8 +26,7 @@ export class FindClientsComponent implements OnInit {
   }
 
   pageSizeOptions: number[] = [12, 24, 36, 48]
-
-  displayedColumns: string[] = ["client_id", "name", "cell_phone", "actions"];
+  displayedColumns: string[] = ["name", "cell_phone", "actions"];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   loading: boolean = true;
@@ -103,31 +100,17 @@ export class FindClientsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
        this.service.delete(id).subscribe({
-       next: () => { this.successModel('Cliente deletado com sucesso!')},
-       error: () => {this.errorModel('Cliente não pode ser deletado!')}
+       next: () => { this.messageAlert('Cliente deletado com sucesso!', true)},
+       error: () => {this.messageAlert('Cliente não pode ser deletado!', false)}
       });
       }
     });
   }
 
-  successModel(text:string){
+  messageAlert(text:string, sucess: boolean){
     Swal.fire({
-      icon: 'success',
+      icon: sucess ? 'success' :  'error',
       title: 'Sucesso!',
-      text: `${text}`,
-      showConfirmButton: true,
-    }).then((result) => {
-      if(result.isConfirmed){
-        Swal.close()
-        this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
-      }
-    })
-  }
-
-  errorModel(text:string){
-    Swal.fire({
-      icon: 'error',
-      title: 'Oppss.!',
       text: `${text}`,
       showConfirmButton: true,
     }).then((result) => {
@@ -161,6 +144,4 @@ export class FindClientsComponent implements OnInit {
         this.loading = false
     }})
   }
-
-
 }

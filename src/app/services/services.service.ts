@@ -18,6 +18,7 @@ export class ServicesService {
     let params = new HttpParams()
     if (query?.page) params = params.set('page', String(query.page))
     if (query?.take) params = params.set('take', String(query.take))
+    if (query?.filter) params = params.set('filter', String(query.filter))
     return this.http.get<IRespGetServices>(`${this.baseUrl}/servicos`, {params});
   }
 
