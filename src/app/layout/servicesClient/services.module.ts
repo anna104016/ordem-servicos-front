@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FindClientsComponent } from './find-clients/find-clients.component';
-import { CreateClientComponent } from './create-client/create-client.component';
+import { CreateServiceComponent } from './create-service/create-service.component';
+import { FindOneServiceComponent } from './find-one-service/find-one-service.component';
+import { FindServicesComponent } from './find-all-services/find-services.component';
+import { ServiceRoutingModule } from './services.routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ClientsService } from '../services/clients.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,27 +13,36 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
-import { ClientRoutingModule } from './cliente.routing.module';
-import { FineOneClientComponent } from './find-one-client/find-one-client.component';
-import { SharedModule } from '../shared/shared.module';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { TokenInterceptor } from '../auth/token.interceptor';
-import { ClientesGuard } from '../resolver/clientes.guard';
-import { OneClienteGuard } from '../resolver/client.guard';
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { MatNativeDateModule } from '@angular/material/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
+import { TokenInterceptor } from 'src/app/auth/token.interceptor';
+import { ServiceGuard } from 'src/app/resolver/service.guard';
+import { ServicesService } from 'src/app/services/services.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
-    FindClientsComponent,
-    CreateClientComponent,
-    FineOneClientComponent
+    CreateServiceComponent,
+    FindOneServiceComponent,
+    FindServicesComponent
+  ],
+  exports: [
+    CreateServiceComponent,
+    FindOneServiceComponent,
+    FindServicesComponent
   ],
     imports: [
-        ClientRoutingModule,
+        MatNativeDateModule,
         CommonModule,
+        ServiceRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
         FormsModule,
@@ -47,15 +56,19 @@ import {MatMenuModule} from "@angular/material/menu";
         MatPaginatorModule,
         SharedModule,
         MatDatepickerModule,
-        MatProgressSpinnerModule,
         MatDialogModule,
+        MatProgressSpinnerModule,
         MatTooltipModule,
         MatMenuModule
     ],
   providers: [
-    ClientsService,
-    ClientesGuard,
-    OneClienteGuard,
+    MatDatepickerModule,
+    ServicesService,
+    ServiceGuard,
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    },
     {
       provide: HTTP_INTERCEPTORS, //interceptor
       useClass: TokenInterceptor, //classe TokenInterceptor vai ser utilizada com interceptor da aplicação
@@ -63,4 +76,4 @@ import {MatMenuModule} from "@angular/material/menu";
     },
   ]
 })
-export class ClientModule { }
+export class ServicesModule { }

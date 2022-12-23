@@ -4,14 +4,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { ClientModule } from './client/client.module';
 import { SharedModule } from './shared/shared.module';
-import { ServicesModule } from './servicesClient/services.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {MatButtonModule} from "@angular/material/button";
-import {DashboardModule} from "./dashboard/dashboard.module";
+import { ClientModule } from './layout/client/client.module';
+import { ServicesModule } from './layout/servicesClient/services.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import {DashboardModule} from "./dashboard/dashboard.module";
         SharedModule,
         NgxSpinnerModule,
         MatButtonModule,
-        DashboardModule
     ],
   providers: [
     {

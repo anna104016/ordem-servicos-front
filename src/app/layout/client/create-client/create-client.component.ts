@@ -1,15 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {ErrorsType} from 'src/app/models/error.enum';
 import Swal from 'sweetalert2';
-import {Client} from '../../models/client.model';
-import {ClientsService} from '../../services/clients.service';
 import {Notify} from "notiflix";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogTypeEnum} from "../../models/dialogType.enum";
+import { Client } from 'src/app/models/client.model';
+import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-create-client',
@@ -24,10 +22,7 @@ export class CreateClientComponent implements OnInit {
   clienteId: string
 
   constructor(
-    private readonly router: Router,
-    private readonly _snackBar: MatSnackBar,
     private readonly service: ClientsService,
-    private readonly activatedRouter: ActivatedRoute,
     private readonly dialogRef: MatDialogRef<CreateClientComponent>,
     private readonly formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public readonly data: {
@@ -43,13 +38,17 @@ export class CreateClientComponent implements OnInit {
   getClient(): void {
     this.loading = true
     this.service.findOne(this.data.client).pipe(take(1)).subscribe({next: (res: Client) => {
-        this.form.patchValue({
-          name: res.name,
-          cpf: res.cpf,
-          cell_phone: res.cell_phone,
-        })
+        this.updateForm(res)
         this.loading = false
     }})
+  }
+
+  updateForm(client){
+    this.form.patchValue({
+      name: client.name,
+      cpf: client.cpf,
+      cell_phone: client.cell_phone,
+    })
   }
 
   submitForm(){
@@ -126,23 +125,23 @@ export class CreateClientComponent implements OnInit {
 
   createForm(){
     this.form = this.formBuilder.group({
-      name: new FormControl('', [
+      name: ['', [
         Validators.required,
         Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
         Validators.minLength(5),
-      ]),
-      cell_phone: new FormControl('', [
+      ]],
+      cell_phone: ['', [
         Validators.required,
         Validators.pattern('[0-9]+$'),
         Validators.minLength(9),
         Validators.maxLength(20)
-      ]),
-      cpf: new FormControl('', [
+      ]],
+      cpf:['', [
         Validators.required,
         Validators.pattern('[0-9]+$'),
         Validators.minLength(11),
         Validators.maxLength(11)
-      ])
+      ]]
     })
   }
 }

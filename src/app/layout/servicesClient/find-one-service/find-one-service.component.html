@@ -6,11 +6,6 @@
 
     <div class="header" mat-dialog-title *ngIf="!loading">
         <h2 style="display: flex; flex: auto">{{serviceModel?.description}}</h2>
-
-<!--            <button mat-icon-button type="button">-->
-<!--                <i class="fas fa-info-circle" style="font-size: 1rem"></i>-->
-<!--            </button>-->
-
             <button mat-dialog-close mat-icon-button type="button">
                 <i class="fas fa-times" style="font-size: 1rem"></i>
             </button>
@@ -48,7 +43,6 @@
         <button mat-raised-button class="delete" (click)="delete()">Deletar</button>
         <button mat-raised-button class="update" (click)="update()">Editar</button>
     </mat-dialog-actions>
-
 </div>
 
 

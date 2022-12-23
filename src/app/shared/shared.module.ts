@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +20,8 @@ import {HeaderComponent} from "./header/header.component";
 import {PageHeaderComponent} from "./page-header/page-header.component";
 import {MenuButtomComponent} from "./menu-buttom/menu-buttom.component";
 import {MatListModule} from "@angular/material/list";
+import { HomeComponent } from '../pages/home/home.component';
+import { TableComponent } from '../components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatListModule} from "@angular/material/list";
     SelectUserPhotoComponent,
     HeaderComponent,
     PageHeaderComponent,
-    MenuButtomComponent
+    MenuButtomComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,7 @@ import {MatListModule} from "@angular/material/list";
   ],
   exports: [
     SelectUserPhotoComponent,
-    HeaderComponent,PageHeaderComponent
+    HeaderComponent,PageHeaderComponent,TableComponent
   ]
 })
 export class SharedModule { }

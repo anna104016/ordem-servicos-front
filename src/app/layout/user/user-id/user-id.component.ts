@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {SafeStyle, DomSanitizer} from '@angular/platform-browser';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {take} from 'rxjs/operators';
-import {SelectUserPhotoComponent} from 'src/app/shared/select-user-photo/select-user-photo.component';
-import {UserModel} from '../../models/user.model';
-import {UserService} from '../../services/user.service';
-import {Notify} from "notiflix";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { take } from 'rxjs/operators';
+import { SelectUserPhotoComponent } from 'src/app/shared/select-user-photo/select-user-photo.component';
+import { Notify } from "notiflix";
+import { UserModel } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-user-id',

@@ -4,8 +4,8 @@ import {NgApexchartsModule} from "ng-apexcharts";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCardModule} from "@angular/material/card";
-import {SharedModule} from "../shared/shared.module";
 import {DashboardRoutingModule} from "./dashboard.routing.module";
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [

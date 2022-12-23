@@ -5,16 +5,16 @@ import {LayoutComponentComponent} from "./layout-component/layout-component.comp
 const routes: Routes = [
     { path: '', component: LayoutComponentComponent, children: [
             { path: 'dashboard',
-                loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule),
+                loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
             },
             { path: 'clientes',
-                loadChildren: () => import('../client/client.module').then(m => m.ClientModule),
+                loadChildren: () => import('./client/client.module').then(m => m.ClientModule),
             },
             { path: 'servicos',
-                loadChildren: () => import('../servicesClient/services.module').then(m => m.ServicesModule),
+                loadChildren: () => import('./servicesClient/services.module').then(m => m.ServicesModule),
             },
             { path: 'user',
-                loadChildren: () => import('../user/user.module').then(m => m.UserModule),
+                loadChildren: () => import('./user/user.module').then(m => m.UserModule),
             },
         ]},
   ];

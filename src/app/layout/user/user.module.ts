@@ -4,12 +4,12 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { TokenInterceptor } from '../auth/token.interceptor';
-import { UserGuard } from '../resolver/user.guard';
-import { SharedModule } from '../shared/shared.module';
+import { TokenInterceptor } from 'src/app/auth/token.interceptor';
+import { UserGuard } from 'src/app/resolver/user.guard';
+import { UserService } from 'src/app/services/user.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { UserIdComponent } from './user-id/user-id.component';
 import { UserRoutingModule } from './user.routing.module';
-import { UserService } from '../services/user.service';
 
 @NgModule({
   declarations: [

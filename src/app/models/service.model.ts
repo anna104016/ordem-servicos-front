@@ -18,7 +18,7 @@ export interface Status{
 export interface ReportServices {
     servicos_abertos:number
     servicos: number
-    servicos_fechados:  number
+    servicos_fechados: number
 }
 
 export interface IRespGetServices{

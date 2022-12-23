@@ -106,17 +106,12 @@ export class LoginFormComponent implements OnInit {
                 },
                 error: (error) => {
                     this.loading = false
-
-                    if (error.error.error === ErrorsType.EMAIL_ALREADY_REGISTERED) {
-                        Notify.info("Email já cadastrado")
-                    } else {
                         this.form.reset()
-                        Swal.fire('Que pena!', 'Não foi possível criar sua conta', 'error').then(res => {
+                        Swal.fire('Que pena!', error.error.message, 'error').then(res => {
                             if (res.isConfirmed) {
                                 Swal.close()
                             }
                         })
-                    }
                 }
             })
     }

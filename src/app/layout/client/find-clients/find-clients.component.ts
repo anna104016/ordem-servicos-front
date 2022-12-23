@@ -3,13 +3,13 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take} from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { Client } from '../../models/client.model';
-import { ClientsService } from '../../services/clients.service';
-import {IQuery} from "../../models/query.model";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogTypeEnum} from "../../models/dialogType.enum";
 import {CreateClientComponent} from "../create-client/create-client.component";
 import {FineOneClientComponent} from "../find-one-client/find-one-client.component";
+import { Client } from 'src/app/models/client.model';
+import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
+import { IQuery } from 'src/app/models/query.model';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: "app-find-clients",
@@ -33,8 +33,6 @@ export class FindClientsComponent implements OnInit {
 
   constructor(
     private readonly service: ClientsService,
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly router: Router,
     private readonly  dialog: MatDialog
   ) {}
 
@@ -99,12 +97,16 @@ export class FindClientsComponent implements OnInit {
       cancelButtonText: "Não",
     }).then((result) => {
       if (result.isConfirmed) {
-       this.service.delete(id).subscribe({
-       next: () => { this.messageAlert('Cliente deletado com sucesso!', true)},
-       error: () => {this.messageAlert('Cliente não pode ser deletado!', false)}
-      });
+        this.confirmDeleteClient(id)
       }
     });
+  }
+
+  confirmDeleteClient(id: number){
+    this.service.delete(id).subscribe({
+      next: () => { this.messageAlert('Cliente deletado com sucesso!', true)},
+      error: () => {this.messageAlert('Cliente não pode ser deletado!', false)}
+     });
   }
 
   messageAlert(text:string, sucess: boolean){
@@ -124,7 +126,6 @@ export class FindClientsComponent implements OnInit {
   getNext (event: PageEvent): void {
     this.paginationDefault.size = event.pageSize
     this.paginationDefault.page = event.pageIndex
-    console.log(event.pageIndex + 1, event.pageSize)
 
     this.find(event.pageIndex + 1, event.pageSize)
   }

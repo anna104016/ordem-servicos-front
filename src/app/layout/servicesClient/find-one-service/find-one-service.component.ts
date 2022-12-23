@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServiceModel } from '../../models/service.model';
-import { ServicesService } from '../../services/services.service';
 import Swal from 'sweetalert2';
 import { take } from 'rxjs/operators';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CreateServiceComponent} from "../create-service/create-service.component";
-import {DialogTypeEnum} from "../../models/dialogType.enum";
+import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
+import { ServiceModel } from 'src/app/models/service.model';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-find-one-service',

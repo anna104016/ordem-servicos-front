@@ -4,12 +4,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Client} from 'src/app/models/client.model';
 import {ClientsService} from 'src/app/services/clients.service';
 import Swal from 'sweetalert2';
-import {ServiceModel, Status} from '../../models/service.model';
-import {ServicesService} from '../../services/services.service';
 import {take} from 'rxjs/operators';
 import {StatusService} from 'src/app/services/status.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogTypeEnum} from "../../models/dialogType.enum";
+import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
+import { Status, ServiceModel } from 'src/app/models/service.model';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
     selector: 'app-create-service',
