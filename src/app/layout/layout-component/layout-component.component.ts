@@ -3,6 +3,7 @@ import { NavbarSettings } from './../sidebar/models/navbnarSettings.model';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { SideNavbarService } from '../sidebar/services/sidenavbar.service';
+import { SidenavbarNames } from '../sidebar/models/sidenavbarNames';
 
 @Component({
   selector: 'app-layout-component',
@@ -13,6 +14,7 @@ export class LayoutComponentComponent implements OnInit  {
 
   sidebarSideClassName = SidebarSideClassName
   sidenavbarTheme = SidenavbarTheme
+  sidenavbarNames = SidenavbarNames
   
   constructor(
     private observer: BreakpointObserver,
@@ -26,6 +28,6 @@ export class LayoutComponentComponent implements OnInit  {
   }
 
   openSidebar(){
-    this._sideNavService.getSidebar('app-sidebar-navigation').openSidebar()
+    this._sideNavService.getSidebar(this.sidenavbarNames.COMPONENT_NAVBAR_NAVIGATION).openSidebar()
   }
 }

@@ -1,0 +1,4 @@
+export class SidenavbarNames{
+    public static COMPONENT_NAVBAR_NAVIGATION =  'COMPONENT_NAVBAR_NAVIGATION';
+    public static COMPONENT_CLIENT_DETAILS = 'COMPONENT_CLIENT_DETAILS'
+}

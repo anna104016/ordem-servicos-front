@@ -12,6 +12,7 @@ import { IQuery } from 'src/app/models/query.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 import { NavbarSide, SidebarSideClassName } from '../../sidebar/models/sidenavbar.enum';
+import { SidenavbarNames } from '../../sidebar/models/sidenavbarNames';
 
 @Component({
   selector: "app-find-clients",
@@ -60,7 +61,7 @@ export class FindClientsComponent implements OnInit {
   openClientDetails(id: number) {
     this._clientService.setCurrentClientId(id)
     this._sideNavService.setSidenavbarIsOpen(true)
-    this._sideNavService.getSidebar('app-client-details').openSidebar()
+    this._sideNavService.getSidebar(SidenavbarNames.COMPONENT_CLIENT_DETAILS).openSidebar()
   }
 
   update(id: number) {

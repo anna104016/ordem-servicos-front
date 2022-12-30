@@ -3,14 +3,14 @@
 
 <app-navbar 
     [side]="sidebarSideClassName.RIGHT" 
-    name="app-sidebar-navigation" 
+    [name]="sidenavbarNames.COMPONENT_NAVBAR_NAVIGATION" 
     [theme]="sidenavbarTheme.DARK">
     <app-sidebar-navigation></app-sidebar-navigation>
 </app-navbar>
 
 <app-navbar 
     [side]="sidebarSideClassName.LEFT" 
-    name="app-client-details" 
+    [name]="sidenavbarNames.COMPONENT_CLIENT_DETAILS" 
     [theme]="sidenavbarTheme.LIGTH">
     <app-client-details></app-client-details>
 </app-navbar>
