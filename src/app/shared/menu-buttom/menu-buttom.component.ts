@@ -3,6 +3,7 @@ import {MatBottomSheetRef} from "@angular/material/bottom-sheet";
 import {Route, Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import Swal from "sweetalert2";
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-menu-buttom',
@@ -13,8 +14,9 @@ export class MenuButtomComponent implements OnInit {
 
   constructor(
       private readonly _bottomSheetRef: MatBottomSheetRef<MenuButtomComponent>,
-      private readonly router: Router,
-      private readonly userService: UserService
+      private readonly _router: Router,
+      private readonly _userService: UserService,
+      private readonly _authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class MenuButtomComponent implements OnInit {
 
   openLink(route: string): void {
     this._bottomSheetRef.dismiss();
-    this.router.navigate(['/portal/' + route])
+    this._router.navigate(['/portal/' + route])
   }
 
   public logOut(){
@@ -35,7 +37,7 @@ export class MenuButtomComponent implements OnInit {
       showConfirmButton: true
     }).then((resul) => {
       if(resul.isConfirmed){
-        this.userService.logOut()
+        this._authService.logOut()
       }else{
         Swal.close()
       }

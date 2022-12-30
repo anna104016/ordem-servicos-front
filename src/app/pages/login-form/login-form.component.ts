@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {ErrorsType} from 'src/app/models/error.enum';
 import {UserService} from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import {SelectUserPhotoComponent} from '../select-user-photo/select-user-photo.component';
 import {take} from "rxjs/operators";
 import {Notify} from "notiflix";
 import { UserModel } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
     selector: 'app-login-form',
@@ -24,10 +24,11 @@ export class LoginFormComponent implements OnInit {
     imgSelect: string
 
     constructor(
-        private readonly router: Router,
-        private readonly userService: UserService,
-        private readonly formBuilder: FormBuilder,
-        private readonly dialog: MatDialog,
+        private readonly _router: Router,
+        private readonly _userService: UserService,
+        private readonly _formBuilder: FormBuilder,
+        private readonly _dialog: MatDialog,
+        private readonly _authService: AuthService
     ) {
         this.createAccountField = false
     }
@@ -37,7 +38,7 @@ export class LoginFormComponent implements OnInit {
     }
 
     selectPhoto() {
-        this.dialog.open(SelectUserPhotoComponent, {
+        this._dialog.open(SelectUserPhotoComponent, {
             width: '30rem',
             height: '90vh'
         }).afterClosed().pipe(take(1)).subscribe(res => {
@@ -61,7 +62,7 @@ export class LoginFormComponent implements OnInit {
             email: this.form.controls.email.value,
             password: this.form.controls.password.value
         }
-        this.userService.generateToken(body)
+        this._authService.loginByCredentials(body)
             .pipe(take(1)).subscribe({
             next: (response) => {
                 this.successfullyAuthenticatedUser(response)
@@ -83,15 +84,15 @@ export class LoginFormComponent implements OnInit {
     }
     successfullyAuthenticatedUser(user: UserModel){
         this.loading = false
-        this.userService.changeUser(user)
+        this._authService.changeUser(user)
         this.form.reset()
         const access_token = user.access_token
         localStorage.setItem('access_token', access_token)
-        this.router.navigate(['/portal/dashboard'])
+        this._router.navigate(['/portal/dashboard'])
     }
 
     createAccount() {
-        this.router.navigate(['create-account'])
+        this._router.navigate(['create-account'])
         this.createAccountField = true
         this.newAccountForm()
     }
@@ -105,7 +106,7 @@ export class LoginFormComponent implements OnInit {
         }
         if (!this.form.get('photo').value) this.form.get('photo').setValue('https://services-on.netlify.app/assets/user-default.png')
         const data = this.form.value
-        this.userService.create(data)
+        this._userService.create(data)
             .pipe(take(1))
             .subscribe({
                 next: () => {
@@ -133,13 +134,13 @@ export class LoginFormComponent implements OnInit {
             showConfirmButton: true,
         }).then(res => {
             if (res.isConfirmed) {
-                this.router.navigate(['/login'])
+                this._router.navigate(['/login'])
             }
         })
     }
 
     formLogin() {
-        this.form = this.formBuilder.group({
+        this.form = this._formBuilder.group({
             email: ['', [
                 Validators.required, Validators.email
             ]],
@@ -150,7 +151,7 @@ export class LoginFormComponent implements OnInit {
     }
 
     newAccountForm() {
-        this.form = this.formBuilder.group({
+        this.form = this._formBuilder.group({
             email: ['', [
                 Validators.required, Validators.email
             ]],
