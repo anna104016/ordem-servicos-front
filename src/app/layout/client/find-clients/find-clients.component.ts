@@ -1,17 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
 import { take} from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import {MatDialog} from "@angular/material/dialog";
 import {CreateClientComponent} from "../create-client/create-client.component";
-import {FineOneClientComponent} from "../find-one-client/find-one-client.component";
 import { Client } from 'src/app/models/client.model';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { IQuery } from 'src/app/models/query.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
-import { NavbarSide, SidebarSideClassName } from '../../sidebar/models/sidenavbar.enum';
 import { SidenavbarNames } from '../../sidebar/models/sidenavbarNames';
 
 @Component({

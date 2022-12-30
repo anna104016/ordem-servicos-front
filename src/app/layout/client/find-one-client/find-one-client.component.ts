@@ -1,11 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import {finalize, take, takeUntil} from 'rxjs/operators';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {CreateClientComponent} from "../create-client/create-client.component";
 import { Client } from 'src/app/models/client.model';
-import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 import { Subject } from 'rxjs';
