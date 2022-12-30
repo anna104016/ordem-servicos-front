@@ -15,10 +15,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @HostBinding('class') get navbarSide() { return `${this.side} ${this.theme}` }
 
   @HostBinding('class.sidebar__container__show')
-  opened: boolean;
+  opened: boolean = false
 
   @HostBinding('class.sidebar__container')
-  configSidevbar: boolean
+  configSidevbar: boolean = false
+
+  @HostBinding('class.sidebar__container__hide')
+  closed: boolean = true
 
   constructor(
     private _sideNavbarService:SideNavbarService,
@@ -33,6 +36,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public openSidebar(){
     this.opened = true
     this.configSidevbar = true
+    this.closed = false
     // this.renderer.addClass(this._elementRef.nativeElement, 'sidebar__container__show');
     // this.renderer.addClass(this._elementRef.nativeElement, 'sidebar__container');
   }
@@ -40,6 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public closeSidenav(){
     this.opened = false
     this.configSidevbar = false
+    this.closed = true
   }
 
   ngOnDestroy(): void {

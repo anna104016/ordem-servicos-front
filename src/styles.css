@@ -212,7 +212,6 @@ i{
     cursor: pointer;
 }
 
-
 .sidebar__left{
     top: 0;
     right: 0;
@@ -241,4 +240,8 @@ i{
 
 .sidebar__container__show{
     display: block;
+}
+
+.sidebar__container__hide{
+    display: none;
 }
