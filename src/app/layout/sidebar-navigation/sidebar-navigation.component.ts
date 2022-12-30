@@ -2,6 +2,7 @@ import { UserModel } from 'src/app/models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { SideNavbarService } from '../sidebar/services/sidenavbar.service';
+import { SidenavbarNames } from '../sidebar/models/sidenavbarNames';
 
 @Component({
   selector: 'app-sidebar-navigation',
@@ -31,7 +32,7 @@ export class SidebarNavigationComponent implements OnInit {
   }
 
   closeSiebar(){
-    this._sideNavbarService.getSidebar('app-sidebar-navigation').closeSidenav()
+    this._sideNavbarService.getSidebar(SidenavbarNames.COMPONENT_NAVBAR_NAVIGATION).closeSidenav()
   }
 
 }
