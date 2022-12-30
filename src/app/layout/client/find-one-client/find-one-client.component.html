@@ -7,7 +7,7 @@
   <div class="header" mat-dialog-title *ngIf="!loading">
     <h2 style="display: flex; flex: auto">{{clientModel?.name}}</h2>
 
-    <button mat-dialog-close="true" mat-icon-button type="button">
+    <button mat-icon-button type="button" (click)="closeNavbar()">
       <i class="fas fa-times" style="font-size: 1rem"></i>
     </button>
   </div>

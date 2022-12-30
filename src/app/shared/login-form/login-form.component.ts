@@ -64,6 +64,7 @@ export class LoginFormComponent implements OnInit {
             .pipe(take(1)).subscribe({
             next: (response) => {
                 this.loading = false
+                this.userService.changeUser(response)
                 this.form.reset()
                 const access_token = response.access_token
                 localStorage.setItem('access_token', access_token)

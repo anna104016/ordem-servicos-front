@@ -1,4 +1,4 @@
-export interface UserModel {
+export class UserModel {
     user_id: number
     user_name:string
     email:string
@@ -6,6 +6,7 @@ export interface UserModel {
     creation_date: Date
     photo: string
     occupation_area: string
+    access_token?: string
 }
 
 export interface Photo {

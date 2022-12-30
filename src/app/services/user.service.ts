@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt'
@@ -14,6 +14,8 @@ export class UserService {
   baseUrl: String = environment.baseUrl;
   jwtHelperService: JwtHelperService = new JwtHelperService()
 
+  private userLog: BehaviorSubject<UserModel> =  new BehaviorSubject<UserModel>(new UserModel())
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -23,12 +25,12 @@ export class UserService {
     return this.http.post<UserModel>(`${this.baseUrl}/user`, user)
   }
 
-  generateToken(user:{email:string, password:string}){
+  generateToken(user:{email:string, password:string}): Observable<UserModel>{
     const params = new HttpParams()
     .set('email', user.email)
     .set('password', user.password)
     const url = `${this.baseUrl}/auth/login`
-    return this.http.post<any>(url, params)
+    return this.http.post<UserModel>(url, params)
   }
 
   getToken(){
@@ -60,5 +62,14 @@ export class UserService {
 
   updatePhoto(userId: number, body: { photo: string}): Observable<object> {
     return this.http.put(`${this.baseUrl}/user/update-photo/${userId}`, body);
+  }
+
+
+  public getUser(){
+    return this.userLog.asObservable()
+  }
+
+  public changeUser(user:UserModel){
+    this.userLog.next(user)
   }
 }

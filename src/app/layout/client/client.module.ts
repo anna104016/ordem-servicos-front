@@ -52,6 +52,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         MatTooltipModule,
         MatMenuModule
     ],
+    exports: [FineOneClientComponent],
   providers: [
     ClientsService,
     ClientesGuard,

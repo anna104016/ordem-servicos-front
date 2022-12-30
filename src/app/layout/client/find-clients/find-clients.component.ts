@@ -10,6 +10,8 @@ import { Client } from 'src/app/models/client.model';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { IQuery } from 'src/app/models/query.model';
 import { ClientsService } from 'src/app/services/clients.service';
+import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
+import { NavbarSide, SidebarSideClassName } from '../../sidebar/models/sidenavbar.enum';
 
 @Component({
   selector: "app-find-clients",
@@ -32,8 +34,9 @@ export class FindClientsComponent implements OnInit {
   loading: boolean = true;
 
   constructor(
-    private readonly service: ClientsService,
-    private readonly  dialog: MatDialog
+    private readonly _clientService: ClientsService,
+    private readonly  dialog: MatDialog,
+    private readonly _sideNavService: SideNavbarService
   ) {}
 
   ngOnInit(): void {
@@ -54,20 +57,10 @@ export class FindClientsComponent implements OnInit {
       }})
   }
 
-  getClient(_id: number) {
-    this.dialog.open(FineOneClientComponent,{
-      width: '40rem',
-      height: '20rem',
-      data: {
-        id: _id
-      }
-    }).afterClosed().pipe(take(1)).subscribe({
-      next: (resp: {data: boolean}) => {
-        if(resp){
-          if(resp.data) this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
-        }
-      }
-    })
+  openClientDetails(id: number) {
+    this._clientService.setCurrentClientId(id)
+    this._sideNavService.setSidenavbarIsOpen(true)
+    this._sideNavService.getSidebar('app-client-details').openSidebar()
   }
 
   update(id: number) {
@@ -103,7 +96,7 @@ export class FindClientsComponent implements OnInit {
   }
 
   confirmDeleteClient(id: number){
-    this.service.delete(id).subscribe({
+    this._clientService.delete(id).subscribe({
       next: () => { this.messageAlert('Cliente deletado com sucesso!', true)},
       error: () => {this.messageAlert('Cliente não pode ser deletado!', false)}
      });
@@ -136,7 +129,7 @@ export class FindClientsComponent implements OnInit {
       take: perPage
     }
 
-    this.service.find(query).pipe(
+    this._clientService.find(query).pipe(
       take(1)
     ).subscribe({
       next: (resp) => {

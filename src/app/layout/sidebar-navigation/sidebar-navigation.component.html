@@ -1,0 +1,32 @@
+<div class="sidenav__container">
+    <div class='sidenav__content'>
+    
+          <img class="sidenav__avatar mat-elevation-z8" [src]="user?.photo" />
+    
+          <h4 class="sidenav__avatar__name">{{ user?.user_name }}</h4>
+          <p class="sidenav__avatar__designation">{{ user?.occupation_area }}</p>
+    
+          <button  class="sidenav__menu__button">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </button>
+    
+          <button  class="sidenav__menu__button">
+            <mat-icon>person</mat-icon>
+            <span>Meus clientes</span>
+          </button>
+    
+          <button  class="sidenav__menu__button">
+            <mat-icon>info</mat-icon>
+            <span>Meus serviços</span>
+          </button>
+    
+          <mat-divider></mat-divider>
+    
+          <button  class="sidenav__menu__button" (click)="closeSiebar()">
+            <mat-icon>close</mat-icon>
+            <span>Fechar</span>
+          </button>
+          
+        </div>
+      </div>

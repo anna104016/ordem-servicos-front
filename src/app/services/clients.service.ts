@@ -1,6 +1,6 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {Client, IRespGetClients, ReportClients} from '../models/client.model';
 import {IQuery} from "../models/query.model";
@@ -9,6 +9,8 @@ import {IQuery} from "../models/query.model";
   providedIn: 'root'
 })
 export class ClientsService {
+
+  private currentClientId: BehaviorSubject<number> = new BehaviorSubject<number>(null)
 
   baseUrl: String = environment.baseUrl;
 
@@ -25,16 +27,6 @@ export class ClientsService {
     return this.http.get<IRespGetClients>(`${this.baseUrl}/clientes`, {params});
   }
 
-  // OBTENDO TOKEN NO LOCAL STORAGE E LANÇANDO NA REQUISIÇÃO
-  // find(): Observable<Client[]> {
-  //   const token = localStorage.getItem('access_token')
-  //   const headers = {
-  //     'Authorization': 'Bearer ' + token
-  //   }
-  //   const url = `${this.baseUrl}/clientes`;
-  //   return this.http.get<Client[]>(url, {headers});
-  // }
-
   create(cliente: Client): Observable<Client>{
     return this.http.post<Client>(`${this.baseUrl}/clientes`,cliente);
   }
@@ -49,5 +41,13 @@ export class ClientsService {
 
   reportClients(): Observable<ReportClients> {
     return this.http.get<ReportClients>(`${this.baseUrl}/clientes/servicos/relatorios`);
+  }
+
+  getCurrentClientId(){
+    return this.currentClientId.asObservable()
+  }
+
+  setCurrentClientId(id: number){
+    this.currentClientId.next(id)
   }
 }

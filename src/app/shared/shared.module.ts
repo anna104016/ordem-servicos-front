@@ -1,3 +1,4 @@
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { NgModule } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SelectUserPhotoComponent } from './select-user-photo/select-user-photo.component';
@@ -32,7 +33,7 @@ import { TableComponent } from '../components/table/table.component';
     HeaderComponent,
     PageHeaderComponent,
     MenuButtomComponent,
-    TableComponent
+    TableComponent,
   ],
   imports: [
     CommonModule,
@@ -54,10 +55,12 @@ import { TableComponent } from '../components/table/table.component';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatIconModule,
+    MatSidenavModule
   ],
   exports: [
     SelectUserPhotoComponent,
-    HeaderComponent,PageHeaderComponent,TableComponent
+    HeaderComponent,PageHeaderComponent,TableComponent,
   ]
 })
 export class SharedModule { }
