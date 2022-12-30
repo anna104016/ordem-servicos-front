@@ -6,6 +6,7 @@ import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 import { Subject } from 'rxjs';
+import { SidenavbarNames } from '../../sidebar/models/sidenavbarNames';
 
 @Component({
   selector: 'app-client-details',
@@ -120,6 +121,6 @@ export class FineOneClientComponent implements OnInit {
   closeNavbar(){
     this._clientService.setCurrentClientId(null)
     this._sidenavbarService.setSidenavbarIsOpen(false)
-    this._sidenavbarService.getSidebar('app-client-details').closeSidenav()
+    this._sidenavbarService.getSidebar(SidenavbarNames.COMPONENT_CLIENT_DETAILS).closeSidenav()
   }
 }
