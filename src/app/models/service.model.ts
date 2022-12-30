@@ -20,7 +20,6 @@ export interface ReportServices {
     servicos: number
     servicos_fechados: number
 }
-
 export interface IRespGetServices{
     services: ServiceModel[],
     page?: number,

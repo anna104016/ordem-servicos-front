@@ -29,11 +29,9 @@ export class CreateServiceComponent implements OnInit {
     form: FormGroup
 
     constructor(
-        private readonly router: Router,
         private readonly clientService: ClientsService,
         private readonly formBuilder: FormBuilder,
         private readonly statusService: StatusService,
-        private readonly activatedRouter: ActivatedRoute,
         private readonly dialogRef: MatDialogRef<CreateServiceComponent>,
         @Inject(MAT_DIALOG_DATA) public readonly data: {service_id: number,type: DialogTypeEnum},
         private readonly service: ServicesService) {
@@ -59,24 +57,28 @@ export class CreateServiceComponent implements OnInit {
     getService() {
         this.loading = true
         this.service.findOne(this.data.service_id).pipe(take(1)).subscribe({
-        next: (res: ServiceModel) => {
-            this.statusControl.setValue(res.status.status_id)
-            this.clientControl.setValue(res.client.client_id)
-            this.form = this.formBuilder.group({
-                description: new FormControl(res.description, [
-                    Validators.required,
-                    Validators.minLength(10)
-                ]),
-                price: new FormControl(res.price, [
-                    Validators.required,
-                ]),
-                client: this.clientControl,
-                status: this.statusControl,
-                closing_date: new FormControl(res.closing_date),
-                opening_date: new FormControl(res.opening_date),
-            })
+        next: (service: ServiceModel) => {
+            this.statusControl.setValue(service.status.status_id)
+            this.clientControl.setValue(service.client.client_id)
+            this.updateForm(service)
             this.loading = false
         }})
+    }
+
+    updateForm(service: ServiceModel){
+        this.form = this.formBuilder.group({
+            description: [service.description, [
+                Validators.required,
+                Validators.minLength(10)
+            ]],
+            price: [service.price, [
+                Validators.required,
+            ]],
+            client: this.clientControl,
+            status: this.statusControl,
+            closing_date: [service.closing_date],
+            opening_date: [service.opening_date],
+        })
     }
 
     getClients(): void {
@@ -111,12 +113,8 @@ export class CreateServiceComponent implements OnInit {
 
     save(): void {
         console.log("chegou aqui")
-        const data = {
-            description: this.form.get('description').value,
-            price: this.form.get('price').value,
-            client: this.form.get('client').value
-        }
-        this.service.create(data).subscribe({
+        const service = this.createServiceObject()
+        this.service.create(service).subscribe({
             next: () => {
                 this.successModel('Serviço criado com sucesso!')
                 this.loadingSumit = false
@@ -124,6 +122,15 @@ export class CreateServiceComponent implements OnInit {
                 this.loading = false
                 this.errorModel('Não foi pissível criar este serviço')
             }})
+    }
+
+    createServiceObject(){
+        const service: ServiceModel = {
+            description: this.form.get('description').value,
+            price: this.form.get('price').value,
+            client: this.form.get('client').value
+        }
+        return service
     }
 
     successModel(text: string): void {
@@ -154,17 +161,17 @@ export class CreateServiceComponent implements OnInit {
 
     createForm(): void {
         this.form = this.formBuilder.group({
-            description: new FormControl('', [
+            description: ['', [
                 Validators.required,
                 Validators.minLength(10)
-            ]),
-            price: new FormControl('', [
+            ]],
+            price: ['', [
                 Validators.required,
-            ]),
+            ]],
             client: this.clientControl,
             status: this.statusControl,
-            closing_date: new FormControl(''),
-            opening_date: new FormControl(''),
+            closing_date: [''],
+            opening_date: [''],
         })
     }
 }
