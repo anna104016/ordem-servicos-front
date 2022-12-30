@@ -37,8 +37,7 @@ export class FindServicesComponent implements OnInit {
         private readonly activaredRoute: ActivatedRoute,
         private readonly router: Router,
         private readonly dialog: MatDialog
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.find(this.paginationDefault.page + 1, this.paginationDefault.size)

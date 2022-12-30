@@ -43,11 +43,11 @@ export class UserIdComponent implements OnInit {
     }
 
     selectPhoto() {
-        const photo = this.dialog.open(SelectUserPhotoComponent, {
+        const photoDialog = this.dialog.open(SelectUserPhotoComponent, {
             width: '40rem',
             height: '90vh'
         })
-        photo.afterClosed().pipe(take(1)).subscribe(resp => {
+        photoDialog.afterClosed().pipe(take(1)).subscribe(resp => {
             if (resp) {
                 this.updateUserPhoto(resp.data)
             }

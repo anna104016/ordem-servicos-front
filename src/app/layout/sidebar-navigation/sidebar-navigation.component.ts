@@ -1,8 +1,8 @@
 import { UserModel } from 'src/app/models/user.model';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 import { SideNavbarService } from '../sidebar/services/sidenavbar.service';
-import { SidenavbarNames } from '../sidebar/models/sidenavbarNames';
+import { SidebarNames } from '../sidebar/models/sidenavbarNames';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar-navigation',
@@ -14,9 +14,8 @@ export class SidebarNavigationComponent implements OnInit {
   user: UserModel
 
   constructor(
-    private _userService: UserService,
-    private _sideNavbarService: SideNavbarService
-
+    private _sideNavbarService: SideNavbarService,
+    private readonly _authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -24,15 +23,14 @@ export class SidebarNavigationComponent implements OnInit {
   }
 
   getUser(){
-    this._userService.getUser().subscribe({
+    this._authService.getUser().subscribe({
       next: (user) => {
         this.user = user
       }
     })
   }
 
-  closeSiebar(){
-    this._sideNavbarService.getSidebar(SidenavbarNames.COMPONENT_NAVBAR_NAVIGATION).closeSidenav()
+  closeSidebar(){
+    this._sideNavbarService.getSidebar(SidebarNames.COMPONENT_NAVBAR_NAVIGATION).closeSidenav()
   }
-
 }

@@ -1,9 +1,8 @@
-import { SidebarSideClassName, SidenavbarTheme } from 'src/app/layout/sidebar/models/sidenavbar.enum';
-import { NavbarSettings } from './../sidebar/models/navbnarSettings.model';
+import { SidebarSideClassName, SidebarTheme } from 'src/app/layout/sidebar/models/sidenavbar.enum';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { SideNavbarService } from '../sidebar/services/sidenavbar.service';
-import { SidenavbarNames } from '../sidebar/models/sidenavbarNames';
+import { SidebarNames } from '../sidebar/models/sidenavbarNames';
 
 @Component({
   selector: 'app-layout-component',
@@ -13,9 +12,9 @@ import { SidenavbarNames } from '../sidebar/models/sidenavbarNames';
 export class LayoutComponentComponent implements OnInit  {
 
   sidebarSideClassName = SidebarSideClassName
-  sidenavbarTheme = SidenavbarTheme
-  sidenavbarNames = SidenavbarNames
-  
+  sidebarTheme = SidebarTheme
+  sidebarNames = SidebarNames
+
   constructor(
     private observer: BreakpointObserver,
     private _sideNavService:SideNavbarService,
@@ -24,10 +23,7 @@ export class LayoutComponentComponent implements OnInit  {
   ngOnInit(): void {
   }
 
-  ngAfterViewInit() {
-  }
-
   openSidebar(){
-    this._sideNavService.getSidebar(this.sidenavbarNames.COMPONENT_NAVBAR_NAVIGATION).openSidebar()
+    this._sideNavService.getSidebar(this.sidebarNames.COMPONENT_NAVBAR_NAVIGATION).openSidebar()
   }
 }

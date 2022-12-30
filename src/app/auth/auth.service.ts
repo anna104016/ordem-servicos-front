@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt'
@@ -30,7 +31,11 @@ export class AuthService{
       }
 
       validateUser(){
-        return this.http.post(`${this.baseUrl}/auth/validation`)
+        let userAuth: UserModel
+        return  this.http.post<UserModel>(`${this.baseUrl}/auth/validation`, {}).pipe(
+          map(user => userAuth = user),
+          mergeMap(async () => this.changeUser(userAuth))
+        )
       }
     
       getToken(){

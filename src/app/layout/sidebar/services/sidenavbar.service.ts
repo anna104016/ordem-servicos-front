@@ -1,6 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { NavbarSettings } from '../models/navbnarSettings.model';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 @Injectable({
@@ -8,11 +7,11 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class SideNavbarService {
 
-  private sidenavbarIsOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  
+  private sidebarIsOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+
   private _registry: { [key: string]: NavbarComponent } = {};
 
-  constructor() { } 
+  constructor() { }
 
     getSidebar(key): NavbarComponent{
       return this._registry[key];
@@ -26,12 +25,12 @@ export class SideNavbarService {
       delete this._registry[key];
     }
 
-    getSidenavbarIsOpen(){
-      return this.sidenavbarIsOpen.asObservable()
+    getSidebarIsOpen(){
+      return this.sidebarIsOpen.asObservable()
     }
 
-    setSidenavbarIsOpen(value: boolean){
-      this.sidenavbarIsOpen.next(value)
+    setSidebarIsOpen(value: boolean){
+      this.sidebarIsOpen.next(value)
     }
 
 }

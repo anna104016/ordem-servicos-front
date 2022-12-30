@@ -1,17 +1,17 @@
 <app-header (openSidebarEvent)="openSidebar()"></app-header>
 <router-outlet></router-outlet>
 
-<app-navbar 
-    [side]="sidebarSideClassName.RIGHT" 
-    [name]="sidenavbarNames.COMPONENT_NAVBAR_NAVIGATION" 
-    [theme]="sidenavbarTheme.DARK">
+<app-navbar
+    [side]="sidebarSideClassName.RIGHT"
+    [name]="sidebarNames.COMPONENT_NAVBAR_NAVIGATION"
+    [theme]="sidebarTheme.DARK">
     <app-sidebar-navigation></app-sidebar-navigation>
 </app-navbar>
 
-<app-navbar 
-    [side]="sidebarSideClassName.LEFT" 
-    [name]="sidenavbarNames.COMPONENT_CLIENT_DETAILS" 
-    [theme]="sidenavbarTheme.LIGTH">
+<app-navbar
+    [side]="sidebarSideClassName.LEFT"
+    [name]="sidebarNames.COMPONENT_CLIENT_DETAILS"
+    [theme]="sidebarTheme.LIGHT">
     <app-client-details></app-client-details>
 </app-navbar>
 

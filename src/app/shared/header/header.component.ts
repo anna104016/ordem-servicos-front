@@ -3,9 +3,9 @@ import {UserService} from "../../services/user.service";
 import Swal from "sweetalert2";
 import {MenuButtomComponent} from "../menu-buttom/menu-buttom.component";
 import {MatBottomSheet} from "@angular/material/bottom-sheet";
-import { SidebarSideClassName } from 'src/app/layout/sidebar/models/sidenavbar.enum';
 import { SideNavbarService } from 'src/app/layout/sidebar/services/sidenavbar.service';
 import { NavbarSettings } from 'src/app/layout/sidebar/models/navbnarSettings.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,16 +20,17 @@ export class HeaderComponent implements OnInit {
   @Output() closeSidenavEvent = new EventEmitter()
 
   constructor(
-      private readonly userService: UserService,
-      private readonly bottomSheet: MatBottomSheet,
-      private _sideNavService: SideNavbarService
+      private readonly _userService: UserService,
+      private readonly _bottomSheet: MatBottomSheet,
+      private _sideNavService: SideNavbarService,
+      private readonly _authSerivice: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
   openBottomSheet(){
-    this.bottomSheet.open(MenuButtomComponent);
+    this._bottomSheet.open(MenuButtomComponent);
   }
 
 
@@ -42,7 +43,7 @@ export class HeaderComponent implements OnInit {
       showConfirmButton: true
     }).then((resul) => {
       if(resul.isConfirmed){
-        this.userService.logOut()
+        this._authSerivice.logOut()
       }else{
         Swal.close()
       }

@@ -33,7 +33,7 @@ export class FindClientsComponent implements OnInit {
 
   constructor(
     private readonly _clientService: ClientsService,
-    private readonly  dialog: MatDialog,
+    private readonly  _dialog: MatDialog,
     private readonly _sideNavService: SideNavbarService
   ) {}
 
@@ -42,7 +42,7 @@ export class FindClientsComponent implements OnInit {
   }
 
   newClient() {
-    this.dialog.open(CreateClientComponent, {
+    this._dialog.open(CreateClientComponent, {
       width: '40rem',
       data: {
         type: DialogTypeEnum.CREATE
@@ -62,7 +62,7 @@ export class FindClientsComponent implements OnInit {
   }
 
   update(id: number) {
-    this.dialog.open(CreateClientComponent, {
+    this._dialog.open(CreateClientComponent, {
       width: '40rem',
       minHeight: '20rem',
       data: {
@@ -71,7 +71,7 @@ export class FindClientsComponent implements OnInit {
       }
     }).afterClosed().pipe(take(1)).subscribe({
       next: (resp: {data: boolean}) => {
-        if(resp){
+        if(resp.data){
           this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
         }
       }})
@@ -127,9 +127,7 @@ export class FindClientsComponent implements OnInit {
       take: perPage
     }
 
-    this._clientService.find(query).pipe(
-      take(1)
-    ).subscribe({
+    this._clientService.find(query).pipe(take(1)).subscribe({
       next: (resp) => {
       this.clients = resp.users
       this.paginationDefault.totalElements = resp.count

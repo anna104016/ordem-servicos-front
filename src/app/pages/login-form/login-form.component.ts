@@ -4,11 +4,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {UserService} from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
-import {SelectUserPhotoComponent} from '../select-user-photo/select-user-photo.component';
 import {take} from "rxjs/operators";
 import {Notify} from "notiflix";
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
+import { SelectUserPhotoComponent } from 'src/app/shared/select-user-photo/select-user-photo.component';
 
 @Component({
     selector: 'app-login-form',
@@ -16,6 +16,8 @@ import { AuthService } from 'src/app/auth/auth.service';
     styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
+
+    userDefaultProfilePhoto: string = 'https://services-on.netlify.app/assets/user-default.png'
 
     form: FormGroup
     emailOrPassWrong: string
@@ -104,7 +106,7 @@ export class LoginFormComponent implements OnInit {
             Notify.info("Informe os dados corretamente")
             return
         }
-        if (!this.form.get('photo').value) this.form.get('photo').setValue('https://services-on.netlify.app/assets/user-default.png')
+        if (!this.form.get('photo').value) this.form.get('photo').setValue(this.userDefaultProfilePhoto)
         const data = this.form.value
         this._userService.create(data)
             .pipe(take(1))

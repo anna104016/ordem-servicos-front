@@ -1,4 +1,4 @@
-import { SidebarSideClassName, SidenavbarTheme } from './../models/sidenavbar.enum';
+import { SidebarSideClassName, SidebarTheme } from '../models/sidenavbar.enum';
 import { Component, HostBinding, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 import { SideNavbarService } from '../services/sidenavbar.service';
 
@@ -10,7 +10,7 @@ import { SideNavbarService } from '../services/sidenavbar.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   @Input() side: SidebarSideClassName
   @Input() name: string
-  @Input() theme: SidenavbarTheme
+  @Input() theme: SidebarTheme
 
   @HostBinding('class') get navbarSide() { return `${this.side} ${this.theme}` }
 
@@ -18,14 +18,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
   opened: boolean = false
 
   @HostBinding('class.sidebar__container')
-  configSidevbar: boolean = false
+  configSidebar: boolean = false
 
   @HostBinding('class.sidebar__container__hide')
   closed: boolean = true
 
   constructor(
     private _sideNavbarService:SideNavbarService,
-    private _elementRef: ElementRef, 
+    private _elementRef: ElementRef,
     private _renderer: Renderer2
   ) { }
 
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public openSidebar(){
     this.opened = true
-    this.configSidevbar = true
+    this.configSidebar = true
     this.closed = false
     // this.renderer.addClass(this._elementRef.nativeElement, 'sidebar__container__show');
     // this.renderer.addClass(this._elementRef.nativeElement, 'sidebar__container');
@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public closeSidenav(){
     this.opened = false
-    this.configSidevbar = false
+    this.configSidebar = false
     this.closed = true
   }
 

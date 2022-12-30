@@ -6,7 +6,7 @@ import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 import { Subject } from 'rxjs';
-import { SidenavbarNames } from '../../sidebar/models/sidenavbarNames';
+import {SidebarNames} from "../../sidebar/models/sidenavbarNames";
 
 @Component({
   selector: 'app-client-details',
@@ -21,12 +21,12 @@ export class FineOneClientComponent implements OnInit {
   clientModel: Client
   id: number
 
-  sidenavbarIsOpen: boolean = false
+  sidebarIsOpen: boolean = false
 
   constructor(
     private readonly _clientService: ClientsService,
     private readonly router: Router,
-    private readonly _sidenavbarService: SideNavbarService
+    private readonly _sidebarService: SideNavbarService
   ) { }
 
   ngOnInit(): void {
@@ -43,11 +43,11 @@ export class FineOneClientComponent implements OnInit {
   }
 
   getSidenavState(){
-    this._sidenavbarService.getSidenavbarIsOpen().pipe(takeUntil(this.componentDestroyed$)).subscribe({
+    this._sidebarService.getSidebarIsOpen().pipe(takeUntil(this.componentDestroyed$)).subscribe({
       next: (value) => {
-        this.sidenavbarIsOpen = value
+        this.sidebarIsOpen = value
 
-        if(this.sidenavbarIsOpen == true && this.id != null){
+        if(this.sidebarIsOpen == true && this.id != null){
           this.getClient()
         }
       }
@@ -120,7 +120,7 @@ export class FineOneClientComponent implements OnInit {
 
   closeNavbar(){
     this._clientService.setCurrentClientId(null)
-    this._sidenavbarService.setSidenavbarIsOpen(false)
-    this._sidenavbarService.getSidebar(SidenavbarNames.COMPONENT_CLIENT_DETAILS).closeSidenav()
+    this._sidebarService.setSidebarIsOpen(false)
+    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_DETAILS).closeSidenav()
   }
 }

@@ -55,7 +55,7 @@
             ],
             "styles": [
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.scss",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": [

@@ -1,14 +1,9 @@
-export enum NavbarSide{
-    LEFT = 'LEFT',
-    RIGHT = 'RIGHT'
-}
-
 export enum SidebarSideClassName{
     LEFT = 'sidebar__left',
     RIGHT = 'sidebar__right'
 }
 
-export enum SidenavbarTheme{
+export enum SidebarTheme{
     DARK = 'sidebar__container__dark',
-    LIGTH = 'sidebar__container__ligth'
+    LIGHT = 'sidebar__container__light'
 }

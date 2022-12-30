@@ -9,7 +9,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { SharedRoutingModule } from './shared.routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { NgModule } from '@angular/core';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
@@ -23,6 +22,7 @@ import {MenuButtomComponent} from "./menu-buttom/menu-buttom.component";
 import {MatListModule} from "@angular/material/list";
 import { HomeComponent } from '../pages/home/home.component';
 import { TableComponent } from '../components/table/table.component';
+import { LoginFormComponent } from '../pages/login-form/login-form.component';
 
 @NgModule({
   declarations: [

@@ -11,7 +11,6 @@ import {RouterModule} from "@angular/router";
 import {LayoutRoutingModule} from "./layout.routing.module";
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { FineOneClientComponent } from './client/find-one-client/find-one-client.component';
 
 @NgModule({
   declarations: [
