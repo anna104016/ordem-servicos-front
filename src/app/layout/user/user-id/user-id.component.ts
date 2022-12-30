@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
     selector: 'app-user-id',
     templateUrl: './user-id.component.html',
-    styleUrls: ['./user-id.component.css']
+    styleUrls: ['./user-id.component.scss']
 })
 export class UserIdComponent implements OnInit {
 

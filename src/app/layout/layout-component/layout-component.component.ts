@@ -7,7 +7,7 @@ import { SideNavbarService } from '../sidebar/services/sidenavbar.service';
 @Component({
   selector: 'app-layout-component',
   templateUrl: './layout-component.component.html',
-  styleUrls: ['./layout-component.component.css']
+  styleUrls: ['./layout-component.component.scss']
 })
 export class LayoutComponentComponent implements OnInit  {
 

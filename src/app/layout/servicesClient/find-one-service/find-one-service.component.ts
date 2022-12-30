@@ -11,7 +11,7 @@ import { ServicesService } from 'src/app/services/services.service';
 @Component({
   selector: 'app-find-one-service',
   templateUrl: './find-one-service.component.html',
-  styleUrls: ['./find-one-service.component.css']
+  styleUrls: ['./find-one-service.component.scss']
 })
 export class FindOneServiceComponent implements OnInit {
   loading: boolean = false
@@ -19,7 +19,6 @@ export class FindOneServiceComponent implements OnInit {
 
   constructor(
       private readonly servicesService: ServicesService,
-      private readonly activatedRoute: ActivatedRoute,
       private readonly router: Router,
       private readonly  dialog: MatDialog,
       private readonly dialogRef: MatDialogRef<FindOneServiceComponent>,

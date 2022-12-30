@@ -16,7 +16,7 @@ import { NavbarSide, SidebarSideClassName } from '../../sidebar/models/sidenavba
 @Component({
   selector: "app-find-clients",
   templateUrl: "./find-clients.component.html",
-  styleUrls: ["./find-clients.component.css"],
+  styleUrls: ["./find-clients.component.scss"],
 })
 export class FindClientsComponent implements OnInit {
   clients: Client[] = []

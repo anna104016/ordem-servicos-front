@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-client-details',
   templateUrl: './find-one-client.component.html',
-  styleUrls: ['./find-one-client.component.css']
+  styleUrls: ['./find-one-client.component.scss']
 })
 export class FineOneClientComponent implements OnInit {
 
@@ -39,7 +39,6 @@ export class FineOneClientComponent implements OnInit {
   getClientId(){
     this._clientService.getCurrentClientId().pipe(takeUntil(this.componentDestroyed$)).subscribe({
       next: (clientId) => {
-        console.log("🚀 this._clientService.getCurrentClientId ~ clientId", clientId)
         this.id = clientId
       }
     })
@@ -64,7 +63,6 @@ export class FineOneClientComponent implements OnInit {
           take(1)
       ).subscribe({
         next: (resp) =>{
-          console.log('resp ', resp)
           this.clientModel = resp}
     })
   }

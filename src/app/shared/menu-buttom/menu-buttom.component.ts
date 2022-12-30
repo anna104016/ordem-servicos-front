@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 @Component({
   selector: 'app-menu-buttom',
   templateUrl: './menu-buttom.component.html',
-  styleUrls: ['./menu-buttom.component.css']
+  styleUrls: ['./menu-buttom.component.scss']
 })
 export class MenuButtomComponent implements OnInit {
 

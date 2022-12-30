@@ -10,7 +10,7 @@ import { NavbarSettings } from 'src/app/layout/sidebar/models/navbnarSettings.mo
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 

@@ -14,7 +14,7 @@ import { ServicesService } from "src/app/services/services.service";
 @Component({
     selector: "app-find-servicesClient",
     templateUrl: "./find-services.component.html",
-    styleUrls: ["./find-services.component.css"],
+    styleUrls: ["./find-services.component.scss"],
 })
 export class FindServicesComponent implements OnInit {
     services: ServiceModel[] = []

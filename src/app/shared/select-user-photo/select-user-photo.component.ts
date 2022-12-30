@@ -5,7 +5,7 @@ import { Photo } from 'src/app/models/user.model';
 @Component({
   selector: 'app-select-user-photo',
   templateUrl: './select-user-photo.component.html',
-  styleUrls: ['./select-user-photo.component.css']
+  styleUrls: ['./select-user-photo.component.scss']
 })
 export class SelectUserPhotoComponent implements OnInit {
 
