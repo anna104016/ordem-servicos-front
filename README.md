@@ -6,19 +6,5 @@
 - Angular
 - Angular material
 
-##### :small_blue_diamond: Métodos para entidade Clientes:
-- inserir
-- deletar
-- encontrar todos
-- encontrar pelo ID
-- atualizar
-
-##### :small_blue_diamond: Métodos para entidade Serviços:
-- inserir
-- deletar
-- encontrar todos
-- encontrar pelo ID
-- atualizar
-
 ##### :small_blue_diamond: API utilizada:
 - https://github.com/santoskarolina/ordem-servicos-nestjs
