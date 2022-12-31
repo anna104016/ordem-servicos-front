@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserService } from '../services/user.service';
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,13 @@ import { UserService } from '../services/user.service';
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private router: Router,
-    private userService: UserService
+    private readonly _router: Router,
+    private readonly _userService: UserService,
+    private readonly _authService: AuthService
   ){}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean { //condição para rota ser acessada
-    const userIsAuthenticated  = this.userService.checkIfTheUserIsAuthenticated()
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const userIsAuthenticated  = this._authService.checkIfTheUserIsAuthenticated()
     if(userIsAuthenticated){
       return true
     }else{
@@ -23,7 +24,6 @@ export class AuthGuard implements CanActivate {
       return false
     }
   }
-
 
   logOut(){
     Swal.fire({
@@ -34,9 +34,9 @@ export class AuthGuard implements CanActivate {
       cancelButtonText: 'OK'
     }).then((result) => {
       if(result.isConfirmed){
-        this.router.navigate([''])
+        this._router.navigate([''])
       }else{
-        this.router.navigate([''])
+        this._router.navigate([''])
       }
     })
   }

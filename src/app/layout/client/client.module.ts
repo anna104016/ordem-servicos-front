@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { ClientRoutingModule } from './cliente.routing.module';
-import { FineOneClientComponent } from './find-one-client/find-one-client.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -29,7 +29,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   declarations: [
     FindClientsComponent,
     CreateClientComponent,
-    FineOneClientComponent
+      ClientDetailsComponent
   ],
     imports: [
         ClientRoutingModule,
@@ -52,7 +52,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         MatTooltipModule,
         MatMenuModule
     ],
-    exports: [FineOneClientComponent],
+    exports: [ClientDetailsComponent],
   providers: [
     ClientsService,
     ClientesGuard,

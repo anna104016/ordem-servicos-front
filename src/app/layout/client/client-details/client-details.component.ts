@@ -10,10 +10,10 @@ import {SidebarNames} from "../../sidebar/models/sidenavbarNames";
 
 @Component({
   selector: 'app-client-details',
-  templateUrl: './find-one-client.component.html',
-  styleUrls: ['./find-one-client.component.scss']
+  templateUrl: './client-details.component.html',
+  styleUrls: ['./client-details.component.scss']
 })
-export class FineOneClientComponent implements OnInit {
+export class ClientDetailsComponent implements OnInit {
 
   private componentDestroyed$ = new Subject();
 

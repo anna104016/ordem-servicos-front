@@ -3,6 +3,10 @@
 // Import ax.theme.scss
 @import "app/scss/app.style.scss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *{
     margin: 0;
     padding: 0;

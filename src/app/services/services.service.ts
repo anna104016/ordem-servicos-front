@@ -26,19 +26,19 @@ export class ServicesService {
     return this.http.get<ReportServices>(`${this.baseUrl}/servicos/todos/report`);
   }
 
-  findOne(id: number): Observable<ServiceModel>{
-    return this.http.get<ServiceModel>(`${this.baseUrl}/servicos/${id}`);
+  findOne(serviceId: number): Observable<ServiceModel>{
+    return this.http.get<ServiceModel>(`${this.baseUrl}/servicos/${serviceId}`);
   }
 
   create(service: ServiceModel): Observable<ServiceModel>{
     return this.http.post<ServiceModel>(`${this.baseUrl}/servicos`, service);
   }
 
-  update(id:number, service: ServiceModel): Observable<ServiceModel>{
-    return this.http.put<ServiceModel>(`${this.baseUrl}/servicos/${id}`, service);
+  update(serviceId:number, service: ServiceModel): Observable<ServiceModel>{
+    return this.http.put<ServiceModel>(`${this.baseUrl}/servicos/${serviceId}`, service);
   }
 
-  delete(id: number): Observable<void>{
-    return this.http.delete<void>(`${this.baseUrl}/servicos/${id}`);
+  delete(serviceId: number): Observable<void>{
+    return this.http.delete<void>(`${this.baseUrl}/servicos/${serviceId}`);
   }
 }

@@ -1,11 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { UserModel } from '../models/user.model';
-import { JwtHelperService } from '@auth0/angular-jwt'
-import { Router } from '@angular/router';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map, mergeMap} from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
+import {UserModel} from '../models/user.model';
+import {Router} from '@angular/router';
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
     providedIn: 'root'
@@ -13,13 +13,12 @@ import { Router } from '@angular/router';
 export class AuthService{
 
     baseUrl: String = environment.baseUrl;
-    jwtHelperService: JwtHelperService = new JwtHelperService()
-  
     private userLog: BehaviorSubject<UserModel> =  new BehaviorSubject<UserModel>(new UserModel())
 
     constructor(
-        private http: HttpClient,
-        private router: Router
+        private readonly _http: HttpClient,
+        private readonly _router: Router,
+        private readonly _jwtHelperService: JwtHelperService
     ){}
 
     loginByCredentials(user:{email:string, password:string}): Observable<UserModel>{
@@ -27,44 +26,43 @@ export class AuthService{
         .set('email', user.email)
         .set('password', user.password)
         const url = `${this.baseUrl}/auth/login`
-        return this.http.post<UserModel>(url, params)
+        return this._http.post<UserModel>(url, params)
       }
 
       validateUser(){
         let userAuth: UserModel
-        return  this.http.post<UserModel>(`${this.baseUrl}/auth/validation`, {}).pipe(
+        return  this._http.post<UserModel>(`${this.baseUrl}/auth/validation`, {}).pipe(
           map(user => userAuth = user),
           mergeMap(async () => this.changeUser(userAuth))
         )
       }
-    
+
       getToken(){
         const token = localStorage.getItem('access_token')
         if(token){
-          const tokenJSON = JSON.parse(JSON.stringify(token))
-          return tokenJSON
+            return JSON.parse(JSON.stringify(token))
         }
         return null
       }
-    
+
       checkIfTheUserIsAuthenticated(): boolean {
         const token = this.getToken()
         if(token){
-          const expiredToken = this.jwtHelperService.isTokenExpired(token) 
+          const expiredToken = this._jwtHelperService.isTokenExpired(token)
           return !expiredToken
         }
         return false
       }
-    
+
       logOut(){
         localStorage.clear()
-        this.router.navigate([''])
+        this._router.navigate([''])
       }
 
       public getUser(){
         return this.userLog.asObservable()
       }
-    
+
       public changeUser(user:UserModel){
         this.userLog.next(user)
       }

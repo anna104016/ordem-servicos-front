@@ -16,8 +16,8 @@ export class ClientsService {
 
   constructor(private http: HttpClient) { }
 
-  findOne(id: number): Observable<Client>{
-    return this.http.get<Client>(`${this.baseUrl}/clientes/${id}`);
+  findOne(clientId: number): Observable<Client>{
+    return this.http.get<Client>(`${this.baseUrl}/clientes/${clientId}`);
   }
 
   find(query?: IQuery): Observable<IRespGetClients> {
@@ -27,16 +27,16 @@ export class ClientsService {
     return this.http.get<IRespGetClients>(`${this.baseUrl}/clientes`, {params});
   }
 
-  create(cliente: Client): Observable<Client>{
-    return this.http.post<Client>(`${this.baseUrl}/clientes`,cliente);
+  create(client: Client): Observable<Client>{
+    return this.http.post<Client>(`${this.baseUrl}/clientes`, {client});
   }
 
-  update(id: number, client: Client): Observable<void>{
-    return this.http.put<void>(`${this.baseUrl}/clientes/${id}`,client)
+  update(clientId: number, client: Client): Observable<void>{
+    return this.http.put<void>(`${this.baseUrl}/clientes/${clientId}`, {client})
   }
 
-  delete(id: number):Observable<void>{
-    return this.http.delete<void>(`${this.baseUrl}/clientes/${id}`);
+  delete(clientId: number):Observable<void>{
+    return this.http.delete<void>(`${this.baseUrl}/clientes/${clientId}`);
   }
 
   reportClients(): Observable<ReportClients> {

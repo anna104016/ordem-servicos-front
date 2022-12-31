@@ -9,7 +9,7 @@ import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { IQuery } from 'src/app/models/query.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
-import { SidenavbarNames } from '../../sidebar/models/sidenavbarNames';
+import {SidebarNames} from "../../sidebar/models/sidenavbarNames";
 
 @Component({
   selector: "app-find-clients",
@@ -57,8 +57,8 @@ export class FindClientsComponent implements OnInit {
 
   openClientDetails(id: number) {
     this._clientService.setCurrentClientId(id)
-    this._sideNavService.setSidenavbarIsOpen(true)
-    this._sideNavService.getSidebar(SidenavbarNames.COMPONENT_CLIENT_DETAILS).openSidebar()
+    this._sideNavService.setSidebarIsOpen(true)
+    this._sideNavService.getSidebar(SidebarNames.COMPONENT_CLIENT_DETAILS).openSidebar()
   }
 
   update(id: number) {
