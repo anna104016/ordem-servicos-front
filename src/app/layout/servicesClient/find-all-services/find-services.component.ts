@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {take} from "rxjs/operators";
 import Swal from "sweetalert2";
 import {MatDialog} from "@angular/material/dialog";
-import {FindOneServiceComponent} from "../find-one-service/find-one-service.component";
+import {ServiceDetailsComponent} from "../service-details/service-details.component";
 import {CreateServiceComponent} from "../create-service/create-service.component";
 import { DialogTypeEnum } from "src/app/models/dialogType.enum";
 import { IQuery } from "src/app/models/query.model";
@@ -103,7 +103,7 @@ export class FindServicesComponent implements OnInit {
     }
 
     findOne(id: number) {
-        this.dialog.open(FindOneServiceComponent, {
+        this.dialog.open(ServiceDetailsComponent, {
             width: '40rem',
             minHeight: '20rem',
             data: {

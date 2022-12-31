@@ -5,8 +5,8 @@
     </div>
 
     <div class="header" mat-dialog-title *ngIf="!loading">
-        <h2 style="display: flex; flex: auto">{{serviceModel?.description}}</h2>
-            <button mat-dialog-close mat-icon-button type="button">
+        <h2 class="flex flex-auto">{{serviceModel?.description}}</h2>
+            <button mat-dialog-close="true" mat-icon-button type="button">
                 <i class="fas fa-times" style="font-size: 1rem"></i>
             </button>
     </div>
@@ -39,7 +39,7 @@
 
     </mat-dialog-content>
 
-    <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end">
+    <mat-dialog-actions *ngIf="!loading" class="flex justify-end">
         <button mat-raised-button class="delete" (click)="delete()">Deletar</button>
         <button mat-raised-button class="update" (click)="update()">Editar</button>
     </mat-dialog-actions>

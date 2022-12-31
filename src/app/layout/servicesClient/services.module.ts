@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CreateServiceComponent } from './create-service/create-service.component';
-import { FindOneServiceComponent } from './find-one-service/find-one-service.component';
+import { ServiceDetailsComponent } from './service-details/service-details.component';
 import { FindServicesComponent } from './find-all-services/find-services.component';
 import { ServiceRoutingModule } from './services.routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -31,12 +31,12 @@ registerLocaleData(localePt);
 @NgModule({
   declarations: [
     CreateServiceComponent,
-    FindOneServiceComponent,
+    ServiceDetailsComponent,
     FindServicesComponent
   ],
   exports: [
     CreateServiceComponent,
-    FindOneServiceComponent,
+    ServiceDetailsComponent,
     FindServicesComponent
   ],
     imports: [

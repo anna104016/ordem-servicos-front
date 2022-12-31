@@ -17,7 +17,6 @@ export class UserIdComponent implements OnInit {
 
     user: UserModel;
     backgroundImg: SafeStyle;
-
     constructor(
         private readonly userService: UserService,
         private readonly spinner: NgxSpinnerService,

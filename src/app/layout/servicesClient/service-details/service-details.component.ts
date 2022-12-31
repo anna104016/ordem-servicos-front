@@ -9,11 +9,11 @@ import { ServiceModel } from 'src/app/models/service.model';
 import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
-  selector: 'app-find-one-service',
-  templateUrl: './find-one-service.component.html',
-  styleUrls: ['./find-one-service.component.scss']
+  selector: 'app-service-details',
+  templateUrl: './service-details.component.html',
+  styleUrls: ['./service-details.component.scss']
 })
-export class FindOneServiceComponent implements OnInit {
+export class ServiceDetailsComponent implements OnInit {
   loading: boolean = false
   serviceModel: ServiceModel;
 
@@ -21,7 +21,7 @@ export class FindOneServiceComponent implements OnInit {
       private readonly servicesService: ServicesService,
       private readonly router: Router,
       private readonly  dialog: MatDialog,
-      private readonly dialogRef: MatDialogRef<FindOneServiceComponent>,
+      private readonly dialogRef: MatDialogRef<ServiceDetailsComponent>,
       @Inject(MAT_DIALOG_DATA) private readonly data: {
         service: number}
       ) {}

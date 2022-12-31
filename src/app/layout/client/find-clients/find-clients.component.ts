@@ -134,4 +134,7 @@ export class FindClientsComponent implements OnInit {
         this.loading = false
     }})
   }
+
+  getClient(clientId: number){}
+
 }

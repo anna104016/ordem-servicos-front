@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
-// Import ax.theme.scss
 @import "app/scss/app.style.scss";
+
+@import "app/scss/_spiner.scss";
 
 @tailwind base;
 @tailwind components;

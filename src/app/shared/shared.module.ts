@@ -23,6 +23,7 @@ import {MatListModule} from "@angular/material/list";
 import { HomeComponent } from '../pages/home/home.component';
 import { TableComponent } from '../components/table/table.component';
 import { LoginFormComponent } from '../pages/login-form/login-form.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -35,29 +36,30 @@ import { LoginFormComponent } from '../pages/login-form/login-form.component';
     MenuButtomComponent,
     TableComponent,
   ],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    SharedRoutingModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    HttpClientModule,
-    MatTableModule,
-    MatInputModule,
-    MatIconModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatDividerModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatListModule,
-    MatIconModule,
-    MatSidenavModule
-  ],
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        SharedRoutingModule,
+        MatButtonModule,
+        MatCardModule,
+        MatToolbarModule,
+        HttpClientModule,
+        MatTableModule,
+        MatInputModule,
+        MatIconModule,
+        MatMenuModule,
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatListModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatTooltipModule
+    ],
   exports: [
     SelectUserPhotoComponent,
     HeaderComponent,PageHeaderComponent,TableComponent,
