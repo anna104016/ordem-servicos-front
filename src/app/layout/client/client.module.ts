@@ -1,7 +1,8 @@
+import { SidebarModule } from './../sidebar/sidebar.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FindClientsComponent } from './find-clients/find-clients.component';
-import { CreateClientComponent } from './create-client/create-client.component';
+import { ClientFormComponent  } from './create-form/client-form.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,8 +29,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   declarations: [
     FindClientsComponent,
-    CreateClientComponent,
-      ClientDetailsComponent
+      ClientDetailsComponent,
+      ClientFormComponent
   ],
     imports: [
         ClientRoutingModule,
@@ -50,7 +51,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
         MatProgressSpinnerModule,
         MatDialogModule,
         MatTooltipModule,
-        MatMenuModule
+        MatMenuModule,
+        SidebarModule
     ],
     exports: [ClientDetailsComponent],
   providers: [

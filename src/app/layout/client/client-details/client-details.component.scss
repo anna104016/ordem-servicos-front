@@ -24,12 +24,6 @@
     text-align: center;
 }
 
-.status p{
-    font-size: 0.9rem;
-    font-weight: 400;
-    margin: 0;
-    color: aliceblue;
-}
 
 .loading{
     display: flex;
@@ -41,22 +35,4 @@
     top: 0;
     left: 0;
     z-index: 50;
-}
-
-.box{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0.4rem 0 0.1rem 0;
-    border-bottom: 1px solid #EEEEEE;
-}
-
-.box p{
-    font-size: 1.2rem;
-    margin-top: 0.2rem;
-}
-
-.header{
-    display: flex; flex-direction: row;
-    align-items: center; justify-content: start;
 }

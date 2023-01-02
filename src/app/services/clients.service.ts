@@ -10,11 +10,10 @@ import {IQuery} from "../models/query.model";
 })
 export class ClientsService {
 
-  private currentClientId: BehaviorSubject<number> = new BehaviorSubject<number>(null)
-
   baseUrl: String = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+   }
 
   findOne(clientId: number): Observable<Client>{
     return this.http.get<Client>(`${this.baseUrl}/clientes/${clientId}`);
@@ -41,13 +40,5 @@ export class ClientsService {
 
   reportClients(): Observable<ReportClients> {
     return this.http.get<ReportClients>(`${this.baseUrl}/clientes/servicos/relatorios`);
-  }
-
-  getCurrentClientId(){
-    return this.currentClientId.asObservable()
-  }
-
-  setCurrentClientId(id: number){
-    this.currentClientId.next(id)
   }
 }

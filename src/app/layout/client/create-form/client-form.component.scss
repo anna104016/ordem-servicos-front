@@ -61,12 +61,3 @@
     display: flex; flex-direction: row;
     align-items: center; justify-content: start;
 }
-
-::ng-deep .mat-dialog-title{
-    margin: 0 !important;
-}
-
-.form{
-    display: flex;
-    flex-direction: column;
-}

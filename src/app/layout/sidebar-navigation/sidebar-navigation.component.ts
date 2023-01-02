@@ -23,7 +23,7 @@ export class SidebarNavigationComponent implements OnInit {
   }
 
   getUser(){
-    this._authService.getUser().subscribe({
+    this._authService.validateUser().subscribe({
       next: (user) => {
         this.user = user
       }

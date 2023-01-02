@@ -5,7 +5,6 @@ import {map, mergeMap} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
 import {UserModel} from '../models/user.model';
 import {Router} from '@angular/router';
-import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +17,6 @@ export class AuthService{
     constructor(
         private readonly _http: HttpClient,
         private readonly _router: Router,
-        private readonly _jwtHelperService: JwtHelperService
     ){}
 
     loginByCredentials(user:{email:string, password:string}): Observable<UserModel>{
@@ -30,11 +28,7 @@ export class AuthService{
       }
 
       validateUser(){
-        let userAuth: UserModel
-        return  this._http.post<UserModel>(`${this.baseUrl}/auth/validation`, {}).pipe(
-          map(user => userAuth = user),
-          mergeMap(async () => this.changeUser(userAuth))
-        )
+        return  this._http.post<UserModel>(`${this.baseUrl}/auth/validation`, {})
       }
 
       getToken(){
@@ -46,12 +40,7 @@ export class AuthService{
       }
 
       checkIfTheUserIsAuthenticated(): boolean {
-        const token = this.getToken()
-        if(token){
-          const expiredToken = this._jwtHelperService.isTokenExpired(token)
-          return !expiredToken
-        }
-        return false
+        return true
       }
 
       logOut(){

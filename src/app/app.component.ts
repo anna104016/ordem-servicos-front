@@ -1,4 +1,3 @@
-import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 
@@ -6,18 +5,11 @@ import { AuthService } from './auth/auth.service';
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   title = 'front';
 
   constructor(
     private readonly _authService: AuthService
   ){}
-
-  ngOnInit(): void {
-    this.getUser()
-  }
-
-  getUser(){
-    this._authService.validateUser().subscribe()
-  }
+  
 }

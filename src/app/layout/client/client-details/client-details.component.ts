@@ -1,82 +1,79 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import {finalize, take, takeUntil} from 'rxjs/operators';
+import { takeUntil} from 'rxjs/operators';
 import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 import { Subject } from 'rxjs';
-import {SidebarNames} from "../../sidebar/models/sidenavbarNames";
 
 @Component({
   selector: 'app-client-details',
   templateUrl: './client-details.component.html',
   styleUrls: ['./client-details.component.scss']
 })
-export class ClientDetailsComponent implements OnInit {
+export class ClientDetailsComponent implements OnInit , OnDestroy, OnChanges{
 
   private componentDestroyed$ = new Subject();
 
   loading: boolean = false
   clientModel: Client
-  id: number
+  
+  @Input() clientId: number
+
+  @Output() closeSidebar = new EventEmitter();
+  @Output() openClientForm = new EventEmitter();
+
 
   sidebarIsOpen: boolean = false
 
   constructor(
     private readonly _clientService: ClientsService,
-    private readonly router: Router,
+    private readonly _router: Router,
     private readonly _sidebarService: SideNavbarService
-  ) { }
-
-  ngOnInit(): void {
-    this.getClientId()
-    this.getSidenavState()
+  ) { 
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.sidebarIsOpen == true){
+      this.getClientDetails()
+    }
   }
 
-  getClientId(){
-    this._clientService.getCurrentClientId().pipe(takeUntil(this.componentDestroyed$)).subscribe({
-      next: (clientId) => {
-        this.id = clientId
-      }
-    })
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next()
+    this.componentDestroyed$.complete()
+  }
+  
+  ngOnInit(): void {
+    this.getSidenavState()
   }
 
   getSidenavState(){
     this._sidebarService.getSidebarIsOpen().pipe(takeUntil(this.componentDestroyed$)).subscribe({
       next: (value) => {
         this.sidebarIsOpen = value
-
-        if(this.sidebarIsOpen == true && this.id != null){
-          this.getClient()
-        }
+       
       }
     })
   }
 
-  getClient(){
-      this.loading = true
-      this._clientService.findOne(this.id).pipe(
-        finalize(() =>  this.loading = false),
-          take(1)
-      ).subscribe({
-        next: (resp) =>{
-          this.clientModel = resp}
+  getClientDetails(){
+    this.loading = true
+    this._clientService.findOne(this.clientId).subscribe({
+      next: (client) => {
+        this.clientModel = client
+        this.loading = false
+      }
     })
   }
 
-  update(){
-    // this.dialog.open(CreateClientComponent, {
-    //   width: '40rem',
-    //   minHeight: '20rem',
-    //   data: {
-    //     client: this.data.id,
-    //     type: DialogTypeEnum.UPDATE
-    //   }
-    // })
+  openSidebarUpdateClient(){
+    this._sidebarService.setSidebarIsOpen(false)
+    this.openClientForm.emit(this.clientId)
   }
 
-  delete(){
+  deleteClient(){
     Swal.fire({
       icon: 'question',
       title: 'Deletar cliente',
@@ -110,7 +107,7 @@ export class ClientDetailsComponent implements OnInit {
     }).then((result) => {
       if(result.isConfirmed){
         if(success){
-          this.router.navigate(['/main/clientes'])
+          this._router.navigate(['/main/clientes'])
         }else{
           Swal.close()
         }
@@ -119,8 +116,6 @@ export class ClientDetailsComponent implements OnInit {
   }
 
   closeNavbar(){
-    this._clientService.setCurrentClientId(null)
-    this._sidebarService.setSidebarIsOpen(false)
-    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_DETAILS).closeSidenav()
+    this.closeSidebar.emit()
   }
 }

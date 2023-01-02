@@ -1,46 +1,63 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {take} from 'rxjs/operators';
 import {ErrorsType} from 'src/app/models/error.enum';
 import Swal from 'sweetalert2';
 import {Notify} from "notiflix";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import { Client } from 'src/app/models/client.model';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { ClientsService } from 'src/app/services/clients.service';
+import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 
 @Component({
-  selector: 'app-create-client',
-  templateUrl: './create-client.component.html',
-  styleUrls: ['./create-client.component.scss']
+  selector: 'app-client-form',
+  templateUrl: './client-form.component.html',
+  styleUrls: ['./client-form.component.scss']
 })
-export class CreateClientComponent implements OnInit {
+export class ClientFormComponent implements OnInit {
 
   loading: boolean = false
   loadingSumit: boolean = false
   form: FormGroup
-  clienteId: string
+  modaIsOpen:boolean = false
+
+  @Input() clientId: number
+
+  @Input() formType: DialogTypeEnum
+
+  @Output() closeSidebarClientForm = new EventEmitter();
 
   constructor(
-    private readonly service: ClientsService,
-    private readonly dialogRef: MatDialogRef<CreateClientComponent>,
-    private readonly formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public readonly data: {
-      client: number
-      type: DialogTypeEnum}
+    private readonly _service: ClientsService,
+    private readonly _formBuilder: FormBuilder,
+    private readonly _sidebarService: SideNavbarService
     ) {}
 
   ngOnInit(): void {
     this.createForm()
-    if(this.data.type === DialogTypeEnum.UPDATE) this.getClient()
+    this.getSeidebarState()
+  }
+
+  getSeidebarState(){
+    this._sidebarService.getSidebarClientFormIsOpen().subscribe({
+      next: (isOpen) => {
+        this.modaIsOpen = isOpen;
+
+        if(this.modaIsOpen === true) {
+          this.getClient()
+        }
+      }
+    })
   }
 
   getClient(): void {
-    this.loading = true
-    this.service.findOne(this.data.client).pipe(take(1)).subscribe({next: (res: Client) => {
-        this.updateForm(res)
-        this.loading = false
-    }})
+    if(this.formType === DialogTypeEnum.UPDATE){
+      this.loading = true
+      this._service.findOne(this.clientId).pipe(take(1)).subscribe({next: (res: Client) => {
+          this.updateForm(res)
+          this.loading = false
+      }})
+    }
   }
 
   updateForm(client){
@@ -56,14 +73,14 @@ export class CreateClientComponent implements OnInit {
 
     this.loadingSumit = true
 
-    if(this.data.type === DialogTypeEnum.CREATE){
+    if(this.formType === DialogTypeEnum.CREATE){
       this.create()
     }else{
       this.update()
     }
   }
   create() {
-    this.service.create(this.form.value)
+    this._service.create(this.form.value)
       .subscribe({
         next: () => { 
           this.loadingSumit = false
@@ -82,7 +99,7 @@ export class CreateClientComponent implements OnInit {
 
   update(){
     const body = this.form.getRawValue()
-    this.service.update(this.data.client, body)
+    this._service.update(this.clientId, body)
         .pipe(take(1))
         .subscribe({next: () => {
           this.loadingSumit = false
@@ -105,7 +122,6 @@ export class CreateClientComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.dialogRef.close(true)
       }
     })
   }
@@ -118,13 +134,12 @@ export class CreateClientComponent implements OnInit {
       showConfirmButton: true,
     }).then((result) => {
       if(result.isConfirmed){
-        this.dialogRef.close()
       }
     })
   }
 
   createForm(){
-    this.form = this.formBuilder.group({
+    this.form = this._formBuilder.group({
       name: ['', [
         Validators.required,
         Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
@@ -143,5 +158,9 @@ export class CreateClientComponent implements OnInit {
         Validators.maxLength(11)
       ]]
     })
+  }
+
+  closeModal(reaload: boolean){
+    this.closeSidebarClientForm.emit({reload: reaload})
   }
 }

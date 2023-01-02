@@ -8,6 +8,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class SideNavbarService {
 
   private sidebarIsOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  private _sidebarFormClientIsOpen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   private _registry: { [key: string]: NavbarComponent } = {};
 
@@ -31,6 +32,14 @@ export class SideNavbarService {
 
     setSidebarIsOpen(value: boolean){
       this.sidebarIsOpen.next(value)
+    }
+
+    getSidebarClientFormIsOpen(){
+      return this._sidebarFormClientIsOpen.asObservable()
+    }
+
+    setSidebarClientFormIsOpen(value: boolean){
+      this._sidebarFormClientIsOpen.next(value)
     }
 
 }

@@ -1,34 +1,41 @@
-<div id="data">
+<div class="p-8">
 
   <div class="loading" *ngIf="loading">
     <div class="spinner"></div>
   </div>
 
-  <div class="header" mat-dialog-title *ngIf="!loading">
-    <h2 class="flex flex-auto">{{clientModel?.name}}</h2>
+  <div class="flex flex-col" *ngIf="!loading">
 
-    <button mat-icon-button type="button" (click)="closeNavbar()">
-      <i class="fas fa-times" style="font-size: 1rem"></i>
-    </button>
+    <div class="flex items-end justify-end">
+      <button mat-icon-button type="button" (click)="closeNavbar()">
+        <i class="fas fa-times" style="font-size: 1rem"></i>
+      </button>
+    </div>
+
+    <div class="flex flex-col">
+      <p class="mb-5 !text-4xl">Dados do cliente</p>
+      <h2 class="!mb-6 font-bold text-xl">{{clientModel?.name}}</h2>
+    </div>
+
   </div>
 
-  <mat-dialog-content *ngIf="!loading" style="height: calc(100% - 96px);">
-    <div class="box">
-      <span>CPF</span>
+  <div *ngIf="!loading">
+    <div>
+      <p class="text-lg font-bold">CPF</p>
       <p>{{clientModel?.cpf}}</p>
     </div>
 
-    <div class="box">
-      <span>CPF</span>
+    <div class="mt-4">
+      <p class="text-lg font-bold">Telefone</p>
       <p>{{clientModel?.cell_phone}}</p>
     </div>
 
-  </mat-dialog-content>
+  </div>
 
-  <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end; box-sizing: border-box">
-    <button mat-raised-button class="delete" (click)="delete()">Deletar</button>
-    <button mat-raised-button class="update" (click)="update()">Editar</button>
-  </mat-dialog-actions>
+  <div *ngIf="!loading" class="flex justify-end mt-8 w-full">
+    <button class="delete !rounded !mr-2 py-6" (click)="deleteClient()">Deletar</button>
+    <button class="update !rounded !ml-2 py-6" (click)="openSidebarUpdateClient()">Editar</button>
+  </div>
 
 </div>
 

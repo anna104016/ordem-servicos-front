@@ -112,7 +112,6 @@ export class CreateServiceComponent implements OnInit {
     }
 
     save(): void {
-        console.log("chegou aqui")
         const service = this.createServiceObject()
         this.service.create(service).subscribe({
             next: () => {

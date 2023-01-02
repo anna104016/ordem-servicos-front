@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { SideNavbarService } from '../sidebar/services/sidenavbar.service';
 import { SidebarNames } from '../sidebar/models/sidenavbarNames';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-layout-component',
@@ -15,9 +16,12 @@ export class LayoutComponentComponent implements OnInit  {
   sidebarTheme = SidebarTheme
   sidebarNames = SidebarNames
 
+  clientId: number
+
   constructor(
     private observer: BreakpointObserver,
     private _sideNavService:SideNavbarService,
+    private readonly _clientService: ClientsService
   ) { }
 
   ngOnInit(): void {

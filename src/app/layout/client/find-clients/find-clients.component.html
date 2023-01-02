@@ -13,7 +13,7 @@
         </div>
 
         <div class="pesquisa-search">
-          <button mat-fab (click)="newClient()" class="btn-new mat-elevation-z2" matTooltip="Adicionar cliente">
+          <button mat-fab (click)="openSidebaCreateClient()" class="btn-new mat-elevation-z2" matTooltip="Adicionar cliente">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -40,7 +40,7 @@
         <th mat-header-cell *matHeaderCellDef class="table-head th-center"> AÇÕES </th>
         <td mat-cell *matCellDef="let element">
           <i class="fas fa-info-circle desktop i-info" (click)="openClientDetails(element.client_id)"></i>
-          <i class="far fa-edit desktop i-update" (click)="update(element.client_id)"></i>
+          <i class="far fa-edit desktop i-update" (click)="openSidebarUpdateClient(element.client_id)"></i>
           <i class="fas fa-trash desktop i-delete" (click)="deleteClient(element.client_id)"></i>
           <button mat-icon-button [matMenuTriggerFor]="menu" class="mobile" [matMenuTriggerData]="{id: element.client_id}">
             <mat-icon>more_vert</mat-icon>
@@ -65,7 +65,7 @@
       <mat-icon>info</mat-icon>
       <span>Ver Cliente</span>
     </button>
-    <button mat-menu-item (click)="update(id)">
+    <button mat-menu-item (click)="openSidebarUpdateClient(id)">
       <mat-icon>edit</mat-icon>
       <span>Editar Cliente</span>
     </button>
@@ -75,3 +75,28 @@
     </button>
   </ng-template>
 </mat-menu>
+
+
+<app-navbar
+    [side]="sidebarSideClassName.LEFT"
+    [name]="sidebarNames.COMPONENT_CLIENT_DETAILS"
+    [theme]="sidebarTheme.LIGHT">
+    <app-client-details [clientId]="currentClientId" (closeSidebar)="closeClientDetailsComponent()" 
+    (openClientForm)="openClientForm($event)"></app-client-details>
+</app-navbar>
+
+<app-navbar
+    [side]="sidebarSideClassName.LEFT"
+    [name]="sidebarNames.COMPONENT_CLIENT_FORM_CREATE"
+    [theme]="sidebarTheme.LIGHT">
+    <app-client-form [clientId]="currentClientId" [formType]="clientFormType.CREATE"></app-client-form>
+</app-navbar>
+
+<app-navbar
+    [side]="sidebarSideClassName.LEFT"
+    [name]="sidebarNames.COMPONENT_CLIENT_FORM_UPDATE"
+    [theme]="sidebarTheme.LIGHT">
+    <app-client-form [clientId]="currentClientId" [formType]="clientFormType.UPDATE"></app-client-form>
+</app-navbar>
+
+

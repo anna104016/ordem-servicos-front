@@ -1,8 +1,5 @@
 import { ServiceModel } from "./service.model";
 
-export interface ResClientResolve {
-    cliente: Client
-}
 export interface Client{
     client_id?: number;
     name: string;

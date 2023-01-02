@@ -1,39 +1,39 @@
-<div id="data">
+<div class="p-8">
 
   <div class="loading" *ngIf="loading">
     <div class="spinner"></div>
   </div>
 
-  <div class="header" mat-dialog-title *ngIf="!loading">
-    <p style="display: flex; flex: auto">{{ data.type === 'UPDATE' ? 'Atualizar cliente' : 'Novo cliente' }}</p>
-    <button mat-dialog-close="true" mat-icon-button type="button">
+  <div class="flex !w-full items-center justify-between"  *ngIf="!loading">
+    <p>{{ formType === 'UPDATE' ? 'Atualizar cliente' : 'Novo cliente' }}</p>
+    <button mat-icon-button type="button" (click)="closeModal(false)">
       <i class="fas fa-times" style="font-size: 1rem"></i>
     </button>
   </div>
 
-  <form class="form" [formGroup]="form" *ngIf="!loading">
+  <form class="flex flex-col" [formGroup]="form" *ngIf="!loading">
 
-    <mat-form-field class="form-field"  appearance="fill">
+    <mat-form-field  appearance="fill">
       <mat-label>Nome</mat-label>
       <input type="text" matInput autocomplete="off" formControlName="name">
       <mat-error *ngIf="form.get('name').hasError('required')" class="field-error">Campo obrigatório</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-field"  appearance="fill">
+    <mat-form-field  appearance="fill">
       <mat-label>CPF</mat-label>
       <input type="text" matInput autocomplete="off" formControlName="cpf" maxlength="11">
       <mat-error *ngIf="form.get('cpf').hasError('required')" class="field-error">Campo obrigatório</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-field"  appearance="fill">
+    <mat-form-field  appearance="fill">
       <mat-label>Telefone</mat-label>
       <input type="text" matInput autocomplete="off" formControlName="cell_phone">
       <mat-error *ngIf="form.get('cell_phone').hasError('required')" class="field-error">Campo obrigatório</mat-error>
     </mat-form-field>
   </form>
 
-  <mat-dialog-actions *ngIf="!loading" style="display: flex; justify-content: flex-end">
-    <button mat-raised-button class="update" (click)="submitForm()" [class.spinner]="loadingSumit" [disabled]="loadingSumit">Salvar</button>
-    <button mat-raised-button class="delete" mat-dialog-close>Cancelar</button>
-  </mat-dialog-actions>
+  <div *ngIf="!loading" style="display: flex; justify-content: flex-end">
+    <button class="delete !rounded !mr-2 py-6 update" (click)="submitForm()" [class.spinner]="loadingSumit" [disabled]="loadingSumit">Salvar</button>
+    <button class="delete !rounded !mr-2 py-6 delete">Cancelar</button>
+  </div>
 </div>
