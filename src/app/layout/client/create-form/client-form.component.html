@@ -6,7 +6,7 @@
 
   <div class="flex !w-full items-center justify-between"  *ngIf="!loading">
     <p>{{ formType === 'UPDATE' ? 'Atualizar cliente' : 'Novo cliente' }}</p>
-    <button mat-icon-button type="button" (click)="closeModal(false)">
+    <button mat-icon-button type="button" (click)="closeModal(true)">
       <i class="fas fa-times" style="font-size: 1rem"></i>
     </button>
   </div>
@@ -33,7 +33,7 @@
   </form>
 
   <div *ngIf="!loading" style="display: flex; justify-content: flex-end">
-    <button class="delete !rounded !mr-2 py-6 update" (click)="submitForm()" [class.spinner]="loadingSumit" [disabled]="loadingSumit">Salvar</button>
-    <button class="delete !rounded !mr-2 py-6 delete">Cancelar</button>
+    <button class="!rounded !mr-2 py-3 update" (click)="submitForm()" [class.spinner]="loadingSumit" [disabled]="loadingSumit">Salvar</button>
+    <button class="!rounded !mr-2 py-3 delete" (click)="closeModal(true)">Cancelar</button>
   </div>
 </div>

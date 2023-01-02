@@ -25,7 +25,7 @@ export class SelectUserPhotoComponent implements OnInit {
 
   close(){
       this.dialogRef.close({
-        data: this.photoSelected.img
+        photo: this.photoSelected.img
       })
   }
 

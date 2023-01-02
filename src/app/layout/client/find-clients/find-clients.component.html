@@ -61,7 +61,7 @@
 
 <mat-menu #menu="matMenu">
   <ng-template let-id="id" matMenuContent>
-    <button mat-menu-item (click)="getClient(id)">
+    <button mat-menu-item (click)="openClientDetails(id)">
       <mat-icon>info</mat-icon>
       <span>Ver Cliente</span>
     </button>
@@ -85,18 +85,14 @@
     (openClientForm)="openClientForm($event)"></app-client-details>
 </app-navbar>
 
-<app-navbar
-    [side]="sidebarSideClassName.LEFT"
-    [name]="sidebarNames.COMPONENT_CLIENT_FORM_CREATE"
-    [theme]="sidebarTheme.LIGHT">
-    <app-client-form [clientId]="currentClientId" [formType]="clientFormType.CREATE"></app-client-form>
+<app-navbar [side]="sidebarSideClassName.LEFT" [name]="sidebarNames.COMPONENT_CLIENT_FORM_CREATE" [theme]="sidebarTheme.LIGHT">
+    <app-client-form [formType]="clientFormType.CREATE"
+    (closeSidebarClientForm)="closeModalUserForm($event)"
+    ></app-client-form>
 </app-navbar>
 
-<app-navbar
-    [side]="sidebarSideClassName.LEFT"
-    [name]="sidebarNames.COMPONENT_CLIENT_FORM_UPDATE"
-    [theme]="sidebarTheme.LIGHT">
-    <app-client-form [clientId]="currentClientId" [formType]="clientFormType.UPDATE"></app-client-form>
+<app-navbar [side]="sidebarSideClassName.LEFT" [name]="sidebarNames.COMPONENT_CLIENT_FORM_UPDATE" [theme]="sidebarTheme.LIGHT">
+    <app-client-form [clientId]="currentClientId" [formType]="clientFormType.UPDATE"
+    (closeSidebarClientForm)="closeModalUserForm($event)"
+    ></app-client-form>
 </app-navbar>
-
-

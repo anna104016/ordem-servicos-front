@@ -23,15 +23,15 @@ export class ClientsService {
     let params = new HttpParams()
     if (query?.page) params = params.set('page', String(query.page))
     if (query?.take) params = params.set('take', String(query.take))
-    return this.http.get<IRespGetClients>(`${this.baseUrl}/clientes`, {params});
+    return this.http.get<IRespGetClients>(`${this.baseUrl}/clientes`, { params });
   }
 
   create(client: Client): Observable<Client>{
-    return this.http.post<Client>(`${this.baseUrl}/clientes`, {client});
+    return this.http.post<Client>(`${this.baseUrl}/clientes`, client);
   }
 
   update(clientId: number, client: Client): Observable<void>{
-    return this.http.put<void>(`${this.baseUrl}/clientes/${clientId}`, {client})
+    return this.http.put<void>(`${this.baseUrl}/clientes/${clientId}`, client )
   }
 
   delete(clientId: number):Observable<void>{

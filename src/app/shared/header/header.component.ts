@@ -20,10 +20,7 @@ export class HeaderComponent implements OnInit {
   @Output() closeSidenavEvent = new EventEmitter()
 
   constructor(
-      private readonly _userService: UserService,
       private readonly _bottomSheet: MatBottomSheet,
-      private _sideNavService: SideNavbarService,
-      private readonly _authSerivice: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -33,23 +30,6 @@ export class HeaderComponent implements OnInit {
     this._bottomSheet.open(MenuButtomComponent);
   }
 
-
-  public logOut(){
-    Swal.fire({
-      title: "Encerrar sessão",
-      icon: "info",
-      text: "Você deseja encerrar esta sessão?",
-      showCancelButton: true,
-      showConfirmButton: true
-    }).then((resul) => {
-      if(resul.isConfirmed){
-        this._authSerivice.logOut()
-      }else{
-        Swal.close()
-      }
-    })
-  }
-
   openSidebar(): void{
     this.openSidebarEvent.emit()
   }
@@ -57,5 +37,4 @@ export class HeaderComponent implements OnInit {
   closeSidebar(): void{
     this.closeSidenavEvent.emit()
   }
-
 }

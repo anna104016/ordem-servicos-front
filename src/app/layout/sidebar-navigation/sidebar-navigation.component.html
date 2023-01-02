@@ -1,29 +1,31 @@
 <div class="sidenav__container">
     <div class='sidenav__content'>
 
-          <img class="sidenav__avatar mat-elevation-z8" [src]="user?.photo"  alt="Foto do perfil"/>
+      <div class="flex flex-col justify-center items-center  w-full">
+        <img (click)="selectPhoto()"  class="sidenav__avatar mat-elevation-z8" [src]="user?.photo" alt="Foto do perfil"/>
+      </div>
 
           <h4 class="sidenav__avatar__name">{{ user?.user_name }}</h4>
           <p class="sidenav__avatar__designation">{{ user?.occupation_area }}</p>
 
-          <button  class="sidenav__menu__button">
+          <button  class="w-full flex items-center justify-start bg-transparent border-none my-1">
             <mat-icon>dashboard</mat-icon>
             <span>Dashboard</span>
           </button>
 
-          <button  class="sidenav__menu__button">
+          <button   class="w-full flex items-center justify-start bg-transparent border-none my-1">
             <mat-icon>person</mat-icon>
             <span>Meus clientes</span>
           </button>
 
-          <button  class="sidenav__menu__button">
+          <button  class="w-full flex items-center justify-start bg-transparent border-none my-1">
             <mat-icon>info</mat-icon>
             <span>Meus serviços</span>
           </button>
 
           <mat-divider></mat-divider>
 
-          <button  class="sidenav__menu__button" (click)="closeSidebar()">
+          <button   class="w-full flex items-center justify-start bg-transparent border-none my-1" (click)="closeSidebar()">
             <mat-icon>close</mat-icon>
             <span>Fechar</span>
           </button>

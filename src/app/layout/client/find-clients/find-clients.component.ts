@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { take} from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import {MatDialog} from "@angular/material/dialog";
+ import { MatDialog } from "@angular/material/dialog";
 import { Client } from 'src/app/models/client.model';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { IQuery } from 'src/app/models/query.model';
@@ -41,19 +41,14 @@ export class FindClientsComponent implements OnInit {
 
   constructor(
     private readonly _clientService: ClientsService,
-    private readonly  _dialog: MatDialog,
     private readonly _sidebarService: SideNavbarService
   ) {}
 
   ngOnInit(): void {
-    this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+    this.getAllclients(this.paginationDefault.page + 1, this.paginationDefault.size)
   }
 
-  openClientDetails(id: number) {
-    this.currentClientId = id
-    this._sidebarService.setSidebarIsOpen(true)
-    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_DETAILS).openSidebar()
-  }
+ 
 
   deleteClient(id: number): void {
     Swal.fire({
@@ -87,7 +82,7 @@ export class FindClientsComponent implements OnInit {
     }).then((result) => {
       if(result.isConfirmed){
         Swal.close()
-        this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
+        this.getAllclients(this.paginationDefault.page + 1, this.paginationDefault.size)
       }
     })
   }
@@ -96,10 +91,10 @@ export class FindClientsComponent implements OnInit {
     this.paginationDefault.size = event.pageSize
     this.paginationDefault.page = event.pageIndex
 
-    this.find(event.pageIndex + 1, event.pageSize)
+    this.getAllclients(event.pageIndex + 1, event.pageSize)
   }
 
-  find(page: number, perPage: number) {
+  getAllclients(page: number, perPage: number) {
     const query: IQuery = {
       page: page,
       take: perPage
@@ -109,7 +104,7 @@ export class FindClientsComponent implements OnInit {
       next: (resp) => {
       this.clients = resp.users
       this.paginationDefault.totalElements = resp.count
-        this.loading = false
+      this.loading = false
     }})
   }
 
@@ -124,18 +119,28 @@ export class FindClientsComponent implements OnInit {
     this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM_UPDATE).openSidebar()
   }
 
-  closeSidebarUpdateClient(){
-    this._sidebarService.setSidebarClientFormIsOpen(false)
-    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM_UPDATE).closeSidenav()
+  openClientDetails(id: number) {
+    this.currentClientId = id
+    this._sidebarService.setSidebarIsOpen(true)
+    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_DETAILS).openSidebar()
   }
-
+  
   openSidebaCreateClient(){
     this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM_CREATE).openSidebar()
   }
+
+  closeModalUserForm(event){
+    if(event.reaload){
+      this.getAllclients(this.paginator.pageIndex + 1, this.paginator.pageSize)
+    }
+    this._sidebarService.setSidebarClientFormIsOpen(false)
+    this._sidebarService.getSidebar(event.name).closeSidenav()
+  }
+
+ 
 
   openClientForm(event){
     this.closeClientDetailsComponent()
     this.openSidebarUpdateClient(event)
   }
-
 }

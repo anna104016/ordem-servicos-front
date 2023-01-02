@@ -1,7 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {map, mergeMap} from 'rxjs/operators';
+import {map, mergeAll, mergeMap} from 'rxjs/operators';
 import {environment} from 'src/environments/environment';
 import {UserModel} from '../models/user.model';
 import {Router} from '@angular/router';
@@ -28,7 +28,12 @@ export class AuthService{
       }
 
       validateUser(){
-        return  this._http.post<UserModel>(`${this.baseUrl}/auth/validation`, {})
+        let newUser;
+        return  this._http.post<UserModel>(`${this.baseUrl}/auth/validation`, {}).pipe(
+          map(user => newUser = user),
+          map(userGO => this.changeUser(newUser)),
+          mergeMap(() => this.getUser()),
+        )
       }
 
       getToken(){
