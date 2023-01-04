@@ -34,6 +34,6 @@
 
   <div *ngIf="!loading" style="display: flex; justify-content: flex-end">
     <button class="!rounded !mr-2 py-3 update" (click)="submitForm()" [class.spinner]="loadingSumit" [disabled]="loadingSumit">Salvar</button>
-    <button class="!rounded !mr-2 py-3 delete" (click)="closeModal(true)">Cancelar</button>
+    <button class="!rounded !mr-2 py-3 delete" (click)="closeModal(false)">Cancelar</button>
   </div>
 </div>

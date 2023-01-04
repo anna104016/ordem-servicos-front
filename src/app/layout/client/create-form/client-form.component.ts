@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { take } from "rxjs/operators";
 import { ErrorsType } from "src/app/models/error.enum";
@@ -15,7 +15,7 @@ import { SidebarNames } from "../../sidebar/models/sidenavbarNames";
   templateUrl: "./client-form.component.html",
   styleUrls: ["./client-form.component.scss"],
 })
-export class ClientFormComponent implements OnInit, OnChanges {
+export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
   loading: boolean = false;
   loadingSumit: boolean = false;
   form: FormGroup;
@@ -32,9 +32,12 @@ export class ClientFormComponent implements OnInit, OnChanges {
     private readonly _formBuilder: FormBuilder,
     private readonly _sidebarService: SideNavbarService
   ) {}
+
+  ngOnDestroy(): void {
+  }
   
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.modaIsOpen){
+    if(this.modaIsOpen == true && changes.clientId && changes.formType){
       this.getClient()
     }
   }
@@ -53,7 +56,8 @@ export class ClientFormComponent implements OnInit, OnChanges {
   }
 
   getClient(): void {
-    if (this.formType === DialogTypeEnum.UPDATE && this.modaIsOpen === true) {
+    console.log(this.clientId)
+    if (this.formType === DialogTypeEnum.UPDATE) {
       this.loading = true;
       this._service
         .findOne(this.clientId)
@@ -167,10 +171,6 @@ export class ClientFormComponent implements OnInit, OnChanges {
   }
 
   closeModal(reaload: boolean) {
-    const name =
-      this.formType === DialogTypeEnum.CREATE
-        ? SidebarNames.COMPONENT_CLIENT_FORM_CREATE
-        : SidebarNames.COMPONENT_CLIENT_FORM_UPDATE;
-    this.closeSidebarClientForm.emit({ reaload: reaload, name: name });
+    this.closeSidebarClientForm.emit({ reaload: reaload });
   }
 }

@@ -1,8 +1,8 @@
+import { ClientFormComponent } from './../create-form/client-form.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { take} from 'rxjs/operators';
 import Swal from 'sweetalert2';
- import { MatDialog } from "@angular/material/dialog";
 import { Client } from 'src/app/models/client.model';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { IQuery } from 'src/app/models/query.model';
@@ -10,6 +10,7 @@ import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 import {SidebarNames} from "../../sidebar/models/sidenavbarNames";
 import { SidebarSideClassName, SidebarTheme } from '../../sidebar/models/sidenavbar.enum';
+import { interval } from 'rxjs';
 
 @Component({
   selector: "app-find-clients",
@@ -19,11 +20,21 @@ import { SidebarSideClassName, SidebarTheme } from '../../sidebar/models/sidenav
 export class FindClientsComponent implements OnInit {
 
   currentClientId: number
+  currentClientUpdate: number
+
+  clientFormTypeUpdate: string
 
   sidebarSideClassName = SidebarSideClassName
   sidebarTheme = SidebarTheme
   sidebarNames = SidebarNames
   clientFormType = DialogTypeEnum
+
+  sidebarClientForm = SidebarNames.COMPONENT_CLIENT_FORM
+
+  updateUserComponent: boolean = false
+  createeUserComponent: boolean = true
+
+  isFormUpdateUser: boolean = false
   
   clients: Client[] = []
 
@@ -39,6 +50,7 @@ export class FindClientsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   loading: boolean = true;
 
+
   constructor(
     private readonly _clientService: ClientsService,
     private readonly _sidebarService: SideNavbarService
@@ -48,7 +60,6 @@ export class FindClientsComponent implements OnInit {
     this.getAllclients(this.paginationDefault.page + 1, this.paginationDefault.size)
   }
 
- 
 
   deleteClient(id: number): void {
     Swal.fire({
@@ -113,12 +124,6 @@ export class FindClientsComponent implements OnInit {
     this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_DETAILS).closeSidenav()
   }
 
-  openSidebarUpdateClient(id: number){
-    this.currentClientId = id
-    this._sidebarService.setSidebarClientFormIsOpen(true)
-    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM_UPDATE).openSidebar()
-  }
-
   openClientDetails(id: number) {
     this.currentClientId = id
     this._sidebarService.setSidebarIsOpen(true)
@@ -126,21 +131,27 @@ export class FindClientsComponent implements OnInit {
   }
   
   openSidebaCreateClient(){
-    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM_CREATE).openSidebar()
+    this.isFormUpdateUser = false
+    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM).openSidebar()
+  }
+
+  openClientFormUpdate(event){
+    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_DETAILS).closeSidenav()
+    this.currentClientUpdate = event
+    this.isFormUpdateUser = true
+    this._sidebarService.setSidebarClientFormIsOpen(true)
+    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM).openSidebar()
   }
 
   closeModalUserForm(event){
-    if(event.reaload){
-      this.getAllclients(this.paginator.pageIndex + 1, this.paginator.pageSize)
-    }
+    this.currentClientUpdate = null
     this._sidebarService.setSidebarClientFormIsOpen(false)
-    this._sidebarService.getSidebar(event.name).closeSidenav()
-  }
+    this.clientFormTypeUpdate = null
+    this.isFormUpdateUser = false
+    this._sidebarService.getSidebar(SidebarNames.COMPONENT_CLIENT_FORM).closeSidenav()
 
- 
-
-  openClientForm(event){
-    this.closeClientDetailsComponent()
-    this.openSidebarUpdateClient(event)
+    if(event.reload){
+      this.getAllclients(this.paginationDefault.page + 1, this.paginationDefault.size)
+    }
   }
 }

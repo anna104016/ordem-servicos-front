@@ -1,11 +1,10 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {ActivatedRoute, Router} from "@angular/router";
-import {take} from "rxjs/operators";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { take } from "rxjs/operators";
 import Swal from "sweetalert2";
-import {MatDialog} from "@angular/material/dialog";
-import {ServiceDetailsComponent} from "../service-details/service-details.component";
-import {CreateServiceComponent} from "../create-service/create-service.component";
+import { MatDialog } from "@angular/material/dialog";
+import { ServiceDetailsComponent } from "../service-details/service-details.component";
+import { CreateServiceComponent } from "../create-service/create-service.component";
 import { DialogTypeEnum } from "src/app/models/dialogType.enum";
 import { IQuery } from "src/app/models/query.model";
 import { ServiceModel, IRespGetServices } from "src/app/models/service.model";
@@ -34,8 +33,6 @@ export class FindServicesComponent implements OnInit {
 
     constructor(
         private readonly service: ServicesService,
-        private readonly activaredRoute: ActivatedRoute,
-        private readonly router: Router,
         private readonly dialog: MatDialog
     ) {}
 

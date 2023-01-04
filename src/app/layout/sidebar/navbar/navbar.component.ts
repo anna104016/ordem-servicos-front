@@ -1,5 +1,5 @@
 import { SidebarSideClassName, SidebarTheme } from '../models/sidenavbar.enum';
-import { Component, HostBinding, OnInit, Input, ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import { Component, HostBinding, OnInit, Input, ElementRef, Renderer2, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { SideNavbarService } from '../services/sidenavbar.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { SideNavbarService } from '../services/sidenavbar.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
   @Input() side: SidebarSideClassName
   @Input() name: string
   @Input() theme: SidebarTheme
@@ -28,6 +28,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private _elementRef: ElementRef,
     private _renderer: Renderer2
   ) { }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    
+  }
 
   ngOnInit(): void {
     this._sideNavbarService.register(this.name, this)
