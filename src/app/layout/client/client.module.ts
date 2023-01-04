@@ -25,6 +25,7 @@ import { OneClienteGuard } from 'src/app/resolver/client.guard';
 import { ClientesGuard } from 'src/app/resolver/clientes.guard';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TableModule } from 'src/app/components/table/table.module';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
         MatDialogModule,
         MatTooltipModule,
         MatMenuModule,
-        SidebarModule
+        SidebarModule,
+        TableModule
     ],
     exports: [ClientDetailsComponent],
   providers: [

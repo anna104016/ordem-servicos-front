@@ -50,7 +50,6 @@ export class FindClientsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   loading: boolean = true;
 
-
   constructor(
     private readonly _clientService: ClientsService,
     private readonly _sidebarService: SideNavbarService

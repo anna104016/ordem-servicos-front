@@ -21,7 +21,6 @@ import {PageHeaderComponent} from "./page-header/page-header.component";
 import {MenuButtomComponent} from "./menu-buttom/menu-buttom.component";
 import {MatListModule} from "@angular/material/list";
 import { HomeComponent } from '../pages/home/home.component';
-import { TableComponent } from '../components/table/table.component';
 import { LoginFormComponent } from '../pages/login-form/login-form.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 
@@ -34,7 +33,6 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     HeaderComponent,
     PageHeaderComponent,
     MenuButtomComponent,
-    TableComponent,
   ],
     imports: [
         CommonModule,
@@ -62,7 +60,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     ],
   exports: [
     SelectUserPhotoComponent,
-    HeaderComponent,PageHeaderComponent,TableComponent,
+    HeaderComponent,PageHeaderComponent,
   ]
 })
 export class SharedModule { }
