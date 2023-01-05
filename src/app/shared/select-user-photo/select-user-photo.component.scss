@@ -1,60 +1,60 @@
-.container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.container .title{
-    font-size: 1.3rem;
-    color: rgba(119, 115, 115, 0.933);
+.container .title {
+  font-size: 1.3rem;
+  color: rgba(119, 115, 115, 0.933);
 }
 
-.photos{
-    width: 100%;
-    min-height: 90%;
-    overflow-y: scroll;
-    max-height: fit-content;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-    place-items: center;
+.photos {
+  width: 100%;
+  min-height: 90%;
+  overflow-y: scroll;
+  max-height: fit-content;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  place-items: center;
 }
 
-.photo{
-    cursor: pointer;
-    width: 8rem;
-    height: 8rem;
-    border-radius: 4rem;
+.photo {
+  cursor: pointer;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 4rem;
 }
 
-.photo img{
-    width: 100%;
-    height: 100%;
+.photo img {
+  width: 100%;
+  height: 100%;
 }
 
-button{
-    width: 90%;
-    background-color: rgb(161, 161, 207);
+button {
+  width: 90%;
+  background-color: rgb(161, 161, 207);
 }
 
 ::-webkit-scrollbar {
-    width: 0.6rem;
-  }
+  width: 0.6rem;
+}
 
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 10px;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background-color: rgb(161, 161, 207);
-    border-radius: 10px;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(161, 161, 207);
+  border-radius: 10px;
+}
 
-.photoSelected{
-    border: 0.2rem solid #000;
+.photoSelected {
+  border: 0.2rem solid #000;
 }

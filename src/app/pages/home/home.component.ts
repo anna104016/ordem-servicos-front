@@ -9,23 +9,24 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   navbarActive: boolean = false;
   formLoginActive: boolean = false;
-  invalidCredentials: string
-  darkTheme: boolean = false
-  loading: boolean = false
+  invalidCredentials: string;
+  darkTheme: boolean = false;
+  loading: boolean = false;
 
-  constructor(
-    private router: Router
-  ) { }
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   scrollToElement($element): void {
-    this.navbarActive = false
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    this.navbarActive = false;
+    $element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'
+    });
   }
 
-  loginGo(){
-    this.router.navigate(['/login'])
+  loginGo() {
+    this.router.navigate(['/login']);
   }
 }

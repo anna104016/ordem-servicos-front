@@ -5,11 +5,8 @@ import { AuthService } from './auth/auth.service';
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent  {
+export class AppComponent {
   title = 'front';
 
-  constructor(
-    private readonly _authService: AuthService
-  ){}
-  
+  constructor(private readonly _authService: AuthService) {}
 }

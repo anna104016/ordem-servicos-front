@@ -8,32 +8,29 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {MatButtonModule} from "@angular/material/button";
+import { MatButtonModule } from '@angular/material/button';
 import { ClientModule } from './layout/client/client.module';
 import { ServicesModule } from './layout/servicesClient/services.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotfoundComponent,
+  declarations: [AppComponent, NotfoundComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    ClientModule,
+    ServicesModule,
+    SharedModule,
+    NgxSpinnerModule,
+    MatButtonModule
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        ClientModule,
-        ServicesModule,
-        SharedModule,
-        NgxSpinnerModule,
-        MatButtonModule,
-    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor, 
+      useClass: TokenInterceptor,
       multi: true
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -6,17 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponentComponent } from './layout-component/layout-component.component';
-import {SharedModule} from "../shared/shared.module";
-import {RouterModule} from "@angular/router";
-import {LayoutRoutingModule} from "./layout.routing.module";
-import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { LayoutRoutingModule } from './layout.routing.module';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
-  declarations: [
-    LayoutComponentComponent,
-    SidebarNavigationComponent
-  ],
+  declarations: [LayoutComponentComponent, SidebarNavigationComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -29,8 +26,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     SidebarModule,
     ClientModule
   ],
-  exports: [
-      LayoutComponentComponent
-  ]
+  exports: [LayoutComponentComponent]
 })
-export class LayoutModule { }
+export class LayoutModule {}

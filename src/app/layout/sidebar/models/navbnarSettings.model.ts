@@ -1,6 +1,6 @@
-import { SidebarSideClassName } from "./sidenavbar.enum"
+import { SidebarSideClassName } from './sidenavbar.enum';
 
-export class NavbarSettings{
-    side?: SidebarSideClassName
-    open: boolean
+export class NavbarSettings {
+  side?: SidebarSideClassName;
+  open: boolean;
 }

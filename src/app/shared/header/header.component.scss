@@ -1,27 +1,27 @@
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
-.title{
-    margin-right: 1rem;
+.title {
+  margin-right: 1rem;
 }
 
-.mobile{
-    display: none !important;
+.mobile {
+  display: none !important;
 }
 
- p{
-     font-size: 1rem;
-     margin: 0 0.9rem;
-     cursor: pointer;
- }
+p {
+  font-size: 1rem;
+  margin: 0 0.9rem;
+  cursor: pointer;
+}
 
-@media only screen and (max-width: 600px)  {
-    .desktop{
-        display: none;
-    }
+@media only screen and (max-width: 600px) {
+  .desktop {
+    display: none;
+  }
 
-    .mobile{
-        display: flex !important;
-    }
+  .mobile {
+    display: flex !important;
+  }
 }

@@ -1,11 +1,9 @@
 <div class="p-8">
-
   <div class="loading" *ngIf="loading">
     <div class="spinner"></div>
   </div>
 
   <div class="flex flex-col" *ngIf="!loading">
-
     <div class="flex items-end justify-end">
       <button mat-icon-button type="button" (click)="closeNavbar()">
         <i class="fas fa-times" style="font-size: 1rem"></i>
@@ -14,33 +12,31 @@
 
     <div class="flex flex-col">
       <p class="mb-5 !text-4xl">Dados do cliente</p>
-      <h2 class="!mb-6 font-bold text-xl">{{clientModel?.name}}</h2>
+      <h2 class="!mb-6 font-bold text-xl">{{ clientModel?.name }}</h2>
     </div>
-
   </div>
 
   <div *ngIf="!loading">
     <div>
       <p class="text-lg font-bold">CPF</p>
-      <p>{{clientModel?.cpf}}</p>
+      <p>{{ clientModel?.cpf }}</p>
     </div>
 
     <div class="mt-4">
       <p class="text-lg font-bold">Telefone</p>
-      <p>{{clientModel?.cell_phone}}</p>
+      <p>{{ clientModel?.cell_phone }}</p>
     </div>
-
   </div>
 
   <div *ngIf="!loading" class="flex justify-end mt-8 w-full">
-    <button class="delete !rounded !mr-2 py-4" (click)="deleteClient()">Deletar</button>
-    <button class="update !rounded !ml-2 py-4" (click)="openSidebarUpdateClient()">Editar</button>
+    <button class="delete !rounded !mr-2 py-4" (click)="deleteClient()">
+      Deletar
+    </button>
+    <button
+      class="update !rounded !ml-2 py-4"
+      (click)="openSidebarUpdateClient()"
+    >
+      Editar
+    </button>
   </div>
-
 </div>
-
-
-
-
-
-

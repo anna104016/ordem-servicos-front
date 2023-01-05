@@ -11,34 +11,55 @@
   [totalElements]="paginationDefault.totalElements"
   (getNext)="getNext($event)"
 >
-  <table mat-table class="table-content" [dataSource]="clients" *ngIf="!loading">
-
+  <table
+    mat-table
+    class="table-content"
+    [dataSource]="clients"
+    *ngIf="!loading"
+  >
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef class="table-head"> NOME </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <th mat-header-cell *matHeaderCellDef class="table-head">NOME</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="cell_phone">
-      <th mat-header-cell *matHeaderCellDef class="table-head th-center"> TELEFONE </th>
-      <td mat-cell *matCellDef="let element"> {{element.cell_phone}} </td>
+      <th mat-header-cell *matHeaderCellDef class="table-head th-center">
+        TELEFONE
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.cell_phone }}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef class="table-head th-center"> AÇÕES </th>
+      <th mat-header-cell *matHeaderCellDef class="table-head th-center">
+        AÇÕES
+      </th>
       <td mat-cell *matCellDef="let element">
-        <i class="fas fa-info-circle desktop i-info" (click)="openClientDetails(element.client_id)"></i>
-        <i class="far fa-edit desktop i-update" (click)="openClientFormUpdate(element.client_id)"></i>
-        <i class="fas fa-trash desktop i-delete" (click)="deleteClient(element.client_id)"></i>
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="mobile" [matMenuTriggerData]="{id: element.client_id}">
+        <i
+          class="fas fa-info-circle desktop i-info"
+          (click)="openClientDetails(element.client_id)"
+        ></i>
+        <i
+          class="far fa-edit desktop i-update"
+          (click)="openClientFormUpdate(element.client_id)"
+        ></i>
+        <i
+          class="fas fa-trash desktop i-delete"
+          (click)="deleteClient(element.client_id)"
+        ></i>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          class="mobile"
+          [matMenuTriggerData]="{ id: element.client_id }"
+        >
           <mat-icon>more_vert</mat-icon>
         </button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-
 </app-table>
 
 <mat-menu #menu="matMenu">
@@ -58,17 +79,28 @@
   </ng-template>
 </mat-menu>
 
-
 <app-navbar
-    [side]="sidebarSideClassName.LEFT"
-    [name]="sidebarNames.COMPONENT_CLIENT_DETAILS"
-    [theme]="sidebarTheme.LIGHT">
-    <app-client-details [clientId]="currentClientId" (closeSidebar)="closeClientDetailsComponent()" 
-    (openClientForm)="openClientFormUpdate($event)"></app-client-details>
+  [side]="sidebarSideClassName.LEFT"
+  [name]="sidebarNames.COMPONENT_CLIENT_DETAILS"
+  [theme]="sidebarTheme.LIGHT"
+>
+  <app-client-details
+    [clientId]="currentClientId"
+    (closeSidebar)="closeClientDetailsComponent()"
+    (openClientForm)="openClientFormUpdate($event)"
+  ></app-client-details>
 </app-navbar>
 
-<app-navbar [side]="sidebarSideClassName.LEFT" [name]="sidebarNames.COMPONENT_CLIENT_FORM" [theme]="sidebarTheme.LIGHT">
-    <app-client-form  [clientId]="isFormUpdateUser ? currentClientUpdate : null" [formType]="isFormUpdateUser ? clientFormType.UPDATE : clientFormType.CREATE"
+<app-navbar
+  [side]="sidebarSideClassName.LEFT"
+  [name]="sidebarNames.COMPONENT_CLIENT_FORM"
+  [theme]="sidebarTheme.LIGHT"
+>
+  <app-client-form
+    [clientId]="isFormUpdateUser ? currentClientUpdate : null"
+    [formType]="
+      isFormUpdateUser ? clientFormType.UPDATE : clientFormType.CREATE
+    "
     (closeSidebarClientForm)="closeModalUserForm($event)"
-    ></app-client-form>
+  ></app-client-form>
 </app-navbar>

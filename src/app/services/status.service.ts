@@ -8,14 +8,11 @@ import { Status } from '../models/service.model';
   providedIn: 'root'
 })
 export class StatusService {
+  private baseURL: string = environment.baseUrl;
 
-  private baseURL:string = environment.baseUrl
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   findAll(): Observable<Status[]> {
-    return this.http.get<Status[]>(`${this.baseURL}/status`)
+    return this.http.get<Status[]>(`${this.baseURL}/status`);
   }
 }

@@ -6,27 +6,25 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  @Input() title: string;
+  @Input() loading: boolean;
+  @Output() onPress = new EventEmitter();
+  @Output() getNext = new EventEmitter();
+  @Input() buttonTooltip: string;
+  @Input() pageIndex: number;
+  @Input() pageSizeOptions: number[];
+  @Input() pageSize: number;
+  @Input() totalElements: number;
 
-  @Input() title: string
-  @Input() loading: boolean
-  @Output() onPress = new EventEmitter()
-  @Output() getNext = new EventEmitter()
-  @Input() buttonTooltip: string
-  @Input() pageIndex: number
-  @Input() pageSizeOptions: number[]
-  @Input() pageSize: number
-  @Input() totalElements: number
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  functionOnPress() {
+    this.onPress.emit();
   }
 
-  functionOnPress(){
-    this.onPress.emit()
-  }
-
-  ongetNext(event){
-    this.getNext.emit(event)
+  ongetNext(event) {
+    this.getNext.emit(event);
   }
 }

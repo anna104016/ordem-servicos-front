@@ -1,40 +1,39 @@
-.container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    background-color: #eee6ff;
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #eee6ff;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 
-.content{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .img img {
-    width: 400px;
+  width: 400px;
 }
 
-.div{
-    margin: 20px 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.div {
+  margin: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .div button {
-    width:200px;
-    border-radius:20px;
-    background-color: #673ab7;
-    color: #fff;
+  width: 200px;
+  border-radius: 20px;
+  background-color: #673ab7;
+  color: #fff;
 }
 
-.div button a{
-    text-decoration: none;
-    color: #fff;
-    font-size: 20px;
+.div button a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
 }

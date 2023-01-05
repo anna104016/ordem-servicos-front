@@ -15,8 +15,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./sidebar-navigation.component.scss']
 })
 export class SidebarNavigationComponent implements OnInit {
-
-  user: UserModel
+  user: UserModel;
   private componentDestroyed$ = new Subject();
 
   constructor(
@@ -24,37 +23,45 @@ export class SidebarNavigationComponent implements OnInit {
     private readonly _authService: AuthService,
     private readonly _dialog: MatDialog,
     private readonly _userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.getUser()
+    this.getUser();
   }
 
-  getUser(){
-    this._authService.validateUser().pipe(takeUntil(this.componentDestroyed$)).subscribe({
-      next: (user) => {
-        this.user = user
-      }
-    })
+  getUser() {
+    this._authService
+      .validateUser()
+      .pipe(takeUntil(this.componentDestroyed$))
+      .subscribe({
+        next: (user) => {
+          this.user = user;
+        }
+      });
   }
 
   selectPhoto() {
     const photoDialog = this._dialog.open(SelectUserPhotoComponent, {
-        width: '40rem',
-        height: '90vh'
-    })
-    photoDialog.afterClosed().pipe(take(1)).subscribe(resp => {
+      width: '40rem',
+      height: '90vh'
+    });
+    photoDialog
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((resp) => {
         if (resp) {
-            this.updateUserPhoto(resp.photo)
+          this.updateUserPhoto(resp.photo);
         }
-    })
+      });
   }
 
-  updateUserPhoto(photo: string){
-    this._userService.updatePhoto(this.user.user_id, {photo}).subscribe()
+  updateUserPhoto(photo: string) {
+    this._userService.updatePhoto(this.user.user_id, { photo }).subscribe();
   }
 
-  closeSidebar(){
-    this._sideNavbarService.getSidebar(SidebarNames.COMPONENT_NAVBAR_NAVIGATION).closeSidenav()
+  closeSidebar() {
+    this._sideNavbarService
+      .getSidebar(SidebarNames.COMPONENT_NAVBAR_NAVIGATION)
+      .closeSidenav();
   }
 }

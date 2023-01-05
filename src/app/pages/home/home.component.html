@@ -1,135 +1,224 @@
 <div class="container">
-    <header class="header" [style.background-color]="darkTheme ?  '#1A1C1F' : '#ffff'"  #inicio>
-        <p class="logo" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">  
-            ServicesOn
+  <header
+    class="header"
+    [style.background-color]="darkTheme ? '#1A1C1F' : '#ffff'"
+    #inicio
+  >
+    <p class="logo" [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+      ServicesOn
+    </p>
+
+    <div class="navbar">
+      <ul>
+        <li (click)="scrollToElement(inicio)">
+          <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">Inicio</p>
+        </li>
+        <li (click)="scrollToElement(func)">
+          <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">Funcionalidades</p>
+        </li>
+        <li (click)="scrollToElement(contatos)">
+          <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">Contatos</p>
+        </li>
+        <li (click)="scrollToElement(app)">
+          <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">Aplicativo</p>
+        </li>
+        <div id="theme-btn" class="box-nav" (click)="darkTheme = !darkTheme">
+          <i [class]="darkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
+        </div>
+        <div id="login-btn" class="box-nav" (click)="loginGo()">
+          <i class="fas fa-user"></i>
+        </div>
+      </ul>
+    </div>
+
+    <div class="icons">
+      <div id="theme-btn" class="box-nav" (click)="darkTheme = !darkTheme">
+        <i [class]="darkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
+      </div>
+      <div id="menu-btn" (click)="navbarActive = !navbarActive" class="box-nav">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+
+    <div class="menu-mobile" [style.display]="navbarActive ? 'flex' : 'none'">
+      <div class="menu-content">
+        <div class="menu-icon">
+          <i class="fas fa-close" (click)="navbarActive = !navbarActive"></i>
+        </div>
+        <ul>
+          <li (click)="scrollToElement(inicio)">
+            <p [style.color]="darkTheme ? '#ffff' : '#ffff'">Inicio</p>
+          </li>
+          <li (click)="scrollToElement(func)">
+            <p [style.color]="darkTheme ? '#ffff' : '#ffff'">Funcionalidades</p>
+          </li>
+          <li (click)="scrollToElement(contatos)">
+            <p [style.color]="darkTheme ? '#ffff' : '#ffff'">Contatos</p>
+          </li>
+          <li (click)="scrollToElement(app)">
+            <p [style.color]="darkTheme ? '#ffff' : '#ffff'">
+              Baixar aplicativo
+            </p>
+          </li>
+          <li (click)="loginGo()">
+            <p [style.color]="darkTheme ? '#ffff' : '#ffff'">Login</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div
+    class="content"
+    [style.background-color]="darkTheme ? '#2d2c2e' : '#ffff'"
+  >
+    <div class="text">
+      <h1 [style.color]="darkTheme ? '#ffff' : '#2d2c2e'">
+        Sistema de Ordem de Serviço
+      </h1>
+      <p [style.color]="darkTheme ? '#ffff' : '#2d2c2e'">
+        Entenda como funciona na prática o <br />
+        Produttivo e os benefícios do programa <br />
+        de ordem de serviço para o seu negócio!
+      </p>
+      <button mat-button class="botao-comecar" (click)="loginGo()">
+        Começar
+      </button>
+    </div>
+    <div class="img-content">
+      <img src="../../../assets/home-phone.svg" alt="" />
+    </div>
+  </div>
+
+  <div
+    class="infomativos"
+    #func
+    [style.background-color]="darkTheme ? '#1A1C1F' : '#ffff'"
+  >
+    <div class="info-text">
+      <p id="funcionalidade" [style.color]="darkTheme ? '#ffff' : '#2d2c2e'">
+        Funcionalidades
+      </p>
+    </div>
+    <div class="cards">
+      <div
+        class="info-card"
+        [style.background-color]="darkTheme ? '#2d2c2e' : '#ffff'"
+      >
+        <i
+          class="fas fa-cog"
+          [style.color]="darkTheme ? '#ffff' : '#0e0f10'"
+        ></i>
+        <p class="title" [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          Serviços
         </p>
+        <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          Tenha o controle de seus serviços.
+        </p>
+      </div>
 
-        <div class="navbar">
-            <ul>
-                <li (click)="scrollToElement(inicio)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'" >Inicio</p></li>
-                <li (click)="scrollToElement(func)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Funcionalidades</p></li>
-                <li (click)="scrollToElement(contatos)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Contatos</p></li>
-                <li (click)="scrollToElement(app)"><p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Aplicativo</p></li>
-                <div id="theme-btn" class="box-nav" (click)="darkTheme=!darkTheme">
-                    <i [class]="darkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
-                </div>
-                <div id="login-btn" class="box-nav" (click)="loginGo()">
-                    <i class="fas fa-user"></i>
-                </div>
-            </ul>
-        </div>
-    
-        <div class="icons">
-            <div id="theme-btn" class="box-nav" (click)="darkTheme=!darkTheme">
-                <i [class]="darkTheme ? 'fas fa-sun' : 'fas fa-moon'"></i>
-            </div>
-            <div id="menu-btn" (click)="navbarActive=!navbarActive" class="box-nav">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
+      <div
+        class="info-card"
+        [style.background-color]="darkTheme ? '#2d2c2e' : '#ffff'"
+      >
+        <i
+          class="far fa-address-book"
+          [style.color]="darkTheme ? '#ffff' : '#0e0f10'"
+        ></i>
+        <p class="title" [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          Aplicativo
+        </p>
+        <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          Na Services ON você pode fazer o downloado dp aplivativo e ter tudo na
+          palma de suas mãos.
+        </p>
+      </div>
 
-        <div class="menu-mobile" [style.display]="navbarActive ? 'flex' : 'none'">
-            <div class="menu-content">
-                <div class="menu-icon">
-                    <i class="fas fa-close" (click)="navbarActive=!navbarActive"></i>
-                </div>
-                <ul>
-                    <li (click)="scrollToElement(inicio)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Inicio</p></li>
-                    <li (click)="scrollToElement(func)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Funcionalidades</p></li>
-                    <li (click)="scrollToElement(contatos)"><p [style.color]="darkTheme ?  '#ffff' : '#ffff'">Contatos</p></li>
-                    <li (click)="scrollToElement(app)"><p [style.color]="darkTheme ? '#ffff' : '#ffff'" >Baixar aplicativo</p></li>
-                    <li (click)="loginGo()"><p [style.color]="darkTheme ? '#ffff' : '#ffff'" >Login</p></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-    
-    <div class="content" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
-        <div class="text">
-            <h1 [style.color]="darkTheme ?  '#ffff' : '#2d2c2e'">Sistema de Ordem de Serviço</h1>
-            <p [style.color]="darkTheme ?  '#ffff' : '#2d2c2e'">Entenda como funciona na prática o <br> Produttivo e os benefícios do programa <br> de ordem de serviço para o seu negócio!</p>
-            <button mat-button class="botao-comecar" (click)="loginGo()">
-                Começar
-            </button>
-        </div>
-        <div class="img-content">
-            <img src="../../../assets/home-phone.svg" alt="">
-        </div>
+      <div
+        class="info-card"
+        [style.background-color]="darkTheme ? '#2d2c2e' : '#ffff'"
+      >
+        <i
+          class="fas fa-user-friends"
+          [style.color]="darkTheme ? '#ffff' : '#0e0f10'"
+        ></i>
+        <p class="title" [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          Clientes
+        </p>
+        <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          Na Services ON você pode adicionar seus clientes.
+        </p>
+      </div>
     </div>
+  </div>
 
-    <div class="infomativos" #func [style.background-color]="darkTheme ?  '#1A1C1F' : '#ffff'">
-        <div class="info-text">
-            <p id="funcionalidade" [style.color]="darkTheme ?  '#ffff' : '#2d2c2e'">Funcionalidades</p>
-        </div>
-        <div class="cards">
-            <div class="info-card" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
-                <i class="fas fa-cog" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'"></i>
-                <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Serviços</p>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Tenha o controle de seus serviços.</p>
-            </div>
-       
-            <div class="info-card" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
-                <i class="far fa-address-book" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'"></i>
-                <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Aplicativo</p>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Na Services ON você pode fazer o downloado dp aplivativo e ter tudo na
-                    palma de suas mãos.</p>
-            </div>
-
-            <div class="info-card" [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
-                <i class="fas fa-user-friends" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'"></i>
-                <p class="title" [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Clientes</p>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Na Services ON você pode adicionar seus clientes.</p>
-            </div>
-        </div>
-       
+  <div class="paralax">
+    <div class="overlay"></div>
+    <div class="texts-paralax">
+      <h2>
+        Tudo isso de uma forma muito <br /><mark>visual e fácil</mark> de
+        preencher!
+      </h2>
     </div>
+  </div>
 
-    <div class="paralax">
-        <div class="overlay"></div>
-        <div class="texts-paralax">
-            <h2>Tudo isso de uma forma muito <br><mark>visual e fácil</mark> de preencher!</h2>
-        </div>
-    </div>
-
-    <div class="app" #app [style.background-color]="darkTheme ?  '#2d2c2e' : '#ffff'">
-
-        <div class="app-content">
-
-                <div class="textos">
-                    <h3 [style.color]="darkTheme ?  '#ffff' : '#2d2c2e'">Baixar ServiceOn para Android grátis</h3>
-                    <p [style.color]="darkTheme ?  '#ffff' : '#2d2c2e'">Tenha todos os serviços na palma de suas mãos</p>
-                    <!-- <a href="https://www.mediafire.com/file/pwyin8jl0qzbvfl/base.apk/file" download="ServicseOn" class="mat-button">
+  <div
+    class="app"
+    #app
+    [style.background-color]="darkTheme ? '#2d2c2e' : '#ffff'"
+  >
+    <div class="app-content">
+      <div class="textos">
+        <h3 [style.color]="darkTheme ? '#ffff' : '#2d2c2e'">
+          Baixar ServiceOn para Android grátis
+        </h3>
+        <p [style.color]="darkTheme ? '#ffff' : '#2d2c2e'">
+          Tenha todos os serviços na palma de suas mãos
+        </p>
+        <!-- <a href="https://www.mediafire.com/file/pwyin8jl0qzbvfl/base.apk/file" download="ServicseOn" class="mat-button">
                         <button mat-button>Baixar aplicativo</button>
                     </a> -->
 
-                    <a href="https://www.mediafire.com/file/5dfsm5n50wc5ubz/base.apk/file" download="ServicesOn" class="mat-button" class="app-button" [style.background-color]="darkTheme ?  '#ccc' : '#012a4a'">
-                        <button mat-button [style.color]="darkTheme ?  '#000' : '#fff'">Baixar aplicativo</button>
-                    </a>
+        <a
+          href="https://www.mediafire.com/file/5dfsm5n50wc5ubz/base.apk/file"
+          download="ServicesOn"
+          class="mat-button"
+          class="app-button"
+          [style.background-color]="darkTheme ? '#ccc' : '#012a4a'"
+        >
+          <button mat-button [style.color]="darkTheme ? '#000' : '#fff'">
+            Baixar aplicativo
+          </button>
+        </a>
+      </div>
 
-                </div>
-        
-                <div class="app-img">
-                    <img src="../../../assets/app.svg" alt="">
-                </div>
-
+      <div class="app-img">
+        <img src="../../../assets/app.svg" alt="" />
+      </div>
     </div>
+  </div>
 
+  <footer [style.background-color]="darkTheme ? '#1A1C1F' : '#ffff'" #contatos>
+    <div class="main-footer">
+      <div class="box" id="contato">
+        <h1 [style.color]="darkTheme ? '#ffff' : '#0e0f10'">Contatos</h1>
+        <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          www.serviceson.com.br
+        </p>
+        <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          serviceson@contact.com.br
+        </p>
+      </div>
+
+      <div class="box" id="sobre">
+        <h1 [style.color]="darkTheme ? '#ffff' : '#0e0f10'">Sobre</h1>
+        <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          www.serviceson.com.br
+        </p>
+        <p [style.color]="darkTheme ? '#ffff' : '#0e0f10'">
+          serviceson@contact.com.br
+        </p>
+      </div>
     </div>
-
-    <footer [style.background-color]="darkTheme ?  '#1A1C1F' : '#ffff'" #contatos>
-        <div class="main-footer">
-            <div class="box" id="contato">
-                <h1 [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Contatos</h1>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">www.serviceson.com.br</p>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">serviceson@contact.com.br</p>
-            </div>
-    
-            <div class="box" id="sobre">
-                <h1 [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">Sobre</h1>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">www.serviceson.com.br</p>
-                <p [style.color]="darkTheme ?  '#ffff' : '#0e0f10'">serviceson@contact.com.br</p>
-            </div>
-        </div>
-    </footer>
+  </footer>
 </div>

@@ -1,22 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material/dialog";
-import { Router } from "@angular/router";
-import { UserService } from "src/app/services/user.service";
-import Swal from "sweetalert2";
-import { take } from "rxjs/operators";
-import { Notify } from "notiflix";
-import { UserModel } from "src/app/models/user.model";
-import { AuthService } from "src/app/auth/auth.service";
-import { SelectUserPhotoComponent } from "src/app/shared/select-user-photo/select-user-photo.component";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+import { take } from 'rxjs/operators';
+import { Notify } from 'notiflix';
+import { UserModel } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/auth/auth.service';
+import { SelectUserPhotoComponent } from 'src/app/shared/select-user-photo/select-user-photo.component';
 
 @Component({
-  selector: "app-login-form",
-  templateUrl: "./login-form.component.html",
-  styleUrls: ["./login-form.component.scss"],
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  userDefaultProfilePhoto: string = "https://services-on.netlify.app/assets/user-default.png";
+  userDefaultProfilePhoto: string =
+    'https://services-on.netlify.app/assets/user-default.png';
 
   form: FormGroup;
   emailOrPassWrong: string;
@@ -30,7 +31,7 @@ export class LoginFormComponent implements OnInit {
     private readonly _formBuilder: FormBuilder,
     private readonly _dialog: MatDialog,
     private readonly _authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formLogin();
@@ -39,16 +40,16 @@ export class LoginFormComponent implements OnInit {
   selectPhoto() {
     this._dialog
       .open(SelectUserPhotoComponent, {
-        width: "30rem",
-        height: "90vh",
+        width: '30rem',
+        height: '90vh'
       })
       .afterClosed()
       .pipe(take(1))
       .subscribe((res) => {
         if (res) {
-          this.form.get("photo").setValue(res.data);
+          this.form.get('photo').setValue(res.data);
         } else {
-          this.form.get("photo").setValue("");
+          this.form.get('photo').setValue('');
         }
       });
   }
@@ -57,38 +58,41 @@ export class LoginFormComponent implements OnInit {
     this.loading = true;
     if (this.form.invalid) {
       this.loading = false;
-      Notify.info("Informe os dados corretamente");
+      Notify.info('Informe os dados corretamente');
       return;
     }
 
-    const body = this.createUserObject()
+    const body = this.createUserObject();
 
-    this._authService.loginByCredentials(body).pipe(take(1)).subscribe({
+    this._authService
+      .loginByCredentials(body)
+      .pipe(take(1))
+      .subscribe({
         next: (response) => {
           this.successfullyAuthenticatedUser(response);
         },
         error: () => {
           this.unauthenticatedUser();
-        },
+        }
       });
   }
 
-  createUserObject(){
+  createUserObject() {
     const credentails = {
-        email: this.form.controls.email.value,
-        password: this.form.controls.password.value,
-    }
+      email: this.form.controls.email.value,
+      password: this.form.controls.password.value
+    };
 
-    return credentails
+    return credentails;
   }
 
   unauthenticatedUser() {
     this.form.reset();
     this.loading = false;
     Swal.fire({
-      icon: "warning",
-      text: "Email e/ou senha invalido(s)!",
-      title: "Atenção!",
+      icon: 'warning',
+      text: 'Email e/ou senha invalido(s)!',
+      title: 'Atenção!'
     });
   }
 
@@ -97,12 +101,12 @@ export class LoginFormComponent implements OnInit {
     this._authService.changeUser(user);
     this.form.reset();
     const access_token = user.access_token;
-    localStorage.setItem("access_token", access_token);
-    this._router.navigate(["/portal/dashboard"]);
+    localStorage.setItem('access_token', access_token);
+    this._router.navigate(['/portal/dashboard']);
   }
 
   createAccount() {
-    this._router.navigate(["create-account"]);
+    this._router.navigate(['create-account']);
     this.createAccountField = true;
     this.newAccountForm();
   }
@@ -111,11 +115,11 @@ export class LoginFormComponent implements OnInit {
     this.loading = true;
     if (this.form.invalid) {
       this.loading = false;
-      Notify.info("Informe os dados corretamente");
+      Notify.info('Informe os dados corretamente');
       return;
     }
-    if (!this.form.get("photo").value)
-      this.form.get("photo").setValue(this.userDefaultProfilePhoto);
+    if (!this.form.get('photo').value)
+      this.form.get('photo').setValue(this.userDefaultProfilePhoto);
     const data = this.form.value;
     this._userService
       .create(data)
@@ -129,62 +133,70 @@ export class LoginFormComponent implements OnInit {
         error: (error) => {
           this.loading = false;
           this.form.reset();
-          Swal.fire("Que pena!", error.error.message, "error").then((res) => {
+          Swal.fire('Que pena!', error.error.message, 'error').then((res) => {
             if (res.isConfirmed) {
               Swal.close();
             }
           });
-        },
+        }
       });
   }
 
   sucesso() {
     Swal.fire({
-      title: "Sucesso!",
-      text: "Conta criada com sucesso",
-      icon: "success",
-      showConfirmButton: true,
+      title: 'Sucesso!',
+      text: 'Conta criada com sucesso',
+      icon: 'success',
+      showConfirmButton: true
     }).then((res) => {
       if (res.isConfirmed) {
-        this._router.navigate(["/login"]);
+        this._router.navigate(['/login']);
       }
     });
   }
 
   formLogin() {
     this.form = this._formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(255),
-        ],
-      ],
+          Validators.maxLength(255)
+        ]
+      ]
     });
   }
 
   newAccountForm() {
     this.form = this._formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(255),
-        ],
+          Validators.maxLength(255)
+        ]
       ],
-      user_name: ["",[
+      user_name: [
+        '',
+        [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(255),
-        ],
+          Validators.maxLength(255)
+        ]
       ],
-      occupation_area: ["",[
+      occupation_area: [
+        '',
+        [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(255),
-        ],
+          Validators.maxLength(255)
+        ]
       ],
-      photo: [""],
+      photo: ['']
     });
   }
 }

@@ -1,4 +1,4 @@
-export enum DialogTypeEnum{
-    CREATE = 'CREATE',
-    UPDATE = 'UPDATE'
+export enum DialogTypeEnum {
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE'
 }

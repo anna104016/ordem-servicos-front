@@ -1,9 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { take } from 'rxjs/operators';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {CreateServiceComponent} from "../create-service/create-service.component";
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef
+} from '@angular/material/dialog';
+import { CreateServiceComponent } from '../create-service/create-service.component';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { ServiceModel } from 'src/app/models/service.model';
 import { ServicesService } from 'src/app/services/services.service';
@@ -14,38 +18,43 @@ import { ServicesService } from 'src/app/services/services.service';
   styleUrls: ['./service-details.component.scss']
 })
 export class ServiceDetailsComponent implements OnInit {
-  loading: boolean = false
+  loading: boolean = false;
   serviceModel: ServiceModel;
 
   constructor(
-      private readonly servicesService: ServicesService,
-      private readonly router: Router,
-      private readonly  dialog: MatDialog,
-      private readonly dialogRef: MatDialogRef<ServiceDetailsComponent>,
-      @Inject(MAT_DIALOG_DATA) private readonly data: {
-        service: number}
-      ) {}
+    private readonly servicesService: ServicesService,
+    private readonly router: Router,
+    private readonly dialog: MatDialog,
+    private readonly dialogRef: MatDialogRef<ServiceDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    private readonly data: {
+      service: number;
+    }
+  ) {}
 
   ngOnInit(): void {
     this.findOne();
   }
 
-  wayBack(): void{
-    this.router.navigate(['/main/servicos'])
+  wayBack(): void {
+    this.router.navigate(['/main/servicos']);
   }
 
   findOne(): void {
-    this.loading = true
-    this.servicesService.findOne(this.data.service).pipe(take(1)).subscribe({
-      next: (resp) => this.serviceModel = resp,
-      complete: () => {
-          this.loading = false
-      }
-    })
+    this.loading = true;
+    this.servicesService
+      .findOne(this.data.service)
+      .pipe(take(1))
+      .subscribe({
+        next: (resp) => (this.serviceModel = resp),
+        complete: () => {
+          this.loading = false;
+        }
+      });
   }
 
-  update(){
-    this.dialogRef.close()
+  update() {
+    this.dialogRef.close();
     this.dialog.open(CreateServiceComponent, {
       width: '40rem',
       minHeight: '20rem',
@@ -53,56 +62,57 @@ export class ServiceDetailsComponent implements OnInit {
         service_id: this.data.service,
         type: DialogTypeEnum.UPDATE
       }
-    })
+    });
   }
 
-  delete(){
+  delete() {
     Swal.fire({
       title: 'Deletar serviço',
-      icon:'question',
+      icon: 'question',
       showCancelButton: true,
       showConfirmButton: true,
       confirmButtonText: 'Sim',
       cancelButtonText: 'Não'
     }).then((result) => {
-      if(result.isConfirmed){
+      if (result.isConfirmed) {
         this.servicesService.delete(this.serviceModel.service_id).subscribe({
-          next: ()  =>{
-          this.dialogRef.close({data: true})
-          this.successModel()
-        } ,
-        error: () => {
-          this.errorModel()
-        }
-      } )
+          next: () => {
+            this.dialogRef.close({ data: true });
+            this.successModel();
+          },
+          error: () => {
+            this.errorModel();
+          }
+        });
       }
-    })
+    });
   }
 
-  successModel(){
+  successModel() {
     Swal.fire({
       icon: 'success',
       title: 'Sucesso!',
       text: 'Serviço deletado com sucesso',
-      showConfirmButton: true,
+      showConfirmButton: true
     }).then((result) => {
-      if(result.isConfirmed){
-        this.router.navigate([`/main/servicos`])
+      if (result.isConfirmed) {
+        this.router.navigate([`/main/servicos`]);
       }
-    })
+    });
   }
 
-  errorModel(){
+  errorModel() {
     Swal.fire({
       icon: 'error',
       title: 'Opss...!',
       text: 'Serviço não pode ser deletado',
-      showConfirmButton: true,
+      showConfirmButton: true
     }).then((result) => {
-      if(result.isConfirmed){
-        this.router.navigate([`/main/servicos/dados/${this.serviceModel.service_id}`])
+      if (result.isConfirmed) {
+        this.router.navigate([
+          `/main/servicos/dados/${this.serviceModel.service_id}`
+        ]);
       }
-    })
+    });
   }
 }
-

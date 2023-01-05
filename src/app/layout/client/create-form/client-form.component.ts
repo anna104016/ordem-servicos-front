@@ -1,19 +1,28 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { take } from "rxjs/operators";
-import { ErrorsType } from "src/app/models/error.enum";
-import Swal from "sweetalert2";
-import { Notify } from "notiflix";
-import { Client } from "src/app/models/client.model";
-import { DialogTypeEnum } from "src/app/models/dialogType.enum";
-import { ClientsService } from "src/app/services/clients.service";
-import { SideNavbarService } from "../../sidebar/services/sidenavbar.service";
-import { SidebarNames } from "../../sidebar/models/sidenavbarNames";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { take } from 'rxjs/operators';
+import { ErrorsType } from 'src/app/models/error.enum';
+import Swal from 'sweetalert2';
+import { Notify } from 'notiflix';
+import { Client } from 'src/app/models/client.model';
+import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
+import { ClientsService } from 'src/app/services/clients.service';
+import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
+import { SidebarNames } from '../../sidebar/models/sidenavbarNames';
 
 @Component({
-  selector: "app-client-form",
-  templateUrl: "./client-form.component.html",
-  styleUrls: ["./client-form.component.scss"],
+  selector: 'app-client-form',
+  templateUrl: './client-form.component.html',
+  styleUrls: ['./client-form.component.scss']
 })
 export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
   loading: boolean = false;
@@ -33,12 +42,11 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
     private readonly _sidebarService: SideNavbarService
   ) {}
 
-  ngOnDestroy(): void {
-  }
-  
+  ngOnDestroy(): void {}
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.modaIsOpen == true && changes.clientId && changes.formType){
-      this.getClient()
+    if (this.modaIsOpen == true && changes.clientId && changes.formType) {
+      this.getClient();
     }
   }
 
@@ -51,12 +59,12 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
     this._sidebarService.getSidebarClientFormIsOpen().subscribe({
       next: (isOpen) => {
         this.modaIsOpen = isOpen;
-      },
+      }
     });
   }
 
   getClient(): void {
-    console.log(this.clientId)
+    console.log(this.clientId);
     if (this.formType === DialogTypeEnum.UPDATE) {
       this.loading = true;
       this._service
@@ -66,7 +74,7 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
           next: (res: Client) => {
             this.updateForm(res);
             this.loading = false;
-          },
+          }
         });
     }
   }
@@ -75,7 +83,7 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
     this.form.patchValue({
       name: client.name,
       cpf: client.cpf,
-      cell_phone: client.cell_phone,
+      cell_phone: client.cell_phone
     });
   }
 
@@ -92,43 +100,46 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
     this._service.create(this.form.value).subscribe({
       next: () => {
         this.loadingSumit = false;
-        this.successModel("Cliente adicionado com sucesso!");
+        this.successModel('Cliente adicionado com sucesso!');
       },
       error: (error) => {
         this.loadingSumit = false;
         if (error.error.error === ErrorsType.CPF_ALREDY_REGISTERED) {
-          Notify.info("CPF já cadastrado");
+          Notify.info('CPF já cadastrado');
         } else {
-          this.errorModel("Não foi possilve adicionar este cliente");
+          this.errorModel('Não foi possilve adicionar este cliente');
         }
-      },
+      }
     });
   }
 
   update() {
     const body = this.form.getRawValue();
-    this._service.update(this.clientId, body).pipe(take(1)).subscribe({
+    this._service
+      .update(this.clientId, body)
+      .pipe(take(1))
+      .subscribe({
         next: () => {
           this.loadingSumit = false;
-          this.successModel("Cliente atualizado com sucesso!");
+          this.successModel('Cliente atualizado com sucesso!');
         },
         error: (error) => {
           this.loadingSumit = false;
           if (error.error.error === ErrorsType.CPF_ALREDY_REGISTERED) {
-            Notify.info("CPF já cadastrado");
+            Notify.info('CPF já cadastrado');
           } else {
-            this.errorModel("Não foi possível atualizar os dados do cliente");
+            this.errorModel('Não foi possível atualizar os dados do cliente');
           }
-        },
+        }
       });
   }
 
   successModel(text: string) {
     Swal.fire({
-      icon: "success",
-      title: "Sucesso!",
+      icon: 'success',
+      title: 'Sucesso!',
       text: `${text}`,
-      showConfirmButton: true,
+      showConfirmButton: true
     }).then((result) => {
       if (result.isConfirmed) {
         this.closeModal(true);
@@ -138,35 +149,41 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
 
   errorModel(text: string) {
     Swal.fire({
-      icon: "error",
-      title: "Oppss.!",
+      icon: 'error',
+      title: 'Oppss.!',
       text: `${text}`,
-      showConfirmButton: true,
+      showConfirmButton: true
     });
   }
 
   createForm() {
     this.form = this._formBuilder.group({
-      name: ["", [
+      name: [
+        '',
+        [
           Validators.required,
-          Validators.pattern("[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"),
-          Validators.minLength(5),
-        ],
+          Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
+          Validators.minLength(5)
+        ]
       ],
-      cell_phone: [ "",[
+      cell_phone: [
+        '',
+        [
           Validators.required,
-          Validators.pattern("[0-9]+$"),
+          Validators.pattern('[0-9]+$'),
           Validators.minLength(9),
-          Validators.maxLength(20),
-        ],
+          Validators.maxLength(20)
+        ]
       ],
-      cpf: ["",[
+      cpf: [
+        '',
+        [
           Validators.required,
-          Validators.pattern("[0-9]+$"),
+          Validators.pattern('[0-9]+$'),
           Validators.minLength(11),
-          Validators.maxLength(11),
-        ],
-      ],
+          Validators.maxLength(11)
+        ]
+      ]
     });
   }
 

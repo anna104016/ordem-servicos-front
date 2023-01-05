@@ -1,34 +1,46 @@
 <div class="w-full h-full text-white text-center p-4">
-    <div>
+  <div>
+    <div class="flex flex-col justify-center items-center w-full">
+      <img
+        (click)="selectPhoto()"
+        class="w-24 h-24 mt-4 rounded-[50%] mat-elevation-z8"
+        [src]="user?.photo"
+        alt="Foto do perfil"
+      />
+    </div>
 
-      <div class="flex flex-col justify-center items-center w-full">
-        <img (click)="selectPhoto()"  class="w-24 h-24 mt-4 rounded-[50%] mat-elevation-z8" [src]="user?.photo" alt="Foto do perfil"/>
-      </div>
+    <h4 class="text-white mt-2">{{ user?.user_name }}</h4>
+    <p class="text-xs text-[#eee]">{{ user?.occupation_area }}</p>
 
-          <h4 class="text-white mt-2">{{ user?.user_name }}</h4>
-          <p class="text-xs text-[#eee]">{{ user?.occupation_area }}</p>
+    <button
+      class="w-full flex items-center justify-start bg-transparent border-none my-1"
+    >
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </button>
 
-          <button  class="w-full flex items-center justify-start bg-transparent border-none my-1">
-            <mat-icon>dashboard</mat-icon>
-            <span>Dashboard</span>
-          </button>
+    <button
+      class="w-full flex items-center justify-start bg-transparent border-none my-1"
+    >
+      <mat-icon>person</mat-icon>
+      <span>Meus clientes</span>
+    </button>
 
-          <button   class="w-full flex items-center justify-start bg-transparent border-none my-1">
-            <mat-icon>person</mat-icon>
-            <span>Meus clientes</span>
-          </button>
+    <button
+      class="w-full flex items-center justify-start bg-transparent border-none my-1"
+    >
+      <mat-icon>info</mat-icon>
+      <span>Meus serviços</span>
+    </button>
 
-          <button  class="w-full flex items-center justify-start bg-transparent border-none my-1">
-            <mat-icon>info</mat-icon>
-            <span>Meus serviços</span>
-          </button>
+    <mat-divider></mat-divider>
 
-          <mat-divider></mat-divider>
-
-          <button   class="w-full flex items-center justify-start bg-transparent border-none my-1" (click)="closeSidebar()">
-            <mat-icon>close</mat-icon>
-            <span>Fechar</span>
-          </button>
-
-        </div>
-      </div>
+    <button
+      class="w-full flex items-center justify-start bg-transparent border-none my-1"
+      (click)="closeSidebar()"
+    >
+      <mat-icon>close</mat-icon>
+      <span>Fechar</span>
+    </button>
+  </div>
+</div>

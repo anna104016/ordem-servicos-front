@@ -2,70 +2,68 @@
 @import './__alert.scss';
 
 .badge {
-    border-radius: 0.4rem;
-    padding: 2px 8px;
-    font-size: 12px;
-    font-weight: 500;
-    background-color: #d5d5d5;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border-radius: 0.4rem;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #d5d5d5;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .badge-green {
-     background-color: #e9f6eb;
-     color: #54b05c;
- }
+  background-color: #e9f6eb;
+  color: #54b05c;
+}
 
 .badge-red {
-     background-color: #f87786;
-     color: #FFFFFF;
- }
-
-.bg-white{
-    background-color: #FFFFFF;
+  background-color: #f87786;
+  color: #ffffff;
 }
 
-
-.table-content{
-    width: 80%;
-    align-items: center;
+.bg-white {
+  background-color: #ffffff;
 }
 
-
-.mobile{
-    display: none !important;
+.table-content {
+  width: 80%;
+  align-items: center;
 }
 
-i{
-    margin: 0 0.2rem;
-    font-size: 1.3rem;
-    cursor: pointer;
+.mobile {
+  display: none !important;
 }
 
-.i-delete{
-    color: #f87786
+i {
+  margin: 0 0.2rem;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
 
-.i-update{
-    color: rgb(118, 143, 252)
+.i-delete {
+  color: #f87786;
 }
 
-.i-info{
-    color: rgb(148, 220, 148)
+.i-update {
+  color: rgb(118, 143, 252);
+}
+
+.i-info {
+  color: rgb(148, 220, 148);
 }
 
 .table-head {
-    border-bottom: 3px solid transparent;
+  border-bottom: 3px solid transparent;
 }
 
-@media only screen and (max-width: 600px)  {
-    .desktop{
-        display: none;
-    }
+@media only screen and (max-width: 600px) {
+  .desktop {
+    display: none;
+  }
 
-    .mobile{
-        display: flex !important;
-    }
+  .mobile {
+    display: flex !important;
+  }
 }

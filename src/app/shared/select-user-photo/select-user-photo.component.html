@@ -1,17 +1,20 @@
 <div class="container">
-    <p class="title">Selecione a foto do seu perfil</p>
+  <p class="title">Selecione a foto do seu perfil</p>
 
-    <div class="photos">
-        <div *ngFor="let photo of photos; let index = i">
-            <div class="photo" (click)="select(photo)" #photo [ngClass]="{'photoSelected': photo.img === photoSelected.img}">
-                <img src="{{photo.img}}" alt="">
-            </div>
-        </div>
+  <div class="photos">
+    <div *ngFor="let photo of photos; let index = i">
+      <div
+        class="photo"
+        (click)="select(photo)"
+        #photo
+        [ngClass]="{ photoSelected: photo.img === photoSelected.img }"
+      >
+        <img src="{{ photo.img }}" alt="" />
+      </div>
     </div>
+  </div>
 
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <button mat-button (click)="close()">
-        Escolher
-    </button>
+  <button mat-button (click)="close()">Escolher</button>
 </div>

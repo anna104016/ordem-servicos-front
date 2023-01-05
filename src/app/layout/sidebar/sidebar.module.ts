@@ -2,14 +2,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule} from "@angular/router";
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-  ],
+  declarations: [NavbarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -17,8 +15,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatIconModule,
     MatDividerModule
   ],
-  exports: [
-    NavbarComponent,
-  ]
+  exports: [NavbarComponent]
 })
-export class SidebarModule { }
+export class SidebarModule {}

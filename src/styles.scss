@@ -1,58 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "app/scss/app.style.scss";
+@import 'app/scss/app.style.scss';
 
-@import "app/scss/_spiner.scss";
+@import 'app/scss/_spiner.scss';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-html, body { height: 100%; }
+html,
 body {
-    font-family: Montserrat, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    color: #444;
-    background: #eee;
+  height: 100%;
+}
+body {
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+  background: #eee;
 }
 
-.sidebar__left{
-    top: 0;
-    right: 0;
+.sidebar__left {
+  top: 0;
+  right: 0;
 }
 
-.sidebar__right{
-    top: 0;
-    left: 0;
+.sidebar__right {
+  top: 0;
+  left: 0;
 }
 
-.sidebar__container{
-    position: fixed;
-    width: 20rem;
-    display: none;
-    height: 100%;
-    transition: all 0.1s ease-in-out;
+.sidebar__container {
+  position: fixed;
+  width: 20rem;
+  display: none;
+  height: 100%;
+  transition: all 0.1s ease-in-out;
 }
 
-.sidebar__container__dark{
-    background:#002b5c;
+.sidebar__container__dark {
+  background: #002b5c;
 }
 
-.sidebar__container__light{
-    background-color: #eee;
+.sidebar__container__light {
+  background-color: #eee;
 }
 
-.sidebar__container__show{
-    display: block;
+.sidebar__container__show {
+  display: block;
 }
 
-.sidebar__container__hide{
-    display: none;
+.sidebar__container__hide {
+  display: none;
 }

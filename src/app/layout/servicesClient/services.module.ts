@@ -3,8 +3,8 @@ import { CreateServiceComponent } from './create-service/create-service.componen
 import { ServiceDetailsComponent } from './service-details/service-details.component';
 import { FindServicesComponent } from './find-all-services/find-services.component';
 import { ServiceRoutingModule } from './services.routing.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,13 +15,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {MatTooltipModule} from "@angular/material/tooltip";
-import {MatMenuModule} from "@angular/material/menu";
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 import { TokenInterceptor } from 'src/app/auth/token.interceptor';
 import { ServiceGuard } from 'src/app/resolver/service.guard';
 import { ServicesService } from 'src/app/services/services.service';
@@ -40,29 +40,29 @@ registerLocaleData(localePt);
     ServiceDetailsComponent,
     FindServicesComponent
   ],
-    imports: [
-        MatNativeDateModule,
-        CommonModule,
-        ServiceRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        FormsModule,
-        MatIconModule,
-        MatTableModule,
-        MatButtonModule,
-        MatInputModule,
-        MatSnackBarModule,
-        MatCardModule,
-        MatSelectModule,
-        MatPaginatorModule,
-        SharedModule,
-        MatDatepickerModule,
-        MatDialogModule,
-        MatProgressSpinnerModule,
-        MatTooltipModule,
-        MatMenuModule,
-         TableModule
-    ],
+  imports: [
+    MatNativeDateModule,
+    CommonModule,
+    ServiceRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
+    MatIconModule,
+    MatTableModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    SharedModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatMenuModule,
+    TableModule
+  ],
   providers: [
     MatDatepickerModule,
     ServicesService,
@@ -73,9 +73,9 @@ registerLocaleData(localePt);
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor, 
+      useClass: TokenInterceptor,
       multi: true
-    },
+    }
   ]
 })
-export class ServicesModule { }
+export class ServicesModule {}

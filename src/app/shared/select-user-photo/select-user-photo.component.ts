@@ -9,27 +9,25 @@ import { userPhotosList } from './user_photos_list';
   styleUrls: ['./select-user-photo.component.scss']
 })
 export class SelectUserPhotoComponent implements OnInit {
+  photoSelected: Photo = { img: '', value: '' };
 
-  photoSelected: Photo = {img: '', value: ''}
+  @ViewChild('photo') photo: HTMLElement;
 
-  @ViewChild('photo') photo: HTMLElement
+  photos = userPhotosList;
 
-  photos = userPhotosList
-  
   constructor(
     private readonly dialogRef: MatDialogRef<SelectUserPhotoComponent>
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  close() {
+    this.dialogRef.close({
+      photo: this.photoSelected.img
+    });
   }
 
-  close(){
-      this.dialogRef.close({
-        photo: this.photoSelected.img
-      })
-  }
-
-  select(photo: Photo){
-    this.photoSelected.img = photo.img
+  select(photo: Photo) {
+    this.photoSelected.img = photo.img;
   }
 }
