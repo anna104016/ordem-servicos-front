@@ -1,8 +1,6 @@
-import { ClientFormComponent } from './../create-form/client-form.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { take } from 'rxjs/operators';
-import Swal from 'sweetalert2';
 import { Client } from 'src/app/models/client.model';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { IQuery } from 'src/app/models/query.model';
@@ -13,7 +11,7 @@ import {
   SidebarSideClassName,
   SidebarTheme
 } from '../../sidebar/models/sidenavbar.enum';
-import { interval } from 'rxjs';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-find-clients',
@@ -54,7 +52,8 @@ export class FindClientsComponent implements OnInit {
 
   constructor(
     private readonly _clientService: ClientsService,
-    private readonly _sidebarService: SideNavbarService
+    private readonly _sidebarService: SideNavbarService,
+    private readonly _alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -65,14 +64,13 @@ export class FindClientsComponent implements OnInit {
   }
 
   deleteClient(id: number): void {
-    Swal.fire({
+   this._alertService.showSweetAlert({
       text: 'Você deseja deletar este cliente?',
       title: 'Deletar cliente',
-      showCancelButton: true,
-      showConfirmButton: true,
       icon: 'question',
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Não'
+      confirmButtonText: 'Continaur',
+      cancelButtonText: 'Cancelar',
+      showCancelButton: true
     }).then((result) => {
       if (result.isConfirmed) {
         this.confirmDeleteClient(id);
@@ -92,14 +90,13 @@ export class FindClientsComponent implements OnInit {
   }
 
   messageAlert(text: string, sucess: boolean) {
-    Swal.fire({
+    this._alertService.showSweetAlert({
       icon: sucess ? 'success' : 'error',
       title: 'Sucesso!',
       text: `${text}`,
-      showConfirmButton: true
+      confirmButtonText: 'Fechar'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.close();
         this.getAllclients(
           this.paginationDefault.page + 1,
           this.paginationDefault.size
@@ -121,10 +118,7 @@ export class FindClientsComponent implements OnInit {
       take: perPage
     };
 
-    this._clientService
-      .find(query)
-      .pipe(take(1))
-      .subscribe({
+    this._clientService.find(query).pipe(take(1)).subscribe({
         next: (resp) => {
           this.clients = resp.users;
           this.paginationDefault.totalElements = resp.count;

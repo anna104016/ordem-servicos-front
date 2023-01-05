@@ -9,12 +9,12 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { takeUntil } from 'rxjs/operators';
 import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
 import { Subject } from 'rxjs';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-client-details',
@@ -37,7 +37,8 @@ export class ClientDetailsComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     private readonly _clientService: ClientsService,
     private readonly _router: Router,
-    private readonly _sidebarService: SideNavbarService
+    private readonly _sidebarService: SideNavbarService,
+    private readonly alertService: AlertService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -82,14 +83,13 @@ export class ClientDetailsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   deleteClient() {
-    Swal.fire({
+    this.alertService.showSweetAlert({
       icon: 'question',
       title: 'Deletar cliente',
       text: 'Você deseja deletar este cliente?',
+      cancelButtonText: 'Cancelar',
       showCancelButton: true,
-      showConfirmButton: true,
-      cancelButtonText: 'Não',
-      confirmButtonText: 'Sim'
+      confirmButtonText: 'Continuar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.confirmDeleteClient();
@@ -113,18 +113,15 @@ export class ClientDetailsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   messageAlert(title: string, message: string, success: boolean) {
-    Swal.fire({
+    this.alertService.showSweetAlert({
       icon: success ? 'success' : 'error',
       title: `${title}`,
       text: `${message}`,
-      showConfirmButton: true
     }).then((result) => {
       if (result.isConfirmed) {
         if (success) {
           this._router.navigate(['/main/clientes']);
-        } else {
-          Swal.close();
-        }
+        } 
       }
     });
   }

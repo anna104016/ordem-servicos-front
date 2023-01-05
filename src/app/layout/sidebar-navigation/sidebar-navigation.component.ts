@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix';
 import { MatDialog } from '@angular/material/dialog';
 import { UserModel } from 'src/app/models/user.model';
 import { Component, OnInit } from '@angular/core';
@@ -57,6 +58,7 @@ export class SidebarNavigationComponent implements OnInit {
 
   updateUserPhoto(photo: string) {
     this._userService.updatePhoto(this.user.user_id, { photo }).subscribe();
+    Notify.success('Foto atualizada com sucesso!')
   }
 
   closeSidebar() {

@@ -116,17 +116,14 @@ export class FindServicesComponent implements OnInit {
   }
 
   findOne(id: number) {
-    this.dialog
-      .open(ServiceDetailsComponent, {
+    this.dialog.open(ServiceDetailsComponent, {
         width: '40rem',
         minHeight: '20rem',
         data: {
           service: id
         }
       })
-      .afterClosed()
-      .pipe(take(1))
-      .subscribe({
+      .afterClosed().pipe(take(1)).subscribe({
         next: (resp: { data: boolean }) => {
           if (resp) {
             if (resp.data)

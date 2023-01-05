@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/services/alert.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -5,10 +6,8 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/services/clients.service';
-import Swal from 'sweetalert2';
 import { take } from 'rxjs/operators';
 import { StatusService } from 'src/app/services/status.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -39,7 +38,8 @@ export class CreateServiceComponent implements OnInit {
     private readonly dialogRef: MatDialogRef<CreateServiceComponent>,
     @Inject(MAT_DIALOG_DATA)
     public readonly data: { service_id: number; type: DialogTypeEnum },
-    private readonly service: ServicesService
+    private readonly service: ServicesService,
+    private readonly _alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -149,11 +149,10 @@ export class CreateServiceComponent implements OnInit {
   }
 
   successModel(text: string): void {
-    Swal.fire({
+    this._alertService.showSweetAlert({
       icon: 'success',
       title: 'Sucesso!',
       text: `${text}`,
-      showConfirmButton: true
     }).then((result) => {
       if (result.isConfirmed) {
         this.dialogRef.close(true);
@@ -162,7 +161,7 @@ export class CreateServiceComponent implements OnInit {
   }
 
   errorModel(text: string): void {
-    Swal.fire({
+    this._alertService.showSweetAlert({
       icon: 'error',
       title: 'Oppss.!',
       text: `${text}`,

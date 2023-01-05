@@ -5,6 +5,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { SideNavbarService } from '../sidebar/services/sidenavbar.service';
 import { SidebarNames } from '../sidebar/models/sidenavbarNames';
+
 @Component({
   selector: 'app-layout-component',
   templateUrl: './layout-component.component.html',
@@ -22,8 +23,6 @@ export class LayoutComponentComponent implements OnInit {
   ngOnInit(): void {}
 
   openSidebar() {
-    this._sideNavService
-      .getSidebar(this.sidebarNames.COMPONENT_NAVBAR_NAVIGATION)
-      .openSidebar();
+    this._sideNavService.getSidebar(this.sidebarNames.COMPONENT_NAVBAR_NAVIGATION).openSidebar();
   }
 }

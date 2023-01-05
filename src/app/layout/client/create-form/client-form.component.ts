@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/services/alert.service';
 import {
   Component,
   EventEmitter,
@@ -11,13 +12,11 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { ErrorsType } from 'src/app/models/error.enum';
-import Swal from 'sweetalert2';
 import { Notify } from 'notiflix';
 import { Client } from 'src/app/models/client.model';
 import { DialogTypeEnum } from 'src/app/models/dialogType.enum';
 import { ClientsService } from 'src/app/services/clients.service';
 import { SideNavbarService } from '../../sidebar/services/sidenavbar.service';
-import { SidebarNames } from '../../sidebar/models/sidenavbarNames';
 
 @Component({
   selector: 'app-client-form',
@@ -39,7 +38,8 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private readonly _service: ClientsService,
     private readonly _formBuilder: FormBuilder,
-    private readonly _sidebarService: SideNavbarService
+    private readonly _sidebarService: SideNavbarService,
+    private readonly _alertService: AlertService
   ) {}
 
   ngOnDestroy(): void {}
@@ -64,7 +64,6 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getClient(): void {
-    console.log(this.clientId);
     if (this.formType === DialogTypeEnum.UPDATE) {
       this.loading = true;
       this._service
@@ -135,11 +134,10 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   successModel(text: string) {
-    Swal.fire({
+    this._alertService.showSweetAlert({
       icon: 'success',
       title: 'Sucesso!',
       text: `${text}`,
-      showConfirmButton: true
     }).then((result) => {
       if (result.isConfirmed) {
         this.closeModal(true);
@@ -148,36 +146,29 @@ export class ClientFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   errorModel(text: string) {
-    Swal.fire({
+    this._alertService.showSweetAlert({
       icon: 'error',
       title: 'Oppss.!',
       text: `${text}`,
-      showConfirmButton: true
     });
   }
 
   createForm() {
     this.form = this._formBuilder.group({
-      name: [
-        '',
-        [
+      name: ['',[
           Validators.required,
           Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
           Validators.minLength(5)
         ]
       ],
-      cell_phone: [
-        '',
-        [
+      cell_phone: [ '',[
           Validators.required,
           Validators.pattern('[0-9]+$'),
           Validators.minLength(9),
           Validators.maxLength(20)
         ]
       ],
-      cpf: [
-        '',
-        [
+      cpf: ['',[
           Validators.required,
           Validators.pattern('[0-9]+$'),
           Validators.minLength(11),
