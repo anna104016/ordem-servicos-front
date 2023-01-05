@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { take } from "rxjs/operators";
-import Swal from "sweetalert2";
 import { MatDialog } from "@angular/material/dialog";
 import { ServiceDetailsComponent } from "../service-details/service-details.component";
 import { CreateServiceComponent } from "../create-service/create-service.component";
@@ -9,6 +8,7 @@ import { DialogTypeEnum } from "src/app/models/dialogType.enum";
 import { IQuery } from "src/app/models/query.model";
 import { ServiceModel, IRespGetServices } from "src/app/models/service.model";
 import { ServicesService } from "src/app/services/services.service";
+import { AlertService } from "src/app/services/alert.service";
 
 @Component({
     selector: "app-find-servicesClient",
@@ -33,7 +33,8 @@ export class FindServicesComponent implements OnInit {
 
     constructor(
         private readonly service: ServicesService,
-        private readonly dialog: MatDialog
+        private readonly dialog: MatDialog,
+        private readonly alertService: AlertService
     ) {}
 
     ngOnInit(): void {
@@ -116,50 +117,33 @@ export class FindServicesComponent implements OnInit {
     }
 
     deleteOne(id: number): void {
-        Swal.fire({
+        this.alertService.showSweetAlert({
             icon: "question",
             text: "Você deseja deleatar este serviço?",
             title: "Deletar serviço",
             showCancelButton: true,
-            showConfirmButton: true,
-            padding: 40,
-            showClass: {
-                icon: ''// disable icon animation
-              },
-            width: 500,
-            buttonsStyling: false,
-            customClass: {
-                cancelButton: 'swal__button swal__button__cancel',
-                closeButton: 'swal__button swal__button__close',
-                confirmButton: 'swal__button swal__button__confirm',
-                title: 'swal__title',
-              },
-
-        }).then((res) => {
-            if (res.isConfirmed) {
-                this.service
-                    .delete(id)
-                    .pipe(take(1))
-                    .subscribe({
-                        next: () => {
-                            this.successModel("Serviço deletado com sucesso!");
-                        },
-                        error: () => {
-                            this.successModel("Não foi possível deletar este serviço");
-                        }
-                    });
-            } else {
-                Swal.close();
             }
+        ).then((res) => {
+            if (res.isConfirmed) {this.confirmDeleteService(id)}
         });
     }
 
+    confirmDeleteService(id: number){
+       this.service.delete(id).pipe(take(1)).subscribe({
+            next: () => {
+                this.successModel("Serviço deletado com sucesso!");
+            },
+            error: () => {
+                this.successModel("Não foi possível deletar este serviço");
+               }
+            });
+    }
+
     successModel(text: string) {
-        Swal.fire({
+        this.alertService.showSweetAlert({
             icon: "success",
             title: "Sucesso!",
             text: `${text}`,
-            showConfirmButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 this.find(this.paginationDefault.page + 1, this.paginationDefault.size)
