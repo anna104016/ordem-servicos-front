@@ -26,6 +26,7 @@ import { TokenInterceptor } from 'src/app/auth/token.interceptor';
 import { ServiceGuard } from 'src/app/resolver/service.guard';
 import { ServicesService } from 'src/app/services/services.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TableModule } from 'src/app/components/table/table.module';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -59,7 +60,8 @@ registerLocaleData(localePt);
         MatDialogModule,
         MatProgressSpinnerModule,
         MatTooltipModule,
-        MatMenuModule
+        MatMenuModule,
+         TableModule
     ],
   providers: [
     MatDatepickerModule,
