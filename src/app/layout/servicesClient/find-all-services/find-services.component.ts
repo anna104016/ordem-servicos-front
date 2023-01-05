@@ -122,6 +122,19 @@ export class FindServicesComponent implements OnInit {
             title: "Deletar serviço",
             showCancelButton: true,
             showConfirmButton: true,
+            padding: 40,
+            showClass: {
+                icon: ''// disable icon animation
+              },
+            width: 500,
+            buttonsStyling: false,
+            customClass: {
+                cancelButton: 'swal__button swal__button__cancel',
+                closeButton: 'swal__button swal__button__close',
+                confirmButton: 'swal__button swal__button__confirm',
+                title: 'swal__title',
+              },
+
         }).then((res) => {
             if (res.isConfirmed) {
                 this.service

@@ -72,8 +72,8 @@ registerLocaleData(localePt);
       useValue: 'pt-BR'
     },
     {
-      provide: HTTP_INTERCEPTORS, //interceptor
-      useClass: TokenInterceptor, //classe TokenInterceptor vai ser utilizada com interceptor da aplicação
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor, 
       multi: true
     },
   ]
