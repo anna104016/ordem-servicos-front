@@ -13,7 +13,7 @@
 
         <div class="w-1/2 pt-1 pl-[14px] pb-[14px] flex items-center justify-end">
           <button mat-fab (click)="functionOnPress()" class="m-0 w-[40px] h-[40px] bg-[] mat-elevation-z2 text-white flex
-          fex-col items-center justify-center" matTooltip="{{ buttonTooltip }}">
+          fex-col items-center justify-center" matTooltip="{{ buttonTooltip}}">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -27,7 +27,8 @@
     <ng-content></ng-content>
 
 
-    <mat-paginator *ngIf="!loading" showFirstLastButtons
+    <mat-paginator showFirstLastButtons
+    class="w-11/12"
                    [pageIndex]="pageIndex" [pageSize]="pageSize"
                    [pageSizeOptions]="pageSizeOptions" [length]="totalElements"
                    (page)="ongetNext($event)">
