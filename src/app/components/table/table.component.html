@@ -1,18 +1,19 @@
 
-<div class="container">
+<div class="flex flex-col items-center justify-center w-full mt-2.5">
 
-  <div class="content mat-elevation-z4 bg-white">
+  <div class="w-4/5 flex flex-col rounded-[20px] mat-elevation-z4 bg-white py-8 items-center justify-center">
 
-    <div class="pesquisa">
+    <div class="w-11/12 flex flex-col items-center justify-center text-center bg-white mb-[1rem]">
 
-      <div class="pesquisa-content">
+      <div class="w-full flex py-[6px] px-[20px] items-center justify-between">
 
-        <div class="pesquisa-header">
-          <h1>Clientes</h1>
+        <div class="w-1/2 pt-1 pl-[14px] pb-[14px] flex">
+          <h1>{{ title }}</h1>
         </div>
 
-        <div class="pesquisa-search">
-          <button mat-fab (click)="functionOnPress()" class="btn-new mat-elevation-z2" matTooltip="{{buttonTooltip}}">
+        <div class="w-1/2 pt-1 pl-[14px] pb-[14px] flex items-center justify-end">
+          <button mat-fab (click)="functionOnPress()" class="m-0 w-[40px] h-[40px] bg-[] mat-elevation-z2 text-white flex
+          fex-col items-center justify-center" matTooltip="{{ buttonTooltip }}">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
