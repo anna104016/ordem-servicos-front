@@ -87,26 +87,3 @@
     </button>
   </ng-template>
 </mat-menu>
-
-<mat-menu #columnFilterMenu="matMenu" xPosition="before" yPosition="below">
-  <button
-    class="mat-menu-item"
-    (click)="find(paginationDefault.page + 1, paginationDefault.size)"
-  >
-    Todos
-  </button>
-  <button
-    class="mat-menu-item"
-    (click)="
-      find(paginationDefault.page + 1, paginationDefault.size, 'FINALIZADO')
-    "
-  >
-    Finalizados
-  </button>
-  <button
-    class="mat-menu-item"
-    (click)="find(paginationDefault.page + 1, paginationDefault.size, 'ABERTO')"
-  >
-    Abertos
-  </button>
-</mat-menu>

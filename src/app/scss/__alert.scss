@@ -1,21 +1,20 @@
 .swal2-container {
-  .swal__button {
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.4rem;
-    width: 7rem;
-    margin: 0 0.5rem;
-    color: #fff;
-    outline: none;
-  }
-  .swal__button__cancel {
-    background-color: rgb(175, 73, 73);
-  }
 
-  .swal__button__close {
-    background-color: blue;
-  }
-
-  .swal__button__confirm {
-    background-color: rgb(54, 180, 54);
+  .swal2-actions{
+    gap: 1rem;
+    .swal__button {
+      border-radius: 0.2rem;
+      color: #fff;
+      font-size: 14px;
+      padding: 13px 20px;
+      outline: none;
+    }
+    .swal__button__cancel {
+      background-color: rgb(175, 73, 73);
+    }
+  
+    .swal__button__confirm {
+      background-color: rgb(54, 180, 54);
+    }
   }
 }

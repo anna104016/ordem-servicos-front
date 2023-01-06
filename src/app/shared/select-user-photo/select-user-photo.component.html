@@ -2,7 +2,7 @@
   <p class="title">Selecione a foto do seu perfil</p>
 
   <div class="photos">
-    <div *ngFor="let photo of photos; let index = i">
+    <div *ngFor="let photo of photos; let i = index">
       <div
         class="photo"
         (click)="select(photo)"

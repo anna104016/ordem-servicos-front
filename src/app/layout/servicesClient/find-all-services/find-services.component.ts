@@ -142,7 +142,9 @@ export class FindServicesComponent implements OnInit {
         icon: 'question',
         text: 'Você deseja deleatar este serviço?',
         title: 'Deletar serviço',
-        showCancelButton: true
+        showCancelButton: true,
+        confirmButtonText: 'Continuar',
+        cancelButtonText: 'Cancelar'
       })
       .then((res) => {
         if (res.isConfirmed) {
@@ -152,10 +154,7 @@ export class FindServicesComponent implements OnInit {
   }
 
   confirmDeleteService(id: number) {
-    this.service
-      .delete(id)
-      .pipe(take(1))
-      .subscribe({
+    this.service.delete(id).pipe(take(1)).subscribe({
         next: () => {
           this.successModel('Serviço deletado com sucesso!');
         },

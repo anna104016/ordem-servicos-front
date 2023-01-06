@@ -50,10 +50,7 @@ export class CreateServiceComponent implements OnInit {
   }
 
   getStatus() {
-    this.statusService
-      .findAll()
-      .pipe(take(1))
-      .subscribe({
+    this.statusService.findAll().pipe(take(1)).subscribe({
         next: (resp) => {
           this.status = resp;
         }
@@ -62,10 +59,7 @@ export class CreateServiceComponent implements OnInit {
 
   getService() {
     this.loading = true;
-    this.service
-      .findOne(this.data.service_id)
-      .pipe(take(1))
-      .subscribe({
+    this.service.findOne(this.data.service_id).pipe(take(1)).subscribe({
         next: (service: ServiceModel) => {
           this.statusControl.setValue(service.status.status_id);
           this.clientControl.setValue(service.client.client_id);
@@ -90,10 +84,7 @@ export class CreateServiceComponent implements OnInit {
   }
 
   getClients(): void {
-    this.clientService
-      .find()
-      .pipe(take(1))
-      .subscribe({
+    this.clientService.find().pipe(take(1)).subscribe({
         next: (response) => {
           this.clients = response.users;
         }
@@ -101,10 +92,7 @@ export class CreateServiceComponent implements OnInit {
   }
 
   update(data: any): void {
-    this.service
-      .update(this.data.service_id, data)
-      .pipe(take(1))
-      .subscribe({
+    this.service.update(this.data.service_id, data).pipe(take(1)).subscribe({
         next: () => {
           this.successModel('Serviço atualizado com sucesso!');
           this.loadingSumit = false;

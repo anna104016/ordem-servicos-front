@@ -2,7 +2,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertService {
   constructor() {}
@@ -12,7 +12,7 @@ export class AlertService {
       showConfirmButton: true,
       padding: 40,
       showClass: {
-        icon: '' // disable icon animation
+        icon: '', // disable icon animation
       },
       width: 500,
       buttonsStyling: false,
@@ -20,9 +20,9 @@ export class AlertService {
         cancelButton: 'swal__button swal__button__cancel',
         closeButton: 'swal__button swal__button__close',
         confirmButton: 'swal__button swal__button__confirm',
-        title: 'swal__title'
+        title: 'swal__title',
       },
-      ...sweetAlertOptions
+      ...sweetAlertOptions,
     });
   }
 }
